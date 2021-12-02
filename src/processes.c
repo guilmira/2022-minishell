@@ -12,12 +12,14 @@
 
 #include "../include/minishell.h"
 
+//an array of builtin command names
 char *builtin_str[] = {
 		"cd",
 		"help",
 		"exit"
 };
 
+//an array of function pointers (that take array of strings and return an int)
 int (*builtin_func[]) (char **) = {
 		&msh_cd,
 		&msh_help,
@@ -39,16 +41,17 @@ int
 	else
 	{
 		if (chdir(args[1]) != 0)
-			perror("lsh");
+			perror("msh");
 	}
 	return (1);
 }
 
 int
-	msh_help(char **args)
+	msh_help(char **args __attribute__((unused)))
 {
 	int	i;
 
+	i = 0;
 	printf("minishell\n");
 	printf("Type program names and arguments, and hit enter.\n");
 	printf("The following are built in:\n");
@@ -61,8 +64,12 @@ int
 	return (1);
 }
 
+/*
+** __attribute__((unused))
+** Command for disabling unused variable warnings
+*/
 int
-	msh_exit(char **args)
+	msh_exit(char **args __attribute__((unused)))
 {
 	return (0);
 }
@@ -104,10 +111,11 @@ int
 
 	if (args[0] == NULL) //empty command was entered
 		return (1);
+	i = 0;
 	while (i < msh_num_builtins())
 	{
 		if (strcmp(args[0], builtin_str[i]) == 0)
-			return (*builtin_func[i](args));
+			return ((*builtin_func[i])(args));
 		i++;
 	}
 	return (msh_launch(args));
