@@ -12,18 +12,16 @@
 
 #include "../include/minishell.h"
 
-//an array of builtin command names
-char *builtin_str[] = {
-		"cd",
-		"help",
-		"exit"
-};
-
 //an array of function pointers (that take array of strings and return an int)
-int (*builtin_func[]) (char **) = {
+int (*builtin_func[]) (char **, char **) = {
+		&msh_echo,
 		&msh_cd,
-		&msh_help,
-		&msh_exit
+		&msh_pwd,
+		&msh_export,
+		&msh_unset,
+		&msh_env,
+		&msh_exit,
+		&msh_help
 };
 
 
@@ -31,47 +29,6 @@ int
 	msh_num_builtins(void)
 {
 	return (sizeof(builtin_str) / sizeof(char *));
-}
-
-int
-	msh_cd(char **args)
-{
-	if (args[1] == NULL)
-		fprintf(stderr, "msh: expected argument to \"cd\"\n");
-	else
-	{
-		if (chdir(args[1]) != 0)
-			perror("msh");
-	}
-	return (1);
-}
-
-int
-	msh_help(char **args __attribute__((unused)))
-{
-	int	i;
-
-	i = 0;
-	printf("minishell\n");
-	printf("Type program names and arguments, and hit enter.\n");
-	printf("The following are built in:\n");
-	while (i < msh_num_builtins())
-	{
-		printf("  %s\n", builtin_str[i]);
-		i++;
-	}
-	printf("Use the man command for information on other programs.\n");
-	return (1);
-}
-
-/*
-** __attribute__((unused))
-** Command for disabling unused variable warnings
-*/
-int
-	msh_exit(char **args __attribute__((unused)))
-{
-	return (0);
 }
 
 int
@@ -105,7 +62,7 @@ int
 }
 
 int
-	msh_execute(char **args)
+	msh_execute(char **args, char *envp[])
 {
 	int	i;
 
@@ -115,7 +72,13 @@ int
 	while (i < msh_num_builtins())
 	{
 		if (strcmp(args[0], builtin_str[i]) == 0)
-			return ((*builtin_func[i])(args));
+		{
+			if (strcmp(args[0], "env") == 0)
+			{
+				return (msh_env(args, envp));
+			}
+			return ((*builtin_func[i])(args, envp));
+		}
 		i++;
 	}
 	return (msh_launch(args));

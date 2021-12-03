@@ -13,8 +13,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-
-/* COMMENTS */
+/*
+** COMMENTS
+*/
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -24,9 +25,18 @@
 # define TOK_BUFSIZE 64
 # define TOK_DELIM " \t\r\n\a"
 
-int	msh_execute(char **args);
-int	msh_cd(char **args);
-int	msh_help(char **args);
-int	msh_exit(char **args);
+//an array of builtin command names
+char	*builtin_str[8];
+
+int	msh_execute(char **args, char *envp[]);
+int	msh_echo(char **args, char *envp[]);
+int	msh_cd(char **args, char *envp[]);
+int	msh_pwd(char **args, char *envp[]);
+int	msh_export(char **args, char *envp[]);
+int	msh_unset(char **args, char *envp[]);
+int	msh_env(char **args, char *envp[]);
+int	msh_exit(char **args, char *envp[]);
+int	msh_help(char **args, char *envp[]);
+int	msh_num_builtins(void);
 
 #endif

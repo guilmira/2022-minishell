@@ -12,6 +12,19 @@
 
 #include "../include/minishell.h"
 
+void
+	init_builtins(void)
+{
+	builtin_str[0] = "echo";
+	builtin_str[1] = "cd";
+	builtin_str[2] = "pwd";
+	builtin_str[3] = "export";
+	builtin_str[4] = "unset";
+	builtin_str[5] = "env";
+	builtin_str[6] = "exit";
+	builtin_str[7] = "help";
+}
+
 char
 	**split_line(char *line)
 {
@@ -20,6 +33,7 @@ char
 	char	**tokens;
 	char	*token;
 
+	init_builtins();
 	bufsize = TOK_BUFSIZE;
 	position = 0;
 	tokens = malloc(bufsize * sizeof(char *));
@@ -80,7 +94,7 @@ char
 ** Execute: Run the parsed command.
 */
 void
-	msh_loop(void)
+	msh_loop(char *envp[])
 {
 	char	*line;
 	char	**args;
@@ -88,10 +102,10 @@ void
 
 	while (true)
 	{
-		printf("> ");
+		printf("msh> ");
 		line = msh_read_line();
 		args = split_line(line);
-		status = msh_execute(args);
+		status = msh_execute(args, envp);
 		free(line);
 		free(args);
 		if (!status)
@@ -103,14 +117,14 @@ void
 ** SYNOPSIS: main function.
 */
 int
-	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
+	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
 {
 
 	//TODO: decide if we should exit if the program called with arguments
 	//TODO: three parts:
 	// 1. Load config files, if any.
 	// 2. Run command loop.
-	msh_loop();
+	msh_loop(envp);
 	// 3. Perform shutdown/cleanup
 	return (EXIT_SUCCESS);
 }
