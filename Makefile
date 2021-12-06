@@ -19,7 +19,8 @@ LIB_DIR		= libft_submodule
 LIB			= $(LIB_DIR)/libft.a
 INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
 #--------------------------------------------------------------------------------------------------------------SOURCES
-SRCS		=	minishell.c main.c processes.c builtins.c builtins_2.c
+SRCS		=	minishell.c main.c processes.c builtins.c builtins_2.c \
+			ft_str_sort.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 

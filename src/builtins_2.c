@@ -15,6 +15,29 @@
 int
 	msh_export(char **args __attribute__((unused)), char *envp[] __attribute__((unused)))
 {
+	int		n;
+	int		i;
+	char	**arr;
+
+	n = 0;
+	while (envp[n])
+		n++;
+	arr = malloc((n + 1) * sizeof(char *));
+	i = 0;
+	while (envp[i])
+	{
+		arr[i] = envp[i];
+		i++;
+	}
+	arr[i] = NULL;
+	ft_str_sort(arr, 0, n - 1);
+	i = 0;
+	while (arr[i])
+	{
+		printf("%s\n", arr[i]);
+		i++;
+	}
+	printf("\n");
 	return (1);
 }
 

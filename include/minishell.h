@@ -28,15 +28,16 @@
 //an array of builtin command names
 char	*builtin_str[8];
 
-int	msh_execute(char **args, char *envp[]);
-int	msh_echo(char **args, char *envp[]);
-int	msh_cd(char **args, char *envp[]);
-int	msh_pwd(char **args, char *envp[]);
-int	msh_export(char **args, char *envp[]);
-int	msh_unset(char **args, char *envp[]);
-int	msh_env(char **args, char *envp[]);
-int	msh_exit(char **args, char *envp[]);
-int	msh_help(char **args, char *envp[]);
-int	msh_num_builtins(void);
+int		msh_execute(char **args, char *envp[]);
+int		msh_echo(char **args, char *envp[]);
+int		msh_cd(char **args, char *envp[]);
+int		msh_pwd(char **args, char *envp[]);
+int		msh_export(char **args, char *envp[]);
+int		msh_unset(char **args, char *envp[]);
+int		msh_env(char **args, char *envp[]);
+int		msh_exit(char **args, char *envp[]);
+int		msh_help(char **args, char *envp[]);
+int		msh_num_builtins(void);
+void	ft_str_sort(void *arr, int left, int right);
 
 #endif
