@@ -19,16 +19,18 @@ LIB_DIR		= libft_submodule
 LIB			= $(LIB_DIR)/libft.a
 INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
 #--------------------------------------------------------------------------------------------------------------SOURCES
-SRCS		=	minishell.c
+SRCS		=	minishell.c main.c processes.c builtins.c builtins_2.c \
+			ft_str_sort.c utilities.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
+
+RM = rm -f
+VPATH = src include
+
 all: $(LIB) $(NAME)
 
 $(LIB):
 	@make -C $(LIB_DIR)
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -Imlx -c $< -o $@
 
 $(NAME): $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIB) $(INCLUDES_LIBX) -o $(NAME)
@@ -37,20 +39,20 @@ $(NAME): $(OBJS) $(LIB)
 exe: $(NAME)
 	./$(NAME)
 
-norm:
-	norminette $(SRCS)
-
 clean:
-	@rm -rf $(OBJS)
+	@$(RM) $(OBJS)
 	@make clean -C $(LIB_DIR)
 
 fclean: clean
-	@rm -rf $(NAME)
+	@$(RM) $(NAME)
 	@make fclean -C $(LIB_DIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+norm:
+	norminette ./src ./include $(LIB_DIR)
+
+.PHONY: all clean fclean re norm
 #--------------------------------------------------------------------------------------------------------------FORMAT
 NONE='\033[0m'
 GREEN='\033[1;32m'
