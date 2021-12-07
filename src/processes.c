@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 
 //an array of function pointers (that takes two arrays of strings and return an int)
-static int	(*builtin_func[])(char **, char **) = {
+static int	(*builtin_func[])(char **, t_data *) = {
 		&msh_echo,
 		&msh_cd,
 		&msh_pwd,
@@ -61,7 +61,7 @@ int
 }
 
 int
-	msh_execute(char **args, char *envp[])
+	msh_execute(char **args, t_data *data)
 {
 	int	i;
 
@@ -71,7 +71,7 @@ int
 	while (i < msh_num_builtins())
 	{
 		if (strcmp(args[0], g_builtin_str[i]) == 0)
-			return ((*builtin_func[i])(args, envp));
+			return ((*builtin_func[i])(args, data));
 		i++;
 	}
 	return (msh_launch(args));

@@ -18,13 +18,13 @@
 */
 
 int
-	msh_echo(char **args __attribute__((unused)), char *envp[] __attribute__((unused)))
+	msh_echo(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
 {
 	return (0);
 }
 
 int
-	msh_cd(char **args, char *envp[] __attribute__((unused)))
+	msh_cd(char **args, t_data *data __attribute__((unused)))
 {
 	if (args[1] == NULL)
 		fprintf(stderr, "msh: expected argument to \"cd\"\n");
@@ -38,7 +38,7 @@ int
 
 
 int
-	msh_pwd(char **args __attribute__((unused)), char *envp[] __attribute__((unused)))
+	msh_pwd(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
 {
 	char	*path;
 
@@ -50,7 +50,7 @@ int
 }
 
 int
-	msh_help(char **args __attribute__((unused)), char *envp[] __attribute__((unused)))
+	msh_help(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
 {
 	int	i;
 
@@ -60,7 +60,7 @@ int
 	printf("The following are built in:\n");
 	while (i < msh_num_builtins())
 	{
-		printf("  %s\n", builtin_str[i]);
+		printf("  %s\n", g_builtin_str[i]);
 		i++;
 	}
 	printf("Use the man command for information on other programs.\n");

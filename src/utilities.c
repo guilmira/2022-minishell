@@ -27,3 +27,38 @@ void
 		i++;
 	}
 }
+
+size_t
+	get_arr_len(char **arr)
+{
+	size_t	len;
+
+	len = 0;
+	while (arr[len])
+		len++;
+	return (len);
+}
+
+void
+	**get_arr(int elem_num, size_t elem_size)
+{
+	void	**arr;
+
+	arr = malloc(elem_num * elem_size);
+	if (!arr)
+		printf("Malloc error");
+	return (arr);
+}
+
+void
+	copy_arr(char **dest, const char **srs, int src_len)
+{
+	int	i;
+
+	i = 0;
+	while (i < src_len)
+	{
+		dest[i] = srs[i];
+		i++;
+	}
+}

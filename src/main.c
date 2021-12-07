@@ -94,7 +94,7 @@ char
 ** Execute: Run the parsed command.
 */
 void
-	msh_loop(char *envp[])
+	msh_loop(t_data *data)
 {
 	char	*line;
 	char	**args;
@@ -105,7 +105,7 @@ void
 		printf("msh> ");
 		line = msh_read_line();
 		args = split_line(line);
-		status = msh_execute(args, envp);
+		status = msh_execute(args, data);
 		free(line);
 		free(args);
 		if (!status)
@@ -128,7 +128,7 @@ int
 	//TODO: three parts:
 	// 1. Load config files, if any.
 	// 2. Run command loop.
-	msh_loop(envp);
+	msh_loop(data);
 	// 3. Perform shutdown/cleanup
 	return (EXIT_SUCCESS);
 }

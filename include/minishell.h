@@ -35,17 +35,20 @@ typedef struct s_data
 	char **envp;
 }	t_data;
 
-int		msh_execute(char **args, char *envp[]);
-int		msh_echo(char **args, char *envp[]);
-int		msh_cd(char **args, char *envp[]);
-int		msh_pwd(char **args, char *envp[]);
-int		msh_export(char **args, char *envp[]);
-int		msh_unset(char **args, char *envp[]);
-int		msh_env(char **args, char *envp[]);
-int		msh_exit(char **args, char *envp[]);
-int		msh_help(char **args, char *envp[]);
+int		msh_execute(char **args, t_data *data);
+int		msh_echo(char **args, t_data *data);
+int		msh_cd(char **args, t_data *data);
+int		msh_pwd(char **args, t_data *data);
+int		msh_export(char **args, t_data *data);
+int		msh_unset(char **args, t_data *data);
+int		msh_env(char **args, t_data *data);
+int		msh_exit(char **args, t_data *data);
+int		msh_help(char **args, t_data *data);
 int		msh_num_builtins(void);
 void	ft_str_sort(char *arr[], unsigned int len);
 void	print_str_arr(char *const *arr);
+size_t	get_arr_len(char **arr);
+void	**get_arr(int elem_num, size_t elem_size);
+void	copy_arr(char **dest, char **srs, int src_len);
 
 #endif
