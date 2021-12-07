@@ -15,14 +15,14 @@
 void
 	init_builtins(void)
 {
-	builtin_str[0] = "echo";
-	builtin_str[1] = "cd";
-	builtin_str[2] = "pwd";
-	builtin_str[3] = "export";
-	builtin_str[4] = "unset";
-	builtin_str[5] = "env";
-	builtin_str[6] = "exit";
-	builtin_str[7] = "help";
+	g_builtin_str[0] = "echo";
+	g_builtin_str[1] = "cd";
+	g_builtin_str[2] = "pwd";
+	g_builtin_str[3] = "export";
+	g_builtin_str[4] = "unset";
+	g_builtin_str[5] = "env";
+	g_builtin_str[6] = "exit";
+	g_builtin_str[7] = "help";
 }
 
 char
@@ -119,7 +119,11 @@ void
 int
 	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
 {
+	t_data	*data;
 
+	data = (t_data *) malloc(sizeof(t_data));
+	data->envp = envp;
+	data->argv = argv;
 	//TODO: decide if we should exit if the program called with arguments
 	//TODO: three parts:
 	// 1. Load config files, if any.

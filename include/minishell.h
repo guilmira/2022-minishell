@@ -21,12 +21,19 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <string.h>
+# include "../libft_submodule/0includes/libft.h"
 
 # define TOK_BUFSIZE 64
 # define TOK_DELIM " \t\r\n\a"
 
 //an array of builtin command names
-char	*builtin_str[8];
+char	*g_builtin_str[8];
+
+typedef struct s_data
+{
+	char **argv;
+	char **envp;
+}	t_data;
 
 int		msh_execute(char **args, char *envp[]);
 int		msh_echo(char **args, char *envp[]);
@@ -38,6 +45,7 @@ int		msh_env(char **args, char *envp[]);
 int		msh_exit(char **args, char *envp[]);
 int		msh_help(char **args, char *envp[]);
 int		msh_num_builtins(void);
-void	ft_str_sort(void *arr, int left, int right);
+void	ft_str_sort(char *arr[], unsigned int len);
+void	print_str_arr(char *const *arr);
 
 #endif

@@ -12,27 +12,9 @@
 
 #include "../include/minishell.h"
 
-void
-	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	char	*a;
-	char	*b;
-
-	if (dst && src)
-	{
-		a = (char *)src;
-		b = (char *)dst;
-		while (n > 0)
-		{
-			*b = *a;
-			b++;
-			a++;
-			n--;
-		}
-	}
-	return (dst);
-}
-
+/*
+** SYNOPSIS: function for comparing two strings.
+*/
 int
 	ft_strcmp(const char *str1, const char *str2)
 {
@@ -47,47 +29,35 @@ int
 }
 
 void
-	ft_str_swap(void *p1, void *p2)
+	ft_str_swap(char **p1, char **p2)
 {
-	char	buffer[sizeof(char *)];
+	char	*temp;
 
-	ft_memcpy(buffer, p1, sizeof(char *));
-	ft_memcpy(p1, p2, sizeof(char *));
-	ft_memcpy(p2, buffer, sizeof(char *));
+	temp = *p1;
+	*p1 = *p2;
+	*p2 = temp;
 }
 
+/*
+** SYNOPSIS: function for sorting string arrays using quicksort method.
+*/
 void
-	ft_str_sort(void *v, int left, int right)
+	ft_str_sort(char *arr[], unsigned int len)
 {
-	void	*vt;
-	void	*v3;
-	int		i;
-	int		last;
-	int		mid;
-	void	*vl;
-	void	*vr;
+	unsigned int	i;
+	unsigned int	pivot;
 
-	mid = (left + right) / 2;
-	if (left >= right)
+	if (len <= 1)
 		return ;
-	vl = (char *)(v + (left * sizeof(char *)));
-	vr = (char *)(v + (mid * sizeof(char *)));
-	ft_str_swap(vl, vr);
-	last = left;
-	i = left + 1;
-	while (i <= right)
+	pivot = 0;
+	i = 0;
+	while (i < len)
 	{
-		vt = (char *)(v + (i * sizeof(char *)));
-		if (ft_strcmp(vl, vt) > 0)
-		{
-			++ last;
-			v3 = (char *)(v + (last * sizeof(char *)));
-			ft_str_swap(vt, v3);
-		}
+		if (ft_strcmp(arr[i], arr[len - 1]) < 0)
+			ft_str_swap(arr + i, arr + pivot++);
 		i++;
 	}
-	v3 = (char *)(v + (last * sizeof(char *)));
-	ft_str_swap(vl, v3);
-	ft_str_sort(v, left, last - 1);
-	ft_str_sort(v, last + 1, right);
+	ft_str_swap(arr + pivot, arr + len - 1);
+	ft_str_sort(arr, pivot++);
+	ft_str_sort(arr + pivot, len - pivot);
 }

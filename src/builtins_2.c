@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 
 int
-	msh_export(char **args __attribute__((unused)), char *envp[] __attribute__((unused)))
+	msh_export(char **args __attribute__((unused)), char *envp[])
 {
 	int		n;
 	int		i;
@@ -30,34 +30,54 @@ int
 		i++;
 	}
 	arr[i] = NULL;
-	ft_str_sort(arr, 0, n - 1);
-	i = 0;
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
+	ft_str_sort(arr, n);
+	print_str_arr(arr);
 	printf("\n");
+	free(arr);
 	return (1);
 }
+
+
 
 int
 	msh_unset(char **args __attribute__((unused)), char *envp[] __attribute__((unused)))
 {
+	int		i;
+	int		j;
+	int		len;
+	char	*tmp;
+
+	i = 0;
+	while (args[i])
+	{
+		tmp = ft_strjoin(args[i], "=");
+		len = ft_strlen(tmp);
+		j = 0;
+		while (envp[j])
+		{
+			if (!ft_strncmp(envp[j], tmp, len))
+			{
+				envp[j] = NULL;
+				while (envp[j + 1])
+				{
+					envp[j] = envp[j + 1];
+					envp[j + 1] = NULL;
+					j++;
+				}
+				break ;
+			}
+			j++;
+		}
+		printf("%s\n", args[i]);
+		i++;
+	}
 	return (1);
 }
 
 int
 	msh_env(char **args __attribute__((unused)), char *envp[])
 {
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
+	print_str_arr(envp);
 	printf("\n");
 	return (1);
 }

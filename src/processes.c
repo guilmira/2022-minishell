@@ -12,8 +12,8 @@
 
 #include "../include/minishell.h"
 
-//an array of function pointers (that take array of strings and return an int)
-int (*builtin_func[]) (char **, char **) = {
+//an array of function pointers (that takes two arrays of strings and return an int)
+static int	(*builtin_func[])(char **, char **) = {
 		&msh_echo,
 		&msh_cd,
 		&msh_pwd,
@@ -24,11 +24,10 @@ int (*builtin_func[]) (char **, char **) = {
 		&msh_help
 };
 
-
 int
 	msh_num_builtins(void)
 {
-	return (sizeof(builtin_str) / sizeof(char *));
+	return (sizeof(g_builtin_str) / sizeof(char *));
 }
 
 int
@@ -71,14 +70,8 @@ int
 	i = 0;
 	while (i < msh_num_builtins())
 	{
-		if (strcmp(args[0], builtin_str[i]) == 0)
-		{
-			if (strcmp(args[0], "env") == 0)
-			{
-				return (msh_env(args, envp));
-			}
+		if (strcmp(args[0], g_builtin_str[i]) == 0)
 			return ((*builtin_func[i])(args, envp));
-		}
 		i++;
 	}
 	return (msh_launch(args));
