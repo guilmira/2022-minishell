@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:58:25 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/07 11:58:26 by asydykna         ###   ########.fr       */
+/*   Updated: 2021/12/08 11:57:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void
 }
 
 void
-	copy_arr(char **dest, const char **srs, int src_len)
+	copy_arr(char **dest, char **srs, int src_len)
 {
 	int	i;
 

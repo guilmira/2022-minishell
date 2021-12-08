@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:01:41 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/06 17:52:14 by asydykna         ###   ########.fr       */
+/*   Updated: 2021/12/08 11:56:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** SYNOPSIS: function for comparing two strings.
 */
 int
-	ft_strcmp(const char *str1, const char *str2)
+	ft_strcmp(char *str1, char *str2)
 {
 	while (*str1)
 	{
