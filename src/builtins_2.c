@@ -16,26 +16,6 @@
 ** TODO: data->envp might be malloced, mind memory leak
 */
 
-void
-	export_new_variables(char *const *args, t_data *data)
-{
-	int		i;
-	int		envp_len;
-	char	**new_envp;
-
-	i = 1;
-	while (args[i])
-	{
-		envp_len = get_arr_len(data->envp);
-		new_envp = (char **)get_arr(envp_len + 2, sizeof(char *));
-		copy_arr(new_envp, data->envp, envp_len);
-		new_envp[envp_len] = args[i];
-		new_envp[envp_len + 1] = NULL;
-		data->envp = new_envp;
-		i++;
-	}
-}
-
 int
 	msh_export(char **args, t_data *data)
 {
@@ -66,33 +46,6 @@ int
 	else
 		export_new_variables(args, data);
 	return (1);
-}
-
-void
-	manipulate_envp(t_data *data, size_t len, const char *tmp)
-{
-	int		i;
-	char	*not_found;
-
-	i = 0;
-	while (data->envp[i])
-	{
-		if (!ft_strncmp(data->envp[i], tmp, len))
-		{
-			data->envp[i] = NULL;
-			while (data->envp[i + 1])
-			{
-				data->envp[i] = data->envp[i + 1];
-				data->envp[i + 1] = NULL;
-				i++;
-			}
-			break ;
-		}
-		i++;
-	}
-	not_found = ft_substr(tmp, 0, (ft_strlen(tmp) - 1));
-	printf("Variable %s not found\n", not_found);
-	free(not_found);
 }
 
 int

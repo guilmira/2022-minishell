@@ -36,7 +36,6 @@ int
 	return (1);
 }
 
-
 int
 	msh_pwd(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
 {

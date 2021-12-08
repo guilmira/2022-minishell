@@ -16,7 +16,7 @@
 ** SYNOPSIS: function for comparing two strings.
 */
 int
-	ft_strcmp(const char *str1, const char *str2)
+	ft_strcmp(char *str1, char *str2)
 {
 	while (*str1)
 	{
