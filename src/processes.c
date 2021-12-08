@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/01 13:47:02 by asydykna         ###   ########.fr       */
+/*   Updated: 2021/12/08 13:00:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,23 @@ int
 }
 
 int
-	msh_launch(char **args)
+	msh_launch(char **argu)
 {
-	pid_t	pid;
-	pid_t	wpid;
-	int		status;
 
-	pid = fork();
-	if (pid == 0) //child process
-	{
-		if (execvp(args[0], args) == -1)
-		{
-			perror("msh");
-		}
-		exit(EXIT_FAILURE);
-	}
-	else if (pid < 0) //FORK ERROR
-	{
-		perror("msh");
-	}
-	else //parent process
-	{
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-		{
-			wpid = waitpid(pid, &status, WUNTRACED);
-		}
-	}
+	t_arguments	*args;
+	args = NULL;
+
+	int argc;
+	argc = 4; //pipex ls wc cat
+	char **envp;
+	char string[] = "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Frameworks/Mono.framework/Versions/Current/Commands";
+	
+	//no va a coger con las omillas por la manera en la que lee. solo cogera comandos limpios
+	envp = ft_calloc(1, sizeof(char *));
+	envp[0] = string;
+	args = arg_reader(argc, argu, envp);
+	args->fds = arg_descriptors(args);
+	process_exe(args);
 	return (1);
 }
 

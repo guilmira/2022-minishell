@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2021/12/08 12:02:58 by guilmira         ###   ########.fr        #
+#    Updated: 2021/12/08 12:34:14 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,16 @@ LIB_DIR		= libft_submodule
 LIB			= $(LIB_DIR)/libft.a
 INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
 #--------------------------------------------------------------------------------------------------------------SOURCES
-SRCS		=	minishell.c main.c processes.c builtins.c builtins_2.c \
-			ft_str_sort.c utilities.c
+SRCS		=	main.c processes.c builtins.c builtins_2.c \
+			ft_str_sort.c utilities.c \
+				execution.c \
+				0files.c 0parser.c 0reader.c \
+				1mid_parent_son.c 2son.c 4auxiliar.c 5mgmt.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 
 RM = rm -f
-VPATH = src include
+VPATH = src include src2
 
 all: $(LIB) $(NAME)
 
