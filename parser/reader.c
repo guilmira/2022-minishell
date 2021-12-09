@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/09 15:01:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:36:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,15 @@ static char	**split_commands(char **argv)
 	j = 0;
 	i = -1;
 	table[0] = ft_strdup(argv[0]);
-	while (++i < total_commands && argv[i])
+	while (argv[++i]) //LOGIC CAN BE IMPROVED
 	{
 		if (!argv[i + 1])
 			break;
-		if (!is_command(argv[i + 1]))
+		if (!is_command(argv[i + 1]) && !is_pipe(argv[i + 1][0]))
 			table[j] = build_new_string(table[j], argv[i + 1]);
-		else
+		else if (is_pipe(argv[i + 1][0]))
+			;
+		else if (is_command(argv[i + 1]))
 			if (argv[i + 1])
 				table[++j] = ft_strdup(argv[i + 1]);
 	}

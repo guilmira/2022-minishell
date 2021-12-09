@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2021/12/09 14:59:32 by guilmira         ###   ########.fr        #
+#    Updated: 2021/12/09 15:38:16 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME): $(OBJS) $(LIB)
 
 exe: $(NAME)
 	./$(NAME)
-
+#ls -la | wc -l | cat | cat | cat | cat | cat
 clean:
 	@$(RM) $(OBJS)
 	@make clean -C $(LIB_DIR)

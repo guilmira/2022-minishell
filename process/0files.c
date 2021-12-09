@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 12:48:01 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/08 12:21:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:13:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ int	file_management(int argc, char *argv[], t_arguments *args)
 {
 	int	modifier;
 
-	modifier = 1;
-	args->total_commands = argc - 1;
+	modifier = 0;
+	args->total_commands = argc;
 	if (file_detector(argc, argv))
 	{
 		file_arrangement(argc, argv, args);
 		args->total_commands = argc - NOT_COMMANDS;
-		modifier = 3;
+		modifier = 2;
 	}
 	else
 		args->flag_file = 0;

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:46:01 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/09 14:54:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:29:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int is_sufix(char z)
 }
 
 /** PURPOSE : Evaluates whether char is a pipe. */
-static int is_pipe(char z)
+int is_pipe(char z)
 {
 	return (z == '|');
 }
@@ -37,10 +37,12 @@ int	is_command(char *str)
 int	count_commands(char **argv)
 {
 	int i;
+	int j;
 
-	i = 0;
-	while (argv[i])
+	j = 0;
+	i = -1;
+	while (argv[++i])
 		if (is_command(argv[i]))
-			i++;	
-	return (i);
+			j++;	
+	return (j);
 }

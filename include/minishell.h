@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/09 14:57:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:29:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void	copy_arr(char **dest, char **srs, int src_len);
 # define FULL_PERMISSIONS 0777
 # define RESTRICTED_PERM 777
 /* ERROR MESSAGES */
-# define ARGUMENTS 2
-# define NOT_COMMANDS 4
+# define NOT_COMMANDS 3
 # define MEM "Failed memory allocation.\n"
 # define ARG "Incorrect arguments.\n"
 # define MSG "Pipe function failure.\n"
@@ -99,13 +98,13 @@ void		process_exe(t_arguments *args);
 int			msh_execute(char **args, t_data *data, t_arguments *arguments);
 t_arguments	*shell_reader(void);
 
+int			is_pipe(char z);
 int			is_command(char *str);
 int			count_commands(char **argv);
 
 /* FILES */
 int			file_management(int argc, char *argv[], t_arguments *args);
 /* PARSER */
-int			parser(int argc, char *argv[]);
 char		*set_path(char *command, char **folders);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 /* READER */
