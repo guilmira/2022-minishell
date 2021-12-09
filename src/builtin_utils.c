@@ -55,7 +55,7 @@ void
 }
 
 void
-	export_new_variables(char *const *args, t_data *data)
+	export_new_variables(char **args, t_data *data)
 {
 	int		i;
 	size_t	envp_len;
@@ -76,7 +76,7 @@ void
 		else if (count_chars(args[i], "=") > 1)
 			export_multi_var(args, i, envp_len, new_envp);
 		else
-			new_envp[envp_len] = args[i];
+			new_envp[envp_len] = ft_strdup(args[i]);
 		new_envp[envp_len + 1] = NULL;
 		data->envp = new_envp;
 		i++;

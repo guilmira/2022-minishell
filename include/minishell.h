@@ -52,7 +52,7 @@ void	**get_arr(size_t elem_num, size_t elem_size);
 void	copy_arr(char **dest, char **srs, size_t src_len);
 int		count_chars(char *p, char *needle);
 void	manipulate_envp(t_data *data, size_t len, const char *tmp);
-void	export_new_variables(char *const *args, t_data *data);
+void	export_new_variables(char **args, t_data *data);
 void	export_multi_var(char *const *args, int i,
 			size_t envp_len, char **new_envp);
 
