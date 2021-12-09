@@ -55,15 +55,20 @@ int
 	size_t	len;
 	char	*tmp;
 
-	i = 1;
-	while (args[i])
+	if (get_arr_len(args) < 2)
+		printf("unset: not enough arguments\n");
+	else
 	{
-		tmp = ft_strjoin(args[i], "=");
-		len = ft_strlen(tmp);
-		manipulate_envp(data, len, tmp);
-		i++;
+		i = 1;
+		while (args[i])
+		{
+			tmp = ft_strjoin(args[i], "=");
+			len = ft_strlen(tmp);
+			manipulate_envp(data, len, tmp);
+			i++;
+		}
+		free(tmp);
 	}
-	free(tmp);
 	return (1);
 }
 
