@@ -45,7 +45,7 @@ int		msh_env(char **args, t_data *data);
 int		msh_exit(char **args, t_data *data);
 int		msh_help(char **args, t_data *data);
 int		msh_num_builtins(void);
-void	ft_str_sort(char *arr[], unsigned int len);
+void	ft_str_arr_sort(char *arr[], unsigned int len);
 void	print_str_arr(char *const *arr);
 size_t	get_arr_len(char **arr);
 void	**get_arr(size_t elem_num, size_t elem_size);

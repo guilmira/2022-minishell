@@ -19,26 +19,18 @@
 int
 	msh_export(char **args, t_data *data)
 {
-	int		n;
-	int		i;
+	int		envp_len;
 	char	**arr;
 	size_t	args_len;
 
 	args_len = get_arr_len(args);
 	if (args_len == 1)
 	{
-		n = 0;
-		while (data->envp[n])
-			n++;
-		arr = malloc((n + 1) * sizeof(char *));
-		i = 0;
-		while (data->envp[i])
-		{
-			arr[i] = data->envp[i];
-			i++;
-		}
-		arr[i] = NULL;
-		ft_str_sort(arr, n);
+		envp_len = (int)get_arr_len(data->envp);
+		arr = (char **)get_arr(envp_len + 1, sizeof(char *));
+		copy_arr(arr, data->envp, envp_len);
+		arr[envp_len] = NULL;
+		ft_str_arr_sort(arr, envp_len);
 		print_str_arr(arr);
 		printf("\n");
 		free(arr);
@@ -81,7 +73,8 @@ int
 }
 
 int
-	msh_exit(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
+	msh_exit(char **args __attribute__((unused)),
+			 	t_data *data __attribute__((unused)))
 {
 	return (0);
 }

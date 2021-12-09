@@ -20,7 +20,7 @@ LIB			= $(LIB_DIR)/libft.a
 INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
 #--------------------------------------------------------------------------------------------------------------SOURCES
 SRCS		=	main.c processes.c builtins.c builtins_2.c \
-			ft_str_sort.c utilities.c builtin_utils.c
+			ft_str_arr_sort.c utilities.c builtin_utils.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 
