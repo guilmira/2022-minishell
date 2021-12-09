@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/08 12:33:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/09 14:57:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data
 	char **envp;
 }	t_data;
 
-int		msh_execute(char **args, t_data *data);
+
 int		msh_echo(char **args, t_data *data);
 int		msh_cd(char **args, t_data *data);
 int		msh_pwd(char **args, t_data *data);
@@ -55,6 +55,7 @@ void	copy_arr(char **dest, char **srs, int src_len);
 //parte de guille
 
 #include <fcntl.h>
+#include <errno.h>
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
@@ -84,6 +85,7 @@ typedef struct s_command
 /** Struct that stores arguments and program parameters. */
 typedef struct s_arguments
 {
+	char	**argv;
 	t_list	*commands_lst;
 	int		flag_file;
 	int		command_number;
@@ -93,7 +95,12 @@ typedef struct s_arguments
 	char	*file_output;
 }			t_arguments;
 
-void	process_exe(t_arguments *args);
+void		process_exe(t_arguments *args);
+int			msh_execute(char **args, t_data *data, t_arguments *arguments);
+t_arguments	*shell_reader(void);
+
+int			is_command(char *str);
+int			count_commands(char **argv);
 
 /* FILES */
 int			file_management(int argc, char *argv[], t_arguments *args);

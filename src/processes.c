@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/08 13:00:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:52:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,40 +30,33 @@ int
 	return (sizeof(g_builtin_str) / sizeof(char *));
 }
 
-int
-	msh_launch(char **argu)
+
+/** PURPOSE : Executes indtermined number of processes.
+ * 1. Create argument descriptors to link pipes. 
+ * 2. Accesses main process function. */
+static int	process_excution(t_arguments *arguments)
 {
-
-	t_arguments	*args;
-	args = NULL;
-
-	int argc;
-	argc = 4; //pipex ls wc cat
-	char **envp;
-	char string[] = "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Frameworks/Mono.framework/Versions/Current/Commands";
-	
-	//no va a coger con las omillas por la manera en la que lee. solo cogera comandos limpios
-	envp = ft_calloc(1, sizeof(char *));
-	envp[0] = string;
-	args = arg_reader(argc, argu, envp);
-	args->fds = arg_descriptors(args);
-	process_exe(args);
+	arguments->fds = arg_descriptors(arguments);
+	process_exe(arguments);
 	return (1);
 }
 
-int
-	msh_execute(char **args, t_data *data)
+int	msh_execute(char **args, t_data *data, t_arguments *arguments)
 {
 	int	i;
+	int	status;
 
+	
 	if (args[0] == NULL) //empty command was entered
 		return (1);
 	i = 0;
 	while (i < msh_num_builtins())
 	{
-		if (strcmp(args[0], g_builtin_str[i]) == 0)
+		if (ft_strcmp(args[0], "prueba") == 0)
+		//if (ft_strcmp(args[0], g_builtin_str[i]) == 0) //TODO da seg fault. Comprobar.
 			return ((*builtin_func[i])(args, data));
 		i++;
 	}
-	return (msh_launch(args));
+	status = process_excution(arguments);
+	return (status);
 }

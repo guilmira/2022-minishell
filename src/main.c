@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/11/30 14:21:33 by asydykna         ###   ########.fr       */
+/*   Updated: 2021/12/09 14:52:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void
 	g_builtin_str[7] = "help";
 }
 
-char
+/* char
 	**split_line(char *line)
 {
 	int		bufsize;
@@ -61,63 +61,32 @@ char
 	}
 	tokens[position] = NULL; //What if position == bufsize?
 	return (tokens);
-}
+} */
 
-/*
-** SYNOPSIS: Function for reading a line:
-*/
-char
-	*msh_read_line(void)
+/** PURPOSE : Main loop of the shell. 
+ * 1. Reads the command from standard input and load it.
+ * 2. Execute main routine. Forks cmmands into processes and execute them. */
+void	shell_loop(t_data *data)
 {
-	char	*line;
-	size_t	bufsize;
-
-	line = NULL;
-	bufsize = 0;
-	if (getline(&line, &bufsize, stdin) == -1) //let getline allocate a buffer for us
-	{
-		if (feof(stdin)) //TODO: wright your own version
-			exit(EXIT_SUCCESS); //exit when EOF received
-		else
-		{
-			perror("readline");
-			exit((EXIT_FAILURE));
-		}
-	}
-	return (line);
-}
-
-/*
-** SYNOPSIS: Basic loop of the shell, does next things:
-** Read: Read the command from standard input.
-** Parse: Separate the command string into a program and arguments.
-** Execute: Run the parsed command.
-*/
-void
-	msh_loop(t_data *data)
-{
-	char	*line;
-	char	**args;
-	int		status;
+	int			status;
+	t_arguments	*arguments;
 
 	while (true)
 	{
 		printf("msh> ");
-		line = msh_read_line();
-		args = split_line(line);
-		status = msh_execute(args, data);
-		free(line);
-		free(args);
+		fflush(0);
+		arguments = shell_reader();
+		status = msh_execute(arguments->argv, data, arguments);
+		free_heap_memory(arguments);
 		if (!status)
 			break ;
 	}
 }
 
-/*
-** SYNOPSIS: main function.
-*/
-int
-	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
+/** EXECUTION : ./minishell
+ * This program will run a student made version of the bash console.
+ * 		msh> [INSERT COMMANDS]											*/
+int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
 {
 	t_data	*data;
 
@@ -128,7 +97,7 @@ int
 	//TODO: three parts:
 	// 1. Load config files, if any.
 	// 2. Run command loop.
-	msh_loop(data);
+	shell_loop(data);
 	// 3. Perform shutdown/cleanup
 	return (EXIT_SUCCESS);
 }
