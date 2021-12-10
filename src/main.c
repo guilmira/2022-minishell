@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/10 09:54:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/10 10:32:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	shell_loop(t_data *data)
 	{
 		printf("msh> ");
 		fflush(0);
-		arguments = shell_reader();
+		arguments = shell_reader(envp);
 		status = msh_execute(arguments->argv, data, arguments);
 		free_heap_memory(arguments);
 		if (!status)
@@ -89,9 +89,9 @@ void	shell_loop(t_data *data)
 //int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_data	*data;
+	/* t_data	*data;
 
-	data = (t_data *) malloc(sizeof(t_data));
+	data = (t_data *) malloc(sizeof(t_data)); */
 	data->envp = envp;
 	data->argv = argv;
 	(void)argc;
@@ -100,7 +100,7 @@ int	main(int argc, char *argv[], char *envp[])
 	//TODO: three parts:
 	// 1. Load config files, if any.
 	// 2. Run command loop.
-	shell_loop(data);
+	shell_loop(envp);
 	// 3. Perform shutdown/cleanup
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/09 15:36:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/10 10:28:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*read_shell_line()
 	if (gnl == -1)
 	{
 		//perror("Error:"); should work, but must be well tested
-		printf("Error at GNL");
+		printf("Error at GNL\n");
 		exit((EXIT_FAILURE));
 	}
 	else
