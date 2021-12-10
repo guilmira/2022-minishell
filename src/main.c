@@ -6,7 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2021/12/10 10:32:48 by guilmira         ###   ########.fr       */
+=======
+/*   Updated: 2021/12/10 10:21:15 by guilmira         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +78,8 @@ void	shell_loop(t_data *data)
 	while (true)
 	{
 		printf("msh> ");
-		fflush(0);
-		arguments = shell_reader(envp);
+		fflush(0); //provisional
+		arguments = shell_reader();
 		status = msh_execute(arguments->argv, data, arguments);
 		free_heap_memory(arguments);
 		if (!status)
@@ -86,16 +90,13 @@ void	shell_loop(t_data *data)
 /** EXECUTION : ./minishell
  * This program will run a student made version of the bash console.
  * 		msh> [INSERT COMMANDS]											*/
-//int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
-int	main(int argc, char *argv[], char *envp[])
+int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
 {
 	/* t_data	*data;
 
 	data = (t_data *) malloc(sizeof(t_data)); */
 	data->envp = envp;
 	data->argv = argv;
-	(void)argc;
-	(void)argv;
 	//TODO: decide if we should exit if the program called with arguments
 	//TODO: three parts:
 	// 1. Load config files, if any.
