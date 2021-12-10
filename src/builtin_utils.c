@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:36:14 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/10 11:39:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/10 12:07:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void
 		i++;
 	}
 	not_found = ft_substr(tmp, 0, (ft_strlen(tmp) - 1));
-	printf("Variable %s not found\n", not_found); //should we keep this warning?
+	printf("Variable %s not found\n", not_found);
 	free(not_found);
 }
 

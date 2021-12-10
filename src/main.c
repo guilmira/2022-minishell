@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/10 11:12:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/10 12:04:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,11 @@ void	shell_loop(char *envp[])
 /** EXECUTION : ./minishell
  * This program will run a student made version of the bash console.
  * 		msh> [INSERT COMMANDS]											*/
-int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *envp[])
+int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
-	/* t_data	*data;
-
-	data = (t_data *) malloc(sizeof(t_data)); */
-	/* data->envp = envp;
-	data->argv = argv; */
-	//TODO: decide if we should exit if the program called with arguments
-	//TODO: three parts:
+	if (argc != 1)
+		exit(0);
 	// 1. Load config files, if any.
-	// 2. Run command loop.
 	shell_loop(envp);
 	// 3. Perform shutdown/cleanup
 	return (EXIT_SUCCESS);
