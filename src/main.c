@@ -6,11 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2021/12/10 10:32:48 by guilmira         ###   ########.fr       */
-=======
-/*   Updated: 2021/12/10 10:21:15 by guilmira         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2021/12/10 11:12:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +66,18 @@ void
 /** PURPOSE : Main loop of the shell. 
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks cmmands into processes and execute them. */
-void	shell_loop(t_data *data)
+void	shell_loop(char *envp[])
 {
 	int			status;
 	t_arguments	*arguments;
 
+	init_builtins();
 	while (true)
 	{
 		printf("msh> ");
 		fflush(0); //provisional
-		arguments = shell_reader();
-		status = msh_execute(arguments->argv, data, arguments);
+		arguments = shell_reader(envp);
+		status = msh_execute(arguments->argv, arguments);
 		free_heap_memory(arguments);
 		if (!status)
 			break ;
@@ -95,8 +92,8 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)),
 	/* t_data	*data;
 
 	data = (t_data *) malloc(sizeof(t_data)); */
-	data->envp = envp;
-	data->argv = argv;
+	/* data->envp = envp;
+	data->argv = argv; */
 	//TODO: decide if we should exit if the program called with arguments
 	//TODO: three parts:
 	// 1. Load config files, if any.

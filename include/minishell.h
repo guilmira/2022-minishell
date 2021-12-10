@@ -6,12 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/09 15:29:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/10 11:10:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+
 
 /*
 ** COMMENTS
@@ -29,21 +31,37 @@
 //an array of builtin command names
 char	*g_builtin_str[8];
 
-typedef struct s_data
+/** Struct that stores command data. */
+typedef struct s_command
 {
-	char **argv;
-	char **envp;
-}	t_data;
+	char	*path;
+	char	**command;
+}			t_command;
+
+/** Struct that stores arguments and program parameters. */
+typedef struct s_arguments
+{
+	char	**envp;
+	char	**argv;
+	t_list	*commands_lst;
+	int		flag_file;
+	int		command_number;
+	int		total_commands;
+	int		*fds;
+	char	*file_input;
+	char	*file_output;
+}			t_arguments;
 
 
-int		msh_echo(char **args, t_data *data);
-int		msh_cd(char **args, t_data *data);
-int		msh_pwd(char **args, t_data *data);
-int		msh_export(char **args, t_data *data);
-int		msh_unset(char **args, t_data *data);
-int		msh_env(char **args, t_data *data);
-int		msh_exit(char **args, t_data *data);
-int		msh_help(char **args, t_data *data);
+
+int		msh_echo(char **args, t_arguments *arg);
+int		msh_cd(char **args, t_arguments *arg);
+int		msh_pwd(char **args, t_arguments *arg);
+int		msh_export(char **args, t_arguments *arg);
+int		msh_unset(char **args, t_arguments *arg);
+int		msh_env(char **args, t_arguments *arg);
+int		msh_exit(char **args, t_arguments *arg);
+int		msh_help(char **args, t_arguments *arg);
 int		msh_num_builtins(void);
 void	ft_str_sort(char *arr[], unsigned int len);
 void	print_str_arr(char *const *arr);
@@ -74,29 +92,13 @@ void	copy_arr(char **dest, char **srs, int src_len);
 # define DUP_ERROR "Dup2 function failure.\n"
 # define EXE_ERROR "Execve function failure.\n"
 
-/** Struct that stores command data. */
-typedef struct s_command
-{
-	char	*path;
-	char	**command;
-}			t_command;
 
-/** Struct that stores arguments and program parameters. */
-typedef struct s_arguments
-{
-	char	**argv;
-	t_list	*commands_lst;
-	int		flag_file;
-	int		command_number;
-	int		total_commands;
-	int		*fds;
-	char	*file_input;
-	char	*file_output;
-}			t_arguments;
+
+
 
 void		process_exe(t_arguments *args);
-int			msh_execute(char **args, t_data *data, t_arguments *arguments);
-t_arguments	*shell_reader(void);
+int			msh_execute(char **args, t_arguments *arguments);
+t_arguments	*shell_reader(char *envp[]);
 
 int			is_pipe(char z);
 int			is_command(char *str);

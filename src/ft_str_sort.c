@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:01:41 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/08 11:56:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/10 11:00:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** SYNOPSIS: function for comparing two strings.
 */
-int
+/* int
 	ft_strcmp(char *str1, char *str2)
 {
 	while (*str1)
@@ -26,7 +26,7 @@ int
 		str2++;
 	}
 	return (*(const unsigned char *)str1 - *(const unsigned char *)str2);
-}
+} */
 
 void
 	ft_str_swap(char **p1, char **p2)

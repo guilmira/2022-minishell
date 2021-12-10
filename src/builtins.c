@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:40:28 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/03 13:40:40 by asydykna         ###   ########.fr       */
+/*   Updated: 2021/12/10 11:15:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 */
 
 int
-	msh_echo(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
+	msh_echo(char **args __attribute__((unused)), t_arguments *arg __attribute__((unused)))
 {
 	return (0);
 }
 
 int
-	msh_cd(char **args, t_data *data __attribute__((unused)))
+	msh_cd(char **args, t_arguments *arg __attribute__((unused)))
 {
 	if (args[1] == NULL)
 		fprintf(stderr, "msh: expected argument to \"cd\"\n");
@@ -38,19 +38,19 @@ int
 
 
 int
-	msh_pwd(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
+	msh_pwd(char **args __attribute__((unused)), t_arguments *arg __attribute__((unused)))
 {
 	char	*path;
 
 	path = getcwd(NULL, 0);
 	if (!path)
 		perror("pwd() error");
-	printf("%s\n\n", path);
+	printf("%s\n", path);
 	return (1);
 }
 
 int
-	msh_help(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
+	msh_help(char **args __attribute__((unused)), t_arguments *arg __attribute__((unused)))
 {
 	int	i;
 

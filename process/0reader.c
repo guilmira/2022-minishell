@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/08 12:21:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/10 10:38:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ t_arguments	*arg_reader(int argc, char *argv[], char *envp[])
 	args = ft_calloc(1, sizeof(t_arguments));
 	if (!args)
 		ft_shut(MEM, 0);
+	args->envp = envp;
 	mod = file_management(argc, argv, args);
 	args->commands_lst = load_linked_list(argv, mod, \
 	envp, args->total_commands);

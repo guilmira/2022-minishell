@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/10 10:28:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/10 10:39:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static char	*read_shell_line()
  * 2. Parses and rearranges arguments. i.e: "ls -la" will be a single arg.
  * 3. Counts number of total commands. i.e: "ls -la" "wc -l" = 2 total args.
  * 4. Creates linked list to manage any number of commands. */
-t_arguments	*shell_reader(void)
+t_arguments	*shell_reader(char *envp[])
 {
 	char		*line;
 	char		**table;
@@ -99,12 +99,6 @@ t_arguments	*shell_reader(void)
 //----------------------------------TO REMOVE
 	//to do: parser
 	char **argv;
-	char **envp;
-
-	//to do: use envp properly
-	char string[] = "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Frameworks/Mono.framework/Versions/Current/Commands";
-	envp = ft_calloc(1, sizeof(char *));
-	envp[0] = string;
 //----------------------------------
 
 	argv = NULL;
