@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/01 13:47:02 by asydykna         ###   ########.fr       */
+/*   Updated: 2021/12/10 11:12:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //an array of function pointers (that takes two arrays of strings and return an int)
-static int	(*builtin_func[])(char **, t_data *) = {
+static int	(*builtin_func[])(char **, t_arguments *) = {
 		&msh_echo,
 		&msh_cd,
 		&msh_pwd,
@@ -30,49 +30,31 @@ int
 	return (sizeof(g_builtin_str) / sizeof(char *));
 }
 
-int
-	msh_launch(char **args)
-{
-	pid_t	pid;
-	pid_t	wpid;
-	int		status;
 
-	pid = fork();
-	if (pid == 0) //child process
-	{
-		if (execvp(args[0], args) == -1)
-		{
-			perror("msh");
-		}
-		exit(EXIT_FAILURE);
-	}
-	else if (pid < 0) //FORK ERROR
-	{
-		perror("msh");
-	}
-	else //parent process
-	{
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-		{
-			wpid = waitpid(pid, &status, WUNTRACED);
-		}
-	}
+/** PURPOSE : Executes indtermined number of processes.
+ * 1. Create argument descriptors to link pipes. 
+ * 2. Accesses main process function. */
+static int	process_excution(t_arguments *arguments)
+{
+	arguments->fds = arg_descriptors(arguments);
+	process_exe(arguments);
 	return (1);
 }
 
-int
-	msh_execute(char **args, t_data *data)
+int	msh_execute(char **args, t_arguments *arguments)
 {
 	int	i;
+	int	status;
 
 	if (args[0] == NULL) //empty command was entered
 		return (1);
 	i = 0;
 	while (i < msh_num_builtins())
-	{
-		if (strcmp(args[0], g_builtin_str[i]) == 0)
-			return ((*builtin_func[i])(args, data));
+	{	
+		if (ft_strcmp(args[0], g_builtin_str[i]) == 0)
+			return ((*builtin_func[i])(args, arguments));
 		i++;
 	}
-	return (msh_launch(args));
+	status = process_excution(arguments);
+	return (status);
 }

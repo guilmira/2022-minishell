@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:36:14 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/08 14:36:15 by asydykna         ###   ########.fr       */
+/*   Updated: 2021/12/10 11:39:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 void
-	manipulate_envp(t_data *data, size_t len, const char *tmp)
+	manipulate_envp(t_arguments *arg, size_t len, const char *tmp)
 {
 	int		i;
 	char	*not_found;
 
 	i = 0;
-	while (data->envp[i])
+	while (arg->envp[i])
 	{
-		if (!ft_strncmp(data->envp[i], tmp, len))
+		if (!ft_strncmp(arg->envp[i], tmp, len))
 		{
-			data->envp[i] = NULL;
-			while (data->envp[i + 1])
+			arg->envp[i] = NULL;
+			while (arg->envp[i + 1])
 			{
-				data->envp[i] = data->envp[i + 1];
-				data->envp[i + 1] = NULL;
+				arg->envp[i] = arg->envp[i + 1];
+				arg->envp[i + 1] = NULL;
 				i++;
 			}
 			return ;
@@ -55,7 +55,7 @@ void
 }
 
 void
-	export_new_variables(char **args, t_data *data)
+	export_new_variables(char **args, t_arguments *arg)
 {
 	int		i;
 	size_t	envp_len;
@@ -65,9 +65,9 @@ void
 	i = 1;
 	while (args[i])
 	{
-		envp_len = get_arr_len(data->envp);
+		envp_len = get_arr_len(arg->envp);
 		new_envp = (char **)get_arr(envp_len + 2, sizeof(char *));
-		copy_arr(new_envp, data->envp, envp_len);
+		copy_arr(new_envp, arg->envp, envp_len);
 		if (!ft_strchr(args[i], '='))
 		{
 			temp = ft_strjoin(ft_strjoin(args[i], "="), "''");
@@ -78,7 +78,7 @@ void
 		else
 			new_envp[envp_len] = ft_strdup(args[i]);
 		new_envp[envp_len + 1] = NULL;
-		data->envp = new_envp;
+		arg->envp = new_envp;
 		i++;
 	}
 }

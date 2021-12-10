@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_arr_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:01:41 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/06 17:52:14 by asydykna         ###   ########.fr       */
+/*   Updated: 2021/12/10 11:35:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-** SYNOPSIS: function for comparing two strings.
-*/
-int
-	ft_strcmp(char *str1, char *str2)
-{
-	while (*str1)
-	{
-		if (*str1 != *str2)
-			break ;
-		str1++;
-		str2++;
-	}
-	return (*(const unsigned char *)str1 - *(const unsigned char *)str2);
-}
 
 void
 	ft_str_swap(char **p1, char **p2)
