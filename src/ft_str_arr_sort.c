@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_sort.c                                      :+:      :+:    :+:   */
+/*   ft_str_arr_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@
 ** SYNOPSIS: function for comparing two strings.
 */
 int
-	ft_strcmp(const char *str1, const char *str2)
+	ft_strcmp(char *str1, char *str2)
 {
 	while (*str1)
 	{
@@ -42,7 +42,7 @@ void
 ** SYNOPSIS: function for sorting string arrays using quicksort method.
 */
 void
-	ft_str_sort(char *arr[], unsigned int len)
+	ft_str_arr_sort(char *arr[], unsigned int len)
 {
 	unsigned int	i;
 	unsigned int	pivot;
@@ -58,6 +58,6 @@ void
 		i++;
 	}
 	ft_str_swap(arr + pivot, arr + len - 1);
-	ft_str_sort(arr, pivot++);
-	ft_str_sort(arr + pivot, len - pivot);
+	ft_str_arr_sort(arr, pivot++);
+	ft_str_arr_sort(arr + pivot, len - pivot);
 }

@@ -16,49 +16,21 @@
 ** TODO: data->envp might be malloced, mind memory leak
 */
 
-void
-	export_new_variables(char *const *args, t_data *data)
-{
-	int		i;
-	int		envp_len;
-	char	**new_envp;
-
-	i = 1;
-	while (args[i])
-	{
-		envp_len = get_arr_len(data->envp);
-		new_envp = (char **)get_arr(envp_len + 2, sizeof(char *));
-		copy_arr(new_envp, data->envp, envp_len);
-		new_envp[envp_len] = args[i];
-		new_envp[envp_len + 1] = NULL;
-		data->envp = new_envp;
-		i++;
-	}
-}
-
 int
 	msh_export(char **args, t_data *data)
 {
-	int		n;
-	int		i;
+	int		envp_len;
 	char	**arr;
 	size_t	args_len;
 
 	args_len = get_arr_len(args);
 	if (args_len == 1)
 	{
-		n = 0;
-		while (data->envp[n])
-			n++;
-		arr = malloc((n + 1) * sizeof(char *));
-		i = 0;
-		while (data->envp[i])
-		{
-			arr[i] = data->envp[i];
-			i++;
-		}
-		arr[i] = NULL;
-		ft_str_sort(arr, n);
+		envp_len = (int)get_arr_len(data->envp);
+		arr = (char **)get_arr(envp_len + 1, sizeof(char *));
+		copy_arr(arr, data->envp, envp_len);
+		arr[envp_len] = NULL;
+		ft_str_arr_sort(arr, envp_len);
 		print_str_arr(arr);
 		printf("\n");
 		free(arr);
@@ -68,33 +40,6 @@ int
 	return (1);
 }
 
-void
-	manipulate_envp(t_data *data, size_t len, const char *tmp)
-{
-	int		i;
-	char	*not_found;
-
-	i = 0;
-	while (data->envp[i])
-	{
-		if (!ft_strncmp(data->envp[i], tmp, len))
-		{
-			data->envp[i] = NULL;
-			while (data->envp[i + 1])
-			{
-				data->envp[i] = data->envp[i + 1];
-				data->envp[i + 1] = NULL;
-				i++;
-			}
-			break ;
-		}
-		i++;
-	}
-	not_found = ft_substr(tmp, 0, (ft_strlen(tmp) - 1));
-	printf("Variable %s not found\n", not_found);
-	free(not_found);
-}
-
 int
 	msh_unset(char **args __attribute__((unused)), t_data *data)
 {
@@ -102,15 +47,20 @@ int
 	size_t	len;
 	char	*tmp;
 
-	i = 1;
-	while (args[i])
+	if (get_arr_len(args) < 2)
+		printf("unset: not enough arguments\n");
+	else
 	{
-		tmp = ft_strjoin(args[i], "=");
-		len = ft_strlen(tmp);
-		manipulate_envp(data, len, tmp);
-		i++;
+		i = 1;
+		while (args[i])
+		{
+			tmp = ft_strjoin(args[i], "=");
+			len = ft_strlen(tmp);
+			manipulate_envp(data, len, tmp);
+			i++;
+		}
+		free(tmp);
 	}
-	free(tmp);
 	return (1);
 }
 
@@ -123,7 +73,8 @@ int
 }
 
 int
-	msh_exit(char **args __attribute__((unused)), t_data *data __attribute__((unused)))
+	msh_exit(char **args __attribute__((unused)),
+			 	t_data *data __attribute__((unused)))
 {
 	return (0);
 }

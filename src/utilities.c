@@ -40,7 +40,7 @@ size_t
 }
 
 void
-	**get_arr(int elem_num, size_t elem_size)
+	**get_arr(size_t elem_num, size_t elem_size)
 {
 	void	**arr;
 
@@ -51,9 +51,9 @@ void
 }
 
 void
-	copy_arr(char **dest, const char **srs, int src_len)
+	copy_arr(char **dest, char **srs, size_t src_len)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < src_len)
@@ -61,4 +61,23 @@ void
 		dest[i] = srs[i];
 		i++;
 	}
+}
+
+
+int
+	count_chars(char *p, char *needle)
+{
+	int	n;
+
+	n = 0;
+	while (p != NULL)
+	{
+		p = ft_strnstr(p, needle, ft_strlen(p));
+		if (p)
+		{
+			n++;
+			p++;
+		}
+	}
+	return (n);
 }
