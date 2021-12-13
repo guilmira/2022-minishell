@@ -46,15 +46,32 @@ int
 }
 
 int
-	msh_cd(char **args, t_arguments *arg __attribute__((unused)))
+	msh_cd(char **args __attribute__((unused)), t_arguments *arg)
 {
-	if (args[1] == NULL)
-		fprintf(stderr, "msh: expected argument to \"cd\"\n");
+	char	*path;
+	char	*oldpath;
+	char	*temp_args[3];
+
+	path = NULL;
+	oldpath = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
+	temp_args[0] = "nothing";
+	temp_args[1] = oldpath;
+	temp_args[2] = NULL;
+	if (!args[1] || !ft_memcmp(args[1], "~", 2) || !ft_memcmp(args[1], "--", 3))
+		path = get_env_var(arg->envp, "HOME=");
+	else if (!ft_memcmp(args[1], "-", 2))
+		path = get_env_var(arg->envp, "OLDPWD=");
+	else
+		path = args[1];
+	if (chdir(path) != 0)
+		perror("msh");
 	else
 	{
-		if (chdir(args[1]) != 0)
-			perror("msh");
+		manipulate_envp(arg, 7, "OLDPWD=");
+		export_new_variables(temp_args, arg);
 	}
+	free(path);
+	free(oldpath);
 	return (1);
 }
 

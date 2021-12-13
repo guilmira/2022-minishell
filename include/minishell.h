@@ -52,8 +52,6 @@ typedef struct s_arguments
 	char	*file_output;
 }			t_arguments;
 
-
-
 int		msh_echo(char **args, t_arguments *arg);
 int		msh_cd(char **args, t_arguments *arg);
 int		msh_pwd(char **args, t_arguments *arg);
@@ -73,6 +71,7 @@ void	manipulate_envp(t_arguments *arg, size_t len, const char *tmp);
 void	export_new_variables(char **args, t_arguments *arg);
 void	export_multi_var(char *const *args, int i,
 			size_t envp_len, char **new_envp);
+char	*get_env_var(char **envp, char *needle);
 
 
 //parte de guille
