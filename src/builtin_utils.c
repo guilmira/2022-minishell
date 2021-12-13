@@ -16,7 +16,6 @@ void
 	manipulate_envp(t_arguments *arg, size_t len, const char *tmp)
 {
 	int		i;
-	char	*not_found;
 
 	i = 0;
 	while (arg->envp[i])
@@ -34,9 +33,6 @@ void
 		}
 		i++;
 	}
-	not_found = ft_substr(tmp, 0, (ft_strlen(tmp) - 1));
-	printf("Variable %s not found\n", not_found);
-	free(not_found);
 }
 
 void

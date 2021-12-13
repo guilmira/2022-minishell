@@ -40,10 +40,8 @@ int
 	return (1);
 }
 
-
-
 int
-	msh_unset(char **args __attribute__((unused)), t_arguments *arg)
+	msh_unset(char **args, t_arguments *arg)
 {
 	int		i;
 	size_t	len;

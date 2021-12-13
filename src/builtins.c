@@ -17,10 +17,32 @@
 ** Command for disabling unused variable warnings
 */
 
+//TODO: there is a segfault if we send nothing to the program (just press enter) or it is just a symbol;
 int
-	msh_echo(char **args __attribute__((unused)), t_arguments *arg __attribute__((unused)))
+	msh_echo(char **args __attribute__((unused)),
+			 t_arguments *arg __attribute__((unused)))
 {
-	return (0);
+	int		i;
+	bool	have_option;
+
+	i = 1;
+	if (ft_memcmp(args[i], "-n", 3))
+		have_option = false;
+	else
+	{
+		have_option = true;
+		i += 1;
+	}
+	while (args[i])
+	{
+		ft_putstr_fd(args[i], 1); //change hardcoded fd
+		if (args[i + 1])
+			ft_putstr_fd(" ", 1);
+		i++;
+	}
+	if (!have_option)
+		ft_putstr_fd("\n", 1);
+	return (1);
 }
 
 int
@@ -37,7 +59,8 @@ int
 }
 
 int
-	msh_pwd(char **args __attribute__((unused)), t_arguments *arg __attribute__((unused)))
+	msh_pwd(char **args __attribute__((unused)),
+			t_arguments *arg __attribute__((unused)))
 {
 	char	*path;
 
@@ -49,7 +72,8 @@ int
 }
 
 int
-	msh_help(char **args __attribute__((unused)), t_arguments *arg __attribute__((unused)))
+	msh_help(char **args __attribute__((unused)),
+			 t_arguments *arg __attribute__((unused)))
 {
 	int	i;
 
