@@ -70,6 +70,8 @@ void	shell_loop(char *envp[])
 {
 	int			status;
 	t_arguments	*arguments;
+	char **temp_envp;
+	temp_envp = NULL;
 
 	init_builtins();
 	while (true)
@@ -77,8 +79,11 @@ void	shell_loop(char *envp[])
 		printf("msh> ");
 		fflush(0); //provisional
 		arguments = shell_reader(envp);
+		if (temp_envp != NULL)
+			arguments->envp = temp_envp;
 		if (arguments)
 			status = msh_execute(arguments->argv, arguments);
+		temp_envp = arguments->envp;
 		//free_heap_memory(arguments);
 		if (!status)
 			break ;
