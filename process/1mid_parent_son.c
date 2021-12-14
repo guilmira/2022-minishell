@@ -18,7 +18,7 @@ void	clean_memory(t_arguments *args)
 	if (args)
 	{
 		if (args)
-			;
+			args = (void *)args; //todo function
 	}
 }
 

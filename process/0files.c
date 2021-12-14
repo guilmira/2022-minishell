@@ -38,9 +38,7 @@ static int	file_symbol_detected(char *str)
 static int	file_detector(int argc, char *argv[])
 {
 	int	i;
-	int	j;
 
-	j = -1;
 	i = -1;
 	while (++i < argc)
 		if (file_symbol_detected(argv[i]))
