@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 
 void
-	manipulate_envp(t_arguments *arg, size_t len, const char *tmp)
+	delete_env_var(t_arguments *arg, size_t len, const char *tmp)
 {
 	int		i;
 
@@ -77,25 +77,4 @@ void
 		arg->envp = new_envp;
 		i++;
 	}
-}
-
-char *
-	get_env_var(char **envp, char *needle)
-{
-	char	*var;
-	int		i;
-	int		len;
-
-	var = NULL;
-	len = ft_strlen(needle);
-	i = 0;
-	while (envp[i])
-	{
-		if (!ft_memcmp(envp[i], needle, len))
-		{
-			var = ft_strdup(envp[i] + len);
-		}
-		i++;
-	}
-	return (var);
 }

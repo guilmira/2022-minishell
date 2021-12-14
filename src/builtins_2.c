@@ -56,7 +56,7 @@ int
 		{
 			tmp = ft_strjoin(args[i], "=");
 			len = ft_strlen(tmp);
-			manipulate_envp(arg, len, tmp);
+			delete_env_var(arg, len, tmp);
 			i++;
 		}
 		free(tmp);

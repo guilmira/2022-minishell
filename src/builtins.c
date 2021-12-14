@@ -46,17 +46,18 @@ int
 }
 
 int
-	msh_cd(char **args __attribute__((unused)), t_arguments *arg)
+	msh_cd(char **args, t_arguments *arg)
 {
 	char	*path;
-	char	*oldpath;
-	char	*temp_args[3];
+	char	*old_path;
 
+	if (get_arr_len(args) > 2)
+	{
+		ft_putstr_fd("msh: cd: too many arguments\n", 2);
+		return (1);
+	}
 	path = NULL;
-	oldpath = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
-	temp_args[0] = "nothing";
-	temp_args[1] = oldpath;
-	temp_args[2] = NULL;
+	old_path = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
 	if (!args[1] || !ft_memcmp(args[1], "~", 2) || !ft_memcmp(args[1], "--", 3))
 		path = get_env_var(arg->envp, "HOME=");
 	else if (!ft_memcmp(args[1], "-", 2))
@@ -66,12 +67,9 @@ int
 	if (chdir(path) != 0)
 		perror("msh");
 	else
-	{
-		manipulate_envp(arg, 7, "OLDPWD=");
-		export_new_variables(temp_args, arg);
-	}
+		renew_pwds(arg, old_path);
 	free(path);
-	free(oldpath);
+	free(old_path);
 	return (1);
 }
 
