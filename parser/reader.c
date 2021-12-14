@@ -81,8 +81,14 @@ static char	*read_shell_line()
 		printf("Error at GNL\n");
 		exit((EXIT_FAILURE));
 	}
-	else
-		return (line);
+	if (!line)
+		return (NULL);
+	if (!line[0])
+	{
+		free(line);
+		return (NULL);
+	}
+	return (line);
 }
 
 /** PURPOSE : Reads command line. Loads arguments into structure. 
@@ -104,6 +110,8 @@ t_arguments	*shell_reader(char *envp[])
 	argv = NULL;
 	args = NULL;
 	line = read_shell_line();
+	if (!line)
+		return (NULL);
 	argv = ft_split(line, ' ');
 	table = split_commands(argv);
 	args = arg_reader(count_commands(table), table, envp);
