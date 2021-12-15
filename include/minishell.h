@@ -52,6 +52,7 @@ typedef struct s_arguments
 	int		*fds;
 	char	*file_input;
 	char	*file_output;
+	int		status;
 }			t_arguments;
 
 //PROVISIONAL MERGE

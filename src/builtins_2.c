@@ -73,7 +73,21 @@ int
 }
 
 int
-	msh_exit(char **args __attribute__((unused)), t_arguments *arg __attribute__((unused)))
+	msh_exit(char **args, t_arguments *arg __attribute__((unused)))
 {
+	if (!args[1])
+		return (0);
+	if (!ft_atoi(args[1]))
+	{
+		ft_putstr_fd("msh: exit: ", 2);
+		ft_putstr_fd(args[1], 2);
+		ft_putendl_fd(": numeric argument required", 2);
+		return (1);
+	}
+	if (get_arr_len(args) > 2)
+	{
+		ft_putendl_fd("msh: exit: too many arguments", 2);
+		return (1);
+	}
 	return (0);
 }

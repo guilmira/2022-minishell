@@ -17,13 +17,15 @@
 ** Command for disabling unused variable warnings
 */
 
-//TODO: there is a segfault if we send nothing to the program (just press enter) or it is just a symbol;
+//TODO: there is a segfault if we send nothing to the program,
+// (just press enter) or it is just a symbol;
+
 int
-	msh_echo(char **args __attribute__((unused)),
-			 t_arguments *arg __attribute__((unused)))
+	msh_echo(char **args, t_arguments *arg)
 {
 	int		i;
 	bool	have_option;
+	int		fd;
 
 	i = 1;
 	if (ft_memcmp(args[i], "-n", 3))
@@ -33,15 +35,26 @@ int
 		have_option = true;
 		i += 1;
 	}
+	if (arg->flag_file)
+	{
+		fd = fileno(fopen(arg->file_output, "w"));
+		if (fd < 0)
+		{
+			perror("msh: "); //needs to be tested
+			return (1);
+		}
+	}
+	else
+		fd = 1;
 	while (args[i])
 	{
-		ft_putstr_fd(args[i], 1); //change hardcoded fd
+		ft_putstr_fd(args[i], fd); //change hardcoded fp
 		if (args[i + 1])
-			ft_putstr_fd(" ", 1);
+			ft_putstr_fd(" ", fd);
 		i++;
 	}
 	if (!have_option)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", fd);
 	return (1);
 }
 
@@ -65,7 +78,10 @@ int
 	else
 		path = args[1];
 	if (chdir(path) != 0)
+	{
 		perror("msh");
+		arg->status = 127;
+	}
 	else
 		renew_pwds(arg, old_path);
 	free(path);

@@ -116,6 +116,7 @@ t_arguments	*shell_reader(char *envp[])
 	table = split_commands(argv);
 	args = arg_reader(count_commands(table), table, envp);
 	args->argv = argv; //to do: this will not be neccesary once structs are unified
+	args->status = 0;
 	free(line);
 	return (args);
 }
