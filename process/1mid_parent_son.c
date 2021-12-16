@@ -6,21 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/08 12:21:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 09:34:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-//frees
-void	clean_memory(t_arguments *args)
-{
-	if (args)
-	{
-		if (args)
-			args = (void *)args; //todo function
-	}
-}
 
 /** PURPOSE : Executes forked process for all the mid commands
  * 1. Sets truct of command. Identify its path.

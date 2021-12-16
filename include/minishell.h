@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/10 11:33:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 11:07:45 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,6 @@ typedef struct s_arguments
 	int		status;
 }			t_arguments;
 
-//PROVISIONAL MERGE
-char *
-	get_env_var(char **envp, char *needle);
-void
-	renew_pwds(t_arguments *arg, char *old_path);
-	void
-	set_new_var(char *var, t_arguments *arg);
 /* Protoypes minishell builtins. */
 int		msh_echo(char **args, t_arguments *arg);
 int		msh_cd(char **args, t_arguments *arg);
@@ -119,6 +112,7 @@ t_arguments	*shell_reader(char *envp[]);
 int			is_pipe(char z);
 int			is_command(char *str);
 int			count_commands(char **argv);
+
 /* Protoypes minishell execution. */
 
 /* EXECUTION */
@@ -126,6 +120,7 @@ void		process_exe(t_arguments *args);
 int			msh_execute(char **args, t_arguments *arguments);
 /* PARENT PROCESS */
 void		mid_process(t_arguments *args);
+void		single_process(t_arguments *args);
 /* SON PROCESS */
 void		first_son(t_arguments *args);
 void		last_son(int index, t_arguments *args);

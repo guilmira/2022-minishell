@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:27 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/09 15:09:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 09:33:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,3 @@ char	*set_path(char *command, char **folders)
 		free(command_path);
 	return (NULL);
 }
-
-

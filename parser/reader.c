@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/10 10:39:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 09:37:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /** PURPOSE : Creates new string that links full build of command. 
  * i.e.: "ls" and "-la" will become "ls -la". */
-static char *build_new_string(char *original, char *sufix)
+static char	*build_new_string(char *original, char *sufix)
 {
 	char	*tmp;
 	char	*new_string;
@@ -39,7 +39,7 @@ static char *build_new_string(char *original, char *sufix)
  * table[2] = "grep this is an example" */
 static char	**split_commands(char **argv)
 {
-	int 	i;
+	int		i;
 	int		j;
 	char	**table;
 	int		total_commands;
@@ -55,7 +55,7 @@ static char	**split_commands(char **argv)
 	while (argv[++i]) //LOGIC CAN BE IMPROVED
 	{
 		if (!argv[i + 1])
-			break;
+			break ;
 		if (!is_command(argv[i + 1]) && !is_pipe(argv[i + 1][0]))
 			table[j] = build_new_string(table[j], argv[i + 1]);
 		else if (is_pipe(argv[i + 1][0]))
@@ -106,7 +106,6 @@ t_arguments	*shell_reader(char *envp[])
 	//to do: parser
 	char **argv;
 //----------------------------------
-
 	argv = NULL;
 	args = NULL;
 	line = read_shell_line();
