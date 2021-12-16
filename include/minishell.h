@@ -76,6 +76,8 @@ void	export_new_variables(char **args, t_arguments *arg);
 void	export_multi_var(char *const *args, int i,
 		size_t envp_len, char **new_envp);
 void	loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd);
+char	*get_env_var(char **envp, char *needle);
+void	renew_pwds(t_arguments *arg, char *old_path);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
