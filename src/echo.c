@@ -50,6 +50,11 @@ void
 	{
 		if (args[i][0] == '$')
 		{
+			if (args[i][1] == '?')
+			{
+				ft_putnbr_fd(arg->status, fd);
+				return ;
+			}
 			tail = find_tail(args, i);
 			head = find_head(args, arg, i, tail);
 		}
@@ -68,6 +73,7 @@ void
 		}
 		i++;
 	}
+	set_status(arg, 0);
 }
 
 int

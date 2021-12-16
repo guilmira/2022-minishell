@@ -95,3 +95,9 @@ char*
 	ft_memcpy(result + len1, s2, len2 + 1);
 	return (result);
 }
+
+void
+	set_status(t_arguments *arg, int status)
+{
+	arg->status = status;
+}

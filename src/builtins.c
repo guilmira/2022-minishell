@@ -50,6 +50,7 @@ int
 		renew_pwds(arg, old_path);
 	free(path);
 	free(old_path);
+	set_status(arg, 0);
 	return (1);
 }
 
@@ -63,12 +64,13 @@ int
 	if (!path)
 		perror("pwd() error");
 	printf("%s\n", path);
+	set_status(arg, 0);
 	return (1);
 }
 
 int
 	msh_help(char **args __attribute__((unused)),
-			 t_arguments *arg __attribute__((unused)))
+			 t_arguments *arg)
 {
 	int	i;
 
@@ -82,5 +84,6 @@ int
 		i++;
 	}
 	printf("Use the man command for information on other programs.\n");
+	set_status(arg, 0);
 	return (1);
 }

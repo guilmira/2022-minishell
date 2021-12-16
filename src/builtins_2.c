@@ -37,6 +37,7 @@ int
 	}
 	else
 		export_new_variables(args, arg);
+	set_status(arg, 0);
 	return (1);
 }
 
@@ -61,6 +62,7 @@ int
 		}
 		free(tmp);
 	}
+	set_status(arg, 0);
 	return (1);
 }
 
@@ -75,6 +77,7 @@ int
 int
 	msh_exit(char **args, t_arguments *arg __attribute__((unused)))
 {
+	set_status(arg, 0);
 	if (!args[1])
 		return (0);
 	if (!ft_atoi(args[1]))
