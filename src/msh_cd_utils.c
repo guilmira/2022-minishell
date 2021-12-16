@@ -13,6 +13,17 @@
 #include "../include/minishell.h"
 
 void
+	set_new_var(char *var, t_arguments *arg)
+{
+	char	*temp_args[3];
+
+	temp_args[0] = "nothing";
+	temp_args[1] = var;
+	temp_args[2] = NULL;
+	export_new_variables(temp_args, arg);
+}
+
+void
 	renew_pwds(t_arguments *arg, char *old_path)
 {
 	char	*cur_path;
@@ -22,17 +33,6 @@ void
 	cur_path = ft_strjoin("PWD=", getcwd(NULL, 0));
 	delete_env_var(arg, 4, "PWD=");
 	set_new_var(cur_path, arg);
-}
-
-void
-	set_new_var(char *var, t_arguments *arg)
-{
-	char	*temp_args[3];
-
-	temp_args[0] = "nothing";
-	temp_args[1] = var;
-	temp_args[2] = NULL;
-	export_new_variables(temp_args, arg);
 }
 
 char *
