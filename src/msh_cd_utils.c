@@ -43,15 +43,19 @@ char *
 	int		len;
 
 	var = NULL;
-	len = ft_strlen(needle);
+	var = ft_concat(needle, "=");
+	len = ft_strlen(var);
 	i = 0;
 	while (envp[i])
 	{
-		if (!ft_memcmp(envp[i], needle, len))
+		if (!ft_memcmp(envp[i], var, len))
 		{
+			free(var);
 			var = ft_strdup(envp[i] + len);
+			return (var);
 		}
 		i++;
 	}
-	return (var);
+	free(var);
+	return (NULL);
 }

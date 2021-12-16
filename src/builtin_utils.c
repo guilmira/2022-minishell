@@ -43,7 +43,7 @@ void
 
 	arg_copy = (char *) malloc((ft_strlen(args[i]) + 1) * sizeof(char ));
 	ft_strlcpy(arg_copy, args[i], ft_strlen(args[i]) + 1);
-	strtok(arg_copy, "=");
+	strtok(arg_copy, "="); //write your own version
 	line = ft_strjoin(ft_strjoin(ft_strjoin(ft_strjoin(arg_copy, "="),
 					"'"), (ft_strchr(args[i], '=') + 1)), "'");
 	new_envp[envp_len] = line;
@@ -77,4 +77,21 @@ void
 		arg->envp = new_envp;
 		i++;
 	}
+}
+
+char*
+	ft_concat(const char *s1, const char *s2)
+{
+	char	*result;
+	size_t	len1;
+	size_t	len2;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = (char *)malloc(len1 + len2 + 1 * sizeof(char));
+	if (!result)
+		return (NULL);
+	ft_memcpy(result, s1, len1);
+	ft_memcpy(result + len1, s2, len2 + 1);
+	return (result);
 }

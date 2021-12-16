@@ -20,37 +20,7 @@
 //TODO: there is a segfault if we send nothing to the program,
 // (just press enter) or it is just a symbol;
 
-int
-	msh_echo(char **args, t_arguments *arg)
-{
-	int		i;
-	bool	have_option;
-	int		fd;
 
-	i = 1;
-	if (ft_memcmp(args[i], "-n", 3)) //what is the args[1] == NULL?
-		have_option = false;
-	else
-	{
-		have_option = true;
-		i += 1;
-	}
-	if (arg->flag_file)
-	{
-		fd = fileno(fopen(arg->file_output, "w"));
-		if (fd < 0)
-		{
-			perror("msh: "); //needs to be tested
-			return (1);
-		}
-	}
-	else
-		fd = 1;
-	loop_and_print_echo_args(args, arg, i, fd);
-	if (!have_option)
-		ft_putstr_fd("\n", fd);
-	return (1);
-}
 
 int
 	msh_cd(char **args, t_arguments *arg)
