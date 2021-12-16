@@ -20,7 +20,7 @@ LIB			= $(LIB_DIR)/libft.a
 INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
 #--------------------------------------------------------------------------------------------------------------SOURCES
 SRCS		=	main.c processes.c builtins.c builtins_2.c \
-				ft_str_arr_sort.c  builtin_utils.c utilities.c msh_cd_utils.c \
+				ft_str_arr_sort.c  builtin_utils.c utilities.c msh_cd_utils.c echo.c\
 				execution.c 0files.c 0parser.c 0reader.c \
 				1mid_parent_son.c 2son.c 4auxiliar.c 5mgmt.c \
 				reader_auxiliar.c reader.c

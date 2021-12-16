@@ -28,7 +28,7 @@ int
 	int		fd;
 
 	i = 1;
-	if (ft_memcmp(args[i], "-n", 3))
+	if (ft_memcmp(args[i], "-n", 3)) //what is the args[1] == NULL?
 		have_option = false;
 	else
 	{
@@ -46,13 +46,7 @@ int
 	}
 	else
 		fd = 1;
-	while (args[i])
-	{
-		ft_putstr_fd(args[i], fd); //change hardcoded fp
-		if (args[i + 1])
-			ft_putstr_fd(" ", fd);
-		i++;
-	}
+	loop_and_print_echo_args(args, arg, i, fd);
 	if (!have_option)
 		ft_putstr_fd("\n", fd);
 	return (1);

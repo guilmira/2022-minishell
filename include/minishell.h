@@ -81,7 +81,8 @@ int		count_chars(char *p, char *needle);
 void	delete_env_var(t_arguments *arg, size_t len, const char *tmp);
 void	export_new_variables(char **args, t_arguments *arg);
 void	export_multi_var(char *const *args, int i,
-			size_t envp_len, char **new_envp);
+		size_t envp_len, char **new_envp);
+void	loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
