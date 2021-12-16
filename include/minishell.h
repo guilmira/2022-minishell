@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/10 11:33:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 08:22:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ t_arguments	*shell_reader(char *envp[]);
 int			is_pipe(char z);
 int			is_command(char *str);
 int			count_commands(char **argv);
+
 /* Protoypes minishell execution. */
 
 /* EXECUTION */
@@ -124,6 +125,7 @@ void		process_exe(t_arguments *args);
 int			msh_execute(char **args, t_arguments *arguments);
 /* PARENT PROCESS */
 void		mid_process(t_arguments *args);
+void		single_process(t_arguments *args);
 /* SON PROCESS */
 void		first_son(t_arguments *args);
 void		last_son(int index, t_arguments *args);

@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2021/12/10 11:37:07 by guilmira         ###   ########.fr        #
+#    Updated: 2021/12/16 08:22:20 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,12 @@ INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
 SRCS		=	main.c processes.c builtins.c builtins_2.c \
 				ft_str_arr_sort.c  builtin_utils.c utilities.c msh_cd_utils.c \
 				execution.c 0files.c 0parser.c 0reader.c \
-				1mid_parent_son.c 2son.c 4auxiliar.c 5mgmt.c \
+				1mid_parent_son.c 1single_process.c 2son.c 4auxiliar.c 5mgmt.c \
 				reader_auxiliar.c reader.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 
-RM = rm -f
+RM = rm -rf
 VPATH = src include parser process
 
 all: $(LIB) $(NAME)
