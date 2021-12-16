@@ -6,13 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/16 08:25:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 09:32:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//an array of function pointers (that takes two arrays of strings and return an int)
+/** an array of function pointers (that takes 
+ * two arrays of strings and return an int) */
 static int	(*builtin_func[])(char **, t_arguments *) = {
 		&msh_echo,
 		&msh_cd,
@@ -46,7 +47,6 @@ static int	process_excution(t_arguments *arguments)
 	return (1);
 }
 
-
 /** PURPOSE : Main execution function.
  * 1. Checks that arguments exists. 
  * 2. Checks if a built-in argument was introduced.
@@ -55,7 +55,7 @@ int	msh_execute(char **args, t_arguments *arguments)
 {
 	int	i;
 	int	status;
-	
+
 	if (args[0] == NULL || !arguments)
 		return (1);
 	i = 0;

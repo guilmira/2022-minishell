@@ -6,21 +6,20 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:46:01 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 08:40:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 09:36:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
 /** PURPOSE : Evaluates whether char is a sufix. */
-static int is_sufix(char z)
+static int	is_sufix(char z)
 {
 	return (z == '-');
 }
 
 /** PURPOSE : Evaluates whether char is a pipe. */
-int is_pipe(char z)
+int	is_pipe(char z)
 {
 	return (z == '|');
 }
@@ -36,16 +35,13 @@ int	is_command(char *str)
 /** PURPOSE : Count total number of commands. */
 int	count_commands(char **argv)
 {
-	int i;
-	int j;
-printf("%s\n", argv[0]);
+	int	i;
+	int	j;
+
 	j = 0;
 	i = -1;
 	while (argv[++i])
-	{
 		if (is_command(argv[i]))
 			j++;
-		printf("dbera\n");
-	}
 	return (j);
 }

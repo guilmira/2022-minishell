@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/10 10:38:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 09:33:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	**get_env_path(char *envp[])
 /** PURPOSE : Builds linked list by allocating memory for a structure and
  * making that same structure the content of each node. Fills the path and 
  * the command fields. */
-static t_list	*load_linked_list(char *argv[], int mod, char *envp[], int coms)
+static t_list	*load_linked_list(char *argv[], int mod, char **envp, int coms)
 {
 	int			i;
 	char		**folders;

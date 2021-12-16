@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/08 12:22:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 09:35:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_shut(char *str, int i)
  * Also frees internal struct memory. */
 void	ft_structclear(t_list *lst)
 {
-	t_list	*tmp;
+	t_list		*tmp;
 	t_command	*command_struct;
 
 	if (!lst)
