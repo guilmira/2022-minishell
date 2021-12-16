@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 09:35:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 09:39:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	free_heap_memory(t_arguments *args)
 			ft_structclear(args->commands_lst);
 		if (args->fds)
 			free(args->fds);
-		free (args);
+		//free (args); No esta lista porque no podemos liberar envp.
 	}
 }
 

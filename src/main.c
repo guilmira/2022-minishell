@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/16 09:34:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 10:05:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,17 @@ void	shell_loop(char *envp[])
 			status = msh_execute(arguments->argv, arguments);
 			temp_envp = arguments->envp;
 		}
-		//free_heap_memory(arguments);
+		free_heap_memory(arguments);
 		if (!status)
 			break ;
 	}
+}
+
+//PROVISIONAL -- comment if compiling with fsanitize
+void	*ft_leaks(void)
+{
+	system("leaks minishell");
+	return (NULL);
 }
 
 /** EXECUTION : ./minishell
@@ -97,6 +104,7 @@ void	shell_loop(char *envp[])
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
+	//atexit(ft_leaks());
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	// 1. Load config files, if any.
@@ -104,3 +112,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	// 3. Perform shutdown/cleanup
 	return (EXIT_SUCCESS);
 }
+
+//cat | cat | ls
+	//wait(status); Si esta fuera hara todo simutaneo. es como funciona bash
+	//si estuvies ddentro, es cuando en cada proceso espera.
