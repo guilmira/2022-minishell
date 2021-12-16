@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/16 08:30:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 08:34:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ void	shell_loop(char *envp[])
 		printf("msh> ");
 		fflush(0); //provisional
 		arguments = shell_reader(envp);
-		if (temp_envp != NULL && arguments)
-			arguments->envp = temp_envp;
+		if (temp_envp != NULL && arguments)			arguments->envp = temp_envp;
 		if (arguments)
 		{
 			status = msh_execute(arguments->argv, arguments);

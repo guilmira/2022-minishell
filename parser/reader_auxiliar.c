@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:46:01 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/09 15:29:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 08:40:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ int	count_commands(char **argv)
 {
 	int i;
 	int j;
-
+printf("%s\n", argv[0]);
 	j = 0;
 	i = -1;
 	while (argv[++i])
+	{
 		if (is_command(argv[i]))
-			j++;	
+			j++;
+		printf("dbera\n");
+	}
 	return (j);
 }

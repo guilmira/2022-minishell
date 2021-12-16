@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 08:29:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 08:44:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static char	**split_commands(char **argv)
 	int		total_commands;
 
 	table = NULL;
+	printf("kasee\n");
 	total_commands = count_commands(argv);
 	table = ft_calloc(total_commands + 1, sizeof(char *));
 	if (!table)
@@ -113,6 +114,7 @@ t_arguments	*shell_reader(char *envp[])
 	if (!line)
 		return (NULL);
 	argv = ft_split(line, ' ');
+	printf("here: %s\n", argv[0]);
 	table = split_commands(argv);
 	args = arg_reader(count_commands(table), table, envp);
 	args->argv = argv; //to do: this will not be neccesary once structs are unified

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 08:22:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/16 08:32:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,6 @@ typedef struct s_arguments
 	char	*file_output;
 }			t_arguments;
 
-//PROVISIONAL MERGE
-char *
-	get_env_var(char **envp, char *needle);
-void
-	renew_pwds(t_arguments *arg, char *old_path);
-	void
-	set_new_var(char *var, t_arguments *arg);
 /* Protoypes minishell builtins. */
 int		msh_echo(char **args, t_arguments *arg);
 int		msh_cd(char **args, t_arguments *arg);
@@ -81,6 +74,9 @@ void	delete_env_var(t_arguments *arg, size_t len, const char *tmp);
 void	export_new_variables(char **args, t_arguments *arg);
 void	export_multi_var(char *const *args, int i,
 			size_t envp_len, char **new_envp);
+char	*get_env_var(char **envp, char *needle);
+void	renew_pwds(t_arguments *arg, char *old_path);
+void	set_new_var(char *var, t_arguments *arg);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
