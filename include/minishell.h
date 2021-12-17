@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <limits.h>
 
 /* LIBFT */
 # include "../libft_submodule/0includes/libft.h"
@@ -66,7 +67,8 @@ int		msh_exit(char **args, t_arguments *arg);
 int		msh_help(char **args, t_arguments *arg);
 int		msh_num_builtins(void);
 void	ft_str_arr_sort(char *arr[], unsigned int len);
-void	print_str_arr(char *const *arr);
+void
+print_str_arr(char *const *arr, int fd);
 size_t	get_arr_len(char **arr);
 void	**get_arr(size_t elem_num, size_t elem_size);
 void	copy_arr(char **dest, char **srs, size_t src_len);
@@ -80,6 +82,9 @@ char	*get_env_var(char **envp, char *needle);
 void	renew_pwds(t_arguments *arg, char *old_path);
 char	*ft_concat(const char *s1, const char *s2);
 void	set_status(t_arguments *arg, int status);
+int		get_fd(char *path);
+bool	is_within_range(const char *str);
+int		atoi_exit_code(const char *str);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

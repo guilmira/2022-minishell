@@ -66,30 +66,36 @@ void
 /** PURPOSE : Main loop of the shell. 
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks cmmands into processes and execute them. */
-void	shell_loop(char *envp[])
+int
+	shell_loop(char *envp[])
 {
 	int			status;
 	char		**temp_envp;
 	t_arguments	*arguments;
+	int			temp_status;
 
 	temp_envp = NULL;
+	temp_status = 0;
 	init_builtins();
 	while (true)
 	{
 		printf("msh> ");
 		fflush(0);
 		arguments = shell_reader(envp);
+		arguments->status = temp_status;
 		if (temp_envp != NULL && arguments)
 			arguments->envp = temp_envp;
 		if (arguments)
 		{
 			status = msh_execute(arguments->argv, arguments);
 			temp_envp = arguments->envp;
+			temp_status = arguments->status;
 		}
 		free_heap_memory(arguments);
 		if (!status)
 			break ;
 	}
+	return (arguments->status);
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize
@@ -108,9 +114,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	// 1. Load config files, if any.
-	shell_loop(envp);
+	return (shell_loop(envp));
 	// 3. Perform shutdown/cleanup
-	return (EXIT_SUCCESS);
+	//return (EXIT_SUCCESS);
 }
 
 //cat | cat | ls

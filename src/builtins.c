@@ -20,43 +20,9 @@
 //TODO: there is a segfault if we send nothing to the program,
 // (just press enter) or it is just a symbol;
 
-
-
-int
-	msh_cd(char **args, t_arguments *arg)
-{
-	char	*path;
-	char	*old_path;
-
-	if (get_arr_len(args) > 2)
-	{
-		ft_putstr_fd("msh: cd: too many arguments\n", 2);
-		return (1);
-	}
-	path = NULL;
-	old_path = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
-	if (!args[1] || !ft_memcmp(args[1], "~", 2) || !ft_memcmp(args[1], "--", 3))
-		path = get_env_var(arg->envp, "HOME=");
-	else if (!ft_memcmp(args[1], "-", 2))
-		path = get_env_var(arg->envp, "OLDPWD=");
-	else
-		path = args[1];
-	if (chdir(path) != 0)
-	{
-		perror("msh");
-		arg->status = 127;
-	}
-	else
-		renew_pwds(arg, old_path);
-	free(path);
-	free(old_path);
-	set_status(arg, 0);
-	return (1);
-}
-
 int
 	msh_pwd(char **args __attribute__((unused)),
-			t_arguments *arg __attribute__((unused)))
+			t_arguments *arg)
 {
 	char	*path;
 

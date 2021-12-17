@@ -50,35 +50,6 @@ void
 	free(arg_copy);
 }
 
-void
-	export_new_variables(char **args, t_arguments *arg)
-{
-	int		i;
-	size_t	envp_len;
-	char	**new_envp;
-	char	*temp;
-
-	i = 1;
-	while (args[i])
-	{
-		envp_len = get_arr_len(arg->envp);
-		new_envp = (char **)get_arr(envp_len + 2, sizeof(char *));
-		copy_arr(new_envp, arg->envp, envp_len);
-		if (!ft_strchr(args[i], '='))
-		{
-			temp = ft_strjoin(ft_strjoin(args[i], "="), "''");
-			new_envp[envp_len] = temp;
-		}
-		else if (count_chars(args[i], "=") > 1)
-			export_multi_var(args, i, envp_len, new_envp);
-		else
-			new_envp[envp_len] = ft_strdup(args[i]);
-		new_envp[envp_len + 1] = NULL;
-		arg->envp = new_envp;
-		i++;
-	}
-}
-
 char*
 	ft_concat(const char *s1, const char *s2)
 {
@@ -100,4 +71,16 @@ void
 	set_status(t_arguments *arg, int status)
 {
 	arg->status = status;
+}
+
+int
+	get_fd(char *path) //what if arg->file_output is NULL, or the user wants to output to sterr??
+{
+	int	fd;
+
+	if (path)
+		fd = fileno(fopen(path, "w")); //fopen is not allowed
+	else
+		fd = 1;
+	return (fd);
 }

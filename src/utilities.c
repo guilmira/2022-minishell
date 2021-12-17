@@ -16,14 +16,14 @@
 ** SYNOPSIS: function for printing string arrays.
 */
 void
-	print_str_arr(char *const *arr)
+	print_str_arr(char *const *arr, int fd)
 {
 	int	i;
 
 	i = 0;
 	while (arr[i])
 	{
-		printf("%s\n", arr[i]);
+		ft_putendl_fd(arr[i], fd);
 		i++;
 	}
 }

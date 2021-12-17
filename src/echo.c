@@ -90,17 +90,12 @@ int
 		have_option = true;
 		i += 1;
 	}
-	if (arg->flag_file)
+	fd = get_fd(arg->file_output);
+	if (fd < 0)
 	{
-		fd = fileno(fopen(arg->file_output, "w"));
-		if (fd < 0)
-		{
-			perror("msh: "); //needs to be tested
-			return (1);
-		}
+		perror("msh: "); //needs to be tested
+		return (1);
 	}
-	else
-		fd = 1;
 	loop_and_print_echo_args(args, arg, i, fd);
 	if (!have_option)
 		ft_putstr_fd("\n", fd);
