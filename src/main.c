@@ -12,19 +12,6 @@
 
 #include "../include/minishell.h"
 
-void
-	init_builtins(void)
-{
-	g_builtin_str[0] = "echo";
-	g_builtin_str[1] = "cd";
-	g_builtin_str[2] = "pwd";
-	g_builtin_str[3] = "export";
-	g_builtin_str[4] = "unset";
-	g_builtin_str[5] = "env";
-	g_builtin_str[6] = "exit";
-	g_builtin_str[7] = "help";
-}
-
 /* char
 	**split_line(char *line)
 {
@@ -73,15 +60,16 @@ int
 	char		**temp_envp;
 	t_arguments	*arguments;
 	int			temp_status;
+	char		*builtin_str[9];
 
 	temp_envp = NULL;
 	temp_status = 0;
-	init_builtins();
+	init_builtins(builtin_str);
 	while (true)
 	{
 		printf("msh> ");
 		fflush(0);
-		arguments = shell_reader(envp);
+		arguments = shell_reader(envp, builtin_str);
 		arguments->status = temp_status;
 		if (temp_envp != NULL && arguments)
 			arguments->envp = temp_envp;

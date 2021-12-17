@@ -12,6 +12,54 @@
 
 #include "../include/minishell.h"
 
+char *
+	get_env_var(char **envp, char *needle)
+{
+	char	*var;
+	int		i;
+	int		len;
+
+	var = NULL;
+	var = ft_concat(needle, "=");
+	len = (int )ft_strlen(var);
+	i = 0;
+	while (envp[i])
+	{
+		if (!ft_memcmp(envp[i], var, len))
+		{
+			free(var);
+			var = ft_strdup(envp[i] + len);
+			return (var);
+		}
+		i++;
+	}
+	free(var);
+	return (NULL);
+}
+
+void
+	set_new_var(char *var, t_arguments *arg)
+{
+	char	*temp_args[3];
+
+	temp_args[0] = "nothing";
+	temp_args[1] = var;
+	temp_args[2] = NULL;
+	export_new_variables(temp_args, arg);
+}
+
+void
+	renew_pwds(t_arguments *arg, char *old_path)
+{
+	char	*cur_path;
+
+	delete_env_var(arg, 7, "OLDPWD=");
+	set_new_var(old_path, arg);
+	cur_path = ft_strjoin("PWD=", getcwd(NULL, 0));
+	delete_env_var(arg, 4, "PWD=");
+	set_new_var(cur_path, arg);
+}
+
 void
 	get_paths(char **args, t_arguments *arg, char **path, char **old_path)
 {
@@ -51,4 +99,3 @@ int
 	set_status(arg, 0);
 	return (1);
 }
-

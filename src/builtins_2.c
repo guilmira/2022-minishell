@@ -17,16 +17,6 @@
 */
 
 int
-	msh_env(char **args __attribute__((unused)), t_arguments *arg)
-{
-	print_str_arr(arg->envp, 0);
-	printf("\n");
-	set_status(arg, 0);
-	return (1);
-}
-
-
-int
 	atoi_exit_code(const char *str)
 {
 	int				sign;
@@ -92,4 +82,35 @@ bool
 	while (*str == ' ' || (*str >= 9 && *str <= 13) || *str == 127)
 		str++;
 	return (get_bool(str, sign, count));
+}
+
+void
+	init_builtins(char **builtin_str)
+{
+	builtin_str[0] = "echo";
+	builtin_str[1] = "cd";
+	builtin_str[2] = "pwd";
+	builtin_str[3] = "export";
+	builtin_str[4] = "unset";
+	builtin_str[5] = "env";
+	builtin_str[6] = "exit";
+	builtin_str[7] = "help";
+	builtin_str[8] = NULL;
+}
+
+/*
+** an array of function pointers (that takes two arrays
+** of strings and returns an int)
+*/
+void
+	init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *))
+{
+	builtin_func[0] = &msh_echo;
+	builtin_func[1] = &msh_cd;
+	builtin_func[2] = &msh_pwd;
+	builtin_func[3] = &msh_export;
+	builtin_func[4] = &msh_unset;
+	builtin_func[5] = &msh_env;
+	builtin_func[6] = &msh_exit;
+	builtin_func[7] = &msh_help;
 }
