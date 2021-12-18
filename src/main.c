@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/18 11:26:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/18 11:30:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ int
 	init_builtins(builtin_str);
 	while (true)
 	{
-		if (arguments)
-		{
-			envp = arguments->envp;
-			status = arguments->status;
-		}
 		arguments = shell_reader(envp, builtin_str);
 		arguments->status = temp_status;
 		if (temp_envp != NULL && arguments)
