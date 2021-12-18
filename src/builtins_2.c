@@ -13,81 +13,104 @@
 #include "../include/minishell.h"
 
 /*
-** TODO: data->envp might be malloced, mind memory leak
+** TODO: arg->envp might be malloced, mind memory leaks
 */
 
 int
-	msh_export(char **args, t_arguments *arg)
+	atoi_exit_code(const char *str)
 {
-	int		envp_len;
-	char	**arr;
-	size_t	args_len;
+	int				sign;
+	unsigned long	count;
 
-	args_len = get_arr_len(args);
-	if (args_len == 1)
+	sign = 1;
+	count = 0;
+	while (*str == ' ' || (*str >= 9 && *str <= 13) || *str == 127)
+		str++;
+	if (*str == '-')
 	{
-		envp_len = (int)get_arr_len(arg->envp);
-		arr = (char **)get_arr(envp_len + 1, sizeof(char *));
-		copy_arr(arr, arg->envp, envp_len);
-		arr[envp_len] = NULL;
-		ft_str_arr_sort(arr, envp_len);
-		print_str_arr(arr);
-		printf("\n");
-		free(arr);
+		sign = -1;
+		str++;
 	}
+	if (!(*str >= '0' && *str <= '9'))
+		return (false);
+	while (*str >= '0' && *str <= '9')
+	{
+		count *= 10;
+		count += (*str - 48) * sign;
+		str++;
+	}
+	if (count >= 0 && count < 256)
+		return ((int)count);
 	else
-		export_new_variables(args, arg);
-	return (1);
+		return ((int)count % 256);
 }
 
-int
-	msh_unset(char **args, t_arguments *arg)
+bool
+	get_bool(const char *str, int sign, unsigned long count)
 {
-	int		i;
-	size_t	len;
-	char	*tmp;
-
-	if (get_arr_len(args) < 2)
-		printf("unset: not enough arguments\n");
-	else
-	{
-		i = 1;
-		while (args[i])
-		{
-			tmp = ft_strjoin(args[i], "=");
-			len = ft_strlen(tmp);
-			delete_env_var(arg, len, tmp);
-			i++;
-		}
-		free(tmp);
-	}
-	return (1);
+	if (*str)
+		return (false);
+	if ((sign == 1 && count <= LONG_MAX)
+		|| (sign == -1 && count >= (unsigned long)LONG_MIN))
+		return (true);
+	return (false);
 }
 
-int
-	msh_env(char **args __attribute__((unused)), t_arguments *arg)
+bool
+	is_within_range(const char *str)
 {
-	print_str_arr(arg->envp);
-	printf("\n");
-	return (1);
+	int				sign;
+	unsigned long	count;
+
+	sign = 1;
+	count = 0;
+	while (*str == ' ' || (*str >= 9 && *str <= 13) || *str == 127)
+		str++;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	if (!(*str >= '0' && *str <= '9'))
+		return (false);
+	while (*str >= '0' && *str <= '9')
+	{
+		count *= 10;
+		count += (*str - 48) * sign;
+		str++;
+	}
+	while (*str == ' ' || (*str >= 9 && *str <= 13) || *str == 127)
+		str++;
+	return (get_bool(str, sign, count));
 }
 
-int
-	msh_exit(char **args, t_arguments *arg __attribute__((unused)))
+void
+	init_builtins(char **builtin_str)
 {
-	if (!args[1])
-		return (0);
-	if (!ft_atoi(args[1]))
-	{
-		ft_putstr_fd("msh: exit: ", 2);
-		ft_putstr_fd(args[1], 2);
-		ft_putendl_fd(": numeric argument required", 2);
-		return (1);
-	}
-	if (get_arr_len(args) > 2)
-	{
-		ft_putendl_fd("msh: exit: too many arguments", 2);
-		return (1);
-	}
-	return (0);
+	builtin_str[0] = "echo";
+	builtin_str[1] = "cd";
+	builtin_str[2] = "pwd";
+	builtin_str[3] = "export";
+	builtin_str[4] = "unset";
+	builtin_str[5] = "env";
+	builtin_str[6] = "exit";
+	builtin_str[7] = "help";
+	builtin_str[8] = NULL;
+}
+
+/*
+** an array of function pointers (that takes two arrays
+** of strings and returns an int)
+*/
+void
+	init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *))
+{
+	builtin_func[0] = &msh_echo;
+	builtin_func[1] = &msh_cd;
+	builtin_func[2] = &msh_pwd;
+	builtin_func[3] = &msh_export;
+	builtin_func[4] = &msh_unset;
+	builtin_func[5] = &msh_env;
+	builtin_func[6] = &msh_exit;
+	builtin_func[7] = &msh_help;
 }

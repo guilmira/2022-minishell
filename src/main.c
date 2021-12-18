@@ -6,24 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/18 08:16:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/18 11:16:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void
-	init_builtins(void)
-{
-	g_builtin_str[0] = "echo";
-	g_builtin_str[1] = "cd";
-	g_builtin_str[2] = "pwd";
-	g_builtin_str[3] = "export";
-	g_builtin_str[4] = "unset";
-	g_builtin_str[5] = "env";
-	g_builtin_str[6] = "exit";
-	g_builtin_str[7] = "help";
-}
 
 /* char
 	**split_line(char *line)
@@ -66,28 +53,36 @@ void
 /** PURPOSE : Main loop of the shell. 
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks cmmands into processes and execute them. */
-void	shell_loop(char *envp[])
+int
+	shell_loop(char *envp[])
 {
 	int			status;
 	char		**temp_envp;
 	t_arguments	*arguments;
+	int			temp_status;
+	char		*builtin_str[9];
 
 	temp_envp = NULL;
-	init_builtins();
+	temp_status = 0;
+	init_builtins(builtin_str);
 	while (true)
 	{
-		arguments = shell_reader(envp);
+
+		arguments = shell_reader(envp, builtin_str);
+		arguments->status = temp_status;
 		if (temp_envp != NULL && arguments)
 			arguments->envp = temp_envp;
 		if (arguments)
 		{
 			status = msh_execute(arguments->argv, arguments);
 			temp_envp = arguments->envp;
+			temp_status = arguments->status;
 		}
 		free_heap_memory(arguments);
 		if (!status)
 			break ;
 	}
+	return (arguments->status);
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize
@@ -106,9 +101,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	// 1. Load config files, if any.
-	shell_loop(envp);
+	return (shell_loop(envp));
 	// 3. Perform shutdown/cleanup
-	return (EXIT_SUCCESS);
+	//return (EXIT_SUCCESS);
 }
 
 //cat | cat | ls

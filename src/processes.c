@@ -12,23 +12,10 @@
 
 #include "../include/minishell.h"
 
-/** an array of function pointers (that takes 
- * two arrays of strings and return an int) */
-static int	(*builtin_func[])(char **, t_arguments *) = {
-		&msh_echo,
-		&msh_cd,
-		&msh_pwd,
-		&msh_export,
-		&msh_unset,
-		&msh_env,
-		&msh_exit,
-		&msh_help
-};
-
 int
-	msh_num_builtins(void)
+	msh_num_builtins(t_arguments *arg)
 {
-	return (sizeof(g_builtin_str) / sizeof(char *));
+	return ((int)get_arr_len(arg->builtin_str));
 }
 
 /** PURPOSE : Executes indetrmined number of processes.
@@ -59,10 +46,10 @@ int	msh_execute(char **args, t_arguments *arguments)
 	if (args[0] == NULL || !arguments)
 		return (1);
 	i = 0;
-	while (i < msh_num_builtins())
+	while (i < msh_num_builtins(arguments))
 	{	
-		if (ft_strcmp(args[0], g_builtin_str[i]) == 0)
-			return ((*builtin_func[i])(args, arguments));
+		if (ft_strcmp(args[0], arguments->builtin_str[i]) == 0)
+			return ((arguments->builtin_func[i])(args, arguments));
 		i++;
 	}
 	status = process_excution(arguments);

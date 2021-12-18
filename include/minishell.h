@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/18 08:10:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/18 11:15:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 //#include <readline/history.h>
+# include <limits.h>
 
 /* LIBFT */
 # include "../libft_submodule/0includes/libft.h"
@@ -33,7 +34,7 @@
 # define TOK_DELIM " \t\r\n\a"
 
 /* Global variables and structs*/
-char	*g_builtin_str[8];
+
 
 /* Struct that stores command data. */
 typedef struct s_command
@@ -55,6 +56,8 @@ typedef struct s_arguments
 	char	*file_input;
 	char	*file_output;
 	int		status;
+	char	**builtin_str;
+	int		(*builtin_func[8])(char **, struct s_arguments *);
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
@@ -66,9 +69,9 @@ int		msh_unset(char **args, t_arguments *arg);
 int		msh_env(char **args, t_arguments *arg);
 int		msh_exit(char **args, t_arguments *arg);
 int		msh_help(char **args, t_arguments *arg);
-int		msh_num_builtins(void);
+int		msh_num_builtins(t_arguments *arg);
 void	ft_str_arr_sort(char *arr[], unsigned int len);
-void	print_str_arr(char *const *arr);
+void	print_str_arr(char *const *arr, int fd);
 size_t	get_arr_len(char **arr);
 void	**get_arr(size_t elem_num, size_t elem_size);
 void	copy_arr(char **dest, char **srs, size_t src_len);
@@ -76,10 +79,17 @@ int		count_chars(char *p, char *needle);
 void	delete_env_var(t_arguments *arg, size_t len, const char *tmp);
 void	export_new_variables(char **args, t_arguments *arg);
 void	export_multi_var(char *const *args, int i,
-		size_t envp_len, char **new_envp);
+			size_t envp_len, char **new_envp);
 void	loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd);
 char	*get_env_var(char **envp, char *needle);
 void	renew_pwds(t_arguments *arg, char *old_path);
+char	*ft_concat(const char *s1, const char *s2);
+void	set_status(t_arguments *arg, int status);
+int		get_fd(char *path);
+bool	is_within_range(const char *str);
+int		atoi_exit_code(const char *str);
+void	init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
+void	init_builtins(char **builtin_str);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
@@ -111,7 +121,7 @@ int			prepare_process(int fd_to_close, int fd_to_prepare);
 /* READER */
 t_arguments	*arg_reader(int argc, char *argv[], char *envp[]);
 char		*set_path(char *command, char **folders);
-t_arguments	*shell_reader(char *envp[]);
+t_arguments	*shell_reader(char *envp[], char **builtin_str);
 /* READER AUX */
 int			is_pipe(char z);
 int			is_command(char *str);

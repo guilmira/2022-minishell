@@ -96,7 +96,7 @@ static char	*read_shell_line()
  * 2. Parses and rearranges arguments. i.e: "ls -la" will be a single arg.
  * 3. Counts number of total commands. i.e: "ls -la" "wc -l" = 2 total args.
  * 4. Creates linked list to manage any number of commands. */
-t_arguments	*shell_reader(char *envp[])
+t_arguments	*shell_reader(char *envp[], char **builtin_str)
 {
 	char		*line;
 	char		**table;
@@ -115,6 +115,8 @@ t_arguments	*shell_reader(char *envp[])
 	free(line);
 	table = split_commands(argv);
 	args = arg_reader(count_commands(table), table, envp);
+	args->builtin_str = builtin_str; ///TODO: move to other place
+	init_builtin_func_arr(args->builtin_func); //TODO: move to other place
 	args->argv = argv; //to do: this will not be neccesary once structs are unified
 	args->status = 0;
 	return (args);
