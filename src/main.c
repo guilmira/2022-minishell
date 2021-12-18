@@ -6,49 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/18 11:16:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/18 11:26:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/* char
-	**split_line(char *line)
-{
-	int		bufsize;
-	int		position;
-	char	**tokens;
-	char	*token;
-
-	init_builtins();
-	bufsize = TOK_BUFSIZE;
-	position = 0;
-	tokens = malloc(bufsize * sizeof(char *));
-	if (!tokens)
-	{
-		fprintf(stderr, "msh: allocation error\n");
-		exit(EXIT_FAILURE);
-	}
-	token = strtok(line, TOK_DELIM);
-	while (token != NULL)
-	{
-		tokens[position] = token;
-		position++;
-		if (position >= bufsize)
-		{
-			bufsize += TOK_BUFSIZE;
-			tokens = realloc(tokens, bufsize * sizeof(char *));
-			if (!tokens)
-			{
-				fprintf(stderr, "msh: allocation error\n");
-				exit(EXIT_FAILURE);
-			}
-		}
-		token = strtok(NULL, TOK_DELIM);
-	}
-	tokens[position] = NULL; //What if position == bufsize?
-	return (tokens);
-} */
 
 /** PURPOSE : Main loop of the shell. 
  * 1. Reads the command from standard input and load it.
@@ -62,12 +24,17 @@ int
 	int			temp_status;
 	char		*builtin_str[9];
 
+	arguments = NULL;
 	temp_envp = NULL;
 	temp_status = 0;
 	init_builtins(builtin_str);
 	while (true)
 	{
-
+		if (arguments)
+		{
+			envp = arguments->envp;
+			status = arguments->status;
+		}
 		arguments = shell_reader(envp, builtin_str);
 		arguments->status = temp_status;
 		if (temp_envp != NULL && arguments)

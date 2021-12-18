@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/18 11:15:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/18 11:17:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_command
 /* Struct that stores arguments and program parameters. */
 typedef struct s_arguments
 {
-	char	**envp;
 	char	**argv;
 	t_list	*commands_lst;
 	int		flag_file;
@@ -55,6 +54,7 @@ typedef struct s_arguments
 	int		*fds;
 	char	*file_input;
 	char	*file_output;
+	char	**envp;
 	int		status;
 	char	**builtin_str;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
