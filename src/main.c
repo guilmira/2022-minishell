@@ -50,35 +50,39 @@
 	return (tokens);
 } */
 
-/** PURPOSE : Main loop of the shell. 
+t_arguments
+	*init_arg(char *envp[], char **builtin_str)
+{
+	t_arguments	*arguments;
+
+	arguments = ft_calloc(1, sizeof(t_arguments));
+	if (!arguments)
+		ft_shut(MEM, 0);
+	arguments->envp = envp;
+	init_builtins(builtin_str);
+	arguments->builtin_str = builtin_str;
+	init_builtin_func_arr(arguments->builtin_func);
+	return (arguments);
+}
+
+/** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks cmmands into processes and execute them. */
 int
 	shell_loop(char *envp[])
 {
 	int			status;
-	char		**temp_envp;
 	t_arguments	*arguments;
-	int			temp_status;
 	char		*builtin_str[9];
 
-	temp_envp = NULL;
-	temp_status = 0;
-	init_builtins(builtin_str);
+	arguments = init_arg(envp, builtin_str);
 	while (true)
 	{
 		printf("msh> ");
 		fflush(0);
-		arguments = shell_reader(envp, builtin_str);
-		arguments->status = temp_status;
-		if (temp_envp != NULL && arguments)
-			arguments->envp = temp_envp;
+		arguments = shell_reader(envp, arguments);
 		if (arguments)
-		{
 			status = msh_execute(arguments->argv, arguments);
-			temp_envp = arguments->envp;
-			temp_status = arguments->status;
-		}
 		free_heap_memory(arguments);
 		if (!status)
 			break ;

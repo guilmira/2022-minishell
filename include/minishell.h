@@ -117,9 +117,9 @@ int			file_management(int argc, char *argv[], t_arguments *args);
 char		*set_path(char *command, char **folders);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 /* READER */
-t_arguments	*arg_reader(int argc, char *argv[], char *envp[]);
+t_arguments	*arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);
-t_arguments	*shell_reader(char *envp[], char **builtin_str);
+t_arguments	*shell_reader(char *envp[], t_arguments *args);
 /* READER AUX */
 int			is_pipe(char z);
 int			is_command(char *str);
