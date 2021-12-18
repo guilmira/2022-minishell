@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 09:37:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/18 08:16:22 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ static char	**split_commands(char **argv)
 /** PURPOSE : Reads command line and allocate it into string. */
 static char	*read_shell_line()
 {
-	int		gnl;
 	char	*line;
 
-	gnl = get_next_line(0, &line);
+	line = readline("msh keys_testing> ");
+	/* gnl = get_next_line(0, &line);
 	if (gnl == -1)
 	{
 		//perror("Error:"); should work, but must be well tested
 		printf("Error at GNL\n");
 		exit((EXIT_FAILURE));
-	}
+	} */
 	if (!line)
 		return (NULL);
 	if (!line[0])
@@ -112,10 +112,10 @@ t_arguments	*shell_reader(char *envp[])
 	if (!line)
 		return (NULL);
 	argv = ft_split(line, ' ');
+	free(line);
 	table = split_commands(argv);
 	args = arg_reader(count_commands(table), table, envp);
 	args->argv = argv; //to do: this will not be neccesary once structs are unified
 	args->status = 0;
-	free(line);
 	return (args);
 }

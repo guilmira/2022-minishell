@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/16 10:05:25 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/18 08:16:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	shell_loop(char *envp[])
 	init_builtins();
 	while (true)
 	{
-		printf("msh> ");
-		fflush(0);
 		arguments = shell_reader(envp);
 		if (temp_envp != NULL && arguments)
 			arguments->envp = temp_envp;

@@ -6,14 +6,15 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2021/12/16 08:22:20 by guilmira         ###   ########.fr        #
+#    Updated: 2021/12/18 08:09:59 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
-CC			= gcc -g
+CC			= gcc -g #¿Por qué la g?
 CFLAGS		= -Wall -Wextra -Werror #-g -fsanitize=address
+READLINE	= -lreadline #Important: requires readline-devel package installed on the system
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
 LIB			= $(LIB_DIR)/libft.a
@@ -36,7 +37,7 @@ $(LIB):
 	@make -C $(LIB_DIR)
 
 $(NAME): $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIB) $(INCLUDES_LIBX) -o $(NAME)
+	$(CC) $(CFLAGS) $(READLINE) $(OBJS) $(INCLUDES) $(LIB) -o $(NAME)
 	@echo $(GREEN) "$(NAME) compiled" $(NONE)
 
 exe: $(NAME)
