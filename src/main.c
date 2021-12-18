@@ -80,7 +80,8 @@ int
 	{
 		printf("msh> ");
 		fflush(0);
-		arguments = shell_reader(envp, arguments);
+		//arguments = shell_reader(envp, arguments);
+		shell_reader(envp, arguments);
 		if (arguments)
 			status = msh_execute(arguments->argv, arguments);
 		free_heap_memory(arguments);
