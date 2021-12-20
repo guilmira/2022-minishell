@@ -41,13 +41,11 @@ char *
 }
 
 void
-	print_echo_output(char *const *args, int i, int fd, char *head, char *tail)
+	print_echo_output(int fd, char *head, char *tail)
 {
 	ft_putstr_fd(head, fd);
 	if (tail)
 		ft_putstr_fd(tail, fd);
-	if (args[i + 1])
-		ft_putstr_fd(" ", fd);
 }
 
 void
@@ -70,7 +68,9 @@ void
 		}
 		else
 			head = ft_strdup(args[i]);
-		print_echo_output(args, i, fd, head, tail);
+		print_echo_output(fd, head, tail);
+		if (args[i + 1])
+			ft_putstr_fd(" ", fd);
 		free_pointers(2, head, tail);
 		i++;
 	}
@@ -95,7 +95,7 @@ int
 	if (fd < 0)
 	{
 		perror("msh: "); //needs to be tested
-		set_status(arg, 1); //
+		set_status(arg, 1);
 		return (2);
 	}
 	loop_and_print_echo_args(args, arg, i, fd);

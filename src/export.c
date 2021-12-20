@@ -20,7 +20,7 @@ void
 
 	arg_copy = (char *) malloc((ft_strlen(args[i]) + 1) * sizeof(char ));
 	ft_strlcpy(arg_copy, args[i], ft_strlen(args[i]) + 1);
-	strtok(arg_copy, "="); //write your own version
+	ft_strtok(arg_copy, "=");
 	line = ft_strjoin(ft_strjoin(ft_strjoin(ft_strjoin(arg_copy, "="),
 					"'"), (ft_strchr(args[i], '=') + 1)), "'");
 	new_envp[envp_len] = line;

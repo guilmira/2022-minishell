@@ -90,6 +90,7 @@ int		atoi_exit_code(const char *str);
 void	init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
 void	init_builtins(char **builtin_str);
 void	free_pointers(int num, ...);
+char	*ft_strtok(char *str, const char *delim);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
