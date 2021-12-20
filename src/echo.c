@@ -63,7 +63,7 @@ void
 			if (args[i][1] == '?')
 			{
 				ft_putnbr_fd(arg->status, fd);
-				return ;
+				break ;
 			}
 			tail = find_tail(args, i);
 			head = find_head(args, arg, i, tail);
@@ -86,7 +86,6 @@ int
 
 	i = 1;
 	have_option = false;
-	set_status(arg, 0);
 	if (!ft_memcmp(args[i], "-n", 3)) //what is the args[1] == NULL?
 	{
 		have_option = true;
@@ -102,5 +101,6 @@ int
 	loop_and_print_echo_args(args, arg, i, fd);
 	if (!have_option)
 		ft_putstr_fd("\n", fd);
+	set_status(arg, 0);
 	return (1);
 }

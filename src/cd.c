@@ -27,13 +27,13 @@ char *
 	{
 		if (!ft_memcmp(envp[i], var, len))
 		{
-			free(var);
+			free_pointers(1, var);
 			var = ft_strdup(envp[i] + len);
 			return (var);
 		}
 		i++;
 	}
-	free(var);
+	free_pointers(1, var);
 	return (NULL);
 }
 
@@ -84,18 +84,18 @@ int
 	if (get_arr_len(args) > 2)
 	{
 		ft_putstr_fd("msh: cd: too many arguments\n", fd);
-		return (1);
+		set_status(arg, 1);
+		return (2);
 	}
 	get_paths(args, arg, &path, &old_path);
 	if (chdir(path) != 0)
 	{
 		perror("msh");
-		arg->status = 127;
+		set_status(arg, 1);
 	}
 	else
 		renew_pwds(arg, old_path);
-	free(path);
-	free(old_path);
+	free_pointers(2, path, old_path);
 	set_status(arg, 0);
 	return (1);
 }

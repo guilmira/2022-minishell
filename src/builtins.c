@@ -16,10 +16,6 @@
 ** __attribute__((unused))
 ** Command for disabling unused variable warnings
 */
-
-//TODO: there is a segfault if we send nothing to the program,
-// (just press enter) or it is just a symbol;
-
 int
 	msh_pwd(char **args __attribute__((unused)),
 			t_arguments *arg)

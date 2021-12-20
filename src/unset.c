@@ -12,6 +12,29 @@
 
 #include "../include/minishell.h"
 
+void
+	delete_env_var(t_arguments *arg, size_t len, const char *tmp)
+{
+	int		i;
+
+	i = 0;
+	while (arg->envp[i])
+	{
+		if (!ft_strncmp(arg->envp[i], tmp, len))
+		{
+			arg->envp[i] = NULL;
+			while (arg->envp[i + 1])
+			{
+				arg->envp[i] = arg->envp[i + 1];
+				arg->envp[i + 1] = NULL;
+				i++;
+			}
+			return ;
+		}
+		i++;
+	}
+}
+
 int
 	msh_unset(char **args, t_arguments *arg)
 {
