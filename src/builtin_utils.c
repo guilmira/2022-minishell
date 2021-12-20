@@ -84,3 +84,25 @@ int
 		fd = 1;
 	return (fd);
 }
+
+void
+	free_pointers(int num, ...)
+{
+	va_list	ap;
+	int		i;
+	void	*p;
+
+	i = 0;
+	va_start(ap, num);
+	while (i < num)
+	{
+		p = va_arg(ap, void *);
+		if (p)
+		{
+			free(p);
+			p = NULL;
+		}
+		i++;
+	}
+	va_end(ap);
+}

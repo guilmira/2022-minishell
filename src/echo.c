@@ -41,6 +41,16 @@ char *
 }
 
 void
+	print_echo_output(char *const *args, int i, int fd, char *head, char *tail)
+{
+	ft_putstr_fd(head, fd);
+	if (tail)
+		ft_putstr_fd(tail, fd);
+	if (args[i + 1])
+		ft_putstr_fd(" ", fd);
+}
+
+void
 	loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd)
 {
 	char	*head;
@@ -60,17 +70,8 @@ void
 		}
 		else
 			head = ft_strdup(args[i]);
-		ft_putstr_fd(head, fd); //change hardcoded fp
-		if (tail)
-			ft_putstr_fd(tail, fd);
-		if (args[i + 1])
-			ft_putstr_fd(" ", fd);
-		free(head);
-		if (tail)
-		{
-			free(tail);
-			tail = NULL;
-		}
+		print_echo_output(args, i, fd, head, tail);
+		free_pointers(2, head, tail);
 		i++;
 	}
 	set_status(arg, 0);
@@ -85,6 +86,7 @@ int
 
 	i = 1;
 	have_option = false;
+	set_status(arg, 0);
 	if (!ft_memcmp(args[i], "-n", 3)) //what is the args[1] == NULL?
 	{
 		have_option = true;
@@ -94,7 +96,8 @@ int
 	if (fd < 0)
 	{
 		perror("msh: "); //needs to be tested
-		return (1);
+		set_status(arg, 1); //
+		return (2);
 	}
 	loop_and_print_echo_args(args, arg, i, fd);
 	if (!have_option)

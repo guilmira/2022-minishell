@@ -23,6 +23,7 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <limits.h>
+# include <stdarg.h>
 
 /* LIBFT */
 # include "../libft_submodule/0includes/libft.h"
@@ -88,6 +89,7 @@ bool	is_within_range(const char *str);
 int		atoi_exit_code(const char *str);
 void	init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
 void	init_builtins(char **builtin_str);
+void	free_pointers(int num, ...);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
