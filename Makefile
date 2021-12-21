@@ -15,6 +15,7 @@ NAME		= minishell
 CC			= gcc -g #¿Por qué la g?
 CFLAGS		= -Wall -Wextra -Werror #-g -fsanitize=address
 READLINE	= -lreadline #Important: requires readline-devel package installed on the system
+#sudo apt-get install libreadline-dev 
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
 LIB			= $(LIB_DIR)/libft.a
@@ -38,7 +39,7 @@ $(LIB):
 	@make -C $(LIB_DIR)
 
 $(NAME): $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) $(READLINE) $(OBJS) $(INCLUDES) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(READLINE) $(INCLUDES) $(LIB) -o $(NAME)
 	@echo $(GREEN) "$(NAME) compiled" $(NONE)
 
 exe: $(NAME)

@@ -35,10 +35,12 @@ void	ft_structclear(t_list *lst)
 	while (lst)
 	{
 		tmp = lst->next;
-		command_struct = lst->content;
+		if (lst->content)
+			command_struct = lst->content;
 		if (lst->content)
 		{
-			ft_free_split(command_struct->command);
+			if (command_struct)
+				ft_free_split(command_struct->command);
 			if (command_struct->path)
 				free(command_struct->path);
 			free(command_struct);
@@ -55,7 +57,7 @@ void	free_heap_memory(t_arguments *args)
 {
 	if (args)
 	{
-		if (args->commands_lst)
+		if (args->commands_lst && args->commands_lst->content)
 			ft_structclear(args->commands_lst);
 		if (args->fds)
 			free(args->fds);
