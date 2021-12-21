@@ -101,6 +101,7 @@ void	init_builtins(char **builtin_str);
 void	free_pointers(int num, ...);
 char	*ft_strtok(char *str, const char *delim);
 
+
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
 # define PATH_USR "/usr/bin/"
