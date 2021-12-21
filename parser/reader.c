@@ -96,8 +96,7 @@ static char	*read_shell_line()
  * 2. Parses and rearranges arguments. i.e: "ls -la" will be a single arg.
  * 3. Counts number of total commands. i.e: "ls -la" "wc -l" = 2 total args.
  * 4. Creates linked list to manage any number of commands. */
-void
-shell_reader(char *envp[], t_arguments	*args)
+void	shell_reader(char *envp[], t_arguments	*args)
 {
 	char		*line;
 	char		**table;
@@ -111,10 +110,8 @@ shell_reader(char *envp[], t_arguments	*args)
 	if (!line)
 	{
 		args->commands_lst = NULL;
-		//	return (args);
 		return ;
 	}
-
 	argv = ft_split(line, ' ');
 	free(line);
 	table = split_commands(argv);

@@ -12,6 +12,7 @@
 
 #include "../include/minishell.h"
 
+
 t_arguments
 	*init_arg(char *envp[], char **builtin_str)
 {
@@ -28,7 +29,6 @@ t_arguments
 }
 
 /** PURPOSE : Main loop of the shell.
->>>>>>> main
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks cmmands into processes and execute them. */
 int
@@ -37,6 +37,8 @@ int
 	int			status;
 	t_arguments	*arguments;
 	char		*builtin_str[9];
+	
+	//HISTORY_STATE *hst_state;
 
 	arguments = NULL;
 	arguments = init_arg(envp, builtin_str);
@@ -65,6 +67,7 @@ void	*ft_leaks(void)
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	//atexit(ft_leaks());
+	using_history();
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	// 1. Load config files, if any.

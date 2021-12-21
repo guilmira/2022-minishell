@@ -95,7 +95,7 @@ int
 	}
 	else
 		renew_pwds(arg, old_path);
-	free_pointers(2, path, old_path);
 	set_status(arg, 0);
+	free_pointers(2, path, old_path);
 	return (1);
 }
