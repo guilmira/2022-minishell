@@ -41,6 +41,14 @@ char *
 }
 
 void
+	print_echo_output(int fd, char *head, char *tail)
+{
+	ft_putstr_fd(head, fd);
+	if (tail)
+		ft_putstr_fd(tail, fd);
+}
+
+void
 	loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd)
 {
 	char	*head;
@@ -53,24 +61,17 @@ void
 			if (args[i][1] == '?')
 			{
 				ft_putnbr_fd(arg->status, fd);
-				return ;
+				break ;
 			}
 			tail = find_tail(args, i);
 			head = find_head(args, arg, i, tail);
 		}
 		else
 			head = ft_strdup(args[i]);
-		ft_putstr_fd(head, fd); //change hardcoded fp
-		if (tail)
-			ft_putstr_fd(tail, fd);
+		print_echo_output(fd, head, tail);
 		if (args[i + 1])
 			ft_putstr_fd(" ", fd);
-		free(head);
-		if (tail)
-		{
-			free(tail);
-			tail = NULL;
-		}
+		free_pointers(2, head, tail);
 		i++;
 	}
 	set_status(arg, 0);
@@ -94,10 +95,12 @@ int
 	if (fd < 0)
 	{
 		perror("msh: "); //needs to be tested
-		return (1);
+		set_status(arg, 1);
+		return (2);
 	}
 	loop_and_print_echo_args(args, arg, i, fd);
 	if (!have_option)
 		ft_putstr_fd("\n", fd);
+	set_status(arg, 0);
 	return (1);
 }

@@ -13,6 +13,21 @@
 #include "../include/minishell.h"
 
 void
+	export_multi_var(char *const *args, int i, size_t envp_len, char **new_envp)
+{
+	char	*arg_copy;
+	char	*line;
+
+	arg_copy = (char *) malloc((ft_strlen(args[i]) + 1) * sizeof(char ));
+	ft_strlcpy(arg_copy, args[i], ft_strlen(args[i]) + 1);
+	ft_strtok(arg_copy, "=");
+	line = ft_strjoin(ft_strjoin(ft_strjoin(ft_strjoin(arg_copy, "="),
+					"'"), (ft_strchr(args[i], '=') + 1)), "'");
+	new_envp[envp_len] = line;
+	free_pointers(1, arg_copy);
+}
+
+void
 	export_new_variables(char **args, t_arguments *arg)
 {
 	int		i;
@@ -60,7 +75,7 @@ int
 		ft_str_arr_sort(arr, envp_len);
 		print_str_arr(arr, fd);
 		ft_putendl_fd("", fd);
-		free(arr);
+		free_pointers(1, arr);
 	}
 	else
 		export_new_variables(args, arg);

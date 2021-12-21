@@ -12,44 +12,6 @@
 
 #include "../include/minishell.h"
 
-void
-	delete_env_var(t_arguments *arg, size_t len, const char *tmp)
-{
-	int		i;
-
-	i = 0;
-	while (arg->envp[i])
-	{
-		if (!ft_strncmp(arg->envp[i], tmp, len))
-		{
-			arg->envp[i] = NULL;
-			while (arg->envp[i + 1])
-			{
-				arg->envp[i] = arg->envp[i + 1];
-				arg->envp[i + 1] = NULL;
-				i++;
-			}
-			return ;
-		}
-		i++;
-	}
-}
-
-void
-	export_multi_var(char *const *args, int i, size_t envp_len, char **new_envp)
-{
-	char	*arg_copy;
-	char	*line;
-
-	arg_copy = (char *) malloc((ft_strlen(args[i]) + 1) * sizeof(char ));
-	ft_strlcpy(arg_copy, args[i], ft_strlen(args[i]) + 1);
-	strtok(arg_copy, "="); //write your own version
-	line = ft_strjoin(ft_strjoin(ft_strjoin(ft_strjoin(arg_copy, "="),
-					"'"), (ft_strchr(args[i], '=') + 1)), "'");
-	new_envp[envp_len] = line;
-	free(arg_copy);
-}
-
 char*
 	ft_concat(const char *s1, const char *s2)
 {
@@ -83,4 +45,26 @@ int
 	else
 		fd = 1;
 	return (fd);
+}
+
+void
+	free_pointers(int num, ...)
+{
+	va_list	ap;
+	int		i;
+	void	*p;
+
+	i = 0;
+	va_start(ap, num);
+	while (i < num)
+	{
+		p = va_arg(ap, void *);
+		if (p)
+		{
+			free(p);
+			p = NULL;
+		}
+		i++;
+	}
+	va_end(ap);
 }
