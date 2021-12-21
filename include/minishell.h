@@ -22,13 +22,11 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
-
-
-//# include <readline/readline.h>
-//#include <readline/history.h>
-
-#include "/usr/include/readline/readline.h"
+//if your library DOESNT work try uncommenting this:
+//#include "/usr/include/readline/readline.h"
 //#include "/usr/include/readline/history.h"
 
 # include <limits.h>

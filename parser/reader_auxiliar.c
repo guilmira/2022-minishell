@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 
 /** PURPOSE : Evaluates whether char is a sufix. */
-static int	is_sufix(char z)
+int	is_sufix(char z)
 {
 	return (z == '-');
 }

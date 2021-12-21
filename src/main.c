@@ -42,9 +42,6 @@ int
 	arguments = init_arg(envp, builtin_str);
 	while (true)
 	{
-		printf("msh> ");
-		fflush(0);
-		//arguments = shell_reader(envp, arguments);
 		shell_reader(envp, arguments);
 		if (arguments)
 			status = msh_execute(arguments->argv, arguments);
