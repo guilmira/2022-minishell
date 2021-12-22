@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/22 04:46:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/22 06:20:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int
 	msh_num_builtins(t_arguments *arg)
 {
-	return ((int)get_arr_len(arg->builtin_str));
+	return ((int)get_arr_len(arg->prog->builtin_str));
 }
 
 /** PURPOSE : Executes indetrmined number of processes.
@@ -48,7 +48,7 @@ int	msh_execute(char **args, t_arguments *arguments)
 	i = 0;
 	while (i < msh_num_builtins(arguments))
 	{	
-		if (ft_strcmp(args[0], arguments->builtin_str[i]) == 0)
+		if (ft_strcmp(args[0], arguments->prog->builtin_str[i]) == 0)
 			return ((arguments->builtin_func[i])(args, arguments));
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/22 04:52:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/22 06:34:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,18 @@ typedef struct s_command
 	char	**command;
 }			t_command;
 
+/* Struct that stores the data kept between loops. */
+typedef struct s_program
+{
+	char	**envp;
+	int		status;
+	char	**builtin_str;
+}	t_prog;
+
 /* Struct that stores arguments and program parameters. */
 typedef struct s_arguments
 {
 	char	**argv;
-	t_list	*commands_lst;
 	int		flag_file;
 	int		flag_execution;
 	int		command_number;
@@ -61,10 +68,12 @@ typedef struct s_arguments
 	int		*fds;
 	char	*file_input;
 	char	*file_output;
-	char	**envp;
-	int		status;
-	char	**builtin_str;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
+	char	**envp;
+	char	**builtin_str;
+	int		status;
+	t_list	*commands_lst;
+	t_prog	*prog;
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
@@ -127,6 +136,9 @@ char	*ft_strtok(char *str, const char *delim);
 
 /* FILES */
 int			file_management(int argc, char *argv[], t_arguments *args);
+/* INITIALIZATION */
+t_prog		*initalize_prog(char **envp, char **builtin_str);
+t_arguments	*intialize_arg(t_prog *prog);
 /* PARSER */
 char		*set_path(char *command, char **folders);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
