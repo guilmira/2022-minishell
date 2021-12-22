@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 09:33:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/22 04:51:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static t_list	*load_linked_list(char *argv[], int mod, char **envp, int coms)
  * 1. Allocates memory for structure.
  * 2. Checks whether program needs to take into account in/output files.
  * 3. Creates linked list to manage any number of commands */
-t_arguments	*arg_reader(int argc, char *argv[], char *envp[], t_arguments	*args)
+void	arg_reader(int argc, char *argv[], char *envp[], t_arguments	*args)
 {
 	int			mod;
 
@@ -115,5 +115,4 @@ t_arguments	*arg_reader(int argc, char *argv[], char *envp[], t_arguments	*args)
 	envp, args->total_commands);
 	if (!args->commands_lst)
 		ft_shutdown(ARG, 0, args);
-	return (args);
 }

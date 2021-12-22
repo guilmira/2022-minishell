@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/18 08:16:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/22 04:53:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,17 @@ static char	**split_commands(char **argv)
 	return (table);
 }
 
-/** PURPOSE : Reads command line and allocate it into string. */
+/** PURPOSE : Reads command line and allocates it into string.
+ * If pointer line exists and is not empty, adds it to history. */
 static char	*read_shell_line()
 {
 	char	*line;
 
-	line = readline("msh keys_testing> ");
-	/* gnl = get_next_line(0, &line);
-	if (gnl == -1)
-	{
-		//perror("Error:"); should work, but must be well tested
-		printf("Error at GNL\n");
-		exit((EXIT_FAILURE));
-	} */
+	line = readline(MSHELL);
 	if (!line)
 		return (NULL);
-	if (!line[0])
-	{
-		free(line);
-		return (NULL);
-	}
+	if (line[0])
+		add_history(line);
 	return (line);
 }
 
@@ -100,23 +91,19 @@ void	shell_reader(char *envp[], t_arguments	*args)
 {
 	char		*line;
 	char		**table;
+	char		**argv;
 
-//----------------------------------TO REMOVE
-	//to do: parser
-	char	**argv;
-//----------------------------------
 	argv = NULL;
 	line = read_shell_line();
 	if (!line)
-	{
-		args->commands_lst = NULL;
+		ft_shutdown(LINE, errno, args);
+	if (parser_line(line))
 		return ;
-	}
+	args->flag_execution = 1;
 	argv = ft_split(line, ' ');
 	free(line);
 	table = split_commands(argv);
-	args = arg_reader(count_commands(table), table, envp, args); //what if make it void function?
+	arg_reader(count_commands(table), table, envp, args);
 	args->argv = argv; //to do: this will not be neccesary once structs are unified
 	//args->status = 0;
-	//return (args);
 }

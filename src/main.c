@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/18 11:30:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/22 04:53:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_arguments
 		ft_shut(MEM, 0);
 	arguments->envp = envp;
 	init_builtins(builtin_str);
-	arguments->builtin_str = builtin_str;
+	arguments->builtin_str = builtin_str; //builtin_str has being declared on stack instead of at heap.
+	// ^  couldn´t this bring problems??
 	init_builtin_func_arr(arguments->builtin_func);
 	return (arguments);
 }
@@ -38,15 +39,14 @@ int
 	t_arguments	*arguments;
 	char		*builtin_str[9];
 	
-	//HISTORY_STATE *hst_state;
-
 	arguments = NULL;
 	arguments = init_arg(envp, builtin_str);
 	while (true)
 	{
 		shell_reader(envp, arguments);
-		if (arguments)
+		if (arguments->flag_execution)
 			status = msh_execute(arguments->argv, arguments);
+		arguments->flag_execution = 0;
 		free_heap_memory(arguments);
 		if (!status)
 			break ;
@@ -67,7 +67,6 @@ void	*ft_leaks(void)
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	//atexit(ft_leaks());
-	using_history();
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	// 1. Load config files, if any.

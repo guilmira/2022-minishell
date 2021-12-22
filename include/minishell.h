@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/18 11:17:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/22 04:52:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_arguments
 	char	**argv;
 	t_list	*commands_lst;
 	int		flag_file;
+	int		flag_execution;
 	int		command_number;
 	int		total_commands;
 	int		*fds;
@@ -110,9 +111,11 @@ char	*ft_strtok(char *str, const char *delim);
 /* ERROR MESSAGES */
 # define NOT_COMMANDS 3
 # define ARG_NUMBER 1
+# define MSHELL "msh> "
 # define INVALID_ARGC "Program execution does not admit arguments\n."
 # define MEM "Failed memory allocation.\n"
 # define ARG "Incorrect arguments.\n"
+# define LINE "Error reading the line.\n"
 # define MSG "Pipe function failure.\n"
 # define LST "Failure at linked list.\n"
 # define FILE_ERROR "File not found or error at opening.\n"
@@ -127,11 +130,11 @@ int			file_management(int argc, char *argv[], t_arguments *args);
 /* PARSER */
 char		*set_path(char *command, char **folders);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
+int			parser_line(char *line);
 /* READER */
-t_arguments	*arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
+void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);
-void
-shell_reader(char *envp[], t_arguments *args);
+void		shell_reader(char *envp[], t_arguments *args);
 /* READER AUX */
 int			is_pipe(char z);
 int			is_command(char *str);
