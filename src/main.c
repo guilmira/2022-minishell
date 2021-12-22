@@ -6,11 +6,18 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/22 06:47:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/22 07:08:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+static void	store_program(t_prog *prog, t_arguments *args)
+{
+	prog->envp = args->envp;
+	prog->status = args->status;
+	prog->builtin_str = args->builtin_str;
+}
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
@@ -35,7 +42,7 @@ int
 		if (arguments->flag_execution)
 			status = msh_execute(arguments->argv, arguments);
 		arguments->flag_execution = 0;
-		prog = arguments->prog;
+		store_program(prog, arguments);
 		free_heap_memory(arguments); //free_heap now frees arguments as well. BUT keeps prog.
 		if (!status)
 			break ;
@@ -66,8 +73,3 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //cat | cat | ls
 	//wait(status); Si esta fuera hara todo simutaneo. es como funciona bash
 	//si estuvies ddentro, es cuando en cada proceso espera.
-
-
-//one of the errors right now
-//ls // export // then only a pipe --> seg fault
-//or ls the only a pipe. the reason is, because arguments should be freed.
