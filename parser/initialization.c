@@ -24,7 +24,7 @@ t_prog	*initalize_prog(char **envp, char **builtin_str)
 	init_builtins(builtin_str);
 	prog->builtin_str = builtin_str; //builtin_str has being declared on stack instead of at heap.
 	// ^  couldn´t this bring problems??
-	
+	prog->status = 0;
 	return (prog);
 }
 

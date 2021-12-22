@@ -95,8 +95,12 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	line = read_shell_line();
 	if (!line)
 		ft_shutdown(LINE, errno, args);
+	args->status = 1;
 	if (parser_line(line))
+	{
+		free(line);
 		return ;
+	}
 	args->flag_execution = 1;
 	args->argv = ft_split(line, ' ');
 	free(line);
