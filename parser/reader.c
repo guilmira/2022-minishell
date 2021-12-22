@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/22 06:31:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/12/22 06:43:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,15 @@ void	shell_reader(char *envp[], t_arguments	*args)
 {
 	char		*line;
 	char		**table;
-	char		**argv;
 
-	argv = NULL;
 	line = read_shell_line();
 	if (!line)
 		ft_shutdown(LINE, errno, args);
 	if (parser_line(line))
 		return ;
 	args->flag_execution = 1;
-	argv = ft_split(line, ' ');
+	args->argv = ft_split(line, ' ');
 	free(line);
-	table = split_commands(argv);
+	table = split_commands(args->argv);
 	arg_reader(count_commands(table), table, envp, args);
-	args->argv = argv; //to do: this will not be neccesary once structs are unified
-	//args->status = 0;
 }

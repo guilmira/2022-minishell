@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2021/12/22 06:31:54 by guilmira         ###   ########.fr        #
+#    Updated: 2021/12/22 06:39:36 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		= minishell
 CC			= gcc -g #¿Por qué la g?
 CFLAGS		= -Wall -Wextra -Werror #-g -fsanitize=address
-READLINE	= -lreadline #Important: requires readline-devel package installed on the system
+READLINE	= -lreadline
 #sudo apt-get install libreadline-dev 
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
@@ -44,7 +44,7 @@ $(NAME): $(OBJS) $(LIB)
 
 exe: $(NAME)
 	./$(NAME)
-#ls -la | wc -l | cat | cat | cat | cat | cat
+
 clean:
 	@$(RM) $(OBJS)
 	@make clean -C $(LIB_DIR)
