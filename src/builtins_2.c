@@ -47,7 +47,9 @@ int
 		count += (*str - 48) * sign;
 		str++;
 	}
-	if (count >= 0 && count < 256)
+	//if (count >= 0 && count < 256) //in my computer, i always get a compilation error here. It reads: comparison of unsigned expression >= 0 is always true
+		//return ((int)count);
+	if (count && count < 256) //in my computer, i always get a compilation error here. It reads: comparison of unsigned expression >= 0 is always true
 		return ((int)count);
 	else
 		return ((int)count % 256);
