@@ -12,6 +12,9 @@
 
 #include "../include/minishell.h"
 
+/*
+** SYNOPSIS: concatenates two strings and returns new \0 terminated string.
+*/
 char*
 	ft_concat(const char *s1, const char *s2)
 {
@@ -29,12 +32,18 @@ char*
 	return (result);
 }
 
+/*
+** SYNOPSIS: sets status of executed command.
+*/
 void
 	set_status(t_arguments *arg, int status)
 {
 	arg->status = status;
 }
 
+/*
+** SYNOPSIS: gets file descriptor from the path passed as argument.
+*/
 int
 	get_fd(char *path) //what if arg->file_output is NULL, or the user wants to output to sterr??
 {
@@ -47,6 +56,10 @@ int
 	return (fd);
 }
 
+/*
+** SYNOPSIS: frees pointers passed as arguments and sets them to NULL.
+** First arguments should indicate the quantity of passed pointers.
+*/
 void
 	free_pointers(int num, ...)
 {

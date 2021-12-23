@@ -12,6 +12,9 @@
 
 #include "../include/minishell.h"
 
+/*
+** SYNOPSIS: returns the number of builtin commands.
+*/
 int
 	msh_num_builtins(t_arguments *arg)
 {

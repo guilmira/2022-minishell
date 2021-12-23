@@ -12,6 +12,9 @@
 
 #include "../include/minishell.h"
 
+/*
+** SYNOPSIS: called if the argument passed to export command contains '='.
+*/
 void
 	export_multi_var(char *const *args, int i, size_t envp_len, char **new_envp)
 {
@@ -27,6 +30,9 @@ void
 	free_pointers(1, arg_copy);
 }
 
+/*
+** SYNOPSIS: called if there are more than 1 argument passed to export command.
+*/
 void
 	export_new_variables(char **args, t_arguments *arg)
 {
@@ -56,6 +62,9 @@ void
 	}
 }
 
+/*
+** SYNOPSIS: builtin export command.
+*/
 int
 	msh_export(char **args, t_arguments *arg)
 {

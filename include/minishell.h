@@ -90,7 +90,7 @@ void	ft_str_arr_sort(char *arr[], unsigned int len);
 void	print_str_arr(char *const *arr, int fd);
 size_t	get_arr_len(char **arr);
 void	**get_arr(size_t elem_num, size_t elem_size);
-void	copy_arr(char **dest, char **srs, size_t src_len);
+void	copy_arr(char **dest, char **src, size_t src_len);
 int		count_chars(char *p, char *needle);
 void	delete_env_var(t_arguments *arg, size_t len, const char *tmp);
 void	export_new_variables(char **args, t_arguments *arg);

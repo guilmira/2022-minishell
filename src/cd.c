@@ -12,6 +12,10 @@
 
 #include "../include/minishell.h"
 
+/*
+** SYNOPSIS: returns value for env variable passed as second argument.
+** If variable is not found returns NULL
+*/
 char *
 	get_env_var(char **envp, char *needle)
 {
@@ -37,6 +41,9 @@ char *
 	return (NULL);
 }
 
+/*
+** SYNOPSIS: saves new environment variable.
+*/
 void
 	set_new_var(char *var, t_arguments *arg)
 {
@@ -47,7 +54,9 @@ void
 	temp_args[2] = NULL;
 	export_new_variables(temp_args, arg);
 }
-
+/*
+** SYNOPSIS: changes the values of 'OLDPWD' and 'PWD' variables.
+*/
 void
 	renew_pwds(t_arguments *arg, char *old_path)
 {
@@ -60,6 +69,10 @@ void
 	set_new_var(cur_path, arg);
 }
 
+/*
+** SYNOPSIS: gets correct path depending of the argument
+** passed to cd  command ('--' or '~').
+*/
 void
 	get_paths(char **args, t_arguments *arg, char **path, char **old_path)
 {
@@ -73,6 +86,9 @@ void
 		(*path) = args[1];
 }
 
+/*
+** SYNOPSIS: builtin cd command.
+*/
 int
 	msh_cd(char **args, t_arguments *arg)
 {
@@ -94,8 +110,10 @@ int
 		set_status(arg, 1);
 	}
 	else
+	{
 		renew_pwds(arg, old_path);
-	set_status(arg, 0);
+		set_status(arg, 0);
+	}
 	free_pointers(2, path, old_path);
 	return (1);
 }

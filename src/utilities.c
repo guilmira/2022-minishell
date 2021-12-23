@@ -28,6 +28,9 @@ void
 	}
 }
 
+/*
+** SYNOPSIS: calculates number of string in a string array.
+*/
 size_t
 	get_arr_len(char **arr)
 {
@@ -39,6 +42,10 @@ size_t
 	return (len);
 }
 
+/*
+** SYNOPSIS: allocates memory for elem_num elements of array of type elem_size.
+** Returns pointer to array.
+*/
 void
 	**get_arr(size_t elem_num, size_t elem_size)
 {
@@ -50,20 +57,25 @@ void
 	return (arr);
 }
 
+/*
+** SYNOPSIS: copies src array to dest array, size of src array should be passed.
+*/
 void
-	copy_arr(char **dest, char **srs, size_t src_len)
+	copy_arr(char **dest, char **src, size_t src_len)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < src_len)
 	{
-		dest[i] = srs[i];
+		dest[i] = src[i];
 		i++;
 	}
 }
 
-
+/*
+** SYNOPSIS: counts occurrences of char needle in a string p.
+*/
 int
 	count_chars(char *p, char *needle)
 {

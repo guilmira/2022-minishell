@@ -20,6 +20,10 @@
    42 |  if (count >= 0 && count < 256) */
    //error wont let me compile. i change the line of code to (if count)
 
+/*
+** SYNOPSIS: converts string passed to exit commadn to int.
+** Specific version of ft_atoi function.
+*/
 int
 	atoi_exit_code(const char *str)
 {
@@ -43,12 +47,16 @@ int
 		count += (*str - 48) * sign;
 		str++;
 	}
-	if (count && count < 256)
+	if (count >= 0 && count < 256)
 		return ((int)count);
 	else
 		return ((int)count % 256);
 }
 
+/*
+** SYNOPSIS: analyzes if the numeric argument passed to exit command
+** is within the range of LONG_MIN and LONG_MAX.
+*/
 bool
 	get_bool(const char *str, int sign, unsigned long count)
 {
@@ -60,6 +68,10 @@ bool
 	return (false);
 }
 
+/*
+** SYNOPSIS: analyzes if the argument passed to exit command is numeric.
+** If the argument is numeric, it is passed to get_bool function
+*/
 bool
 	is_within_range(const char *str)
 {
@@ -88,6 +100,9 @@ bool
 	return (get_bool(str, sign, count));
 }
 
+/*
+** SYNOPSIS: initializes builtin_func array.
+*/
 void
 	init_builtins(char **builtin_str)
 {
@@ -103,7 +118,7 @@ void
 }
 
 /*
-** an array of function pointers (that takes two arrays
+** SYNOPSIS: an array of function pointers (that takes two arrays
 ** of strings and returns an int)
 */
 void

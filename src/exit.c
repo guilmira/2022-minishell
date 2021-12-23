@@ -12,6 +12,9 @@
 
 #include "../include/minishell.h"
 
+/*
+** SYNOPSIS: called if argument passed to exit command is not numeric.
+*/
 void
 	manage_no_numeric_arg(char **args, t_arguments *arg, int fd)
 {
@@ -21,6 +24,9 @@ void
 	ft_putendl_fd(": numeric argument required", fd);
 }
 
+/*
+** SYNOPSIS: builtin exit command.
+*/
 int
 	msh_exit(char **args, t_arguments *arg)
 {

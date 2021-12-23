@@ -16,6 +16,10 @@
 ** __attribute__((unused))
 ** Command for disabling unused variable warnings
 */
+
+/*
+** SYNOPSIS: our version of pwd command.
+*/
 int
 	msh_pwd(char **args __attribute__((unused)),
 			t_arguments *arg)
@@ -32,6 +36,9 @@ int
 	return (1);
 }
 
+/*
+** SYNOPSIS: our version of env command.
+*/
 int
 	msh_env(char **args __attribute__((unused)), t_arguments *arg)
 {
@@ -44,6 +51,9 @@ int
 	return (1);
 }
 
+/*
+** SYNOPSIS: builtin help command.
+*/
 int
 	msh_help(char **args __attribute__((unused)),
 			 t_arguments *arg)

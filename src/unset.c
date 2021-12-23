@@ -12,6 +12,9 @@
 
 #include "../include/minishell.h"
 
+/*
+** SYNOPSIS: deletes environmental variable.
+*/
 void
 	delete_env_var(t_arguments *arg, size_t len, const char *tmp)
 {
@@ -35,6 +38,9 @@ void
 	}
 }
 
+/*
+** SYNOPSIS: builtin unset command.
+*/
 int
 	msh_unset(char **args, t_arguments *arg)
 {

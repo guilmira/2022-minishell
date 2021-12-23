@@ -48,6 +48,9 @@ void
 		ft_putstr_fd(tail, fd);
 }
 
+/*
+** SYNOPSIS: checks arguments passed to echo command and prints them.
+*/
 void
 	loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd)
 {
@@ -77,6 +80,9 @@ void
 	set_status(arg, 0);
 }
 
+/*
+** SYNOPSIS: builtin echo command.
+*/
 int
 	msh_echo(char **args, t_arguments *arg)
 {
