@@ -40,13 +40,15 @@ int
 		//Otherwise, seg faults after serveral iterations were unavoidable.
 		shell_reader(envp, arguments);
 		if (arguments->flag_execution)
-			prog->status = msh_execute(arguments->argv, arguments);
+			//prog->status = msh_execute(arguments->argv, arguments);
+			if (!msh_execute(arguments->argv, arguments)) //We can't rely on prog->status to exit.
+				break ;
 		store_program(prog, arguments);
 		free_heap_memory(arguments); //free_heap now frees arguments as well. BUT keeps prog.
 		if (0) //temporal
 			break ;
-		/* if (!prog->status)
-			break ; */
+	/*	 if (!prog->status)
+			break ;*/
 	}
 	status = prog->status;
 	free(prog);
