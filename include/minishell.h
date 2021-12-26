@@ -61,11 +61,12 @@ typedef struct s_program
 typedef struct s_arguments
 {
 	char	**argv;
-	int		flag_file;
 	int		flag_execution;
 	int		command_number;
 	int		total_commands;
 	int		*fds;
+	int		flag_file_in;
+	int		flag_file_out;
 	char	*file_input;
 	char	*file_output;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
@@ -118,7 +119,6 @@ char	*ft_strtok(char *str, const char *delim);
 # define RESTRICTED_PERM 777
 
 /* ERROR MESSAGES */
-# define NOT_COMMANDS 3
 # define ARG_NUMBER 1
 # define MSHELL "msh> "
 # define INVALID_ARGC "Program execution does not admit arguments\n."

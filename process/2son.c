@@ -50,7 +50,7 @@ void	first_son(t_arguments *args)
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
 	fd_write = prepare_process(args->fds[0], args->fds[1]);
-	if (args->flag_file)
+	if (args->flag_file_out)
 		input_form_file(args->file_input);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
@@ -72,7 +72,7 @@ void	last_son(int index, t_arguments *args)
 	if (dup2(args->fds[index], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
-	if (args->flag_file)
+	if (args->flag_file_out)
 		output_to_file(args->file_output);
 	if (execve(command_struct->path, command_struct->command, NULL) == -1)
 		ft_shutdown(EXE_ERROR, 0, args);

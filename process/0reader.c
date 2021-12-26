@@ -106,13 +106,17 @@ static t_list	*load_linked_list(char *argv[], int mod, char **envp, int coms)
  * 1. Allocates memory for structure.
  * 2. Checks whether program needs to take into account in/output files.
  * 3. Creates linked list to manage any number of commands */
-void	arg_reader(int argc, char *argv[], char *envp[], t_arguments	*args)
+void	arg_reader(int argc, char *argv[], char *envp[], t_arguments *args)
 {
 	int			mod;
 
 	mod = file_management(argc, argv, args);
+	if (args->flag_file_in)
+		args->total_commands--;
 	args->commands_lst = load_linked_list(argv, mod, \
 	envp, args->total_commands);
+	printf("%i\n", args->command_number);
+	printf("%i\n", args->total_commands);
 	if (!args->commands_lst)
 		ft_shutdown(ARG, 0, args);
 }

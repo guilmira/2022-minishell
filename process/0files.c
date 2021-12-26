@@ -13,14 +13,14 @@
 #include "../include/minishell.h"
 
 /** PURPOSE : Searchs on arguments for '<' symbol. */
-static int	file_symbol_detected(char *str)
+static int	file_symbol_detected(char *str, char symbol)
 {
 	int	i;
 
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '<' && (str[i + 1] == ' ' || !str[i + 1]))
+		if (str[i] == symbol && (str[i + 1] == ' ' || !str[i + 1]))
 		{
 			if (i == 0)
 				return (1);
@@ -35,38 +35,59 @@ static int	file_symbol_detected(char *str)
 }
 
 /** PURPOSE : Is a file being introduced as an input to the program? */
-static int	file_detector(int argc, char *argv[])
+static int	file_detector(int argc, char *argv[], char symbol)
 {
 	int	i;
 
 	i = -1;
 	while (++i < argc)
-		if (file_symbol_detected(argv[i]))
+		if (file_symbol_detected(argv[i], symbol))
 			if (file_exists(argv[i + 1]))
 				return (1);
 	return (0);
 }
 
-/** PURPOSE : Load into struct file descriptors for input and output. */
-static int	file_arrangement(int argc, char *argv[], t_arguments *args)
+
+//ver tema counters
+
+/** PURPOSE : Load into struct file descriptors for input. */
+static int	file_arrangement(char *argv[], t_arguments *args)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strncmp(argv[i], "1files/", 7) == 0)
+		args->file_input = argv[i];
+	return (0);
+}
+
+/** PURPOSE : Load into struct file descriptors for output. */
+static int	file_arrangement_out(int argc, char *argv[], t_arguments *args)
 {
 	int	i;
 	int	counter;
 
 	i = -1;
 	counter = 0;
-	args->flag_file = 1;
 	while (++i < argc)
 	{
 		if (ft_strncmp(argv[i], "1files/", 7) == 0)
 		{
-			if (!counter++)
-				args->file_input = argv[i];
+			if (args->flag_file_in)
+			{
+				if (!counter++)
+					;
+				else
+				{
+					args->file_output = argv[i];
+					return (1);
+				}
+			}
 			else
 			{
 				args->file_output = argv[i];
-				return (1);
 			}
+			
 		}
 	}
 	return (0);
@@ -82,14 +103,19 @@ int	file_management(int argc, char *argv[], t_arguments *args)
 
 	modifier = 0;
 	args->total_commands = argc;
-	if (file_detector(argc, argv))
+	if (file_detector(argc, argv, '<'))
 	{
-		file_arrangement(argc, argv, args);
-		args->total_commands = argc - NOT_COMMANDS;
+		args->flag_file_in = 1;
+		file_arrangement(argv, args);
+		args->total_commands = argc - 2;
 		modifier = 2;
 	}
-	else
-		args->flag_file = 0;
+	if (file_detector(argc, argv, '>'))
+	{
+		args->flag_file_out = 1;
+		file_arrangement_out(argc, argv, args);
+		args->total_commands = argc - 2;
+	}
 	args->command_number = 0;
 	return (modifier);
 }
