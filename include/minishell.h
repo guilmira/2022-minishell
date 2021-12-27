@@ -163,6 +163,7 @@ void		single_process(t_arguments *args);
 /* SON PROCESS */
 void		first_son(t_arguments *args);
 void		last_son(int index, t_arguments *args);
+void	single_son(t_arguments *args);
 /* AUXILIAR */
 int			file_exists(char *str);
 int			*arg_descriptors(t_arguments *args);

@@ -42,22 +42,26 @@ static int	file_detector(int argc, char *argv[], char symbol)
 	i = -1;
 	while (++i < argc)
 		if (file_symbol_detected(argv[i], symbol))
-			if (file_exists(argv[i + 1]))
+		{
+			if (file_exists(argv[i - 1]))
 				return (1);
+			else
+				return (2);
+		}
 	return (0);
 }
-
 
 //ver tema counters
 
 /** PURPOSE : Load into struct file descriptors for input. */
-static int	file_arrangement(char *argv[], t_arguments *args)
+static int	file_arrangement(char *argv[], int argc, t_arguments *args)
 {
 	int	i;
 
-	i = 0;
-	if (ft_strncmp(argv[i], "1files/", 7) == 0)
-		args->file_input = argv[i];
+	i = -1;
+	while (++i < argc)
+		if (file_symbol_detected(argv[i], '<'))
+			args->file_input = argv[i - 1];
 	return (0);
 }
 
@@ -65,29 +69,15 @@ static int	file_arrangement(char *argv[], t_arguments *args)
 static int	file_arrangement_out(int argc, char *argv[], t_arguments *args)
 {
 	int	i;
-	int	counter;
+	
 
 	i = -1;
-	counter = 0;
+
 	while (++i < argc)
 	{
-		if (ft_strncmp(argv[i], "1files/", 7) == 0)
+		if (file_symbol_detected(argv[i], '>'))
 		{
-			if (args->flag_file_in)
-			{
-				if (!counter++)
-					;
-				else
-				{
-					args->file_output = argv[i];
-					return (1);
-				}
-			}
-			else
-			{
-				args->file_output = argv[i];
-			}
-			
+			args->file_output = argv[i + 1];
 		}
 	}
 	return (0);
@@ -100,17 +90,23 @@ static int	file_arrangement_out(int argc, char *argv[], t_arguments *args)
 int	file_management(int argc, char *argv[], t_arguments *args)
 {
 	int	modifier;
+	int	flag;
 
 	modifier = 0;
 	args->total_commands = argc;
-	if (file_detector(argc, argv, '<'))
+	flag = 0;
+	flag = file_detector(argc, argv, '<');
+	if (flag)
 	{
+		if (flag == 2)
+			ft_shutdown("file does not exist\n", 0, args);
 		args->flag_file_in = 1;
-		file_arrangement(argv, args);
+		file_arrangement(argv, argc, args);
 		args->total_commands = argc - 2;
 		modifier = 2;
 	}
-	if (file_detector(argc, argv, '>'))
+	flag = file_detector(argc, argv, '>');
+	if (flag)
 	{
 		args->flag_file_out = 1;
 		file_arrangement_out(argc, argv, args);

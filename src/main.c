@@ -71,6 +71,8 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	return (shell_loop(envp));
 }
 
+
+//https://datacarpentry.org/shell-genomics/04-redirection/index.html
 //cat | cat | ls
 	//wait(status); Si esta fuera hara todo simutaneo. es como funciona bash
 	//si estuvies ddentro, es cuando en cada proceso espera.

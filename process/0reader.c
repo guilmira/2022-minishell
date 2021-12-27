@@ -86,9 +86,10 @@ static t_list	*load_linked_list(char *argv[], int mod, char **envp, int coms)
 	if (!folders)
 		return (NULL);
 	i = -1;
+	printf("%i\n", coms);
 	while (++i < coms)
 	{
-		command_struct = ft_calloc(1, sizeof(t_command)); //cant repeat itself
+		command_struct = ft_calloc(1, sizeof(t_command));
 		if (!command_struct)
 		{
 			ft_free_split(folders);
@@ -111,12 +112,8 @@ void	arg_reader(int argc, char *argv[], char *envp[], t_arguments *args)
 	int			mod;
 
 	mod = file_management(argc, argv, args);
-	if (args->flag_file_in)
-		args->total_commands--;
 	args->commands_lst = load_linked_list(argv, mod, \
 	envp, args->total_commands);
-	printf("%i\n", args->command_number);
-	printf("%i\n", args->total_commands);
 	if (!args->commands_lst)
 		ft_shutdown(ARG, 0, args);
 }

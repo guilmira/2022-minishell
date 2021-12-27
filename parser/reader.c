@@ -105,5 +105,6 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	args->argv = ft_split(line, ' ');
 	free(line);
 	table = split_commands(args->argv);
+	
 	arg_reader(count_commands(table), table, envp, args);
 }
