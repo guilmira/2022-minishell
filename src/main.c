@@ -37,9 +37,18 @@ int
 	{
 		arguments = intialize_arg(prog); //Explanation: arguments struct has changed as it had to be INSIDE of the loops.
 		shell_reader(envp, arguments);
+		
 		if (arguments->flag_execution)
 			prog->status = msh_execute(arguments->argv, arguments);
 		store_program(prog, arguments);
+
+		//FOUND OUT SEGFAULT WITH SPLIT. THE PROBLEM IS THAT ARGV IS MODIFIED WHEN USED 'CD'AND NOT TERMINATED IN NULL.
+		if (arguments->flag_execution)
+			if (!ft_strcmp(arguments->argv[0], "cd")) 
+				arguments->argv[1] = NULL;
+		//TEMPORARY ^
+
+
 		free_heap_memory(arguments); //free_heap now frees arguments as well. BUT keeps prog..
 		if (0) //temporal
 			break ;

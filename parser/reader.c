@@ -107,4 +107,5 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	args->total_commands = count_commands(args->argv);
 	arg_reader(count_tokens(args->argv), table, envp, args);
 	
+	
 }

@@ -96,14 +96,12 @@ void	file_management(int argc, char *argv[], t_arguments *args)
 			ft_shutdown("file does not exist\n", 0, args);
 		args->flag_file_in = 1;
 		file_arrangement(argv, argc, args);
-		args->total_commands = argc - 2;
 	}
 	flag = file_detector(argc, argv, '>');
 	if (flag)
 	{
 		args->flag_file_out = 1;
 		file_arrangement_out(argc, argv, args);
-		args->total_commands = argc - 2;
 	}
 	args->command_number = 0;
 }
