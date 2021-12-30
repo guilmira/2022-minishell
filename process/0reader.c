@@ -86,7 +86,6 @@ static t_list	*load_linked_list(char *argv[], int mod, char **envp, int coms)
 	if (!folders)
 		return (NULL);
 	i = -1;
-	printf("%i\n", coms);
 	while (++i < coms)
 	{
 		command_struct = ft_calloc(1, sizeof(t_command));

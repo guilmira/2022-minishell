@@ -60,6 +60,7 @@ typedef struct s_program
 /* Struct that stores arguments and program parameters. */
 typedef struct s_arguments
 {
+	int test;
 	char	**argv;
 	int		flag_execution;
 	int		command_number;
@@ -149,7 +150,8 @@ char		*set_path(char *command, char **folders);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER AUX */
 int			is_pipe(char z);
-int			is_command(char *str);
+int	is_file_symb(char z);
+int			is_command(char **argv, char *command, int position);
 int			count_commands(char **argv);
 
 /* Protoypes minishell execution. */

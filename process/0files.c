@@ -72,14 +72,9 @@ static int	file_arrangement_out(int argc, char *argv[], t_arguments *args)
 	
 
 	i = -1;
-
 	while (++i < argc)
-	{
 		if (file_symbol_detected(argv[i], '>'))
-		{
 			args->file_output = argv[i + 1];
-		}
-	}
 	return (0);
 }
 
@@ -106,6 +101,7 @@ int	file_management(int argc, char *argv[], t_arguments *args)
 		modifier = 2;
 	}
 	flag = file_detector(argc, argv, '>');
+	printf("here %i\n", flag);
 	if (flag)
 	{
 		args->flag_file_out = 1;
