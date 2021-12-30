@@ -74,7 +74,6 @@ void	last_son(int index, t_arguments *args)
 	if (dup2(args->fds[index], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
-	printf("%i\n", args->flag_file_out);
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
 	if (execve(command_struct->path, command_struct->command, NULL) == -1)

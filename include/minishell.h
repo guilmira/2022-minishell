@@ -60,7 +60,7 @@ typedef struct s_program
 /* Struct that stores arguments and program parameters. */
 typedef struct s_arguments
 {
-	int test;
+	int		temporal_solution;
 	char	**argv;
 	int		flag_execution;
 	int		command_number;

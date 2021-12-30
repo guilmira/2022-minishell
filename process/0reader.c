@@ -109,7 +109,6 @@ static t_list	*load_linked_list(char **table, char **envp, int total_commands)
 void	arg_reader(int argc, char **table, char *envp[], t_arguments *args)
 {
 	file_management(argc, args->argv, args);
-	printf("%i\n", args->total_commands);
 	args->commands_lst = load_linked_list(table, envp, args->total_commands);
 	if (!args->commands_lst)
 		ft_shutdown(ARG, 0, args);
