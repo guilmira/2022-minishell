@@ -57,7 +57,7 @@ void	free_heap_memory(t_arguments *args)
 	if (args)
 	{
 		
-		if (args->argv)
+		if (args->argv && args->temporal_solution)
 			ft_free_split(args->argv);
 		if (args->commands_lst && args->commands_lst->content)
 			ft_structclear(args->commands_lst);

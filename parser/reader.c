@@ -52,17 +52,16 @@ static char	**split_commands(char **argv)
 	j = 0;
 	i = -1;
 	table[0] = ft_strdup(argv[0]);
-	while (argv[++i]) //LOGIC CAN BE IMPROVED
+	while (argv[++i])
 	{
 		if (!argv[i + 1])
 			break ;
-		if (!is_command(argv[i + 1]) && !is_pipe(argv[i + 1][0]))
+		if (!is_command(argv, argv[i + 1], i) && !is_pipe(argv[i + 1][0]) && !is_file_symb(argv[i + 1][0]))
 			table[j] = build_new_string(table[j], argv[i + 1]);
 		else if (is_pipe(argv[i + 1][0]))
 			;
-		else if (is_command(argv[i + 1]))
-			if (argv[i + 1])
-				table[++j] = ft_strdup(argv[i + 1]);
+		else if (is_command(argv, argv[i + 1], i + 1))
+			table[++j] = ft_strdup(argv[i + 1]);
 	}
 	table[++j] = NULL;
 	return (table);
@@ -105,5 +104,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	args->argv = ft_split(line, ' ');
 	free(line);
 	table = split_commands(args->argv);
-	arg_reader(count_commands(table), table, envp, args);
+	args->total_commands = count_commands(args->argv);
+	arg_reader(count_tokens(args->argv), table, envp, args);
+	
 }
