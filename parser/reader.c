@@ -51,7 +51,14 @@ static char	**split_commands(char **argv)
 		ft_shut(MEM, 0); //todo: use errorno
 	j = 0;
 	i = -1;
-	table[0] = ft_strdup(argv[0]);
+	while (argv[++i])
+	{
+		if (is_command(argv, argv[i], i))
+		{
+			table[0] = ft_strdup(argv[i]);
+			break;
+		}
+	}
 	while (argv[++i])
 	{
 		if (!argv[i + 1])
@@ -103,6 +110,8 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	args->flag_execution = 1;
 	args->argv = ft_split(line, ' ');
 	free(line);
+	
+	
 	table = split_commands(args->argv);
 	args->total_commands = count_commands(args->argv);
 	arg_reader(count_tokens(args->argv), table, envp, args);

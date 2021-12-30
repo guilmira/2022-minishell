@@ -37,7 +37,6 @@ int
 	{
 		arguments = intialize_arg(prog); //Explanation: arguments struct has changed as it had to be INSIDE of the loops.
 		shell_reader(envp, arguments);
-		
 		if (arguments->flag_execution)
 			prog->status = msh_execute(arguments->argv, arguments);
 		store_program(prog, arguments);

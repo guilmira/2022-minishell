@@ -75,6 +75,8 @@ int	check_previous_place(char *previous)
 {
 	if (is_delimitator(previous))
 		return (1);
+	if (previous[0] == '<')
+		return (1);
 	if (is_special(previous) || is_file_symbol(previous))
 		return (0);
 	return (1);
@@ -89,7 +91,17 @@ int	is_command(char **argv, char *command, int position)
 	if (is_delimitator(command))
 		return (0);
 	if (position == 0)
-		return(1); //estaria bien comprobar si abre fichero etc.
+	{
+		if (argv[position + 1])
+		{
+			if (argv[position + 1][0] == '<')
+				return (0);
+			else
+				return (1);
+		}
+		else
+			return(1); //estaria bien comprobar si abre fichero etc.
+	}
 	if (!check_previous_place(argv[position - 1]))
 		return (0);
 	return (1);
