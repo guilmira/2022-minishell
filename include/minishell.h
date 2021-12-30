@@ -136,7 +136,7 @@ char	*ft_strtok(char *str, const char *delim);
 /* Protoypes minishell reader. */
 
 /* FILES */
-int			file_management(int argc, char *argv[], t_arguments *args);
+void			file_management(int argc, char *argv[], t_arguments *args);
 /* INITIALIZATION */
 t_prog		*initalize_prog(char **envp, char **builtin_str);
 t_arguments	*intialize_arg(t_prog *prog);
@@ -153,6 +153,7 @@ int			is_pipe(char z);
 int	is_file_symb(char z);
 int			is_command(char **argv, char *command, int position);
 int			count_commands(char **argv);
+int	count_tokens(char **argv);
 
 /* Protoypes minishell execution. */
 

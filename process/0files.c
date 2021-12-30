@@ -41,6 +41,7 @@ static int	file_detector(int argc, char *argv[], char symbol)
 
 	i = -1;
 	while (++i < argc)
+	{
 		if (file_symbol_detected(argv[i], symbol))
 		{
 			if (file_exists(argv[i - 1]))
@@ -48,6 +49,7 @@ static int	file_detector(int argc, char *argv[], char symbol)
 			else
 				return (2);
 		}
+	}
 	return (0);
 }
 
@@ -82,13 +84,10 @@ static int	file_arrangement_out(int argc, char *argv[], t_arguments *args)
  * 1. Checks whether files are given as parameter.
  * 2. Sets adresses to input and output files.
  * 3. Sets some of the values of "args" struct. */
-int	file_management(int argc, char *argv[], t_arguments *args)
+void	file_management(int argc, char *argv[], t_arguments *args)
 {
-	int	modifier;
 	int	flag;
-
-	modifier = 0;
-	args->total_commands = argc;
+	
 	flag = 0;
 	flag = file_detector(argc, argv, '<');
 	if (flag)
@@ -98,10 +97,8 @@ int	file_management(int argc, char *argv[], t_arguments *args)
 		args->flag_file_in = 1;
 		file_arrangement(argv, argc, args);
 		args->total_commands = argc - 2;
-		modifier = 2;
 	}
 	flag = file_detector(argc, argv, '>');
-	printf("here %i\n", flag);
 	if (flag)
 	{
 		args->flag_file_out = 1;
@@ -109,5 +106,4 @@ int	file_management(int argc, char *argv[], t_arguments *args)
 		args->total_commands = argc - 2;
 	}
 	args->command_number = 0;
-	return (modifier);
 }

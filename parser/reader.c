@@ -46,7 +46,6 @@ static char	**split_commands(char **argv)
 
 	table = NULL;
 	total_commands = count_commands(argv);
-	//printf("%i\n", total_commands);
 	table = ft_calloc(total_commands + 1, sizeof(char *));
 	if (!table)
 		ft_shut(MEM, 0); //todo: use errorno
@@ -105,5 +104,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	args->argv = ft_split(line, ' ');
 	free(line);
 	table = split_commands(args->argv);
-	arg_reader(count_commands(table), table, envp, args);
+	args->total_commands = count_commands(args->argv);
+	arg_reader(count_tokens(args->argv), table, envp, args);
+	
 }

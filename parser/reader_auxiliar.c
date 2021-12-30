@@ -108,3 +108,16 @@ int	count_commands(char **argv)
 			j++;
 	return (j);
 }
+
+/** PURPOSE : Count total number of tokens. */
+int	count_tokens(char **argv)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = -1;
+	while (argv[++i])
+		j++;
+	return (j);
+}

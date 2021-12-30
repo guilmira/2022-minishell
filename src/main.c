@@ -40,7 +40,6 @@ int
 		if (arguments->flag_execution)
 			prog->status = msh_execute(arguments->argv, arguments);
 		store_program(prog, arguments);
-		
 		free_heap_memory(arguments); //free_heap now frees arguments as well. BUT keeps prog.
 		if (0) //temporal
 			break ;
