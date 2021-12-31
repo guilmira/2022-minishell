@@ -64,6 +64,7 @@ static int	is_special(char *str)
 	if (!str)
 		return (0);
 	i = -1;
+	
 	init_complex(complex);
 	while (++i < number_complex - 1)
 		if (!ft_strcmp(str, complex[i]))

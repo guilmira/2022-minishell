@@ -59,11 +59,12 @@ static char	**split_commands(char **argv)
 			break;
 		}
 	}
+	i = i - 1;
 	while (argv[++i])
 	{
 		if (!argv[i + 1])
 			break ;
-		if (!is_command(argv, argv[i + 1], i) && !is_pipe(argv[i + 1][0]) && !is_file_symb(argv[i + 1][0]))
+		if (!is_command(argv, argv[i + 1], i + 1) && !is_pipe(argv[i + 1][0]) && !is_file_symb(argv[i + 1][0]))
 			table[j] = build_new_string(table[j], argv[i + 1]);
 		else if (is_pipe(argv[i + 1][0]))
 			;
@@ -110,11 +111,11 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	args->flag_execution = 1;
 	args->argv = ft_split(line, ' ');
 	free(line);
-	
-	
 	table = split_commands(args->argv);
 	args->total_commands = count_commands(args->argv);
 	arg_reader(count_tokens(args->argv), table, envp, args);
-	
+	/* t_command* cm;
+	cm = args->commands_lst->next->content;
+	printf("%s\n", cm->command[0]); */
 	
 }
