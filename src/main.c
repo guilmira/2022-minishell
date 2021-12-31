@@ -61,11 +61,11 @@ int
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize
-void	*ft_leaks(void)
+/* void	*ft_leaks(void)
 {
 	system("leaks minishell");
 	return (NULL);
-}
+} */
 
 /** EXECUTION : ./minishell
  * This program will run a student made version of the bash console.
