@@ -17,7 +17,7 @@ void	single_process(t_arguments *args)
 {
 	int	status;
 	int	identifier;
-
+	
 	identifier = fork();
 	if (identifier == 0)
 		single_son(args);

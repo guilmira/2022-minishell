@@ -39,6 +39,7 @@ int
 		shell_reader(envp, arguments);
 		if (arguments->flag_execution)
 			prog->status = msh_execute(arguments->argv, arguments);
+		
 		store_program(prog, arguments);
 
 		//FOUND OUT SEGFAULT WITH SPLIT. THE PROBLEM IS THAT ARGV IS MODIFIED WHEN USED 'CD'AND NOT TERMINATED IN NULL.

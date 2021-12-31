@@ -56,6 +56,8 @@ int	msh_execute(char **args, t_arguments *arguments)
 			return ((arguments->builtin_func[i])(args, arguments));
 		i++;
 	}
+	
+	
 	status = process_excution(arguments);
 	return (status);
 }

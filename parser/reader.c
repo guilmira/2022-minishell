@@ -114,8 +114,5 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	table = split_commands(args->argv);
 	args->total_commands = count_commands(args->argv);
 	arg_reader(count_tokens(args->argv), table, envp, args);
-	/* t_command* cm;
-	cm = args->commands_lst->next->content;
-	printf("%s\n", cm->command[0]); */
-	
+	ft_free_split(table);
 }
