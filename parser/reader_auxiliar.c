@@ -54,7 +54,7 @@ static void	init_complex(char **complex)
 	complex[6] = NULL;
 }
 
-static int	is_special(char *str)
+int	is_special(char *str)
 {
 	int	i;
 	int number_complex;

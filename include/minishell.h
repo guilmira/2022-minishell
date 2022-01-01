@@ -135,7 +135,7 @@ char	*ft_strtok(char *str, const char *delim);
 /* Protoypes minishell reader. */
 
 /* FILES */
-void			file_management(int argc, char *argv[], t_arguments *args);
+void		file_management(int argc, char *argv[], t_arguments *args);
 /* INITIALIZATION */
 t_prog		*initalize_prog(char **envp, char **builtin_str);
 t_arguments	*intialize_arg(t_prog *prog);
@@ -149,10 +149,12 @@ char		*set_path(char *command, char **folders);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER AUX */
 int			is_pipe(char z);
-int	is_file_symb(char z);
+int	is_sufix(char z);
+int	is_special(char *str);
+int			is_file_symb(char z);
 int			is_command(char **argv, char *command, int position);
 int			count_commands(char **argv);
-int	count_tokens(char **argv);
+int			count_tokens(char **argv);
 
 /* Protoypes minishell execution. */
 
@@ -165,7 +167,7 @@ void		single_process(t_arguments *args);
 /* SON PROCESS */
 void		first_son(t_arguments *args);
 void		last_son(int index, t_arguments *args);
-void	single_son(t_arguments *args);
+void		single_son(t_arguments *args);
 /* AUXILIAR */
 int			file_exists(char *str);
 int			*arg_descriptors(t_arguments *args);

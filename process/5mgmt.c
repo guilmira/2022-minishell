@@ -69,6 +69,7 @@ void	free_heap_memory(t_arguments *args)
 /** PURPOSE : shutdown program freeing heap allocated memory. */
 void	ft_shutdown(char *str, int i, t_arguments *args)
 {
+	perror("ERROR");
 	free_heap_memory(args);
 	ft_shut(str, i);
 }
