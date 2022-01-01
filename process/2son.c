@@ -85,12 +85,10 @@ void	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
 
-	
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
-	//printf("%s\n", command_struct->command[1]);
 	if (args->flag_file_in)
 		input_form_file(args->file_input);
 	if (args->flag_file_out)

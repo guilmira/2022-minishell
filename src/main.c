@@ -38,7 +38,7 @@ int
 		arguments = intialize_arg(prog); //Explanation: arguments struct has changed as it had to be INSIDE of the loops.
 		shell_reader(envp, arguments);
 		if (arguments->flag_execution)
-			prog->status = msh_execute(arguments->argv, arguments);
+			prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
 		
 		store_program(prog, arguments);
 
@@ -49,10 +49,10 @@ int
 		//TEMPORARY ^
 
 
-		free_heap_memory(arguments); //free_heap now frees arguments as well. BUT keeps prog..
+		free_heap_memory(arguments); //free_heap now frees arguments as well. BUT keeps prog.
 		if (0) //temporal
 			break ;
-		/* if (!prog->status)
+		/* if (prog->status)
 			break ; */
 	}
 	status = prog->status;
@@ -78,6 +78,13 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	return (shell_loop(envp));
 }
 
+//to do configurar exclamacion.
+/* minishell$ echo $?
+127
+minishell$ ! ls | dsgs
+dsgs: orden no encontrada
+minishell$ echo $?
+0 */
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 //cat | cat | ls
