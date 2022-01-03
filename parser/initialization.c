@@ -38,11 +38,12 @@ t_arguments	*intialize_arg(t_prog *prog)
 		ft_shut(MEM, 0);
 	args->argv = NULL;
 	args->commands_lst = NULL;
-	args->flag_file = 0;
 	args->flag_execution = 0;
 	args->command_number = 0;
 	args->total_commands = 0;
 	args->fds = NULL;
+	args->flag_file_in = 0;
+	args->flag_file_out = 0;
 	args->file_input = NULL;
 	args->file_output = NULL;
 	args->prog = prog;

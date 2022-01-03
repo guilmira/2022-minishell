@@ -13,14 +13,14 @@
 #include "../include/minishell.h"
 
 /** PURPOSE : Searchs on arguments for '<' symbol. */
-static int	file_symbol_detected(char *str)
+static int	file_symbol_detected(char *str, char symbol)
 {
 	int	i;
 
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '<' && (str[i + 1] == ' ' || !str[i + 1]))
+		if (str[i] == symbol && (str[i + 1] == ' ' || !str[i + 1]))
 		{
 			if (i == 0)
 				return (1);
@@ -35,40 +35,48 @@ static int	file_symbol_detected(char *str)
 }
 
 /** PURPOSE : Is a file being introduced as an input to the program? */
-static int	file_detector(int argc, char *argv[])
+static int	file_detector(int argc, char *argv[], char symbol)
 {
 	int	i;
 
 	i = -1;
 	while (++i < argc)
-		if (file_symbol_detected(argv[i]))
-			if (file_exists(argv[i + 1]))
+	{
+		if (file_symbol_detected(argv[i], symbol))
+		{
+			if (file_exists(argv[i - 1]))
 				return (1);
+			else
+				return (2);
+		}
+	}
 	return (0);
 }
 
-/** PURPOSE : Load into struct file descriptors for input and output. */
-static int	file_arrangement(int argc, char *argv[], t_arguments *args)
+//ver tema counters
+
+/** PURPOSE : Load into struct file descriptors for input. */
+static int	file_arrangement(char *argv[], int argc, t_arguments *args)
 {
 	int	i;
-	int	counter;
 
 	i = -1;
-	counter = 0;
-	args->flag_file = 1;
 	while (++i < argc)
-	{
-		if (ft_strncmp(argv[i], "1files/", 7) == 0)
-		{
-			if (!counter++)
-				args->file_input = argv[i];
-			else
-			{
-				args->file_output = argv[i];
-				return (1);
-			}
-		}
-	}
+		if (file_symbol_detected(argv[i], '<'))
+			args->file_input = argv[i - 1];
+	return (0);
+}
+
+/** PURPOSE : Load into struct file descriptors for output. */
+static int	file_arrangement_out(int argc, char *argv[], t_arguments *args)
+{
+	int	i;
+	
+
+	i = -1;
+	while (++i < argc)
+		if (file_symbol_detected(argv[i], '>'))
+			args->file_output = argv[i + 1];
 	return (0);
 }
 
@@ -76,20 +84,24 @@ static int	file_arrangement(int argc, char *argv[], t_arguments *args)
  * 1. Checks whether files are given as parameter.
  * 2. Sets adresses to input and output files.
  * 3. Sets some of the values of "args" struct. */
-int	file_management(int argc, char *argv[], t_arguments *args)
+void	file_management(int argc, char *argv[], t_arguments *args)
 {
-	int	modifier;
-
-	modifier = 0;
-	args->total_commands = argc;
-	if (file_detector(argc, argv))
+	int	flag;
+	
+	flag = 0;
+	flag = file_detector(argc, argv, '<');
+	if (flag)
 	{
-		file_arrangement(argc, argv, args);
-		args->total_commands = argc - NOT_COMMANDS;
-		modifier = 2;
+		if (flag == 2)
+			ft_shutdown("file does not exist\n", 0, args);
+		args->flag_file_in = 1;
+		file_arrangement(argv, argc, args);
 	}
-	else
-		args->flag_file = 0;
+	flag = file_detector(argc, argv, '>');
+	if (flag)
+	{
+		args->flag_file_out = 1;
+		file_arrangement_out(argc, argv, args);
+	}
 	args->command_number = 0;
-	return (modifier);
 }

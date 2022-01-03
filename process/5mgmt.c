@@ -56,7 +56,6 @@ void	free_heap_memory(t_arguments *args)
 {
 	if (args)
 	{
-		
 		if (args->argv)
 			ft_free_split(args->argv);
 		if (args->commands_lst && args->commands_lst->content)
@@ -70,6 +69,7 @@ void	free_heap_memory(t_arguments *args)
 /** PURPOSE : shutdown program freeing heap allocated memory. */
 void	ft_shutdown(char *str, int i, t_arguments *args)
 {
+	perror("ERROR");
 	free_heap_memory(args);
 	ft_shut(str, i);
 }

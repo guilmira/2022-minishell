@@ -34,7 +34,7 @@ static int	process_excution(t_arguments *arguments)
 	}
 	arguments->fds = arg_descriptors(arguments);
 	process_exe(arguments);
-	return (1);
+	return (0);
 }
 
 /** PURPOSE : Main execution function.
@@ -51,6 +51,7 @@ int	msh_execute(char **args, t_arguments *arguments)
 	i = 0;
 	while (i < msh_num_builtins(arguments))
 	{	
+		
 		if (ft_strcmp(args[0], arguments->prog->builtin_str[i]) == 0)
 			return ((arguments->builtin_func[i])(args, arguments));
 		i++;

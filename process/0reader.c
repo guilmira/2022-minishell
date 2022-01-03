@@ -74,7 +74,7 @@ static char	**get_env_path(char *envp[])
 /** PURPOSE : Builds linked list by allocating memory for a structure and
  * making that same structure the content of each node. Fills the path and 
  * the command fields. */
-static t_list	*load_linked_list(char *argv[], int mod, char **envp, int coms)
+static t_list	*load_linked_list(char **table, char **envp, int total_commands)
 {
 	int			i;
 	char		**folders;
@@ -86,15 +86,15 @@ static t_list	*load_linked_list(char *argv[], int mod, char **envp, int coms)
 	if (!folders)
 		return (NULL);
 	i = -1;
-	while (++i < coms)
+	while (++i < total_commands)
 	{
-		command_struct = ft_calloc(1, sizeof(t_command)); //cant repeat itself
+		command_struct = ft_calloc(1, sizeof(t_command));
 		if (!command_struct)
 		{
 			ft_free_split(folders);
 			return (NULL);
 		}
-		command_struct->command = ft_split(argv[i + mod], ' ');
+		command_struct->command = ft_split(table[i], ' ');
 		command_struct->path = set_path(command_struct->command[0], folders);
 		ft_lstadd_back(&lst, ft_lstnew(command_struct));
 	}
@@ -106,13 +106,10 @@ static t_list	*load_linked_list(char *argv[], int mod, char **envp, int coms)
  * 1. Allocates memory for structure.
  * 2. Checks whether program needs to take into account in/output files.
  * 3. Creates linked list to manage any number of commands */
-void	arg_reader(int argc, char *argv[], char *envp[], t_arguments	*args)
+void	arg_reader(int argc, char **table, char *envp[], t_arguments *args)
 {
-	int			mod;
-
-	mod = file_management(argc, argv, args);
-	args->commands_lst = load_linked_list(argv, mod, \
-	envp, args->total_commands);
+	file_management(argc, args->argv, args);
+	args->commands_lst = load_linked_list(table, envp, args->total_commands);
 	if (!args->commands_lst)
 		ft_shutdown(ARG, 0, args);
 }

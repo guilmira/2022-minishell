@@ -60,7 +60,7 @@ static int only_symbol(char *line)
 	char z;
 
 	z = line[0];
-	return (z == '|' || z == '<' || z == '>');
+	return (z == '|' || z == '<' || z == '>' || z == '-');
 }
 
 int	parser_line(char *line)
