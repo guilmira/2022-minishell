@@ -57,6 +57,8 @@ void
 	char	*head;
 	char	*tail;
 
+	head = NULL;
+	tail = NULL;
 	while (args[i])
 	{
 		if (args[i][0] == '$')

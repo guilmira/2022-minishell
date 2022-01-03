@@ -83,7 +83,6 @@ int
 		arr[envp_len] = NULL;
 		ft_str_arr_sort(arr, envp_len);
 		print_str_arr(arr, fd);
-		ft_putendl_fd("", fd);
 		free_pointers(1, arr);
 	}
 	else

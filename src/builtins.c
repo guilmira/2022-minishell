@@ -31,7 +31,6 @@ int
 	path = getcwd(NULL, 0);
 	if (!path)
 		perror("pwd() error");
-	ft_putendl_fd(path, fd);
 	set_status(arg, 0);
 	return (1);
 }
