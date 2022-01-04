@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/22 06:34:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/04 11:34:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,14 +148,14 @@ void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER AUX */
+int			count_commands(char **argv);
+int			count_tokens(char **argv);
+/* READER BOOLEANS */
 int			is_pipe(char z);
 int	is_sufix(char z);
 int	is_special(char *str);
 int			is_file_symb(char z);
 int			is_command(char **argv, char *command, int position);
-int			count_commands(char **argv);
-int			count_tokens(char **argv);
-
 /* Protoypes minishell execution. */
 
 /* EXECUTION */

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/22 07:16:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/04 11:30:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ minishell$ echo $?
 0 */
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
-//cat | cat | ls
+ //cat | cat | ls
 	//wait(status); Si esta fuera hara todo simutaneo. es como funciona bash
 	//si estuvies ddentro, es cuando en cada proceso espera.
