@@ -6,24 +6,26 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/22 07:38:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/04 12:12:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int non_specified_char(char z)
+/** PURPOSE : Checks for symbols that are not specified. */
+static int	non_specified_char(char z)
 {
 	return (z == ';' || z == ':' || z == '\\');
 }
 
 //should it identify '\'??
 
-static int non_closed_collons(char *line)
+/** PURPOSE : Reads string and evaluates if there are collons unclosed. */
+static int	non_closed_collons(char *line)
 {
 	int	i;
 	int	j;
-	int not_closed;
+	int	not_closed;
 
 	i = -1;
 	j = -1;
@@ -39,30 +41,31 @@ static int non_closed_collons(char *line)
 				if (line[j] == '"')
 				{
 					not_closed = 0;
-					break;
+					break ;
 				}
 				if (!line[j] && not_closed)
-					break;
+					break ;
 			}
 			if (line[j + 1])
 				i = j + 1;
 			else
 				return(not_closed);
-			
 		}
 	}
 	return(not_closed);
 }
 
-
-static int only_symbol(char *line)
+/** PURPOSE : Boolean, checks if first char is just a symbol. */
+static int	only_symbol(char *line)
 {
-	char z;
+	char	z;
 
 	z = line[0];
 	return (z == '|' || z == '<' || z == '>' || z == '-');
 }
 
+/** PURPOSE : Direct simple parser of command line as soon
+ * as its read. */
 int	parser_line(char *line)
 {
 	if (!line[0])

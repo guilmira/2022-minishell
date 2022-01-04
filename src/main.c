@@ -6,12 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/04 11:30:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/04 12:00:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+/** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
 {
 	prog->envp = args->envp;
@@ -77,6 +78,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
+
+
+//tdo, ls + name of file/directory
 
 //to do configurar exclamacion.
 /* minishell$ echo $?
