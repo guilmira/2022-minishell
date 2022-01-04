@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/04 12:17:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:35:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
+
+//todo. vale, tengo command para la command tabe. falta, ¿que es o siguiente qe viene?
+//si es un delimitator, entonnces ya puedes cerrar ls. SI no, entonces tokeniza, ponlo n el command.
 
 
 //tdo, ls + name of file/directory
