@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/04 12:00:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/04 12:17:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	//atexit(ft_leaks()); //on exit, gves seg fault.
-	if (argc != ARG_NUMBER)
+	 if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
