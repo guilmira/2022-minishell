@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/04 12:06:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/05 13:41:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ t_arguments	*intialize_arg(t_prog *prog);
 char		*set_path(char *command, char **folders);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 int			parser_line(char *line);
+/* LEXER */
+char		**main_lexer(char *line);
 /* READER */
 void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);
