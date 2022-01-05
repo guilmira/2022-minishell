@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/22 06:34:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/04 12:06:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 # define TOK_DELIM " \t\r\n\a"
 
 /* Global variables and structs*/
-
 
 /* Struct that stores command data. */
 typedef struct s_command
@@ -78,38 +77,37 @@ typedef struct s_arguments
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
-int		msh_echo(char **args, t_arguments *arg);
-int		msh_cd(char **args, t_arguments *arg);
-int		msh_pwd(char **args, t_arguments *arg);
-int		msh_export(char **args, t_arguments *arg);
-int		msh_unset(char **args, t_arguments *arg);
-int		msh_env(char **args, t_arguments *arg);
-int		msh_exit(char **args, t_arguments *arg);
-int		msh_help(char **args, t_arguments *arg);
-int		msh_num_builtins(t_arguments *arg);
-void	ft_str_arr_sort(char *arr[], unsigned int len);
-void	print_str_arr(char *const *arr, int fd);
-size_t	get_arr_len(char **arr);
-void	**get_arr(size_t elem_num, size_t elem_size);
-void	copy_arr(char **dest, char **src, size_t src_len);
-int		count_chars(char *p, char *needle);
-void	delete_env_var(t_arguments *arg, size_t len, const char *tmp);
-void	export_new_variables(char **args, t_arguments *arg);
-void	export_multi_var(char *const *args, int i,
+int			msh_echo(char **args, t_arguments *arg);
+int			msh_cd(char **args, t_arguments *arg);
+int			msh_pwd(char **args, t_arguments *arg);
+int			msh_export(char **args, t_arguments *arg);
+int			msh_unset(char **args, t_arguments *arg);
+int			msh_env(char **args, t_arguments *arg);
+int			msh_exit(char **args, t_arguments *arg);
+int			msh_help(char **args, t_arguments *arg);
+int			msh_num_builtins(t_arguments *arg);
+void		ft_str_arr_sort(char *arr[], unsigned int len);
+void		print_str_arr(char *const *arr, int fd);
+size_t		get_arr_len(char **arr);
+void		**get_arr(size_t elem_num, size_t elem_size);
+void		copy_arr(char **dest, char **src, size_t src_len);
+int			count_chars(char *p, char *needle);
+void		delete_env_var(t_arguments *arg, size_t len, const char *tmp);
+void		export_new_variables(char **args, t_arguments *arg);
+void		export_multi_var(char *const *args, int i,
 			size_t envp_len, char **new_envp);
-void	loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd);
-char	*get_env_var(char **envp, char *needle);
-void	renew_pwds(t_arguments *arg, char *old_path);
-char	*ft_concat(const char *s1, const char *s2);
-void	set_status(t_arguments *arg, int status);
-int		get_fd(char *path);
-bool	is_within_range(const char *str);
-int		atoi_exit_code(const char *str);
-void	init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
-void	init_builtins(char **builtin_str);
-void	free_pointers(int num, ...);
-char	*ft_strtok(char *str, const char *delim);
-
+void		loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd);
+char		*get_env_var(char **envp, char *needle);
+void		renew_pwds(t_arguments *arg, char *old_path);
+char		*ft_concat(const char *s1, const char *s2);
+void		set_status(t_arguments *arg, int status);
+int			get_fd(char *path);
+bool		is_within_range(const char *str);
+int			atoi_exit_code(const char *str);
+void		init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
+void		init_builtins(char **builtin_str);
+void		free_pointers(int num, ...);
+char		*ft_strtok(char *str, const char *delim);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
@@ -148,14 +146,16 @@ void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER AUX */
+int			is_special(char *str);
+/* READER BOOLEANS */
 int			is_pipe(char z);
-int	is_sufix(char z);
-int	is_special(char *str);
+int			is_sufix(char z);
 int			is_file_symb(char z);
+/* READER BOOLEANS ADVANCED */
+int			is_following_text(char *previous, char *text);
 int			is_command(char **argv, char *command, int position);
-int			count_commands(char **argv);
-int			count_tokens(char **argv);
-
+/* READER SPLIT COMMANDS */
+char		**split_commands(char **argv, t_arguments *args);
 /* Protoypes minishell execution. */
 
 /* EXECUTION */

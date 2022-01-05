@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1single_process.c                                  :+:      :+:    :+:   */
+/*   reader_booleans.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/04 12:09:38 by guilmira         ###   ########.fr       */
+/*   Created: 2022/01/04 11:33:05 by guilmira          #+#    #+#             */
+/*   Updated: 2022/01/04 12:08:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/** PURPOSE : Executes fork function for a single command. */
-void	single_process(t_arguments *args)
+/** PURPOSE : Evaluates whether char is a sufix. */
+int	is_sufix(char z)
 {
-	int	status;
-	int	identifier;
+	return (z == '-');
+}
 
-	identifier = fork();
-	if (identifier == 0)
-		single_son(args);
-	else if (identifier > 0)
-		wait(&status);
-	else
-		ft_shutdown(FORK_ERROR, 0, args);
+/** PURPOSE : Evaluates whether char is a pipe. */
+int	is_pipe(char z)
+{
+	return (z == '|');
+}
+
+/** PURPOSE : Evaluates whether char is a pipe. */
+int	is_file_symb(char z)
+{
+	return (z == '<' || z == '>');
 }

@@ -6,12 +6,13 @@
 /*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/03 14:20:31 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/01/05 08:46:52 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+/** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
 {
 	prog->envp = args->envp;
@@ -79,6 +80,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	return (shell_loop(envp));
 }
 
+
+//tdo, ls + name of file/directory
+
 //to do configurar exclamacion.
 /* minishell$ echo $?
 127
@@ -88,6 +92,6 @@ minishell$ echo $?
 0 */
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
-//cat | cat | ls
+ //cat | cat | ls
 	//wait(status); Si esta fuera hara todo simutaneo. es como funciona bash
 	//si estuvies ddentro, es cuando en cada proceso espera.
