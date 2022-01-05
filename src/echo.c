@@ -83,7 +83,7 @@ void
 }
 
 void
-check_n_option(char *const *args, int *i, bool *have_option)
+	check_n_option(char *const *args, int *i, bool *have_option)
 {
 	if (!ft_memcmp(args[(*i)], "-n", 3))
 	{

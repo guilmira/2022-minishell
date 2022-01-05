@@ -31,6 +31,7 @@ int
 	path = getcwd(NULL, 0);
 	if (!path)
 		perror("pwd() error");
+	ft_putendl_fd(path, fd);
 	set_status(arg, 0);
 	return (1);
 }
@@ -45,7 +46,6 @@ int
 
 	fd = get_fd(arg->file_output);
 	print_str_arr(arg->envp, fd);
-	ft_putendl_fd("", fd);
 	set_status(arg, 0);
 	return (1);
 }
