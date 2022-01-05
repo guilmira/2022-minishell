@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/05 11:41:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/05 11:46:22 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ int
 		arguments = intialize_arg(prog); //Explanation: arguments struct has changed as it had to be INSIDE of the loops.
 		shell_reader(envp, arguments);
 		if (arguments->flag_execution)
-			prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
-		
+			//prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
+			if (!msh_execute(arguments->argv, arguments)) //We can't rely on prog->status to exit.
+				break ;
 		store_program(prog, arguments);
 
 		//FOUND OUT SEGFAULT WITH SPLIT. THE PROBLEM IS THAT ARGV IS MODIFIED WHEN USED 'CD'AND NOT TERMINATED IN NULL.

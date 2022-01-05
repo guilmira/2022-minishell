@@ -57,6 +57,8 @@ void
 	char	*head;
 	char	*tail;
 
+	head = NULL;
+	tail = NULL;
 	while (args[i])
 	{
 		if (args[i][0] == '$')
@@ -80,6 +82,16 @@ void
 	set_status(arg, 0);
 }
 
+void
+	check_n_option(char *const *args, int *i, bool *have_option)
+{
+	if (!ft_memcmp(args[(*i)], "-n", 3))
+	{
+		(*have_option) = true;
+		(*i) += 1;
+	}
+}
+
 /*
 ** SYNOPSIS: builtin echo command.
 */
@@ -92,21 +104,20 @@ int
 
 	i = 1;
 	have_option = false;
-	if (!ft_memcmp(args[i], "-n", 3)) //what is the args[1] == NULL?
-	{
-		have_option = true;
-		i += 1;
-	}
+	set_status(arg, 0);
 	fd = get_fd(arg->file_output);
-	if (fd < 0)
+	if (args[i])
 	{
-		perror("msh: "); //needs to be tested
-		set_status(arg, 1);
-		return (2);
+		check_n_option(args, &i, &have_option);
+		if (fd < 0)
+		{
+			perror("msh: "); //needs to be tested
+			set_status(arg, 1);
+			return (2);
+		}
+		loop_and_print_echo_args(args, arg, i, fd);
 	}
-	loop_and_print_echo_args(args, arg, i, fd);
 	if (!have_option)
 		ft_putstr_fd("\n", fd);
-	set_status(arg, 0);
 	return (1);
 }
