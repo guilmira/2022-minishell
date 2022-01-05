@@ -6,30 +6,35 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/05 15:11:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:09:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-static void	init_options(char **option, char **option_name)
+void	init_options(char **option, char **option_name)
 {
 	option[0] = "|";
 	option_name[0] = "lex_PIPE";
-	option[1] = "<";
-	option_name[1] = "lex_INPUT";
-	option[2] = ">";
-	option_name[2] = "lex_OUTPUT";
-	option[3] = NULL;
+	option[1] = "$";
+	option_name[1] = "lex_DOLLAR";
+	option[2] = "<";
+	option_name[2] = "lex_INPUT";
+	option[3] = ">";
+	option_name[3] = "lex_OUTPUT";
+	option[4] = ">>";
+	option_name[4] = "lex_2INPUT";
+	option[5] = ">>";
+	option_name[5] = "lex_2OUTPUT";
+	option[6] = NULL;
 }
 
 static char	*obtain_syntax(char *token)
 {
-	int TOTAL_SYMBOLS = 4;
-	int i;
-	char *option[TOTAL_SYMBOLS];
-	char *option_name[TOTAL_SYMBOLS];
+	int		i;
+	char	*option[TOTAL_SYMBOLS];
+	char	*option_name[TOTAL_SYMBOLS];
 	
 	init_options(option, option_name);
 	i = -1;
@@ -62,7 +67,7 @@ char	**build_lexer_table(char **table)
 				return (NULL);
 			}
 		}
-		printf("%s\n", table[i]);
+		//printf("%s\n", table[i]);
 	}
 	return (table);
 }

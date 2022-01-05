@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:33:05 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/04 12:08:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/05 17:05:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	is_pipe(char z)
 	return (z == '|');
 }
 
-/** PURPOSE : Evaluates whether char is a pipe. */
-int	is_file_symb(char z)
+/** PURPOSE : Evaluates whether char is a greater or lesser. */
+int	is_file_symbol(char z)
 {
 	return (z == '<' || z == '>');
 }
