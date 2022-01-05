@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/05 14:57:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/05 15:14:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	process_excution(t_arguments *arguments)
 	}
 	arguments->fds = arg_descriptors(arguments);
 	process_exe(arguments);
-	return (1); //satus, 0 o 1
+	return (1); //status, 0 o 1
 }
 
 /** PURPOSE : Main execution function.
