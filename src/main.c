@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/04 14:35:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/05 11:41:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int
 	t_arguments	*arguments;
 	char		*builtin_str[9]; //DUDA: cuanta memoria reserva para cada uno de los strings? Declaracion en el stack solo te reserv aespacio para punteros.
 	
+	//introducir ignorar señales?
 	prog = NULL;
 	arguments = NULL;
 	prog = initalize_prog(envp, builtin_str); //Explanation: now we only init outside the loop the struct that will not be freed.
@@ -81,7 +82,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //todo. vale, tengo command para la command tabe. falta, ¿que es o siguiente qe viene?
 //si es un delimitator, entonnces ya puedes cerrar ls. SI no, entonces tokeniza, ponlo n el command.
-
+//hacer el orden. lexer -> parser -> re ->executer
 
 //tdo, ls + name of file/directory
 
