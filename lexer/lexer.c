@@ -6,14 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:08:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:25:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-void	init_options(char **option, char **option_name)
+static void	init_options(char **option, char **option_name)
 {
 	option[0] = "|";
 	option_name[0] = "lex_PIPE";

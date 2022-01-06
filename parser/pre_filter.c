@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 13:24:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:54:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ static int	only_symbol(char *line)
 	return (z == '|' || z == '<' || z == '>' || z == '-');
 }
 
+//TODO FUNCT
+// echo "what|dssg" NO
+// echo| YES
+// echo | wc | YES
+int pipe_not_continued(void)
+{
+	return (0);
+}
+
 /** PURPOSE : Simple parser of command line as soon
  * as its read. */
 int	pre_filter(char *line)
@@ -77,10 +86,14 @@ int	pre_filter(char *line)
 	}
 	if (non_specified_char(line[0]))
 		return (1);
-	//if (pipe_not_continued)
 	if (non_closed_collons(line, '"') || non_closed_collons(line, '\'') )
 	{
 		printf("Collons must be closed\n");
+		return (1);
+	}
+	if (pipe_not_continued())
+	{
+		printf("Insert command after pipe\n");
 		return (1);
 	}
 	return (0);

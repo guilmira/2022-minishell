@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/06 12:48:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:58:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int
 	return (status);
 }
 
+//TODO read variables like a=50
+
 //PROVISIONAL -- comment if compiling with fsanitize
 /* void	*ft_leaks(void)
 {
@@ -84,10 +86,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //TODO review protection of mallocs etc on all parts of the code. 
 
-//todo. vale, tengo command para la command tabe. falta, ¿que es o siguiente qe viene?
-//si es un delimitator, entonnces ya puedes cerrar ls. SI no, entonces tokeniza, ponlo n el command.
-//hacer el orden. lexer -> parser -> re ->executer
-
 //tdo, ls + name of file/directory
 
 //to do configurar exclamacion.
@@ -99,6 +97,3 @@ minishell$ echo $?
 0 */
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
- //cat | cat | ls
-	//wait(status); Si esta fuera hara todo simutaneo. es como funciona bash
-	//si estuvies ddentro, es cuando en cada proceso espera.

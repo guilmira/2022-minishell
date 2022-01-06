@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader_split.c                                     :+:      :+:    :+:   */
+/*   build_command_table.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:53:32 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:02:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:24:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**get_command_table(char **lexer_table, t_arguments *args, int *type)
 	args->total_commands = pipes_number + 1;
 	table = ft_calloc(args->total_commands + 1, sizeof(char *));
 	if (!table)
-		ft_shut(MEM, 0);
+		ft_shutdown(MEM, errno, args);
 	build_command_table(lexer_table, table, args, type);
 	return (table);
 }

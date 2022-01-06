@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:08:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:30:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,6 @@ char		*ft_strtok(char *str, const char *delim);
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
 # define TOTAL_SYMBOLS 6
-void	init_options(char **option, char **option_name);
-int	token_is_lexic(char *token);
 # define MSHELL "msh> "
 # define INVALID_ARGC "Program execution does not admit arguments\n."
 # define MEM "Failed memory allocation.\n"
@@ -162,15 +160,11 @@ void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER AUX */
-int			is_special(char *str);
+
 /* READER BOOLEANS */
-int			is_sufix(char z);
-int			is_lex_symbol(char *string);
-/* READER BOOLEANS ADVANCED */
-int			is_following_text(char *previous, char *text);
-int			is_command(char **argv, char *command, int position);
+
 /* READER SPLIT COMMANDS */
-char	**get_command_table(char **lexer_table, t_arguments *args, int *type);
+char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
 /* Protoypes minishell execution. */
 
 /* EXECUTION */
