@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/05 17:20:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:08:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,19 +133,30 @@ int	token_is_lexic(char *token);
 # define DUP_ERROR "Dup2 function failure.\n"
 # define EXE_ERROR "Execve function failure.\n"
 
+# define PIPE "lex_PIPE"
+
+//temporary
+void printlt(char **lexer_table);
+void printltt(char **table);
+void printlttt(char **table, int *org);
+
 /* Protoypes minishell reader. */
+
+
 
 /* FILES */
 void		file_management(int argc, char *argv[], t_arguments *args);
 /* INITIALIZATION */
 t_prog		*initalize_prog(char **envp, char **builtin_str);
 t_arguments	*intialize_arg(t_prog *prog);
+/* PRE-FILTER */
+int			pre_filter(char *line);
 /* PARSER */
 char		*set_path(char *command, char **folders);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
-int			parser_line(char *line);
 /* LEXER */
 char		**main_lexer(char *line);
+int			*class_lex_table(char **lexer_table);
 /* READER */
 void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);
@@ -153,14 +164,13 @@ void		shell_reader(char *envp[], t_arguments *args);
 /* READER AUX */
 int			is_special(char *str);
 /* READER BOOLEANS */
-int			is_pipe(char z);
 int			is_sufix(char z);
-int			is_file_symbol(char z);
+int			is_lex_symbol(char *string);
 /* READER BOOLEANS ADVANCED */
 int			is_following_text(char *previous, char *text);
 int			is_command(char **argv, char *command, int position);
 /* READER SPLIT COMMANDS */
-char		**split_commands(char **lexer_table, t_arguments *args);
+char	**get_command_table(char **lexer_table, t_arguments *args, int *type);
 /* Protoypes minishell execution. */
 
 /* EXECUTION */

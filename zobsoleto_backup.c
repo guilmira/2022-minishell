@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader_split.c                                     :+:      :+:    :+:   */
+/*   zobsoleto_backup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 11:53:32 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/05 18:12:29 by guilmira         ###   ########.fr       */
+/*   Created: 2022/01/06 14:43:37 by guilmira          #+#    #+#             */
+/*   Updated: 2022/01/06 15:04:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-/** PURPOSE : Creates new string that links full build of command. 
- * i.e.: "ls" and "-la" will become "ls -la". */
-static char	*build_new_string(char *original, char *sufix, t_arguments	*args)
+/** PURPOSE : Evaluates whether char is a pipe. */
+int	is_pipe(char z)
 {
-	char	*tmp;
-	char	*new_string;
+	return (z == '|');
+}
 
-	if (!original)
-		return (NULL);
-	tmp = ft_strjoin(original, " ");
-	if (!tmp)
-		ft_shutdown(MEM, 0, args);
-	free(original);
-	new_string = ft_strjoin(tmp, sufix);
-	if (!new_string)
-		ft_shutdown(MEM, 0, args);
-	free(tmp);
-	return (new_string);
+/** PURPOSE : Evaluates whether char is a greater or lesser. */
+int	is_file_symbol(char z)
+{
+	return (z == '<' || z == '>');
+}
+
+/** PURPOSE : Boolean that evaluates if text is part of a command.
+ * Such is the case on <echo "text"> or <cat "text">. */
+int	is_following_text(char *previous, char *text)
+{
+	if (is_file_symbol(text[0]))
+		return (0);
+	if (is_special(previous))
+		return (1);
+	return (0);
 }
 
 /** PURPOSE : Detects first command on given argv. 
@@ -52,16 +53,6 @@ static int	find_first_command(char **lexer_table, char **table, t_arguments	*arg
 	return (i - 1);
 }
 
-
-int is_lex_symbol(char *string) //temporal apra borrar
-{
-	if (!ft_strcmp(string, "lex_INPUT"))
-		return (1);
-	if (!ft_strcmp(string, "lex_OUTPUT"))
-		return (1);
-	return (0);
-}
-
 /** PURPOSE : Fills table with every command, including its command line options
  * 1. Detects first command and inserts it on position 0 of table.
  * 2. Checks if there is more content on argv, If there is, it will add it to the
@@ -77,19 +68,6 @@ static void	build_table(char **lexer_table, char **table, t_arguments	*args)
 
 	j = 0;
 	i = find_first_command(lexer_table, table, args);
-	/* while (lexer_table[++i])
-	{
-		if (!argv[i + 1])
-			break ;
-		if (is_pipe(argv[i + 1][0]))
-			;
-		else if (is_sufix(argv[i + 1][0]) \
-		|| is_following_text(argv[i], argv[i + 1]))
-			table[j] = build_new_string(table[j], argv[i + 1], args);
-		else if (is_command(argv, argv[i + 1], i + 1))
-			table[++j] = ft_strdup(argv[i + 1]);
-	} */
-
 	i = i + 1;
 	token = NULL;
 	while (lexer_table[++i])
@@ -141,4 +119,50 @@ char	**split_commands(char **lexer_table, t_arguments *args)
 		ft_shut(MEM, 0);
 	build_table(lexer_table, table, args);
 	return (table);
+}
+
+table = split_commands(lexer_table, args); //deberias proteger
+
+
+
+
+
+//IS COMMAND
+
+/** PURPOSE : Auxiliar function to evaluate if its command. */
+static int	check_previous_place(char *previous)
+{
+	int	i;
+	char	*option[TOTAL_SYMBOLS];
+	char	*option_name[TOTAL_SYMBOLS];
+	
+	init_options(option, option_name);
+	if (ft_strcmp(previous, option_name[0]) == 0) //el pipe
+		return (1);
+	i = 1;
+	while (++i < 6)
+		if (ft_strcmp(previous, option_name[i]) == 0) //los <<, <, >>, >
+			return (0);
+	if (is_sufix(previous[0])) //si es sufijo inmediatamente no es
+		return (0);
+	if (is_special(previous)) //si es especial inmeiatmaente no es
+		return (0);
+	return (1);
+}
+
+/** PURPOSE : Evaluate whether string input is command or not.
+ * Assumption: the string table given has gone through lexical analyser. */
+int	is_command(char **lexer_table, char *command, int position)
+{
+	if (!command)
+		return (0);
+	if (token_is_lexic(command))
+		return (0);
+	if (is_sufix(command[0]))
+		return (0);
+	if (position == 0)
+		return (1); //estaria bien comprobar si abre fichero etc.
+	if (!check_previous_place(lexer_table[position - 1]))
+		return (0);
+	return (1);
 }

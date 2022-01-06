@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/05 17:19:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:14:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ static int	count_tokens(char **argv)
 	return (j);
 }
 
+/** PURPOSE : Obtain COMMAND line and apply an initial filter. */
+char *read_and_filter_line(t_arguments *args)
+{
+	char		*line;
+
+	line = read_shell_line();
+	if (!line)
+		ft_shutdown(LINE, errno, args);
+	args->status = 1;
+	if (pre_filter(line))
+	{
+		free(line);
+		return (NULL);
+	}
+	args->flag_execution = 1;
+	return (line);
+}
+
 /** PURPOSE : Reads command line. Loads arguments into structure. 
  * 1. Allocates memory for structure.
  * 2. Parses and rearranges arguments. i.e: "ls -la" will be a single arg.
@@ -49,23 +67,22 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	char		*line;
 	char		**table;
 	char		**lexer_table;
+	int *type;
 
-	line = read_shell_line();
+	line = read_and_filter_line(args);
 	if (!line)
-		ft_shutdown(LINE, errno, args);
-	args->status = 1;
-	if (parser_line(line))
-	{
-		free(line);
 		return ;
-	}
-	args->flag_execution = 1;
 	lexer_table = main_lexer(line);
 	if (!lexer_table)
 		return ;
+	//printlt(lexer_table);
 	args->argv = ft_split(line, ' '); //deberias proteger
 	free(line);
-	table = split_commands(lexer_table, args); //deberias proteger
+	type = class_lex_table(lexer_table);
+	table = NULL;
+	//printlttt(lexer_table, type);
+	table = get_command_table(lexer_table, args, type);
+	//printltt(table);
 	ft_free_split(lexer_table);
 	arg_reader(count_tokens(args->argv), table, envp, args);
 	ft_free_split(table);

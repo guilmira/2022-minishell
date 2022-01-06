@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader_booleans.c                                  :+:      :+:    :+:   */
+/*   printstemp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 11:33:05 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:04:56 by guilmira         ###   ########.fr       */
+/*   Created: 2022/01/06 14:49:33 by guilmira          #+#    #+#             */
+/*   Updated: 2022/01/06 14:52:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/** PURPOSE : Evaluates whether char is a sufix. */
-int	is_sufix(char z)
+void printlt(char **lexer_table)
 {
-	return (z == '-');
+	int i;
+
+	i = -1;
+	while (lexer_table[++i])
+		printf("%i: %s\n", i, lexer_table[i]);
+	printf("--------------\n");
 }
 
-int is_lex_symbol(char *string) //temporal apra borrar
+void printltt(char **table)
 {
-	if (!ft_strcmp(string, "lex_INPUT"))
-		return (1);
-	if (!ft_strcmp(string, "lex_OUTPUT"))
-		return (1);
-	return (0);
+	int i;
+
+	i = -1;
+	while (table[++i])
+		printf("tabla %i: %s\n", i, table[i]);
+	printf("--------------\n");
 }
 
-int	token_is_lexic(char *token)
+void printlttt(char **table, int *org)
 {
-	if (ft_strncmp(token, "lex_", 4) == 0)
-		return (1);
-	else
-		return (0);	
+	int i;
+
+	i = -1;
+	while (table[++i])
+		printf("tabla %i: %12s  % 4i\n", i, table[i], org[i]);
+	printf("--------------\n");
 }

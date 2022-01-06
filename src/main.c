@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/05 15:15:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 12:48:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int
 	while (true)
 	{
 		arguments = intialize_arg(prog);
-		shell_reader(envp, arguments);
+		shell_reader(envp, arguments); //la joya de la corona
 		if (arguments->flag_execution)
 			//prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
 			if (!msh_execute(arguments->argv, arguments)) //We can't rely on prog->status to exit.
@@ -80,6 +80,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
+
+
+//TODO review protection of mallocs etc on all parts of the code. 
 
 //todo. vale, tengo command para la command tabe. falta, ¿que es o siguiente qe viene?
 //si es un delimitator, entonnces ya puedes cerrar ls. SI no, entonces tokeniza, ponlo n el command.

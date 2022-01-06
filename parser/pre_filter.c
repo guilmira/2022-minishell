@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_line.c                                      :+:      :+:    :+:   */
+/*   pre_filter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/04 12:12:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:24:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	non_specified_char(char z)
 //should it identify '\'??
 
 /** PURPOSE : Reads string and evaluates if there are collons unclosed. */
-static int	non_closed_collons(char *line)
+static int	non_closed_collons(char *line, char collons)
 {
 	int	i;
 	int	j;
@@ -32,13 +32,13 @@ static int	non_closed_collons(char *line)
 	not_closed = 0;
 	while (line[++i])
 	{
-		if (line[i] == '"')
+		if (line[i] == collons)
 		{
 			not_closed++;
 			j = i;
 			while (line[++j])
 			{
-				if (line[j] == '"')
+				if (line[j] == collons)
 				{
 					not_closed = 0;
 					break ;
@@ -64,9 +64,9 @@ static int	only_symbol(char *line)
 	return (z == '|' || z == '<' || z == '>' || z == '-');
 }
 
-/** PURPOSE : Direct simple parser of command line as soon
+/** PURPOSE : Simple parser of command line as soon
  * as its read. */
-int	parser_line(char *line)
+int	pre_filter(char *line)
 {
 	if (!line[0])
 		return (1);
@@ -77,7 +77,8 @@ int	parser_line(char *line)
 	}
 	if (non_specified_char(line[0]))
 		return (1);
-	if (non_closed_collons(line))
+	//if (pipe_not_continued)
+	if (non_closed_collons(line, '"') || non_closed_collons(line, '\'') )
 	{
 		printf("Collons must be closed\n");
 		return (1);

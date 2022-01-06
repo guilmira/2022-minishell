@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/05 18:09:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:08:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	init_options(char **option, char **option_name)
 	option[5] = ">>";
 	option_name[5] = "lex_2OUTPUT";
 	option[6] = NULL;
+	option_name[6] = NULL;
 }
 
 static char	*obtain_syntax(char *token)
 {
 	int		i;
-	char	*option[TOTAL_SYMBOLS];
-	char	*option_name[TOTAL_SYMBOLS];
+	char	*option[TOTAL_SYMBOLS + 1];
+	char	*option_name[TOTAL_SYMBOLS + 1];
 	
 	init_options(option, option_name);
 	i = -1;
@@ -80,8 +81,9 @@ char	**main_lexer(char *line)
 	
 	if (!line)
 		return (NULL);
-	split_line = ft_split(line, ' ');
+	split_line = NULL;
 	lexer_table = NULL;
+	split_line = ft_split(line, ' ');
 	lexer_table = build_lexer_table(split_line);
 	return (lexer_table);
 }
