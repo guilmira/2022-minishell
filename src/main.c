@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/06 16:11:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/07 13:50:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int
 	t_arguments	*arguments;
 	char		*builtin_str[9];
 	
-	//introducir ignorar señales?
+	//TODO: introducir ignorar señales?
 	prog = NULL;
 	arguments = NULL;
 	prog = initalize_prog(envp, builtin_str);

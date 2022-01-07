@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:29:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/07 09:12:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int is_lex_symbol(char *string) //temporal apra borrar
 }
 
 /** PURPOSE : Counts positions on a table .*/
-static int	count_table(char **table)
+int	count_table(char **table)
 {
 	int i;
 

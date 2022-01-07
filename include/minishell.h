@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:30:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/07 13:44:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void printlttt(char **table, int *org);
 /* Protoypes minishell reader. */
 
 
-
+int	count_table(char **table);
 /* FILES */
 void		file_management(int argc, char *argv[], t_arguments *args);
 /* INITIALIZATION */
@@ -149,12 +149,15 @@ t_prog		*initalize_prog(char **envp, char **builtin_str);
 t_arguments	*intialize_arg(t_prog *prog);
 /* PRE-FILTER */
 int			pre_filter(char *line);
+int			non_closed_collons(char *line, char collons);
 /* PARSER */
 char		*set_path(char *command, char **folders);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 /* LEXER */
 char		**main_lexer(char *line);
 int			*class_lex_table(char **lexer_table);
+/* COLLON MANAGEMENT */
+char 		**collon_management(char **table);
 /* READER */
 void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);

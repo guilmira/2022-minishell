@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:25:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/07 13:49:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static char	*obtain_syntax(char *token)
 	return (0);
 }
 
+
+//TODO: read | at the begining and end of words. i.e command| or ahfaf |command
+
 char	**build_lexer_table(char **table)
 {
 	int	i;
@@ -73,10 +76,16 @@ char	**build_lexer_table(char **table)
 	return (table);
 }
 
+
+
+
+//TODO: revisar toda la funcion, especcialmente proteciones y liberar memoria.
+
 /** PURPOSE : Lexical Analyzer. */
 char	**main_lexer(char *line)
 {
 	char	**split_line;
+	char	**clean_line;
 	char	**lexer_table;
 	
 	if (!line)
@@ -84,6 +93,10 @@ char	**main_lexer(char *line)
 	split_line = NULL;
 	lexer_table = NULL;
 	split_line = ft_split(line, ' ');
-	lexer_table = build_lexer_table(split_line);
+	
+	//falta liberar
+	clean_line = collon_management(split_line);
+	lexer_table = build_lexer_table(clean_line);
+	//ft_free_split(split_line);
 	return (lexer_table);
 }

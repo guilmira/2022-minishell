@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:56:28 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/07 13:59:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,7 @@ static char	*read_shell_line(void)
 	return (line);
 }
 
-/** PURPOSE : Count total number of tokens. */
-static int	count_tokens(char **argv)
-{
-	int	i;
-	int	j;
 
-	j = 0;
-	i = -1;
-	while (argv[++i])
-		j++;
-	return (j);
-}
 
 /** PURPOSE : Obtain COMMAND line and apply an initial filter. */
 char *read_and_filter_line(t_arguments *args)
@@ -84,11 +73,15 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	if (!type)
 		ft_shutdown(MEM, errno, args);
 	table = NULL;
-	//printlttt(lexer_table, type);
+	printlttt(lexer_table, type);
 	table = get_command_table(lexer_table, args, type);
 	ft_free_split(lexer_table);
 	free(type);
-	//printltt(table);
-	arg_reader(count_tokens(args->argv), table, envp, args);
+	printltt(table);
+	arg_reader(count_table(args->argv), table, envp, args);
 	ft_free_split(table);
 }
+
+
+//todo: it has to work onn directories thath have spacces between the name
+//for that, you have to read an interpret the \ characcter as an esccape char.

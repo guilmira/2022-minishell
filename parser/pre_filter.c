@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/06 15:54:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/07 08:57:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,42 +18,9 @@ static int	non_specified_char(char z)
 	return (z == ';' || z == ':' || z == '\\');
 }
 
-//should it identify '\'??
+//TODO should it identify '\'??
 
-/** PURPOSE : Reads string and evaluates if there are collons unclosed. */
-static int	non_closed_collons(char *line, char collons)
-{
-	int	i;
-	int	j;
-	int	not_closed;
 
-	i = -1;
-	j = -1;
-	not_closed = 0;
-	while (line[++i])
-	{
-		if (line[i] == collons)
-		{
-			not_closed++;
-			j = i;
-			while (line[++j])
-			{
-				if (line[j] == collons)
-				{
-					not_closed = 0;
-					break ;
-				}
-				if (!line[j] && not_closed)
-					break ;
-			}
-			if (line[j + 1])
-				i = j + 1;
-			else
-				return(not_closed);
-		}
-	}
-	return(not_closed);
-}
 
 /** PURPOSE : Boolean, checks if first char is just a symbol. */
 static int	only_symbol(char *line)
