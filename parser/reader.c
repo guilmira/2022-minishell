@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/07 13:59:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/07 14:01:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,5 @@ void	shell_reader(char *envp[], t_arguments	*args)
 
 //todo: it has to work onn directories thath have spacces between the name
 //for that, you have to read an interpret the \ characcter as an esccape char.
+
+//TODO: cuando se mete l o c, it breaks with sanitize. it should be fixed.
