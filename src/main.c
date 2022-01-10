@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/07 13:50:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/10 11:51:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,6 @@ minishell$ echo $?
 0 */
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
+
+
+//TODO: review whats happening with printenv.

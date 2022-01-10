@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/07 08:57:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:05:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,13 @@ static int	only_symbol(char *line)
 }
 
 //TODO FUNCT
-// echo "what|dssg" NO
+// echo what|ls YEs
 // echo| YES
 // echo | wc | YES
+
+
+
+//no vale esto: skajhfkjashgf | //      | ls -la
 int pipe_not_continued(void)
 {
 	return (0);

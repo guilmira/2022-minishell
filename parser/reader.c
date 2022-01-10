@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/07 14:01:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/10 11:30:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	lexer_table = main_lexer(line);
 	if (!lexer_table)
 		return ;
-	//printlt(lexer_table);
+	printlt(lexer_table);
 	args->argv = ft_split(line, ' ');
 	free(line);
 	if (!args->argv)
@@ -73,7 +73,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	if (!type)
 		ft_shutdown(MEM, errno, args);
 	table = NULL;
-	printlttt(lexer_table, type);
+	//printlttt(lexer_table, type);
 	table = get_command_table(lexer_table, args, type);
 	ft_free_split(lexer_table);
 	free(type);
