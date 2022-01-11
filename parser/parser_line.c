@@ -72,14 +72,14 @@ int	parser_line(char *line)
 		return (1);
 	if (only_symbol(line))
 	{
-		printf("parse error on inital symbol\n");
+		printf("parse error on initial symbol\n");
 		return (1);
 	}
 	if (non_specified_char(line[0]))
 		return (1);
 	if (non_closed_collons(line))
 	{
-		printf("Collons must be closed\n");
+		printf("Colons must be closed\n");
 		return (1);
 	}
 	return (0);

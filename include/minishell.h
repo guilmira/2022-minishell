@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
 //if your library DOESNT work try uncommenting this:
 //#include "/usr/include/readline/readline.h"
@@ -108,6 +109,7 @@ void		init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
 void		init_builtins(char **builtin_str);
 void		free_pointers(int num, ...);
 char		*ft_strtok(char *str, const char *delim);
+void		sig_handler(int signum);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

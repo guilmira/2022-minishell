@@ -22,15 +22,14 @@ static void	store_program(t_prog *prog, t_arguments *args)
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
- * 2. Execute main routine. Forks cmmands into processes and execute them. */
+ * 2. Execute main routine. Forks commands into processes and execute them. */
 int
 	shell_loop(char *envp[])
 {
-	int			status;
 	t_prog		*prog; //Explanation: new struct. No panic, its only function is to carry a pointer to the variables that are mantained outsidde the loop.
 	t_arguments	*arguments;
 	char		*builtin_str[9]; //DUDA: cuanta memoria reserva para cada uno de los strings? Declaracion en el stack solo te reserv aespacio para punteros.
-	
+
 	prog = NULL;
 	arguments = NULL;
 	prog = initalize_prog(envp, builtin_str); //Explanation: now we only init outside the loop the struct that will not be freed.
@@ -57,9 +56,8 @@ int
 		/* if (prog->status)
 			break ; */
 	}
-	status = prog->status;
 	free(prog);
-	return (status);
+	return (arguments->status);
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize
@@ -74,6 +72,9 @@ int
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
+
 	//atexit(ft_leaks()); //on exit, gves seg fault.
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
