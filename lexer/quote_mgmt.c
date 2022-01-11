@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collon_mgmt.c                                      :+:      :+:    :+:   */
+/*   quote_mgmt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/07 13:56:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/11 14:33:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	obtain_position_next_collon(char **table, int position)
+int	exists_symbol_in_string(char *str, char sym)
+{	
+	int	i;
+
+	if (!str)
+		return (0);
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == sym)
+			return (1);
+	}
+	return (0);
+}
+
+/** PURPOSE : Obtains position in table that has the inmmeiate next collon
+ * Example [echo "hello what i"s" up], will return the position 3. */
+int	obtain_position_next_quote(char **table, int position, char *symbol)
 {
 	int	i;
 
 	i = position;
 	while (table[i])
 	{
-		if (non_closed_collons(table[i], '"'))
+		if (exists_symbol_in_string(table[i], symbol[0]))
 			return (i);
 		i++;
 	}
@@ -28,11 +45,42 @@ int	obtain_position_next_collon(char **table, int position)
 //ls "jejej papap f" f
 
 //OJO AQUI, REVISA BIEN. PODRIA HABER UNA CASUISTICA QUE DEJE ALGU PTR SIN LIBERAR
+
+
+char *string_without_quote(char *str, char *sym)
+{
+	char	*firsthalf;
+	char	*secondhalf;
+	char	*ptr;
+
+	if (!str)
+		return (NULL);
+	ptr = NULL;
+	firsthalf = NULL;
+	secondhalf = NULL;
+	if (str[0] == sym[0])
+		return(ft_strdup(&str[1]));
+	ptr = ft_strchr(str, sym[0]);
+	if (!(ptr + 1))
+		return (ft_strtrim(str, sym));
+	firsthalf = ft_substr(str, 0, ptr - str);
+	secondhalf = ft_strdup(ptr + 1);
+	ptr = ft_strjoin(firsthalf, secondhalf);
+	free(firsthalf);
+	free(secondhalf);
+	return (ptr);
+}
+
+//echo h"ello he"
+
+/** PURPOSE : Creates new string takin into account quotes. 
+ *					--ALLOCATES MEMORY-- */
 char *get_new_string(char **table, int initial, int final)
 {
 	char *new_str;
 	char *tmp;
 	int i;
+	char *str_non_quote;
 
 	if (!table)
 		return (NULL);
@@ -40,25 +88,34 @@ char *get_new_string(char **table, int initial, int final)
 		return (table[initial]);
 	tmp = NULL;
 	i = initial;
-	new_str = ft_strdup(table[i]);
+	str_non_quote = NULL;
+	new_str = string_without_quote(table[i], "\"");
 	if (!new_str)
 		return (NULL);
-	printf("%s\n", new_str);
+		
 	i++;
 	while (table[i] && i <= final)
 	{
 		tmp = new_str;
-		new_str = ft_strjoin(tmp, " "); //habria que proteger
-		free(tmp);
-		tmp = new_str;
-		new_str = ft_strjoin(tmp, table[i]); //habria que proteger
+		if (i == final)
+		{
+			char *str2 = first_quote_remove(table[i], "\"");
+			printf("here: %s\n", str2);
+		}
+		new_str = ft_strjoin(tmp, table[i]);
+		if (!new_str)
+		{
+			free(tmp);
+			return (NULL);
+		}
 		free(tmp);
 		i++;
 	}
 	return (new_str);
 }
 
-/** PURPOSE : Copies table. */
+/** PURPOSE : Copies table insertinf newString if necessary. 
+ *					--ALLOCATES MEMORY-- */
 void replicate_table(char **new_table, char **table, int initial, int final, char *new_str)
 {
 	int i;
@@ -74,13 +131,13 @@ void replicate_table(char **new_table, char **table, int initial, int final, cha
 			i = final;	
 		}
 		else
-			new_table[j] = table[i];
-		printf("%i: %s\n", j, new_table[j]);
+			new_table[j] = ft_strdup(table[i]);
 		j++;
 	}
 }
 
-/** PURPOSE : Main executer of fnct to rearrange collons. */
+/** PURPOSE : Main executer of fnct to rearrange quotes.
+   * 					--ALLOCATES MEMORY-- */
 char **remake_table(char **table, int initial, int final)
 {
 	int table_tokens;
@@ -97,36 +154,45 @@ char **remake_table(char **table, int initial, int final)
 	new_table_tokens = table_tokens - (final - initial);
 	new_table = ft_calloc(new_table_tokens + 1, sizeof(char *));
 	if (!new_table)
+	{
+		free(new_str);
 		return (NULL);
+	}
 	replicate_table(new_table, table, initial, final, new_str);
 	return (new_table);
 }
 
 /** PURPOSE : Takes a table of strings and remakes it. */
-char	**adjust_collons(char **table, char symbol)
+char	**adjust_quote(char **table, char symbol)
 {
-	int	i;
-	int	position;
-	char **new_table;
+	int		i;
+	int		position;
+	char	**new_table;
+	char	**tmp_table;
 
 	i = -1;
+	tmp_table = NULL;
 	new_table = table;
-	while (table[++i]) //aqui revisar bien, xk al hacer un remake con un if, no siempre entra y cambia la ccosa.
+	while (table[++i])
 	{
-		if (non_closed_collons(table[i], symbol))
+		if (non_closed_quote(table[i], symbol))
 		{
-			position = obtain_position_next_collon(table, i + 1);
+			position = obtain_position_next_quote(table, i + 1, "\"");
 			new_table = remake_table(table, i, position);
-			i = position;
+			if (!new_table)
+				return (NULL);
+			tmp_table = table;
+			table = new_table;
+			ft_free_split(tmp_table);
 		}
 	}
 	return (new_table);
 }
 
-/** PURPOSE : Takes a table of strings and erases the collons.
+/** PURPOSE : Takes a table of strings and erases the quotes.
  * It works for both " and '. Some examples: 
  * ls "-l-a"			--> 	ltable[0] = ls, table[1] = -l-a. */
-char **remove_collons(char **table, char *symbol)
+char **remove_quote(char **table, char *symbol)
 {
 	int i;
 	char **new_table;
@@ -138,7 +204,7 @@ char **remove_collons(char **table, char *symbol)
 	{
 		if (table[i][0] == symbol[0])
 		{
-				tmp = ft_strtrim(table[i], symbol);
+			tmp = ft_strtrim(table[i], symbol);
 			if (!tmp) //TODO proteger bien
 				return (NULL);
 			free(table[i]);
@@ -148,18 +214,23 @@ char **remove_collons(char **table, char *symbol)
 	return (new_table);
 }
 
-/** PURPOSE : Takes a line with collons, arranges it and clears it.
+/** PURPOSE : Takes a line with quotes, arranges it and clears it.
  * It works for both " and '. Some examples: 
  * ls "-l-a"			--> 	ltable[0] = ls, table[1] = -l-a 
  * ls "dir whatever"	--> 	table[0] = ls, table[1] = dir whatever */
-char **collon_management(char **table)
+char **quote_management(char **table)
 {	
 	char	**adjusted_line;
 	char	**clean_line;
 
 	//TODO prioratize function. either '  found first, or " found first.
 	//then apply that to ' or ""
-	adjusted_line = adjust_collons(table, '"');
-	clean_line = remove_collons(adjusted_line, "\"");
+	adjusted_line = adjust_quote(table, '"');
+	if (!adjusted_line)
+		return (NULL);
+	printlt(adjusted_line);
+	clean_line = remove_quote(adjusted_line, "\"");
+	if (!clean_line)
+		return (NULL);
 	return (clean_line);
 }

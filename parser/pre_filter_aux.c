@@ -6,16 +6,24 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:47:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/07 12:36:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:43:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
+
+//TODO, : thing like [echo "hola ' "] must work and its not at the moment
+
+//beefore readapting this function (it need to be remade), a warning:
 //TOCAR ESTE ARCHIVO HACE MUY SENCILO QUe DE SEG FAULT , PERO NO SERA SENCILLO DE DETECTAR
-/** PURPOSE : Reads string and evaluates if the char "collons" is unclosed. */
-int	non_closed_collons(char *line, char collons)
+
+//IMPORTANT: the function non_Closed_quote is used serveral places, so its a good idea 
+//to copy it and create another for the prefilter.
+
+/** PURPOSE : Reads string and evaluates if the char "quotes" is unclosed. */
+int	non_closed_quote(char *line, char quotes)
 {
 	int	i;
 	int	j;
@@ -26,13 +34,13 @@ int	non_closed_collons(char *line, char collons)
 	not_closed = 0;
 	while (line[++i])
 	{
-		if (line[i] == collons)
+		if (line[i] == quotes)
 		{
 			not_closed++;
 			j = i;
 			while (line[++j])
 			{
-				if (line[j] == collons)
+				if (line[j] == quotes)
 				{
 					not_closed = 0;
 					break ;

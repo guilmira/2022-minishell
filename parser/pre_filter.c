@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/10 12:05:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:27:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	pre_filter(char *line)
 	}
 	if (non_specified_char(line[0]))
 		return (1);
-	if (non_closed_collons(line, '"') || non_closed_collons(line, '\'') )
+	if (non_closed_quote(line, '"') || non_closed_quote(line, '\'') ) //TODO: not finished, exlained in function
 	{
-		printf("Collons must be closed\n");
+		printf("Quotes (\" or '') must be closed\n");
 		return (1);
 	}
 	if (pipe_not_continued())

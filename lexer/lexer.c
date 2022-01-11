@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/07 13:49:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/11 14:51:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,31 @@ char	**build_lexer_table(char **table)
 	return (table);
 }
 
-
-
-
 //TODO: revisar toda la funcion, especcialmente proteciones y liberar memoria.
 
-/** PURPOSE : Lexical Analyzer. */
+
+
+char	**quote_split(char const *s, char c)
+{
+	char	**table;
+	char	*str;
+	char	new_set[2];
+
+	new_set[0] = c;
+	new_set[1] = '\0';
+	str = ft_strtrim(s, new_set);
+	if (!str)
+		return (NULL);
+	table = (char **) ft_calloc((word_count(str, c) + 1), sizeof(*table));
+	if (!table)
+		return (NULL);
+	table = allocate(str, table, c);
+	free(str);
+	return (table);
+}
+
+/** PURPOSE : Lexical Analyzer. 
+ * Corrects command line after reading it and interprets symbols. */
 char	**main_lexer(char *line)
 {
 	char	**split_line;
@@ -92,11 +111,16 @@ char	**main_lexer(char *line)
 		return (NULL);
 	split_line = NULL;
 	lexer_table = NULL;
-	split_line = ft_split(line, ' ');
+	if (!ft_strchr(line, '\"') || !ft_strchr(line, '\''))
+		clean_line = ft_split(line, ' ');
+	else
+		clean_line = quote_split(line, ' ');
 	
-	//falta liberar
-	clean_line = collon_management(split_line);
+
+	//clean_line = quote_management(split_line); //split_line queda liberado dentro de la funcion
+	
+	printlt(clean_line);
 	lexer_table = build_lexer_table(clean_line);
-	//ft_free_split(split_line);
+	//ft_free_split(clean_line);
 	return (lexer_table);
 }
