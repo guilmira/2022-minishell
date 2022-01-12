@@ -18,3 +18,12 @@ void
 	ft_putendl_fd("", 2);
 	ft_putstr_fd("msh> ", 2);
 }
+
+void
+	eof_exit(t_arguments *args)
+{
+	ft_putendl_fd("", 2);
+	ft_putendl_fd("exit", 2);
+	free_heap_memory(args); //Check if everything is OK
+	exit(EXIT_SUCCESS);
+}

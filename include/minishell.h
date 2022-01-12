@@ -110,6 +110,7 @@ void		init_builtins(char **builtin_str);
 void		free_pointers(int num, ...);
 char		*ft_strtok(char *str, const char *delim);
 void		sig_handler(int signum);
+void		eof_exit(t_arguments *args);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
