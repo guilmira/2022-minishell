@@ -44,7 +44,7 @@ void
 /*
 ** SYNOPSIS: gets file descriptor from the path passed as argument.
 */
-int
+/*int
 	get_fd(char *path) //what if arg->file_output is NULL, or the user wants to output to sterr??
 {
 	int	fd;
@@ -54,7 +54,7 @@ int
 	else
 		fd = 1;
 	return (fd);
-}
+}*/
 
 /*
 ** SYNOPSIS: frees pointers passed as arguments and sets them to NULL.

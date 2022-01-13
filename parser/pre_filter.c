@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/13 11:41:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/13 12:36:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	pre_filter(char *line)
 		return (1);
 	if (only_symbol(line))
 	{
-		printf("parse error on inital symbol\n");
+		printf("parse error on initial symbol\n");
 		return (1);
 	}
 	if (non_specified_char(line[0]))

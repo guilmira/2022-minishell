@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
 //if your library DOESNT work try uncommenting this:
 //#include "/usr/include/readline/readline.h"
@@ -95,19 +96,21 @@ int			count_chars(char *p, char *needle);
 void		delete_env_var(t_arguments *arg, size_t len, const char *tmp);
 void		export_new_variables(char **args, t_arguments *arg);
 void		export_multi_var(char *const *args, int i,
-			size_t envp_len, char **new_envp);
-void		loop_and_print_echo_args(char **args, t_arguments *arg, int i, int fd);
+				 size_t envp_len, char **new_envp);
+void		loop_and_print_echo_args(char **args, t_arguments *arg, int i);
 char		*get_env_var(char **envp, char *needle);
 void		renew_pwds(t_arguments *arg, char *old_path);
 char		*ft_concat(const char *s1, const char *s2);
 void		set_status(t_arguments *arg, int status);
-int			get_fd(char *path);
+//int			get_fd(char *path);
 bool		is_within_range(const char *str);
 int			atoi_exit_code(const char *str);
 void		init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
 void		init_builtins(char **builtin_str);
 void		free_pointers(int num, ...);
 char		*ft_strtok(char *str, const char *delim);
+void		sig_handler(int signum);
+void		eof_exit(t_arguments *args);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

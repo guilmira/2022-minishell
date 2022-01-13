@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/01/13 11:46:14 by guilmira         ###   ########.fr        #
+#    Updated: 2022/01/13 12:43:11 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,12 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				initialization.c pre_filter.c pre_filter_aux.c \
 				reader_auxiliar.c reader.c \
 				lexer.c lexer_class.c build_command_table.c quote_mgmt.c quote_split.c \
-				printstemp.c
+				printstemp.c \
+				signals.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
+
+
 
 RM = rm -rf
 VPATH = src include parser lexer process
