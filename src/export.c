@@ -71,9 +71,7 @@ int
 	int		envp_len;
 	char	**arr;
 	size_t	args_len;
-	int		fd;
 
-	fd = get_fd(arg->file_output);
 	args_len = get_arr_len(args);
 	if (args_len == 1)
 	{
@@ -82,7 +80,7 @@ int
 		copy_arr(arr, arg->envp, envp_len);
 		arr[envp_len] = NULL;
 		ft_str_arr_sort(arr, envp_len);
-		print_str_arr(arr, fd);
+		print_str_arr(arr, 1);
 		free_pointers(1, arr);
 	}
 	else

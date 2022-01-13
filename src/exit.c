@@ -16,12 +16,12 @@
 ** SYNOPSIS: called if argument passed to exit command is not numeric.
 */
 void
-	manage_no_numeric_arg(char **args, t_arguments *arg, int fd)
+	manage_no_numeric_arg(char **args, t_arguments *arg)
 {
 	set_status(arg, ENOENT);
-	ft_putstr_fd("msh: exit: ", fd);
-	ft_putstr_fd(args[1], fd);
-	ft_putendl_fd(": numeric argument required", fd);
+	ft_putstr_fd("msh: exit: ", 1);
+	ft_putstr_fd(args[1], 1);
+	ft_putendl_fd(": numeric argument required", 1);
 }
 
 /*
@@ -30,21 +30,18 @@ void
 int
 	msh_exit(char **args, t_arguments *arg)
 {
-	int	fd;
-
-	fd = get_fd(arg->file_output);
 	set_status(arg, 0);
 	if (!args[1])
 		return (0);
 	if (!is_within_range(args[1]))
 	{
-		manage_no_numeric_arg(args, arg, fd);
+		manage_no_numeric_arg(args, arg);
 		return (1);
 	}
 	if (get_arr_len(args) > 2)
 	{
 		set_status(arg, EPERM);
-		ft_putendl_fd("msh: exit: too many arguments", fd);
+		ft_putendl_fd("msh: exit: too many arguments", 1);
 		return (1);
 	}
 	set_status(arg, atoi_exit_code(args[1]));

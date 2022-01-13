@@ -94,12 +94,10 @@ int
 {
 	char	*path;
 	char	*old_path;
-	int		fd;
 
-	fd = get_fd(arg->file_output);
 	if (get_arr_len(args) > 2)
 	{
-		ft_putstr_fd("msh: cd: too many arguments\n", fd);
+		ft_putstr_fd("msh: cd: too many arguments\n", 1);
 		set_status(arg, 1);
 		return (2);
 	}

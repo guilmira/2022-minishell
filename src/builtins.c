@@ -25,13 +25,11 @@ int
 			t_arguments *arg)
 {
 	char	*path;
-	int		fd;
 
-	fd = get_fd(arg->file_output);
 	path = getcwd(NULL, 0);
 	if (!path)
 		perror("pwd() error");
-	ft_putendl_fd(path, fd);
+	ft_putendl_fd(path, 1);
 	set_status(arg, 0);
 	return (1);
 }
@@ -42,10 +40,7 @@ int
 int
 	msh_env(char **args __attribute__((unused)), t_arguments *arg)
 {
-	int		fd;
-
-	fd = get_fd(arg->file_output);
-	print_str_arr(arg->envp, fd);
+	print_str_arr(arg->envp, 1);
 	set_status(arg, 0);
 	return (1);
 }
@@ -58,22 +53,20 @@ int
 			 t_arguments *arg)
 {
 	int	i;
-	int	fd;
 
-	fd = get_fd(arg->file_output);
 	i = 0;
-	ft_putendl_fd("\nminishell", fd);
+	ft_putendl_fd("\nminishell", 1);
 	ft_putendl_fd("Copyright (c) Ardak Sydyknazar "
-		"and Guillermo Mira Osuna, 2022.\n", fd);
-	ft_putendl_fd("Type program names and arguments, and hit enter.", fd);
-	ft_putendl_fd("The following are built in:", fd);
+		"and Guillermo Mira Osuna, 2022.\n", 1);
+	ft_putendl_fd("Type program names and arguments, and hit enter.", 1);
+	ft_putendl_fd("The following are built in:", 1);
 	while (i < msh_num_builtins(arg))
 	{
-		ft_putstr_fd("\t", fd);
-		ft_putendl_fd(arg->builtin_str[i], fd);
+		ft_putstr_fd("\t", 1);
+		ft_putendl_fd(arg->builtin_str[i], 1);
 		i++;
 	}
-	ft_putendl_fd("Use the man command for information on other programs.", fd);
+	ft_putendl_fd("Use the man command for information on other programs.", 1);
 	set_status(arg, 0);
 	return (1);
 }
