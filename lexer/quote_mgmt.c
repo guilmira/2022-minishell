@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/13 12:27:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:38:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,38 @@ char	*erase_quote(char *str, char sym)
 char	**remove_quote(char **table)
 {
 	int		i;
+	int		j;
 	char	*new_str;
 
 	i = -1;
+	j = -1;
 	while (table[++i])
 	{
 		if (ft_strchr(table[i], '\"') || ft_strchr(table[i], '\''))
 		{
-			if (ft_strchr(table[i], '\"'))
-				new_str = erase_quote(table[i], '\"');
-			else
-				new_str = erase_quote(table[i], '\"');
-			free(table[i]);
-			table[i] = new_str;
+			while (table[i][++j])
+			{
+				if (table[i][j] == '\"')
+				{
+					j = ft_strchr(table[i], '\"') - table[i];
+					new_str = erase_quote(table[i], '\"');
+					free(table[i]);
+					table[i] = new_str;
+				}
+				else if (table[i][j] == '\'')
+				{
+					j = ft_strchr(table[i], '\'') - table[i];
+					new_str = erase_quote(table[i], '\'');
+					free(table[i]);
+					table[i] = new_str;
+				}
+				
+			}
+			j = i;
 		}
 	}
+		//printf("%s\n", table[i]);
 	return (table);
 }
+
+//l's' -'l'"a" | wc "-l"

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/13 12:52:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/13 12:56:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	shell_reader(char *envp[], t_arguments	*args)
 
 	line = read_and_filter_line(args);
 	if (!line)
-		eof_exit(args);
-		//return ;
+		//eof_exit(args);
+		return ;
 	lexer_table = main_lexer(line);
 	if (!lexer_table)
 		return ;
