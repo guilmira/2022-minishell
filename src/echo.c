@@ -104,7 +104,6 @@ int
 
 	i = 1;
 	have_option = false;
-	set_status(arg, 0);
 	fd = get_fd(arg->file_output);
 	if (args[i])
 	{
@@ -119,5 +118,6 @@ int
 	}
 	if (!have_option)
 		ft_putstr_fd("\n", fd);
+	set_status(arg, 0);
 	return (1);
 }

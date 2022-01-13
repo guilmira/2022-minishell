@@ -53,7 +53,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	if (!line)
 		//ft_shutdown(LINE, errno, args);
 		eof_exit(args);
-	args->status = 1;
+	//args->status = 1; WHY??
 	if (parser_line(line))
 	{
 		free(line);

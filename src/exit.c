@@ -47,6 +47,6 @@ int
 		ft_putendl_fd("msh: exit: too many arguments", fd);
 		return (1);
 	}
-	arg->status = atoi_exit_code(args[1]);
+	set_status(arg, atoi_exit_code(args[1]));
 	return (0);
 }
