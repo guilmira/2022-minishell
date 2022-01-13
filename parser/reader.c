@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/11 10:19:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/13 11:42:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*read_shell_line(void)
 /** PURPOSE : Obtain COMMAND line and apply an initial filter. */
 char *read_and_filter_line(t_arguments *args)
 {
-	char		*line;
+	char	*line;
 
 	line = read_shell_line();
 	if (!line)
@@ -71,7 +71,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	if (!type)
 		ft_shutdown(MEM, errno, args);
 	table = NULL;
-	//printlttt(lexer_table, type);
+	printlttt(lexer_table, type);
 	table = get_command_table(lexer_table, args, type);
 	ft_free_split(lexer_table);
 	free(type);

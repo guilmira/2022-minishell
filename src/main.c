@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/11 10:05:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/13 12:28:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int
 	t_prog		*prog;
 	t_arguments	*arguments;
 	char		*builtin_str[9];
-	
+
 	prog = NULL;
 	arguments = NULL;
 	prog = initalize_prog(envp, builtin_str);

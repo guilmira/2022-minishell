@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/11 10:14:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/13 12:23:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,7 @@ void printlttt(char **table, int *org);
 
 /* Protoypes minishell reader. */
 
-
-int	count_table(char **table);
+int			count_table(char **table);
 /* FILES */
 void		file_management(int argc, char *argv[], t_arguments *args);
 /* INITIALIZATION */
@@ -156,16 +155,14 @@ int			prepare_process(int fd_to_close, int fd_to_prepare);
 /* LEXER */
 char		**main_lexer(char *line);
 int			*class_lex_table(char **lexer_table);
-/* COLLON MANAGEMENT */
-char 		**quote_management(char **table);
+char		**remove_quote(char **table);
+/* QUOTE MANAGEMENT */
+char		**quote_management(char **table);
+char		**quote_split(char const *s, char c);
 /* READER */
 void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 char		*set_path(char *command, char **folders);
 void		shell_reader(char *envp[], t_arguments *args);
-/* READER AUX */
-
-/* READER BOOLEANS */
-
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
 /* Protoypes minishell execution. */

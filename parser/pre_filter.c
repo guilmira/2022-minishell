@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/11 10:27:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/13 11:41:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	only_symbol(char *line)
 	return (z == '|' || z == '<' || z == '>' || z == '-');
 }
 
+//TODO: read | at the begining and end of words. i.e command| or ahfaf |command
+
 //TODO FUNCT
 // echo what|ls YEs
 // echo| YES
@@ -43,6 +45,10 @@ int pipe_not_continued(void)
 {
 	return (0);
 }
+
+
+
+// si encontramos esto "|", no ejecutar
 
 /** PURPOSE : Simple parser of command line as soon
  * as its read. */

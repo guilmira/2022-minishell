@@ -6,12 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/11 14:51:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/13 12:23:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 static void	init_options(char **option, char **option_name)
 {
@@ -36,7 +35,7 @@ static char	*obtain_syntax(char *token)
 	int		i;
 	char	*option[TOTAL_SYMBOLS + 1];
 	char	*option_name[TOTAL_SYMBOLS + 1];
-	
+
 	init_options(option, option_name);
 	i = -1;
 	while (option[++i])
@@ -47,13 +46,10 @@ static char	*obtain_syntax(char *token)
 	return (0);
 }
 
-
-//TODO: read | at the begining and end of words. i.e command| or ahfaf |command
-
 char	**build_lexer_table(char **table)
 {
-	int	i;
-	char *syntax;
+	int		i;
+	char	*syntax;
 
 	if (!table)
 		return (NULL);
@@ -71,31 +67,7 @@ char	**build_lexer_table(char **table)
 				return (NULL);
 			}
 		}
-		//printf("%s\n", table[i]);
 	}
-	return (table);
-}
-
-//TODO: revisar toda la funcion, especcialmente proteciones y liberar memoria.
-
-
-
-char	**quote_split(char const *s, char c)
-{
-	char	**table;
-	char	*str;
-	char	new_set[2];
-
-	new_set[0] = c;
-	new_set[1] = '\0';
-	str = ft_strtrim(s, new_set);
-	if (!str)
-		return (NULL);
-	table = (char **) ft_calloc((word_count(str, c) + 1), sizeof(*table));
-	if (!table)
-		return (NULL);
-	table = allocate(str, table, c);
-	free(str);
 	return (table);
 }
 
@@ -106,21 +78,17 @@ char	**main_lexer(char *line)
 	char	**split_line;
 	char	**clean_line;
 	char	**lexer_table;
-	
+
 	if (!line)
 		return (NULL);
 	split_line = NULL;
 	lexer_table = NULL;
-	if (!ft_strchr(line, '\"') || !ft_strchr(line, '\''))
+	if (!ft_strchr(line, '\"') && !ft_strchr(line, '\''))
 		clean_line = ft_split(line, ' ');
 	else
 		clean_line = quote_split(line, ' ');
-	
-
-	//clean_line = quote_management(split_line); //split_line queda liberado dentro de la funcion
-	
 	printlt(clean_line);
 	lexer_table = build_lexer_table(clean_line);
-	//ft_free_split(clean_line);
+	lexer_table = remove_quote(lexer_table);
 	return (lexer_table);
 }
