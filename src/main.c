@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/13 12:43:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:53:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,8 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 }
 
 
-//TODO review protection of mallocs etc on all parts of the code. 
 
-//tdo, ls + name of file/directory
+
 
 //to do configurar exclamacion.
 /* minishell$ echo $?
@@ -99,5 +98,3 @@ minishell$ echo $?
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 
-
-//TODO: review whats happening with printenv.
