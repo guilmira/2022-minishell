@@ -31,6 +31,20 @@ void
 }
 
 /*
+** SYNOPSIS: calculates the length of a variable up to the "=" sign.
+*/
+size_t
+	get_envv_len(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != '=')
+		i++;
+	return (i);
+}
+
+/*
 ** SYNOPSIS: called if there are more than 1 argument passed to export command.
 */
 void
@@ -44,6 +58,7 @@ void
 	i = 1;
 	while (args[i])
 	{
+		delete_env_var(arg, get_envv_len(args[i]), args[i]);
 		envp_len = get_arr_len(arg->envp);
 		new_envp = (char **)get_arr(envp_len + 2, sizeof(char *));
 		copy_arr(new_envp, arg->envp, envp_len);

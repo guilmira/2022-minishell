@@ -50,8 +50,7 @@ int	msh_execute(char **args, t_arguments *arguments)
 		return (1);
 	i = 0;
 	while (i < msh_num_builtins(arguments))
-	{	
-		
+	{
 		if (ft_strcmp(args[0], arguments->prog->builtin_str[i]) == 0)
 			return ((arguments->builtin_func[i])(args, arguments));
 		i++;

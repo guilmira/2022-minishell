@@ -42,21 +42,6 @@ void
 }
 
 /*
-** SYNOPSIS: gets file descriptor from the path passed as argument.
-*/
-/*int
-	get_fd(char *path) //what if arg->file_output is NULL, or the user wants to output to sterr??
-{
-	int	fd;
-
-	if (path)
-		fd = fileno(fopen(path, "w")); //fopen is not allowed
-	else
-		fd = 1;
-	return (fd);
-}*/
-
-/*
 ** SYNOPSIS: frees pointers passed as arguments and sets them to NULL.
 ** First arguments should indicate the quantity of passed pointers.
 */
