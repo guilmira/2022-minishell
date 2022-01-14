@@ -111,6 +111,8 @@ void		free_pointers(int num, ...);
 char		*ft_strtok(char *str, const char *delim);
 void		sig_handler(int signum);
 void		eof_exit(t_arguments *args);
+void		set_shlvl_num(t_arguments *arg);
+char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

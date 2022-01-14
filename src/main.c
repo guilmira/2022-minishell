@@ -37,6 +37,7 @@ int
 	while (true)
 	{
 		arguments = intialize_arg(prog);
+		set_shlvl_num(arguments);
 		shell_reader(envp, arguments); //la joya de la corona
 		if (arguments->flag_execution)
 			//prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
