@@ -6,13 +6,13 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/01/13 12:43:11 by guilmira         ###   ########.fr        #
+#    Updated: 2022/01/17 12:32:16 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
-CC			= gcc -g #¿Por qué la g?
+CC			= gcc -g
 CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
 READLINE	= -lreadline
 #sudo apt-get install libreadline-dev 
@@ -33,8 +33,6 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				signals.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
-
-
 
 RM = rm -rf
 VPATH = src include parser lexer process
