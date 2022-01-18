@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/05 17:12:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:55:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,12 @@ static t_list	*load_linked_list(char **table, char **envp, int total_commands)
 	char		**folders;
 	t_list		*lst;
 	t_command	*command_struct;
+	char *tmp;
+
 
 	lst = NULL;
 	folders = get_env_path(envp);
+	
 	if (!folders)
 		return (NULL);
 	i = -1;
@@ -95,7 +98,19 @@ static t_list	*load_linked_list(char **table, char **envp, int total_commands)
 			return (NULL);
 		}
 		command_struct->command = ft_split(table[i], ' ');
-		command_struct->path = set_path(command_struct->command[0], folders);
+		if (!ft_strncmp(table[0], "/bin/", 5))
+		{
+			tmp = ft_strdup(table[0]);
+			tmp = &tmp[5];
+			command_struct->command[0] = ft_strdup(tmp);
+			command_struct->command[1] = NULL;
+			//printf("h: %s\n", command_struct->command[0]);
+			folders[0] = ft_strdup("/usr/local/bin/");
+			command_struct->path = set_path(command_struct->command[0], folders);
+		}
+		else
+			command_struct->path = set_path(command_struct->command[0], folders);
+		//printf("here : %s\n", command_struct->path);
 		ft_lstadd_back(&lst, ft_lstnew(command_struct));
 	}
 	ft_free_split(folders);
