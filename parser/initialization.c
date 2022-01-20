@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 06:22:53 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/22 06:29:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:23:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ t_prog	*initalize_prog(char **envp, char **builtin_str)
 		ft_shut(MEM, 0);
 	prog->envp = envp;
 	init_builtins(builtin_str);
-	prog->builtin_str = builtin_str; //builtin_str has being declared on stack instead of at heap.
-	// ^  couldn´t this bring problems??
+	prog->builtin_str = builtin_str;
 	prog->status = 0;
 	return (prog);
 }
