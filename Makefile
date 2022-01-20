@@ -14,7 +14,7 @@
 NAME		= minishell
 CC			= gcc -g
 CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
-READLINE	= -lreadline
+READLINE	= -lreadline -lcurses
 #sudo apt-get install libreadline-dev 
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
