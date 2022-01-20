@@ -6,21 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:47:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/11 10:43:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:24:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
-
-//TODO, : thing like [echo "hola ' "] must work and its not at the moment
-
-//beefore readapting this function (it need to be remade), a warning:
-//TOCAR ESTE ARCHIVO HACE MUY SENCILO QUe DE SEG FAULT , PERO NO SERA SENCILLO DE DETECTAR
-
-//IMPORTANT: the function non_Closed_quote is used serveral places, so its a good idea 
-//to copy it and create another for the prefilter.
+//TODO, : thing like [echo "hola ' "] must work and its not working at the moment
 
 /** PURPOSE : Reads string and evaluates if the char "quotes" is unclosed. */
 int	non_closed_quote(char *line, char quotes)
@@ -52,5 +44,5 @@ int	non_closed_quote(char *line, char quotes)
 				i = j;
 		}
 	}
-	return(not_closed);
+	return (not_closed);
 }

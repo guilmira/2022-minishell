@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/13 12:56:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:18:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*read_shell_line(void)
 }
 
 /** PURPOSE : Obtain COMMAND line and apply an initial filter. */
-char *read_and_filter_line(t_arguments *args)
+char	*read_and_filter_line(t_arguments *args)
 {
 	char	*line;
 
@@ -54,7 +54,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	char		*line;
 	char		**table;
 	char		**lexer_table;
-	int *type;
+	int			*lexer_type;
 
 	line = read_and_filter_line(args);
 	if (!line)
@@ -68,21 +68,15 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	free(line);
 	if (!args->argv)
 		ft_shutdown(MEM, errno, args);
-	type = class_lex_table(lexer_table);
-	if (!type)
+	lexer_type = class_lex_table(lexer_table);
+	if (!lexer_type)
 		ft_shutdown(MEM, errno, args);
 	table = NULL;
-	printlttt(lexer_table, type);
-	table = get_command_table(lexer_table, args, type);
+	printlttt(lexer_table, lexer_type);
+	table = get_command_table(lexer_table, args, lexer_type);
 	ft_free_split(lexer_table);
-	free(type);
+	free(lexer_type);
 	//printltt(table);
 	arg_reader(count_table(args->argv), table, envp, args);
 	ft_free_split(table);
 }
-
-
-//todo: it has to work onn directories thath have spacces between the name
-//for that, you have to read an interpret the \ characcter as an esccape char.
-
-//TODO: cuando se mete l o c, it breaks with sanitize. it should be fixed.

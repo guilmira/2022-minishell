@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:53:32 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/18 14:23:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:23:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static char	*build_new_string(char *original, char *sufix, t_arguments	*args)
  * -> is it a command on its own? then it should go on next position. */
 static void	build_command_table(char **lexer_table, char **table, t_arguments *args, int *type)
 {
-	int	i;
-	int	j;
-	char *token;
+	int		i;
+	int		j;
+	char	*token;
 
 	j = 0;
 	i = 0;

@@ -6,13 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/07 09:12:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:24:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int is_lex_symbol(char *string) //temporal apra borrar
+static int	is_lex_symbol(char *string) //temporal apra borrar
 {
 	if (!ft_strcmp(string, "lex_INPUT"))
 		return (1);
@@ -24,7 +24,7 @@ static int is_lex_symbol(char *string) //temporal apra borrar
 /** PURPOSE : Counts positions on a table .*/
 int	count_table(char **table)
 {
-	int i;
+	int	i;
 
 	if (!table)
 		return (0);
@@ -41,9 +41,9 @@ int	count_table(char **table)
  * 5	COMMAND TOKEN . */
 int	*class_lex_table(char **lexer_table)
 {
-	int i;
+	int	i;
 	int	*type;
-	int total_types;
+	int	total_types;
 
 	total_types = count_table(lexer_table);
 	if (!total_types)

@@ -1,5 +1,0 @@
-HERE we can write down examples that are not working
-
-
-COMMAND LINE					EXPLANATION
-ls -la "|" wc -l				(Does not exacty work like in bash)
