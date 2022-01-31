@@ -22,6 +22,8 @@ static void	store_program(t_prog *prog, t_arguments *args)
 	prog->builtin_str = args->builtin_str;
 }
 
+//   espacios mas enter
+
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks commands into processes and execute them. */
@@ -39,6 +41,7 @@ int
 	while (true)
 	{
 		arguments = intialize_arg(prog);
+		set_shlvl_num(arguments);
 		shell_reader(envp, arguments); //la joya de la corona
 		if (arguments->flag_execution)
 			//prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
