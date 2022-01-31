@@ -75,13 +75,12 @@ char	**build_lexer_table(char **table)
  * Corrects command line after reading it and interprets symbols. */
 char	**main_lexer(char *line)
 {
-	char	**split_line;
 	char	**clean_line;
 	char	**lexer_table;
 
 	if (!line)
 		return (NULL);
-	split_line = NULL;
+	
 	lexer_table = NULL;
 	if (!ft_strchr(line, '\"') && !ft_strchr(line, '\''))
 		clean_line = ft_split(line, ' ');
