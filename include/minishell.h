@@ -61,7 +61,6 @@ typedef struct s_program
 typedef struct s_arguments
 {
 	char	**argv;
-	char	**tabla_temp;
 	int		flag_execution;
 	int		command_number;
 	int		total_commands;

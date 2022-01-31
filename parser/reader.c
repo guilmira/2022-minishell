@@ -78,6 +78,5 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	free(lexer_type);
 	//printltt(table);
 	arg_reader(count_table(args->argv), table, envp, args);
-	args->tabla_temp = table;
-	//ft_free_split(table);
+	ft_free_split(table);
 }
