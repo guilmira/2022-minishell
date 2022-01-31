@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/22 06:20:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/05 15:14:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	process_excution(t_arguments *arguments)
 	}
 	arguments->fds = arg_descriptors(arguments);
 	process_exe(arguments);
-	return (0);
+	return (1); //status, 0 o 1
 }
 
 /** PURPOSE : Main execution function.
@@ -50,8 +50,7 @@ int	msh_execute(char **args, t_arguments *arguments)
 		return (1);
 	i = 0;
 	while (i < msh_num_builtins(arguments))
-	{	
-		
+	{
 		if (ft_strcmp(args[0], arguments->prog->builtin_str[i]) == 0)
 			return ((arguments->builtin_func[i])(args, arguments));
 		i++;

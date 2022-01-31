@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:27 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 09:33:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:36:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*set_path(char *command, char **folders)
 			return (command_path);
 		free(command_path);
 	}
-	current_dir = "/Users/guilmira/Desktop/pipex/";
+	current_dir = "/Users/guilmira/Desktop/minishell/"; //TODO modificar
 	command_path = ft_strjoin(current_dir, command);
 	if (file_exists(command_path))
 		return (command_path);

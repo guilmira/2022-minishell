@@ -42,21 +42,6 @@ void
 }
 
 /*
-** SYNOPSIS: gets file descriptor from the path passed as argument.
-*/
-int
-	get_fd(char *path) //what if arg->file_output is NULL, or the user wants to output to sterr??
-{
-	int	fd;
-
-	if (path)
-		fd = fileno(fopen(path, "w")); //fopen is not allowed
-	else
-		fd = 1;
-	return (fd);
-}
-
-/*
 ** SYNOPSIS: frees pointers passed as arguments and sets them to NULL.
 ** First arguments should indicate the quantity of passed pointers.
 */
@@ -80,4 +65,55 @@ void
 		i++;
 	}
 	va_end(ap);
+}
+
+char *
+	get_env_val(t_arguments *arg, size_t len, const char *tmp)
+{
+	int		i;
+	char	*env;
+	char	**arr;
+
+	i = 0;
+	while (arg->envp[i])
+	{
+		if (!ft_strncmp(arg->envp[i], tmp, len))
+		{
+			env = arg->envp[i];
+			arr = ft_split(env, '=');
+			env = ft_strdup(arr[1]);
+			ft_free_split(arr);
+			return (env);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+void
+	set_shlvl_num(t_arguments *arg)
+{
+	static bool	shlvl_set;
+	char		*tmp;
+	int			num;
+	char		**arr;
+
+	if (!shlvl_set)
+	{
+		tmp = get_env_val(arg, 5, "SHLVL");
+		if (tmp)
+		{
+			num = ft_atoi(tmp);
+			arr = (char **)get_arr(3, sizeof(char *));
+			arr[0] = "export";
+			free(tmp);
+			tmp = ft_strjoin("SHLVL=", ft_itoa(num + 1));
+			arr[1] = tmp;
+			arr[2] = NULL;
+			export_new_variables(arr, arg);
+			free(tmp);
+			free(arr);
+		}
+		shlvl_set = true;
+	}
 }

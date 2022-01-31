@@ -47,11 +47,9 @@ int
 	int		i;
 	size_t	len;
 	char	*tmp;
-	int		fd;
 
-	fd = get_fd(arg->file_output);
 	if (get_arr_len(args) < 2)
-		ft_putendl_fd("unset: not enough arguments", fd);
+		ft_putendl_fd("unset: not enough arguments", 1);
 	else
 	{
 		i = 1;

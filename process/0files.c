@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 12:48:01 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/09 15:13:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:14:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	file_detector(int argc, char *argv[], char symbol)
 	{
 		if (file_symbol_detected(argv[i], symbol))
 		{
-			if (file_exists(argv[i - 1]))
+			if (file_exists(argv[i + 1]))
 				return (1);
 			else
 				return (2);
@@ -63,7 +63,7 @@ static int	file_arrangement(char *argv[], int argc, t_arguments *args)
 	i = -1;
 	while (++i < argc)
 		if (file_symbol_detected(argv[i], '<'))
-			args->file_input = argv[i - 1];
+			args->file_input = argv[i + 1];
 	return (0);
 }
 
