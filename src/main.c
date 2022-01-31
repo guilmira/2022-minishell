@@ -19,6 +19,8 @@ static void	store_program(t_prog *prog, t_arguments *args)
 	prog->builtin_str = args->builtin_str;
 }
 
+//   espacios mas enter
+
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks cmmands into processes and execute them. */
