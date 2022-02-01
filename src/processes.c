@@ -28,7 +28,7 @@ int
 static int
 	process_excution(t_arguments *arguments)
 {
-	if (arguments->total_commands == 1)
+	if (arguments->total_commands == 1) //this if need inside to check whether its built in or not. THis is the simplest case
 	{
 		single_process(arguments);
 		return (1);
