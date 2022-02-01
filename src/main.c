@@ -23,6 +23,7 @@ static void	store_program(t_prog *prog, t_arguments *args)
 }
 
 //   espacios mas enter
+// solo c de sanitize.
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
