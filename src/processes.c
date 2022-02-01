@@ -25,7 +25,8 @@ int
  * 1. Executes single process if that is the case.
  * 2. Create argument descriptors to link pipes. 
  * 3. Accesses main process function. */
-static int	process_excution(t_arguments *arguments)
+static int
+	process_excution(t_arguments *arguments)
 {
 	if (arguments->total_commands == 1)
 	{
@@ -41,19 +42,31 @@ static int	process_excution(t_arguments *arguments)
  * 1. Checks that arguments exists. 
  * 2. Checks if a built-in argument was introduced.
  * 3. Executes commands and takes program to the FORKS section. */
-int	msh_execute(char **args, t_arguments *arguments)
+int
+	msh_execute(char **args, t_arguments *arguments)
 {
-	int	i;
-	int	status;
+	int			i;
+	int			status;
+	t_list		*cmd_list;
+	char		**new_args;
 
-	if (args[0] == NULL || !arguments)
+	if (args[0] == NULL || !arguments || !arguments->commands_lst)
 		return (1);
-	i = 0;
-	while (i < msh_num_builtins(arguments))
+	cmd_list = arguments->commands_lst;
+	while (cmd_list)
 	{
-		if (ft_strcmp(args[0], arguments->prog->builtin_str[i]) == 0)
-			return ((arguments->builtin_func[i])(args, arguments));
-		i++;
+		if (cmd_list->content && ((t_command *)cmd_list->content)->command)
+			new_args = ((t_command *)cmd_list->content)->command;
+		else
+			break ;
+		i = 0;
+		while (i < msh_num_builtins(arguments))
+		{
+			if (ft_strcmp(new_args[0], arguments->prog->builtin_str[i]) == 0)
+				return ((arguments->builtin_func[i])(new_args, arguments));
+			i++;
+		}
+		cmd_list = cmd_list->next;
 	}
 	status = process_excution(arguments);
 	return (status);
