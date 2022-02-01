@@ -36,11 +36,24 @@ int	pipe_not_continued(void)
 	return (0);
 }
 
+int	only_spaces(char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+		if (line[i] != ' ')
+			return (0);
+	return (1);
+}
+
 /** PURPOSE : Simple parser of command line as soon
  * as its read. */
 int	pre_filter(char *line)
 {
 	if (!line[0])
+		return (1);
+	if (only_spaces(line))
 		return (1);
 	if (only_symbol(line))
 	{
