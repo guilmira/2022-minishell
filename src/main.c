@@ -43,7 +43,7 @@ int
 	{
 		arguments = intialize_arg(prog);
 		set_shlvl_num(arguments);
-		shell_reader(envp, arguments); //la joya de la corona
+		shell_reader(envp, arguments);
 		if (arguments->flag_execution)
 			//prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
 			if (!msh_execute(arguments->argv, arguments)) //We can't rely on prog->status to exit.
