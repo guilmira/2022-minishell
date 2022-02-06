@@ -41,6 +41,7 @@
 # define TOK_DELIM " \t\r\n\a"
 
 /* Global variables and structs*/
+int	g_rv;
 
 /* Struct that stores command data. */
 typedef struct s_command
@@ -113,6 +114,7 @@ void		sig_handler(int signum);
 void		eof_exit(t_arguments *args);
 void		set_shlvl_num(t_arguments *arg);
 char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
+char		**get_cmdwargs(t_arguments *arguments);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
@@ -173,15 +175,21 @@ char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
 /* Protoypes minishell execution. */
 
 /* EXECUTION */
-void		process_exe(t_arguments *args);
+int
+process_exe(t_arguments *args);
 int			msh_execute(char **args, t_arguments *arguments);
 /* PARENT PROCESS */
-void		mid_process(t_arguments *args);
-void		single_process(t_arguments *args);
+int
+mid_process(t_arguments *args);
+int
+single_process(t_arguments *args);
 /* SON PROCESS */
-void		first_son(t_arguments *args);
-void		last_son(int index, t_arguments *args);
-void		single_son(t_arguments *args);
+int
+first_son(t_arguments *args);
+int
+last_son(int index, t_arguments *args);
+int
+single_son(t_arguments *args);
 /* AUXILIAR */
 int			file_exists(char *str);
 int			*arg_descriptors(t_arguments *args);

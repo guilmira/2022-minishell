@@ -17,9 +17,12 @@
  * 2. Sets the proper inputs and outputs, redirecting the
  * exits (like STDOUT_FILENO) to the correct pipe file descriptor. 
  * 3. Executes command by searching in path with execve. */
-static void	mid_son(int index, t_arguments *args)
+static int
+	mid_son(int index, t_arguments *args)
 {
 	t_command	*command_struct;
+	char		**cmdwargs;
+	int			i;
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
@@ -33,8 +36,19 @@ static void	mid_son(int index, t_arguments *args)
 	if (dup2(args->fds[index + 1], STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index + 1]);
-	if (execve(command_struct->path, command_struct->command, NULL) == -1)
-		ft_shutdown(EXE_ERROR, 0, args);
+	cmdwargs = get_cmdwargs(args);
+	if (!cmdwargs)
+		return (0); //error, no command
+	i = 0;
+	while (i < msh_num_builtins(args))
+	{
+		if (ft_strcmp(cmdwargs[0], args->prog->builtin_str[i]) == 0)
+			return ((args->builtin_func[i])(cmdwargs, args));
+		i++;
+	}
+	return (execve(command_struct->path, command_struct->command, NULL));
+	/*if (execve(command_struct->path, command_struct->command, NULL) == -1)
+		ft_shutdown(EXE_ERROR, 0, args);*/
 }
 
 /** PURPOSE : Mid process for all the commands that are not
@@ -42,7 +56,8 @@ static void	mid_son(int index, t_arguments *args)
  * 1. Establish syntax and index.
  * 2. Forks the process annd creates a single son.
  * 2. Excutes mid_son and waits for it to finish. */
-void	mid_process(t_arguments *args)
+int
+	mid_process(t_arguments *args)
 {
 	int	index;
 	int	status;
@@ -56,14 +71,21 @@ void	mid_process(t_arguments *args)
 	if (identifier == 0)
 	{
 		close(args->fds[index]);
-		mid_son(index, args);
+		g_rv = mid_son(index, args);
+		if (g_rv < 0)
+			ft_shutdown(EXE_ERROR, 0, args);
+		else if (g_rv == 0)
+			return (0);
+		else
+			exit(0); //to avoid duplication
 	}
 	else if (identifier > 0)
 	{
 		wait(&status);
 		close(args->fds[index + 1]);
-		return ;
+		return (g_rv);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
+	return (g_rv);
 }

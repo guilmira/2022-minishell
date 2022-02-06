@@ -29,13 +29,23 @@ static int
 	process_excution(t_arguments *arguments)
 {
 	if (arguments->total_commands == 1) //this if need inside to check whether its built in or not. THis is the simplest case
-	{
-		single_process(arguments);
-		return (1);
-	}
+		return (single_process(arguments));
 	arguments->fds = arg_descriptors(arguments);
 	process_exe(arguments);
 	return (1); //status, 0 o 1
+}
+
+char **
+	get_cmdwargs(t_arguments *arguments)
+{
+	t_list		*cmd_list;
+	char		**cmdwargs;
+
+	cmdwargs = NULL;
+	cmd_list = arguments->commands_lst;
+	if (cmd_list && cmd_list->content && ((t_command *)cmd_list->content)->command)
+		cmdwargs = ((t_command *)cmd_list->content)->command;
+	return (cmdwargs);
 }
 
 /** PURPOSE : Main execution function.
@@ -45,29 +55,26 @@ static int
 int
 	msh_execute(char **args, t_arguments *arguments)
 {
-	int			i;
-	int			status;
-	t_list		*cmd_list;
-	char		**new_args;
+	//int			i;
+	//t_list		*cmd_list;
+	//char		**cmdwargs;
 
 	if (args[0] == NULL || !arguments || !arguments->commands_lst)
 		return (1);
-	cmd_list = arguments->commands_lst;
-	while (cmd_list)
+//	cmd_list = arguments->commands_lst;
+	/*while (cmd_list)
 	{
-		if (cmd_list->content && ((t_command *)cmd_list->content)->command)
-			new_args = ((t_command *)cmd_list->content)->command;
-		else
+		cmdwargs = get_cmdwargs(arguments);
+		if (!cmdwargs)
 			break ;
 		i = 0;
 		while (i < msh_num_builtins(arguments))
 		{
-			if (ft_strcmp(new_args[0], arguments->prog->builtin_str[i]) == 0)
-				return ((arguments->builtin_func[i])(new_args, arguments));
+			if (ft_strcmp(cmdwargs[0], arguments->prog->builtin_str[i]) == 0)
+				return ((arguments->builtin_func[i])(cmdwargs, arguments));
 			i++;
 		}
 		cmd_list = cmd_list->next;
-	}
-	status = process_excution(arguments);
-	return (status);
+	}*/
+	return (process_excution(arguments));
 }
