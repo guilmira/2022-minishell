@@ -108,8 +108,6 @@ int
 	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
-	char		**cmdwargs;
-	int			i;
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
@@ -121,16 +119,7 @@ int
 		input_form_file(args->file_input);
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
-	cmdwargs = command_struct->command;
-	if (!cmdwargs)
-		return (0); //error, no command
-	i = 0;
-	while (i < msh_num_builtins(args))
-	{
-		if (ft_strcmp(cmdwargs[0], args->prog->builtin_str[i]) == 0)
-			return ((args->builtin_func[i])(cmdwargs, args));
-		i++;
-	}
+
 	if (execve(command_struct->path, command_struct->command, NULL) == -1)
 		ft_shutdown(EXE_ERROR, 0, args);
 	return (1); //to make function work
