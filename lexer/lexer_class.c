@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/20 15:24:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:21:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_table(char **table)
 
 	if (!table)
 		return (0);
-	i = -1;
+	i = 0;
 	while (table[++i])
 		;
 	return (i);

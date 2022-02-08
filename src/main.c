@@ -6,14 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/08 13:08:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:17:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //ejecutar comandos en ruta absoluta. ejecutar antes de buscar nada.
-// solo c de sanitize.
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
@@ -22,8 +21,6 @@ static void	store_program(t_prog *prog, t_arguments *args)
 	prog->status = args->status;
 	prog->builtin_str = args->builtin_str;
 }
-
-
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
@@ -58,8 +55,6 @@ int
 	return (arguments->status);
 }
 
-//TODO read variables like a=500
-
 //PROVISIONAL -- comment if compiling with fsanitize
 /* void	*ft_leaks(void)
 {
@@ -80,10 +75,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
-
-
-
-
 
 //to do configurar exclamacion.
 /* minishell$ echo $?
