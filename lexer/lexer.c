@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/20 15:24:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:46:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,11 @@ char	**main_lexer(char *line)
 
 	if (!line)
 		return (NULL);
-	
 	lexer_table = NULL;
 	if (!ft_strchr(line, '\"') && !ft_strchr(line, '\''))
 		clean_line = ft_split(line, ' ');
 	else
 		clean_line = quote_split(line, ' ');
-	printlt(clean_line);
 	lexer_table = build_lexer_table(clean_line);
 	lexer_table = remove_quote(lexer_table);
 	return (lexer_table);
