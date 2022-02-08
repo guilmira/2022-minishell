@@ -21,6 +21,8 @@ static void	mid_son(int index, t_arguments *args)
 {
 	t_command	*command_struct;
 
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)

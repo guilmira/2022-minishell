@@ -45,6 +45,38 @@ size_t
 }
 
 /*
+** SYNOPSIS: allow to get rif of quotes in the beginning and
+** at the end of environmental variable.
+*/
+void
+	get_rid_of_quotes(char **args, size_t i, char *str)
+{
+	char	*tmp;
+	size_t	len;
+	size_t	j;
+
+	if (*(ft_strchr(str, '=') + 1) == '\''
+		|| *(ft_strchr(str, '=') + 1) == '\"')
+	{
+		len = ft_strlen(str);
+		tmp = (char *)malloc(len - 1 * sizeof(char));
+		j = -1;
+		while (str[++j] != '=')
+			tmp[j] = str[j];
+		tmp[j] = str[j];
+		j++;
+		while (j + 1 < len - 1)
+		{
+			tmp[j] = str[(j + 1)];
+			j++;
+		}
+		tmp[len - 2] = '\0';
+		free(args[i]);
+		args[i] = tmp;
+	}
+}
+
+/*
 ** SYNOPSIS: called if there are more than 1 argument passed to export command.
 */
 void
@@ -55,8 +87,8 @@ void
 	char	**new_envp;
 	char	*temp;
 
-	i = 1;
-	while (args[i])
+	i = 0;
+	while (args[++i])
 	{
 		delete_env_var(arg, get_envv_len(args[i]), args[i]);
 		envp_len = get_arr_len(arg->envp);
@@ -67,13 +99,13 @@ void
 			temp = ft_strjoin(ft_strjoin(args[i], "="), "''");
 			new_envp[envp_len] = temp;
 		}
-		else if (count_chars(args[i], "=") > 1)
+		get_rid_of_quotes(args, i, args[i]);
+		if (count_chars(args[i], "=") > 1)
 			export_multi_var(args, i, envp_len, new_envp);
 		else
 			new_envp[envp_len] = ft_strdup(args[i]);
 		new_envp[envp_len + 1] = NULL;
 		arg->envp = new_envp;
-		i++;
 	}
 }
 

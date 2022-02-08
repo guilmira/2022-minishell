@@ -47,6 +47,8 @@ void	first_son(t_arguments *args)
 	int			fd_write;
 	t_command	*command_struct;
 
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
@@ -67,6 +69,8 @@ void	last_son(int index, t_arguments *args)
 {	
 	t_command	*command_struct;
 
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
@@ -85,6 +89,8 @@ void	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
 
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)

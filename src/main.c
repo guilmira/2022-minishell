@@ -13,6 +13,7 @@
 #include "../include/minishell.h"
 
 //ejecutar comandos en ruta absoluta. ejecutar antes de buscar nada.
+// solo c de sanitize.
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
@@ -21,6 +22,8 @@ static void	store_program(t_prog *prog, t_arguments *args)
 	prog->status = args->status;
 	prog->builtin_str = args->builtin_str;
 }
+
+
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
@@ -39,8 +42,8 @@ int
 	while (true)
 	{
 		arguments = intialize_arg(prog);
-		set_shlvl_num(arguments);
-		shell_reader(envp, arguments); //la joya de la corona
+		//set_shlvl_num(arguments);
+		shell_reader(envp, arguments);
 		if (arguments->flag_execution)
 			//prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
 			if (!msh_execute(arguments->argv, arguments)) //We can't rely on prog->status to exit.

@@ -112,6 +112,6 @@ int
 		renew_pwds(arg, old_path);
 		set_status(arg, 0);
 	}
-	free_pointers(2, path, old_path);
+	//free_pointers(2, path, old_path); temporarily commented out due to double free (see bugs list)
 	return (1);
 }
