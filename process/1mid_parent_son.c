@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 09:34:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/08 12:28:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@
  * 2. Sets the proper inputs and outputs, redirecting the
  * exits (like STDOUT_FILENO) to the correct pipe file descriptor. 
  * 3. Executes command by searching in path with execve. */
-static void	mid_son(int index, t_arguments *args)
+static int
+	mid_son(int index, t_arguments *args)
 {
 	t_command	*command_struct;
+	int			i;
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct)
+	if (!command_struct && !command_struct->command)
 		ft_shutdown(LST, 0, args);
 	if (dup2(args->fds[index - 2], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
@@ -33,8 +35,16 @@ static void	mid_son(int index, t_arguments *args)
 	if (dup2(args->fds[index + 1], STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index + 1]);
-	if (execve(command_struct->path, command_struct->command, NULL) == -1)
-		ft_shutdown(EXE_ERROR, 0, args);
+	i = 0;
+	while (i < msh_num_builtins(args))
+	{
+		if (ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]) == 0)
+			return ((args->builtin_func[i])(command_struct->command, args));
+		i++;
+	}
+	return (execve(command_struct->path, command_struct->command, NULL));
+	/*if (execve(command_struct->path, command_struct->command, NULL) == -1)
+		ft_shutdown(EXE_ERROR, 0, args);*/
 }
 
 /** PURPOSE : Mid process for all the commands that are not
@@ -42,7 +52,8 @@ static void	mid_son(int index, t_arguments *args)
  * 1. Establish syntax and index.
  * 2. Forks the process annd creates a single son.
  * 2. Excutes mid_son and waits for it to finish. */
-void	mid_process(t_arguments *args)
+int
+	mid_process(t_arguments *args)
 {
 	int	index;
 	int	status;
@@ -56,14 +67,21 @@ void	mid_process(t_arguments *args)
 	if (identifier == 0)
 	{
 		close(args->fds[index]);
-		mid_son(index, args);
+		g_rv = mid_son(index, args);
+		if (g_rv < 0)
+			ft_shutdown(EXE_ERROR, 0, args);
+		else if (g_rv == 0)
+			return (0);
+		else
+			exit(0); //to avoid duplication
 	}
 	else if (identifier > 0)
 	{
 		wait(&status);
 		close(args->fds[index + 1]);
-		return ;
+		return (g_rv);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
+	return (g_rv);
 }
