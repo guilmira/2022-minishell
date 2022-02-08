@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 09:34:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/08 12:28:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ static int
 	mid_son(int index, t_arguments *args)
 {
 	t_command	*command_struct;
-	char		**cmdwargs;
 	int			i;
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct)
+	if (!command_struct && !command_struct->command)
 		ft_shutdown(LST, 0, args);
 	if (dup2(args->fds[index - 2], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
@@ -36,14 +35,11 @@ static int
 	if (dup2(args->fds[index + 1], STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index + 1]);
-	cmdwargs = command_struct->command;
-	if (!cmdwargs)
-		return (0); //error, no command
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
-		if (ft_strcmp(cmdwargs[0], args->prog->builtin_str[i]) == 0)
-			return ((args->builtin_func[i])(cmdwargs, args));
+		if (ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]) == 0)
+			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
 	return (execve(command_struct->path, command_struct->command, NULL));
