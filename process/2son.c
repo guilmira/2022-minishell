@@ -62,7 +62,7 @@ int
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
-	cmdwargs = get_cmdwargs(args);
+	cmdwargs = command_struct->command;
 	if (!cmdwargs)
 		return (0); //error, no command
 	i = 0;
@@ -98,7 +98,7 @@ int
 	close(args->fds[index]);
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
-	cmdwargs = get_cmdwargs(args);
+	cmdwargs = command_struct->command;
 	if (!cmdwargs)
 		return (0); //error, no command
 	i = 0;
@@ -109,8 +109,6 @@ int
 		i++;
 	}
 	return (execve(command_struct->path, command_struct->command, NULL));
-	if (execve(command_struct->path, command_struct->command, NULL) == -1)
-		ft_shutdown(EXE_ERROR, 0, args);
 }
 
 /** PURPOSE : Executes a one only forked proccess. */
@@ -131,7 +129,7 @@ int
 		input_form_file(args->file_input);
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
-	cmdwargs = get_cmdwargs(args);
+	cmdwargs = command_struct->command;
 	if (!cmdwargs)
 		return (0); //error, no command
 	i = 0;
@@ -143,5 +141,5 @@ int
 	}
 	if (execve(command_struct->path, command_struct->command, NULL) == -1)
 		ft_shutdown(EXE_ERROR, 0, args);
-	return (0); //to make function work
+	return (1); //to make function work
 }

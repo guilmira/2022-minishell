@@ -114,7 +114,7 @@ void		sig_handler(int signum);
 void		eof_exit(t_arguments *args);
 void		set_shlvl_num(t_arguments *arg);
 char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
-char		**get_cmdwargs(t_arguments *arguments);
+//char		**get_cmdwargs(t_arguments *arguments);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

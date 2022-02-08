@@ -19,16 +19,21 @@ int
 	int	status;
 	int	identifier;
 
-	g_rv = 1;
+	//g_rv = 1;
 	identifier = fork();
 	if (identifier == 0)
-		single_son(args);
+	{
+		g_rv = single_son(args);
+		printf("g_rv = %d\n", g_rv);
+		exit (0);
+	}
 	else if (identifier > 0)
 	{
 		wait(&status);
-		exit(0); //killing father to avoid duplication
+		//exit(0); //killing father to avoid duplication
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
+	printf("before exit g_rv = %d\n", g_rv);
 	return (g_rv); //to make function work
 }

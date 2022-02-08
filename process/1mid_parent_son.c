@@ -36,7 +36,7 @@ static int
 	if (dup2(args->fds[index + 1], STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index + 1]);
-	cmdwargs = get_cmdwargs(args);
+	cmdwargs = command_struct->command;
 	if (!cmdwargs)
 		return (0); //error, no command
 	i = 0;
