@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/08 13:04:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:05:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ int
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
 		store_program(prog, arguments);
-
-		//FOUND OUT SEGFAULT WITH SPLIT. THE PROBLEM IS THAT ARGV IS MODIFIED WHEN USED 'CD'AND NOT TERMINATED IN NULL.
-		if (arguments->flag_execution)
+	/* 	if (arguments->flag_execution)
 			if (!ft_strcmp(arguments->argv[0], "cd")) 
-				arguments->argv[1] = NULL;
-		//TEMPORARY ^
+				arguments->argv[1] = NULL; */
+
 
 
 		free_heap_memory(arguments); //free_heap now frees arguments as well. BUT keeps prog.
