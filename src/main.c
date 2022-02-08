@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/08 13:05:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:08:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	store_program(t_prog *prog, t_arguments *args)
 int
 	shell_loop(char *envp[])
 {
-	//int			status; commented because otherwise it says unused
 	t_prog		*prog;
 	t_arguments	*arguments;
 	char		*builtin_str[9];
@@ -51,14 +50,9 @@ int
 	/* 	if (arguments->flag_execution)
 			if (!ft_strcmp(arguments->argv[0], "cd")) 
 				arguments->argv[1] = NULL; */
-
-
-
-		free_heap_memory(arguments); //free_heap now frees arguments as well. BUT keeps prog.
+		free_heap_memory(arguments); //free_heap  keeps prog.
 		if (0) //temporal
 			break ;
-		/* if (prog->status)
-			break ; */
 	}
 	free(prog);
 	return (arguments->status);
