@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/17 13:31:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:04:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ int
 	while (true)
 	{
 		arguments = intialize_arg(prog);
-		//set_shlvl_num(arguments);
+		set_shlvl_num(arguments);
 		shell_reader(envp, arguments);
 		if (arguments->flag_execution)
-			//prog->status = msh_execute(arguments->argv, arguments); //TODO :falta introducir set_status(t_arguments *arg, int status) en los pipes.ls
-			if (!msh_execute(arguments->argv, arguments)) //We can't rely on prog->status to exit.
+			if (!msh_execute(arguments->argv, arguments))
 				break ;
 		store_program(prog, arguments);
 
