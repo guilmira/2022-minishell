@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 10:32:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:52:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	printer(lexer_table, lexer_type);
 	table = get_command_table(lexer_table, args, lexer_type);
 	ft_free_split(lexer_table);
-	free(lexer_type);;
+	free(lexer_type);
 	arg_reader(count_table(args->argv), table, envp, args);
 	ft_free_split(table);
 }

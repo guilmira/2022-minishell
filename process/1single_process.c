@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 10:33:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:15:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int
 		exit(0);
 	}
 	else if (identifier > 0)
+	{
+		//d seg fault en este momento cuand purebo /Users/guilmira/Desktop/kev/ms/minishell
 		wait(&status);
+	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
 	return (g_rv);

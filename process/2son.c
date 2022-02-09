@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 10:40:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:11:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ int	single_son(t_arguments *args)
 		input_form_file(args->file_input);
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
+	//printf("HEREe %s\n", command_struct->path);
 	if (execve(command_struct->path, command_struct->command, NULL) == -1)
 		ft_shutdown(EXE_ERROR, 0, args);
-	return (1); //to make function work
+	return (1);
 }

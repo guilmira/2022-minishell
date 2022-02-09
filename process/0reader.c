@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 11:04:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:58:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,28 @@ static char	**get_env_path(char *envp[])
 	return (corrected_path);
 }
 
+/** PURPOSE : Builds command and path for the structure.
+ * Manages input commands such as /bin/ls.
+ * Transforms it into the clean command and adjusts path. */
+void	build_command_structure(t_command	*command_struct, char **folders, char **envp)
+{
+	int		lenght_of_command_and_slash;
+	int		lenght_of_line;
+	char	*tmp;
+
+	if ((ft_strchr(command_struct->command[0], '/')))
+	{
+		tmp = command_struct->command[0];
+		command_struct->command[0] = ft_strdup(ft_strrchr(command_struct->command[0], '/') + 1);
+		lenght_of_command_and_slash = ft_strlen(command_struct->command[0]) + 1;
+		lenght_of_line = ft_strlen(tmp);
+		command_struct->path = ft_strdup(tmp);
+		free(tmp);
+	}
+	else
+		command_struct->path = set_path(command_struct->command[0], folders, envp);
+}
+
 /** PURPOSE : Builds linked list by allocating memory for a structure and
  * making that same structure the content of each node. Fills the path and 
  * the command fields. */
@@ -95,7 +117,7 @@ static t_list	*load_linked_list(char **table, char **envp, int total_commands)
 			return (NULL);
 		}
 		command_struct->command = ft_split(table[i], ' ');
-		command_struct->path = set_path(command_struct->command[0], folders, envp);
+		build_command_structure(command_struct, folders, envp);
 		ft_lstadd_back(&lst, ft_lstnew(command_struct));
 	}
 	ft_free_split(folders);
