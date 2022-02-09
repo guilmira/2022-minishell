@@ -6,11 +6,18 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 10:32:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:38:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/** PURPOSE : Call signal handler in child processes. */
+static void	signal_management_sons(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
+}
 
 /** PURPOSE : Recieves input from file if needed. */
 static void	input_form_file(char *path)
@@ -49,8 +56,7 @@ int
 	int			fd_write;
 	t_command	*command_struct;
 
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
+	signal_management_sons();
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct && !command_struct->command)
@@ -82,8 +88,7 @@ int
 	t_command	*command_struct;
 	int			i;
 
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
+	signal_management_sons();
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct && !command_struct->command)
@@ -103,14 +108,15 @@ int
 	return (execve(command_struct->path, command_struct->command, NULL));
 }
 
+
+
 /** PURPOSE : Executes a one only forked proccess. */
 int
 	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
 
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
+	signal_management_sons();
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)

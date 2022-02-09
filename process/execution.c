@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 09:35:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:35:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int
 		else if (g_rv == 0)
 			return (0);
 		else
-			exit(0); //to avoid duplication
+			exit(0);
 	}
 	else if (identifier > 0)
 	{
