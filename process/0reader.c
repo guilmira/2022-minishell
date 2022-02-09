@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/20 15:25:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:04:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static t_list	*load_linked_list(char **table, char **envp, int total_commands)
 			return (NULL);
 		}
 		command_struct->command = ft_split(table[i], ' ');
-		command_struct->path = set_path(command_struct->command[0], folders);
+		command_struct->path = set_path(command_struct->command[0], folders, envp);
 		ft_lstadd_back(&lst, ft_lstnew(command_struct));
 	}
 	ft_free_split(folders);

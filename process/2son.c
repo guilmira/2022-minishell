@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 10:38:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:40:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,7 @@ int
 
 
 /** PURPOSE : Executes a one only forked proccess. */
-int
-	single_son(t_arguments *args)
+int	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
 
@@ -125,7 +124,6 @@ int
 		input_form_file(args->file_input);
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
-
 	if (execve(command_struct->path, command_struct->command, NULL) == -1)
 		ft_shutdown(EXE_ERROR, 0, args);
 	return (1); //to make function work

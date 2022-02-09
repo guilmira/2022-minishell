@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 09:08:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:04:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ t_arguments	*intialize_arg(t_prog *prog);
 int			pre_filter(char *line);
 int			non_closed_quote(char *line, char quote);
 /* PARSER */
-char		*set_path(char *command, char **folders);
+char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 /* LEXER */
 char		**main_lexer(char *line);
@@ -160,7 +160,6 @@ char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
 /* READER */
 void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
-char		*set_path(char *command, char **folders);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
