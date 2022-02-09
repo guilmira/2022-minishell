@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/08 13:59:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 09:09:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*read_and_filter_line(t_arguments *args)
 	if (pre_filter(line))
 	{
 		free(line);
-		return (NULL);
+		return (EMPTY_LINE);
 	}
 	args->flag_execution = 1;
 	return (line);
@@ -59,11 +59,11 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	line = read_and_filter_line(args);
 	if (!line)
 		eof_exit(args);
-		//return ; //no debe salir un NULL
+	if (!line[0])
+		return ;
 	lexer_table = main_lexer(line);
 	if (!lexer_table)
 		return ;
-	//printlt(lexer_table);
 	args->argv = ft_split(line, ' ');
 	free(line);
 	if (!args->argv)
@@ -72,11 +72,10 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	if (!lexer_type)
 		ft_shutdown(MEM, errno, args);
 	table = NULL;
-	printlttt(lexer_table, lexer_type);
+	printer(lexer_table, lexer_type);
 	table = get_command_table(lexer_table, args, lexer_type);
 	ft_free_split(lexer_table);
-	free(lexer_type);
-	//printltt(table);
+	free(lexer_type);;
 	arg_reader(count_table(args->argv), table, envp, args);
 	ft_free_split(table);
 }

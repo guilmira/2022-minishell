@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/13 12:23:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 09:08:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,11 @@
 # include <readline/history.h>
 # include <signal.h>
 
-//if your library DOESNT work try uncommenting this:
-//#include "/usr/include/readline/readline.h"
-//#include "/usr/include/readline/history.h"
-
 # include <limits.h>
 # include <stdarg.h>
 
 /* LIBFT */
 # include "../libft_submodule/0includes/libft.h"
-
-/* TOKENS*/
-# define TOK_BUFSIZE 64
-# define TOK_DELIM " \t\r\n\a"
 
 /* Global variables and structs*/
 int	g_rv;
@@ -140,10 +132,10 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 
 # define PIPE "lex_PIPE"
 
-//temporary
-void printlt(char **lexer_table);
-void printltt(char **table);
-void printlttt(char **table, int *org);
+# define EMPTY_LINE ""
+
+
+void printer(char **table, int *org);
 
 /* Protoypes minishell reader. */
 
