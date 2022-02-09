@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/08 12:27:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:32:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	output_to_file(char *path)
 int
 	first_son(t_arguments *args)
 {
+	int			i;
 	int			fd_write;
 	t_command	*command_struct;
-	int			i;
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);

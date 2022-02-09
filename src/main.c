@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/08 13:17:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:09:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int
 	/* 	if (arguments->flag_execution)
 			if (!ft_strcmp(arguments->argv[0], "cd")) 
 				arguments->argv[1] = NULL; */
-		free_heap_memory(arguments); //free_heap  keeps prog.
+		free_heap_memory(arguments);
 		if (0) //temporal
 			break ;
 	}
-	free(prog);
+	free(prog); //is not freed in free_heap_memory
 	return (arguments->status);
 }
 
@@ -75,14 +75,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
-
-//to do configurar exclamacion.
-/* minishell$ echo $?
-127
-minishell$ ! ls | dsgs
-dsgs: orden no encontrada
-minishell$ echo $?
-0 */
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 

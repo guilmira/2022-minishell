@@ -6,12 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/08 13:46:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:23:47 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+/** PURPOSE : Tokens in existance. */
 static void	init_options(char **option, char **option_name)
 {
 	option[0] = "|";
@@ -30,6 +31,7 @@ static void	init_options(char **option, char **option_name)
 	option_name[6] = NULL;
 }
 
+/** PURPOSE : Filter tokens. */
 static char	*obtain_syntax(char *token)
 {
 	int		i;
@@ -46,7 +48,9 @@ static char	*obtain_syntax(char *token)
 	return (0);
 }
 
-char	**build_lexer_table(char **table)
+/** PURPOSE : Coonstruct lexer table. It will substitute
+ * symbols like the pipe for its corresponding identfier (lex_PIPE) */
+static char	**build_lexer_table(char **table)
 {
 	int		i;
 	char	*syntax;

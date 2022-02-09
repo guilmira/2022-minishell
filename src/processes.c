@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2022/01/05 15:14:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:31:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int
 static int
 	process_excution(t_arguments *arguments)
 {
-	if (arguments->total_commands == 1) //this if need inside to check whether its built in or not. THis is the simplest case
+	if (arguments->total_commands == 1)
 		return (single_process(arguments));
 	arguments->fds = arg_descriptors(arguments);
 	process_exe(arguments);

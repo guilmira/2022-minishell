@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 09:37:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:32:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ char	*read_and_filter_line(t_arguments *args)
 	return (line);
 }
 
-
-
 /** PURPOSE : Reads command line. Loads arguments into structure. 
  * 1. Reads command line and applies a pre-filter.
  * 2. Parses and rearranges arguments. i.e: "ls -la" will be a single arg.
@@ -69,7 +67,6 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	args->argv = ft_split(line, ' ');
 	if (!args->argv)
 		ft_shutdown(MEM, errno, args);
-	printf("here : %s\n", args->argv[0]);
 	free(line);
 	lexer_type = class_lex_table(lexer_table);
 	if (!lexer_type)
