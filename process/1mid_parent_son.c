@@ -27,7 +27,7 @@ static int
 	signal(SIGINT, sig_handler);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct && !command_struct->command)
+	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
 	if (dup2(args->fds[index - 2], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
@@ -42,9 +42,8 @@ static int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
+	set_status(args, 0);
 	return (execve(command_struct->path, command_struct->command, NULL));
-	/*if (execve(command_struct->path, command_struct->command, NULL) == -1)
-		ft_shutdown(EXE_ERROR, 0, args);*/
 }
 
 /** PURPOSE : Mid process for all the commands that are not
@@ -69,7 +68,10 @@ int
 		close(args->fds[index]);
 		g_rv = mid_son(index, args);
 		if (g_rv < 0)
+		{
+			args->status = 1;
 			ft_shutdown(EXE_ERROR, 0, args);
+		}
 		else if (g_rv == 0)
 			return (0);
 		else

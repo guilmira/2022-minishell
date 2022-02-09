@@ -95,7 +95,6 @@ char		*get_env_var(char **envp, char *needle);
 void		renew_pwds(t_arguments *arg, char *old_path);
 char		*ft_concat(const char *s1, const char *s2);
 void		set_status(t_arguments *arg, int status);
-//int			get_fd(char *path);
 bool		is_within_range(const char *str);
 int			atoi_exit_code(const char *str);
 void		init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
@@ -106,7 +105,6 @@ void		sig_handler(int signum);
 void		eof_exit(t_arguments *args);
 void		set_shlvl_num(t_arguments *arg);
 char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
-//char		**get_cmdwargs(t_arguments *arguments);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
