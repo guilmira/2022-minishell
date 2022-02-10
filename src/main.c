@@ -69,8 +69,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
-
-		atexit(ft_leaks()); //on exit, gves seg fault.
+	atexit(ft_leaks()); //on exit, gves seg fault.
 	 if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
