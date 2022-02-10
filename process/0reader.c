@@ -76,16 +76,12 @@ static char	**get_env_path(char *envp[])
  * Transforms it into the clean command and adjusts path. */
 void	build_command_structure(t_command	*command_struct, char **folders, char **envp)
 {
-	int		lenght_of_command_and_slash;
-	int		lenght_of_line;
 	char	*tmp;
 
 	if ((ft_strchr(command_struct->command[0], '/')))
 	{
 		tmp = command_struct->command[0];
 		command_struct->command[0] = ft_strdup(ft_strrchr(command_struct->command[0], '/') + 1);
-		lenght_of_command_and_slash = ft_strlen(command_struct->command[0]) + 1;
-		lenght_of_line = ft_strlen(tmp);
 		command_struct->path = ft_strdup(tmp);
 		free(tmp);
 	}
