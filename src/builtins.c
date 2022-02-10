@@ -31,6 +31,7 @@ int
 		perror("pwd() error");
 	ft_putendl_fd(path, 1);
 	set_status(arg, 0);
+	free(path);
 	return (1);
 }
 
