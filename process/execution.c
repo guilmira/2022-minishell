@@ -59,7 +59,10 @@ int
 	{
 		g_rv = first_son(args);
 		if (g_rv < 0)
+		{
+			set_status(args, 1);
 			ft_shutdown(EXE_ERROR, 0, args);
+		}
 		else if (g_rv == 0)
 			return (0);
 		else
@@ -74,13 +77,19 @@ int
 		{
 			g_rv = mid_process(args);
 			if (g_rv < 0)
+			{
+				set_status(args, 1);
 				ft_shutdown(EXE_ERROR, 0, args);
+			}
 			else if (g_rv == 0)
 				return (0);
 		}
 		g_rv = end_process(args);
 		if (g_rv < 0)
+		{
+			set_status(args, 1);
 			ft_shutdown(EXE_ERROR, 0, args);
+		}
 		else if (g_rv == 0)
 			return (0);
 	}
