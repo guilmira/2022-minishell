@@ -112,7 +112,7 @@ void
 			arr[2] = NULL;
 			export_new_variables(arr, arg);
 			free(tmp);
-			free(arr);
+			ft_free_split(arr);
 		}
 		shlvl_set = true;
 	}
