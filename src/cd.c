@@ -61,10 +61,13 @@ void
 	renew_pwds(t_arguments *arg, char *old_path)
 {
 	char	*cur_path;
+	char	*cwd;
 
 	delete_env_var(arg, 7, "OLDPWD=");
 	set_new_var(old_path, arg);
-	cur_path = ft_strjoin("PWD=", getcwd(NULL, 0));
+	cwd = getcwd(NULL, 0);
+	cur_path = ft_strjoin("PWD=", cwd);
+	free_pointers(1, cwd);
 	delete_env_var(arg, 4, "PWD=");
 	set_new_var(cur_path, arg);
 }
@@ -76,8 +79,12 @@ void
 void
 	get_paths(char **args, t_arguments *arg, char **path, char **old_path)
 {
+	char	*cwd;
+
 	(*path) = NULL;
-	(*old_path) = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
+	cwd = getcwd(NULL, 0);
+	(*old_path) = ft_strjoin("OLDPWD=", cwd);
+	free_pointers(1, cwd);
 	if (!args[1] || !ft_memcmp(args[1], "~", 2) || !ft_memcmp(args[1], "--", 3))
 		(*path) = get_env_var(arg->envp, "HOME");
 	else if (!ft_memcmp(args[1], "-", 2))
@@ -105,10 +112,12 @@ int
 	if (chdir(path) != 0)
 	{
 		perror("msh");
+		free_pointers(1, path); //check it with wrong directory
 		set_status(arg, 1);
 	}
 	else
 	{
+		free_pointers(1, path);
 		renew_pwds(arg, old_path);
 		set_status(arg, 0);
 	}

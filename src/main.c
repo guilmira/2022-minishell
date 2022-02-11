@@ -31,9 +31,11 @@ int
 	t_prog		*prog;
 	t_arguments	*arguments;
 	char		*builtin_str[9];
+	bool		prog_init;
 
 	prog = NULL;
 	arguments = NULL;
+	prog_init = false;
 	prog = initalize_prog(envp, builtin_str);
 	while (true)
 	{
@@ -44,22 +46,27 @@ int
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
 		store_program(prog, arguments);
+		if (prog_init)
+			ft_free_split(arguments->envp);
 	/* 	if (arguments->flag_execution)
-			if (!ft_strcmp(arguments->argv[0], "cd")) 
+			if (!ft_strcmp(arguments->argv[0], "cd"))
 				arguments->argv[1] = NULL; */
 		free_heap_memory(arguments);
 		if (0) //temporal
 			break ;
+		prog_init = true;
 	}
+	ft_free_split(prog->envp);
 	free(prog); //is not freed in free_heap_memory
+	ft_free_split(arguments->envp);
 	return (arguments->status);
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize
- void	*ft_leaks(void)
+ void	ft_leaks(void)
 {
 	system("leaks minishell");
-	return (NULL);
+	//return (NULL);
 }
 
 /** EXECUTION : ./minishell
@@ -69,7 +76,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
-	atexit(ft_leaks()); //on exit, gves seg fault.
+//	atexit(ft_leaks); //on exit, gves seg fault.
 	 if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));

@@ -97,6 +97,7 @@ void
 	char		*tmp;
 	int			num;
 	char		**arr;
+	char		*num_tmp;
 
 	if (!shlvl_set)
 	{
@@ -107,12 +108,15 @@ void
 			arr = (char **)get_arr(3, sizeof(char *));
 			arr[0] = "export";
 			free(tmp);
-			tmp = ft_strjoin("SHLVL=", ft_itoa(num + 1));
+			num_tmp = ft_itoa(num + 1);
+			tmp = ft_strjoin("SHLVL=", num_tmp);
+			free_pointers(1, num_tmp);
 			arr[1] = tmp;
 			arr[2] = NULL;
 			export_new_variables(arr, arg);
-			free(tmp);
+			//free(tmp);
 			free(arr);
+			//ft_free_split(arr);
 		}
 		shlvl_set = true;
 	}

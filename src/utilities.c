@@ -68,7 +68,7 @@ void
 	i = 0;
 	while (i < src_len)
 	{
-		dest[i] = src[i];
+		dest[i] = ft_strdup(src[i]);
 		i++;
 	}
 }
