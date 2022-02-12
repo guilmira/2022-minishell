@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:36:14 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/10 12:07:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:41:02 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void
 	char		*tmp;
 	int			num;
 	char		**arr;
-	char *itoa_string;
+	char		*num_tmp;
 
 	if (!shlvl_set)
 	{
@@ -108,14 +108,15 @@ void
 			arr = (char **)get_arr(3, sizeof(char *));
 			arr[0] = "export";
 			free(tmp);
-			itoa_string = ft_itoa(num + 1);
-			tmp = ft_strjoin("SHLVL=", itoa_string);
-			free(itoa_string);
+			num_tmp = ft_itoa(num + 1);
+			tmp = ft_strjoin("SHLVL=", num_tmp);
+			free_pointers(1, num_tmp);
 			arr[1] = tmp;
 			arr[2] = NULL;
 			export_new_variables(arr, arg);
-			free(tmp);
+			//free(tmp);
 			free(arr);
+			//ft_free_split(arr);
 		}
 		shlvl_set = true;
 	}

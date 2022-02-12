@@ -46,7 +46,12 @@ t_arguments	*intialize_arg(t_prog *prog)
 	args->file_input = NULL;
 	args->file_output = NULL;
 	args->prog = prog;
-	args->envp = prog->envp;
+	size_t	len;
+	len = get_arr_len(prog->envp);
+	args->envp = (char **)get_arr(len + 1, sizeof(char *));
+	copy_arr(args->envp, prog->envp, len);
+	args->envp[len] = NULL;
+	//args->envp = prog->envp;
 	init_builtin_func_arr(args->builtin_func);
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;

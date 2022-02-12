@@ -103,8 +103,12 @@ void
 		if (count_chars(args[i], "=") > 1)
 			export_multi_var(args, i, envp_len, new_envp);
 		else
+		{
 			new_envp[envp_len] = ft_strdup(args[i]);
+			free_pointers(1, args[i]);
+		}
 		new_envp[envp_len + 1] = NULL;
+		ft_free_split(arg->envp);
 		arg->envp = new_envp;
 	}
 }

@@ -25,7 +25,7 @@ void
 	{
 		if (!ft_strncmp(arg->envp[i], tmp, len))
 		{
-			arg->envp[i] = NULL;
+			free_pointers(1, arg->envp[i]);
 			while (arg->envp[i + 1])
 			{
 				arg->envp[i] = arg->envp[i + 1];
