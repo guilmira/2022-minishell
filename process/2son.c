@@ -74,10 +74,8 @@ int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
+	set_status(args, 0);
 	return (execve(command_struct->path, command_struct->command, NULL));
-
-	//if (execve(command_struct->path, command_struct->command, NULL) == -1)
-		//ft_shutdown(EXE_ERROR, 0, args);
 }
 
 /** PURPOSE : Executes first forked proccess. The only thing
@@ -105,6 +103,7 @@ int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
+	set_status(args, 0);
 	return (execve(command_struct->path, command_struct->command, NULL));
 }
 
@@ -124,8 +123,11 @@ int	single_son(t_arguments *args)
 		input_form_file(args->file_input);
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
-	//printf("HEREe %s\n", command_struct->path);
+	set_status(args, 0);
 	if (execve(command_struct->path, command_struct->command, NULL) == -1)
+	{
+		set_status(args, 1);
 		ft_shutdown(EXE_ERROR, 0, args);
+	}
 	return (1);
 }

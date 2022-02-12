@@ -97,6 +97,7 @@ void
 	char		*tmp;
 	int			num;
 	char		**arr;
+	char *itoa_string;
 
 	if (!shlvl_set)
 	{
@@ -107,7 +108,9 @@ void
 			arr = (char **)get_arr(3, sizeof(char *));
 			arr[0] = "export";
 			free(tmp);
-			tmp = ft_strjoin("SHLVL=", ft_itoa(num + 1));
+			itoa_string = ft_itoa(num + 1);
+			tmp = ft_strjoin("SHLVL=", itoa_string);
+			free(itoa_string);
 			arr[1] = tmp;
 			arr[2] = NULL;
 			export_new_variables(arr, arg);
