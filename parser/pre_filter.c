@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 09:43:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/12 11:38:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ static int hanging_quotes(char *line)
 	flag = 0;
 	i = -1;
 	while (table[++i])
-		if (!ft_strcmp("\"", table[i]) || !ft_strcmp("\'", table[i]))
+	{
+		if (!ft_strcmp(table[i], "\"") || !ft_strcmp(table[i], "\'"))
 			flag++;
+	}
 	ft_free_split(table);
 	if (flag)
 		return (1);
 	else
-		return(0);
+		return (0);
 }
 
 /** PURPOSE : Simple parser of command line as soon
