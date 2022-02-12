@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/12 11:38:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/12 14:02:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,79 @@ static int hanging_quotes(char *line)
 	flag = 0;
 	i = -1;
 	while (table[++i])
-	{
 		if (!ft_strcmp(table[i], "\"") || !ft_strcmp(table[i], "\'"))
 			flag++;
-	}
 	ft_free_split(table);
 	if (flag)
 		return (1);
 	else
 		return (0);
 }
+
+char *advance_line_quotes(char *line, char quote)
+{
+	char	*advanced_line;
+
+	advanced_line = NULL;
+	if (!ft_strchr(line, quote))
+		return (line);
+	advanced_line = ft_strchr(line, quote) + 1;
+	advanced_line = ft_strchr(advanced_line, quote) + 1;
+	return (advanced_line);
+}
+
+char *double_quote_filter(char *line, int flag)
+{
+	if (ft_strchr(line, '"') > ft_strchr(line, '\'')) //tratar las simples
+	{
+		if (non_closed_quote(line, '\''))
+		{
+			flag++;
+			return (NULL);
+		}
+		line = advance_line_quotes(line, '\'');
+	}
+	else
+	{
+		if (non_closed_quote(line, '"'))
+		{
+			flag++;
+			return (NULL);
+		}
+		line = advance_line_quotes(line, '"');
+	}
+	return (line);
+}
+
+//hacer funcion que solo quite las comillas del exteiror
+int	quotes_filter(char *line)
+{
+	int	flag;
+
+	flag = 0;
+	while (ft_strchr(line, '"') || ft_strchr(line, '\''))
+	{
+		if ((ft_strchr(line, '"') && ft_strchr(line, '\'')))
+		{
+			line = double_quote_filter(line, flag);
+			if (flag)
+				return (1);
+			if (!line)
+				return (0);
+		}
+		else
+		{
+			if (non_closed_quote(line, '\''))
+				return (1);
+			if (non_closed_quote(line, '"'))
+				return (1);
+			line = advance_line_quotes(line, '"');
+			line = advance_line_quotes(line, '\'');
+		}
+	}
+	return (0);
+}
+	
 
 /** PURPOSE : Simple parser of command line as soon
  * as its read. */
@@ -85,7 +148,7 @@ int	pre_filter(char *line)
 	}
 	if (non_specified_char(line[0]))
 		return (1);
-	if (non_closed_quote(line, '"') || non_closed_quote(line, '\'')) //TODO: not finished, explained in function
+	if (quotes_filter(line))
 	{
 		printf("Quotes (\" or '') must be closed\n");
 		return (1);

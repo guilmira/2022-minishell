@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/20 15:24:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/12 14:19:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,31 @@ char	*erase_quote(char *str, char sym)
 	return (stirng_quote_copy(new_str, str, first, last));
 }
 
+int	needs_remove(char *str)
+{
+	int i;
+	int j;
+
+	i = -1;
+	j = -1;
+	while (str[++i])
+	{
+		if (str[i] == '"')
+		{
+			if (ft_strchr(&str[i + 1], '"'))
+				return (1);
+			
+		}
+		else if (str[i] == '\'')
+		{
+			if (ft_strchr(&str[i + 1], '\''))
+				return (1);
+		}
+	}
+	return (0);
+}
+
+
 /** PURPOSE : Takes a table of strings and erases the quotes.
  * It works for both " and '. Some examples: 
  * ls "-l-a"			--> 	ltable[0] = ls, table[1] = -l-a. */
@@ -68,8 +93,13 @@ char	**remove_quote(char **table)
 	j = -1;
 	while (table[++i])
 	{
-		if (ft_strchr(table[i], '\"') || ft_strchr(table[i], '\''))
+		if (needs_remove(table[i]))
 		{
+		
+		//"hola'"
+			
+
+		printf("here %s\n", table[i]);
 			while (table[i][++j])
 			{
 				if (table[i][j] == '\"')
@@ -88,7 +118,9 @@ char	**remove_quote(char **table)
 				}	
 			}
 			j = i;
+			printf("11 %i\n", j);
 		}
 	}
 	return (table);
+	
 }
