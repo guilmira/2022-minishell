@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 10:23:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:12:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,121 @@ static char	**build_lexer_table(char **table)
 	return (table);
 }
 
+
+
+int	is_one_of_lexer_symbols(char symbol)
+{
+	int		i;
+	char	*option[TOTAL_SYMBOLS + 1];
+	char	*option_name[TOTAL_SYMBOLS + 1];
+
+	if (!symbol)
+		return (0);
+	init_options(option, option_name);
+	i = -1;
+	while (option[++i])
+		if (symbol == option[i][0])
+			return (1);
+	return (0);
+}
+
+
+/* static char	*obtain_name(char symbol, char extra)
+{
+	int		i;
+	char	*option[TOTAL_SYMBOLS + 1];
+	char	*option_name[TOTAL_SYMBOLS + 1];
+
+	init_options(option, option_name);
+	i = -1;
+	while (option[++i])
+	{
+		extra = 't';
+		if (symbol == option[i][0])
+			return (option_name[i]);
+	}
+	return (0);
+} */
+
+void	fix_previous_line(char *line, int t, int i, t_list **list)
+{
+	char	*str;
+	if (i - 1 < 0)
+		return ;
+	str = ft_substr(line, t, i);
+	if (!str)
+		return ;
+	ft_lstadd_back(list, ft_lstnew(str));
+}
+
+t_list	*build_lexer_table_line(char *line)
+{
+	int		i;
+	int		t;
+	t_list	*list;
+
+	list = NULL;
+	i = -1;
+	t = 0;
+	while (line[++i])
+	{
+		if (line[i] == '\'')
+		{
+			while (line[++i] != '\'')
+				;
+			i++;
+		}
+		else if (line[i] == '"')
+		{
+			while (line[++i] != '"')
+				;
+			i++;
+		}
+		else if (is_one_of_lexer_symbols(line[i]))
+		{
+			fix_previous_line(line, t, i, &list);
+			if (is_one_of_lexer_symbols(line[i + 1]))
+				;
+			//give lex_TWOSYMBOLS
+			ft_lstadd_back(&list, ft_lstnew("YO"));
+			t = i + 1;
+		}
+		else if (ft_isspaces(line[i]))
+		{
+			fix_previous_line(line, t, i, &list);
+			while (ft_isspaces(line[i]))
+				i++;
+			i = i - 1;
+			t = i + 1;
+		}
+		else if (!line[i + 1])
+		{
+			fix_previous_line(line, t, i, &list);
+			break;
+		}
+	}
+	return (list);
+}
+
+
 /** PURPOSE : Lexical Analyzer. 
  * Corrects command line after reading it and interprets symbols. */
 char	**main_lexer(char *line)
 {
 	char	**clean_line;
 	char	**lexer_table;
+	t_list	*list;
 
 	if (!line)
 		return (NULL);
 	lexer_table = NULL;
+	list = build_lexer_table_line(line);
+	while (list)
+	{
+		printf("aqui: %s\n", list->content);
+		list = list->next;
+	}
+
 	if (!ft_strchr(line, '\"') && !ft_strchr(line, '\''))
 		clean_line = ft_split(line, ' ');
 	else

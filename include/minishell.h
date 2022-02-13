@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 11:04:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/13 13:43:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 
 # define EMPTY_LINE ""
 
+
+char *advance_line_quotes(char *line, char quote);
 
 void printer(char **table, int *org);
 

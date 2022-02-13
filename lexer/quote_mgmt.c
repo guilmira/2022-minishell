@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/12 14:19:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/13 13:08:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*erase_quote(char *str, char sym)
 	if (!str)
 		return (NULL);
 	new_lenght = ft_strlen(str) - 2;
-	if (!new_lenght)
+	if (new_lenght < 1)
 		return (NULL);
 	new_str = ft_calloc(new_lenght + 1, sizeof(char));
 	if (!new_str)
@@ -68,7 +68,6 @@ int	needs_remove(char *str)
 		{
 			if (ft_strchr(&str[i + 1], '"'))
 				return (1);
-			
 		}
 		else if (str[i] == '\'')
 		{
@@ -88,37 +87,45 @@ char	**remove_quote(char **table)
 	int		i;
 	int		j;
 	char	*new_str;
-
+	char	*str;
+//"hola'"
 	i = -1;
 	j = -1;
+	new_str = NULL;
+	str = NULL;
 	while (table[++i])
 	{
-		if (needs_remove(table[i]))
+		str = table[i];
+		while (needs_remove(str))
 		{
-		
-		//"hola'"
-			
-
-		printf("here %s\n", table[i]);
-			while (table[i][++j])
+			if (ft_strchr(str, '"') && ft_strchr(str, '\''))
 			{
-				if (table[i][j] == '\"')
+				if (ft_strchr(str, '"') > ft_strchr(str, '\''))
 				{
-					j = ft_strchr(table[i], '\"') - table[i];
-					new_str = erase_quote(table[i], '\"');
-					free(table[i]);
+					new_str = erase_quote(str, '\'');
+					free(str);
 					table[i] = new_str;
+					str = advance_line_quotes(new_str, '\'');
 				}
-				else if (table[i][j] == '\'')
+				else
 				{
-					j = ft_strchr(table[i], '\'') - table[i];
-					new_str = erase_quote(table[i], '\'');
-					free(table[i]);
+					new_str = erase_quote(str, '"');
+					free(str);
 					table[i] = new_str;
-				}	
+					str = advance_line_quotes(new_str, '"');
+				}
 			}
-			j = i;
-			printf("11 %i\n", j);
+
+			if (ft_strchr(str, '"'))
+				{
+					new_str = erase_quote(str, '"');
+					free(str);
+					table[i] = new_str;
+					str = advance_line_quotes(new_str, '"');
+			printf("here %s\n", str);
+				}
+
+
 		}
 	}
 	return (table);
