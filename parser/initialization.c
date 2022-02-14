@@ -12,6 +12,18 @@
 
 #include "../include/minishell.h"
 
+char **
+	copy_array(char **dest, char **src)
+{
+	size_t	len;
+
+	len = get_arr_len(src);
+	dest = (char **)get_arr(len + 1, sizeof(char *));
+	copy_arr_entries(dest, src, len);
+	dest[len] = NULL;
+	return (dest);
+}
+
 /** PURPOSE : Init program variable. */
 t_prog	*initalize_prog(char **envp, char **builtin_str)
 {
@@ -20,7 +32,7 @@ t_prog	*initalize_prog(char **envp, char **builtin_str)
 	prog = ft_calloc(1, sizeof(t_prog));
 	if (!prog)
 		ft_shut(MEM, 0);
-	prog->envp = envp;
+	prog->envp = copy_array(prog->envp, envp);
 	init_builtins(builtin_str);
 	prog->builtin_str = builtin_str;
 	prog->status = 0;
@@ -46,12 +58,9 @@ t_arguments	*intialize_arg(t_prog *prog)
 	args->file_input = NULL;
 	args->file_output = NULL;
 	args->prog = prog;
-	size_t	len;
-	len = get_arr_len(prog->envp);
-	args->envp = (char **)get_arr(len + 1, sizeof(char *));
-	copy_arr(args->envp, prog->envp, len);
-	args->envp[len] = NULL;
-	//args->envp = prog->envp;
+	if (args->envp)
+		ft_free_split(args->envp);
+	args->envp = copy_array(args->envp, prog->envp);
 	init_builtin_func_arr(args->builtin_func);
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;

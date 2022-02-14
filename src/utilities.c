@@ -58,15 +58,15 @@ void
 }
 
 /*
-** SYNOPSIS: copies src array to dest array, size of src array should be passed.
+** SYNOPSIS: copies n entries of src array to dest array.
 */
 void
-	copy_arr(char **dest, char **src, size_t src_len)
+	copy_arr_entries(char **dest, char **src, size_t n)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < src_len)
+	while (i < n)
 	{
 		dest[i] = ft_strdup(src[i]);
 		i++;

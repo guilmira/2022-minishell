@@ -17,7 +17,10 @@
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
 {
-	prog->envp = args->envp;
+	if (prog->envp)
+		ft_free_split(prog->envp);
+	prog->envp = copy_array(prog->envp, args->envp);
+//	prog->envp = args->envp;
 	prog->status = args->status;
 	prog->builtin_str = args->builtin_str;
 }
@@ -31,11 +34,9 @@ int
 	t_prog		*prog;
 	t_arguments	*arguments;
 	char		*builtin_str[9];
-	bool		prog_init;
 
 	prog = NULL;
 	arguments = NULL;
-	prog_init = false;
 	prog = initalize_prog(envp, builtin_str);
 	while (true)
 	{
@@ -46,15 +47,13 @@ int
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
 		store_program(prog, arguments);
-		if (prog_init)
-			ft_free_split(arguments->envp);
+		ft_free_split(arguments->envp);
 	/* 	if (arguments->flag_execution)
 			if (!ft_strcmp(arguments->argv[0], "cd"))
 				arguments->argv[1] = NULL; */
 		free_heap_memory(arguments);
 		if (0) //temporal
 			break ;
-		prog_init = true;
 	}
 	ft_free_split(prog->envp);
 	free(prog); //is not freed in free_heap_memory

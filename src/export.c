@@ -93,7 +93,7 @@ void
 		delete_env_var(arg, get_envv_len(args[i]), args[i]);
 		envp_len = get_arr_len(arg->envp);
 		new_envp = (char **)get_arr(envp_len + 2, sizeof(char *));
-		copy_arr(new_envp, arg->envp, envp_len);
+		copy_arr_entries(new_envp, arg->envp, envp_len);
 		if (!ft_strchr(args[i], '='))
 		{
 			temp = ft_strjoin(ft_strjoin(args[i], "="), "''");
@@ -128,7 +128,7 @@ int
 	{
 		envp_len = (int)get_arr_len(arg->envp);
 		arr = (char **)get_arr(envp_len + 1, sizeof(char *));
-		copy_arr(arr, arg->envp, envp_len);
+		copy_arr_entries(arr, arg->envp, envp_len);
 		arr[envp_len] = NULL;
 		ft_str_arr_sort(arr, envp_len);
 		print_str_arr(arr, 1);
