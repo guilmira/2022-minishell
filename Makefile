@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/01/20 15:22:30 by guilmira         ###   ########.fr        #
+#    Updated: 2022/02/14 12:24:22 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				initialization.c pre_filter.c pre_filter_aux.c reader.c \
 				lexer.c lexer_class.c build_command_table.c quote_mgmt.c quote_split.c \
 				printstemp.c \
+				lexer_list.c \
 				signals.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES

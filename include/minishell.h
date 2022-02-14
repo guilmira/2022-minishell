@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/13 13:43:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/14 13:31:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
-# define TOTAL_SYMBOLS 6
+# define TOTAL_SYMBOLS 5
 # define MSHELL "msh> "
 # define INVALID_ARGC "Program execution does not admit arguments\n."
 # define MEM "Failed memory allocation.\n"
@@ -134,8 +134,13 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 
 
 char *advance_line_quotes(char *line, char quote);
+void	init_options(char **option, char **option_name);
 
 void printer(char **table, int *org);
+
+t_list	*build_lexer_list(char *line);
+
+char *build_new_line(t_list *list);
 
 /* Protoypes minishell reader. */
 
