@@ -112,7 +112,7 @@ int
 	if (chdir(path) != 0)
 	{
 		perror("msh");
-		free_pointers(1, path); //check it with wrong directory
+		//free_pointers(1, path); //check it with wrong directory
 		set_status(arg, 1);
 	}
 	else
