@@ -112,7 +112,7 @@ int
 	if (chdir(path) != 0)
 	{
 		perror("msh");
-		free_pointers(1, path); //check it with wrong directory
+		free_pointers(2, path, old_path); //check it with wrong directory
 		set_status(arg, 1);
 	}
 	else
@@ -121,6 +121,5 @@ int
 		renew_pwds(arg, old_path);
 		set_status(arg, 0);
 	}
-	//free_pointers(2, path, old_path); temporarily commented out due to double free (see bugs list)
 	return (1);
 }

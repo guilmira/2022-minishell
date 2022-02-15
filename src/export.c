@@ -45,7 +45,7 @@ size_t
 }
 
 /*
-** SYNOPSIS: allow to get rif of quotes in the beginning and
+** SYNOPSIS: allows to get rid of quotes in the beginning and
 ** at the end of environmental variable.
 */
 void
@@ -55,8 +55,8 @@ void
 	size_t	len;
 	size_t	j;
 
-	if (*(ft_strchr(str, '=') + 1) == '\''
-		|| *(ft_strchr(str, '=') + 1) == '\"')
+	if (ft_strchr(str, '=') && (*(ft_strchr(str, '=') + 1) == '\''
+			|| *(ft_strchr(str, '=') + 1) == '\"'))
 	{
 		len = ft_strlen(str);
 		tmp = (char *)malloc(len - 1 * sizeof(char));
@@ -94,18 +94,21 @@ void
 		envp_len = get_arr_len(arg->envp);
 		new_envp = (char **)get_arr(envp_len + 2, sizeof(char *));
 		copy_arr_entries(new_envp, arg->envp, envp_len);
+		new_envp[envp_len] = NULL;
 		if (!ft_strchr(args[i], '='))
 		{
-			temp = ft_strjoin(ft_strjoin(args[i], "="), "''");
+			temp = ft_multistr_concat(3, args[i], "=", "''");
 			new_envp[envp_len] = temp;
+			//free_pointers(1, args[i]);
 		}
 		get_rid_of_quotes(args, i, args[i]);
 		if (count_chars(args[i], "=") > 1)
 			export_multi_var(args, i, envp_len, new_envp);
-		else
+		else if (!new_envp[envp_len])
 		{
-			new_envp[envp_len] = ft_strdup(args[i]);
-			free_pointers(1, args[i]);
+		//	new_envp[envp_len] = ft_strdup(args[i]);
+			new_envp[envp_len] = args[i];
+			//free_pointers(1, args[i]);
 		}
 		new_envp[envp_len + 1] = NULL;
 		ft_free_split(arg->envp);
@@ -119,20 +122,17 @@ void
 int
 	msh_export(char **args, t_arguments *arg)
 {
-	int		envp_len;
 	char	**arr;
 	size_t	args_len;
 
 	args_len = get_arr_len(args);
 	if (args_len == 1)
 	{
-		envp_len = (int)get_arr_len(arg->envp);
-		arr = (char **)get_arr(envp_len + 1, sizeof(char *));
-		copy_arr_entries(arr, arg->envp, envp_len);
-		arr[envp_len] = NULL;
-		ft_str_arr_sort(arr, envp_len);
+		arr = NULL;
+		arr = copy_array(arr, arg->envp);
+		ft_str_arr_sort(arr, get_arr_len(arr));
 		print_str_arr(arr, 1);
-		free_pointers(1, arr);
+		ft_free_split(arr);
 	}
 	else
 		export_new_variables(args, arg);

@@ -105,8 +105,8 @@ void		sig_handler(int signum);
 void		eof_exit(t_arguments *args);
 void		set_shlvl_num(t_arguments *arg);
 char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
-char **
-copy_array(char **dest, char **src);
+char		**copy_array(char **dest, char **src);
+char		*ft_multistr_concat(int count, ...);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
