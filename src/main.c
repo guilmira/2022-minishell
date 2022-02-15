@@ -20,7 +20,6 @@ static void	store_program(t_prog *prog, t_arguments *args)
 	if (prog->envp)
 		ft_free_split(prog->envp);
 	prog->envp = copy_array(prog->envp, args->envp);
-//	prog->envp = args->envp;
 	prog->status = args->status;
 	prog->builtin_str = args->builtin_str;
 }

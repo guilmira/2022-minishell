@@ -38,8 +38,8 @@ void	ft_structclear(t_list *lst)
 			command_struct = lst->content;
 		if (lst->content)
 		{
-			if (command_struct)
-				ft_free_split(command_struct->command);
+			//if (command_struct)
+			//	ft_free_split(command_struct->command);
 			if (command_struct->path)
 				free(command_struct->path);
 			free(command_struct);

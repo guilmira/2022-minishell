@@ -114,7 +114,7 @@ void
 			arr[1] = tmp;
 			arr[2] = NULL;
 			export_new_variables(arr, arg);
-			//free(tmp);
+			arr[1] = NULL;//free(tmp);
 			free(arr);
 			//ft_free_split(arr);
 		}
