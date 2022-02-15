@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/14 13:42:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/15 14:05:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	init_options(char **option, char **option_name)
 	option[2] = ">";
 	option_name[2] = "lex_OUTPUT";
 	option[3] = ">>";
-	option_name[3] = "lex_2INPUT";
-	option[4] = ">>";
-	option_name[4] = "lex_2OUTPUT";
+	option_name[3] = "lex_APPEND";
+	option[4] = "<<";
+	option_name[4] = "lex_HEREDOC";
 	option[5] = NULL;
 	option_name[5] = NULL;
 }
@@ -75,7 +75,7 @@ static char	**build_lexer_table(char **table)
 
 /** PURPOSE : Lexical Analyzer. 
  * Corrects command line after reading it and interprets symbols. */
-char	**main_lexer(char *line)
+char	**main_lexer(char *line, t_arguments *args)
 {
 	char	**clean_line;
 	char	**lexer_table;
@@ -87,12 +87,15 @@ char	**main_lexer(char *line)
 	lexer_table = NULL;
 	list = build_lexer_list(line);
 	list_line = build_new_line(list);
-	printf("RESULT: %s\n", list_line);
+	printf("RESULT: %s\n", list_line); //ls -la  |    wc -l  |     cat -e      >    a.txt
+	args->argv = ft_split(list_line, ' ');
+	if (!args->argv)
+		ft_shutdown(MEM, errno, args);
 	ft_fullclear(list);
-	if (!ft_strchr(line, '\"') && !ft_strchr(line, '\''))
-		clean_line = ft_split(line, ' ');
+	if (!ft_strchr(list_line, '\"') && !ft_strchr(list_line, '\''))
+		clean_line = ft_split(list_line, ' ');
 	else
-		clean_line = quote_split(line, ' ');
+		clean_line = quote_split(list_line, ' ');
 	lexer_table = build_lexer_table(clean_line);
 	lexer_table = remove_quote(lexer_table);
 	return (lexer_table);

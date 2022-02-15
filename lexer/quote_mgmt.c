@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/13 13:08:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/15 13:07:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ char	**remove_quote(char **table)
 					free(str);
 					table[i] = new_str;
 					str = advance_line_quotes(new_str, '"');
-			printf("here %s\n", str);
 				}
 
 

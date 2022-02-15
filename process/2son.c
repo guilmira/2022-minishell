@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 13:11:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/15 13:32:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ int
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
 	if (args->flag_file_out)
+	{
+		printf("%s\n", args->file_output);
 		output_to_file(args->file_output);
+	}
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
@@ -124,6 +127,8 @@ int	single_son(t_arguments *args)
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
+	//printf("%s\n", command_struct->command[0]); COMMAND TOP
+	//printf("%s\n", command_struct->path);
 	if (execve(command_struct->path, command_struct->command, NULL) == -1)
 	{
 		set_status(args, 1);

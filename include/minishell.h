@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/14 13:31:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/15 13:41:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int			non_closed_quote(char *line, char quote);
 char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 /* LEXER */
-char		**main_lexer(char *line);
+char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);
 char		**remove_quote(char **table);
 /* QUOTE MANAGEMENT */

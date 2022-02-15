@@ -6,11 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/14 15:15:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/15 13:12:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+//he<ls|wc<"jsdhghjsjkgk"""<<whatever>>final test
 
 int	is_one_of_lexer_symbols(char symbol)
 {
@@ -27,29 +29,6 @@ int	is_one_of_lexer_symbols(char symbol)
 			return (1);
 	return (0);
 }
-
-
-/* static char	*obtain_name(char symbol, char extra)
-{
-	int		i;
-	int		flag;
-	char	*option[TOTAL_SYMBOLS + 1];
-	char	*option_name[TOTAL_SYMBOLS + 1];
-
-	flag = 0;
-	if (extra == '<' || extra == '>')
-		flag++;
-	init_options(option, option_name);
-	i = -1;
-	while (option[++i])
-	{
-		if (flag)
-			return (option_name[i]); //A CORREGIR ---- BIG TODO
-		if (symbol == option[i][0])
-			return (option_name[i]);
-	}
-	return (0);
-} */
 
 void	fix_previous_line(char *line, int t, int i, t_list **list)
 {
@@ -142,7 +121,10 @@ t_list	*build_lexer_list(char *line)
 			t = i + 1;
 			str = obtain_symbol(line, i);
 			if (line[i + 1] == '<' || line[i + 1] == '>')
+			{
 				i++;
+				t++;
+			}
 			ft_lstadd_back(&list, ft_lstnew(str));
 			i++;
 		}
@@ -152,9 +134,6 @@ t_list	*build_lexer_list(char *line)
 	fix_previous_line(line, t, i, &list);
 	return (list);
 }
-
-
-he<ls|wc<"jsdhghjsjkgk"""
 
 char *build_new_line(t_list *list)
 {
