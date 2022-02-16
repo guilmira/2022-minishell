@@ -13,7 +13,7 @@
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
 CC			= gcc #-g
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Wno-error=unused-result# -O -fsanitize=leak #-fsanitize=address -g
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g
 READLINE	= -lreadline -lcurses
 #sudo apt-get install libreadline-dev 

@@ -48,8 +48,6 @@ int
 		store_program(prog, arguments);
 		ft_free_split(arguments->envp);
 		free_heap_memory(arguments);
-		if (0) //temporal
-			break ;
 	}
 	ft_free_split(prog->envp);
 	free(prog); //is not freed in free_heap_memory

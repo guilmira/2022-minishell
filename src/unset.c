@@ -19,13 +19,16 @@ void
 	delete_env_var(t_arguments *arg, size_t len, const char *tmp)
 {
 	int		i;
+	char	*tmp2;
 
 	i = 0;
 	while (arg->envp[i])
 	{
 		if (!ft_strncmp(arg->envp[i], tmp, len))
 		{
-			free_pointers(1, arg->envp[i]);
+			tmp2 = arg->envp[i];
+			arg->envp[i] = NULL;
+			free_pointers(1, tmp2);
 			while (arg->envp[i + 1])
 			{
 				arg->envp[i] = arg->envp[i + 1];
@@ -49,7 +52,10 @@ int
 	char	*tmp;
 
 	if (get_arr_len(args) < 2)
-		ft_putendl_fd("unset: not enough arguments", 1);
+	{
+		perror("unset: not enough arguments"); //WTF? unset: not enough arguments: No such file or directory
+		set_status(arg, 1);
+	}
 	else
 	{
 		i = 1;
@@ -61,7 +67,7 @@ int
 			free(tmp);
 			i++;
 		}
+		set_status(arg, 0);
 	}
-	set_status(arg, 0);
 	return (1);
 }

@@ -24,8 +24,8 @@ void
 	arg_copy = (char *) malloc((ft_strlen(args[i]) + 1) * sizeof(char ));
 	ft_strlcpy(arg_copy, args[i], ft_strlen(args[i]) + 1);
 	ft_strtok(arg_copy, "=");
-	line = ft_strjoin(ft_strjoin(ft_strjoin(ft_strjoin(arg_copy, "="),
-					"'"), (ft_strchr(args[i], '=') + 1)), "'");
+	line = ft_multistr_concat(5, arg_copy, "=", "'",
+			(ft_strchr(args[i], '=') + 1), "'");
 	new_envp[envp_len] = line;
 	free_pointers(1, arg_copy);
 }
@@ -99,16 +99,14 @@ void
 		{
 			temp = ft_multistr_concat(3, args[i], "=", "''");
 			new_envp[envp_len] = temp;
-			//free_pointers(1, args[i]);
 		}
 		get_rid_of_quotes(args, i, args[i]);
 		if (count_chars(args[i], "=") > 1)
 			export_multi_var(args, i, envp_len, new_envp);
 		else if (!new_envp[envp_len])
 		{
-		//	new_envp[envp_len] = ft_strdup(args[i]);
-			new_envp[envp_len] = args[i];
-			//free_pointers(1, args[i]);
+			new_envp[envp_len] = ft_strdup(args[i]);
+			free_pointers(1, args[i]);
 		}
 		new_envp[envp_len + 1] = NULL;
 		ft_free_split(arg->envp);
