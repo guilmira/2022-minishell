@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/16 10:33:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/16 10:41:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ int
 				break ;
 		store_program(prog, arguments);
 		ft_free_split(arguments->envp);
-	/* 	if (arguments->flag_execution)
-			if (!ft_strcmp(arguments->argv[0], "cd"))
-				arguments->argv[1] = NULL; */
 		free_heap_memory(arguments);
 		if (0) //temporal
 			break ;
