@@ -6,13 +6,15 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/15 13:12:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:24:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //he<ls|wc<"jsdhghjsjkgk"""<<whatever>>final test
+
+//missign to correct echo "" (take nothing on origin)
 
 int	is_one_of_lexer_symbols(char symbol)
 {
@@ -32,7 +34,7 @@ int	is_one_of_lexer_symbols(char symbol)
 
 void	fix_previous_line(char *line, int t, int i, t_list **list)
 {
-	size_t	lenght;
+	int	lenght;
 	char	*str;
 
 	if (i - 1 < 0)
@@ -43,38 +45,7 @@ void	fix_previous_line(char *line, int t, int i, t_list **list)
 		return ;
 	ft_lstadd_back(list, ft_lstnew(str));
 }
-
-int	is_quote(char symbol)
-{
-	if (symbol == '\'' || symbol == '"')
-		return (1);
-	return (0);
-}
-
-int	advance_to_next_quote(char *line, int i)
-{
-	if (!line)
-		return (i);
-	while (line[i] != '\'' && line[i] != '"')
-	{
-		if (line[i] == '\'')
-		{
-			while (line[++i] != '\'')
-				;
-			i++;
-		}
-		else if (line[i] == '"')
-		{
-			while (line[++i] != '"')
-				;
-			i++;
-		}
-		else
-			return (i);
-	}
-	return (i);
-}
-
+ 
 static char	*obtain_symbol(char *line, int i)
 {
 	char	*str;
@@ -96,6 +67,40 @@ static char	*obtain_symbol(char *line, int i)
 	return (str);
 }
 
+/** PURPOSE : Advance string to next position skiping ALL quotes. */
+int	advance_to_last_quote(char *line, int i)
+{
+	if (!line)
+		return (i);
+	while (!is_quote(line[i]))
+	{
+		if (line[i] == SINGLE)
+		{
+			while (line[++i] != SINGLE)
+				;
+			i++;
+		}
+		else if (line[i] == DOUBLE)
+		{
+			while (line[++i] != DOUBLE)
+				;
+			i++;
+		}
+		else
+			return (i);
+	}
+	return (i);
+}
+
+/* static int	empty_case(char *line, int i)
+{
+	if (ft_strncmp("\"", &line[i], 2))
+		return (1);
+	if (ft_strncmp("'", &line[i], 2))
+		return (1);
+	return (0);
+} */
+
 t_list	*build_lexer_list(char *line)
 {
 	int		i;
@@ -110,7 +115,7 @@ t_list	*build_lexer_list(char *line)
 	{
 		if (is_quote(line[i]))
 		{
-			i = advance_to_next_quote(line, i);
+			i = advance_to_last_quote(line, i);
 			i++;
 		}
 		else if (ft_isspaces(line[i]))

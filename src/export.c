@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 11:15:59 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/17 11:16:00 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/02/16 11:43:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void
 	size_t	len;
 	size_t	j;
 
-	if (*(ft_strchr(str, '=') + 1) == '\''
+	if (*(ft_strchr(str, '=') + 1) == SINGLE
 		|| *(ft_strchr(str, '=') + 1) == '\"')
 	{
 		len = ft_strlen(str);

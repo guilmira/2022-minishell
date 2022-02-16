@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/09 13:13:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/16 11:20:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ int
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
 		store_program(prog, arguments);
-	/* 	if (arguments->flag_execution)
-			if (!ft_strcmp(arguments->argv[0], "cd")) 
-				arguments->argv[1] = NULL; */
 		free_heap_memory(arguments);
 		if (0) //temporal
 			break ;
@@ -77,3 +74,4 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 
+//TODO should it identify '\'??

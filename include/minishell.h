@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/15 13:41:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:58:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,12 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 # define EXE_ERROR "Execve function failure.\n"
 
 # define PIPE "lex_PIPE"
-
+# define SINGLE '\''
+# define DOUBLE '"'
 # define EMPTY_LINE ""
 
 
-char *advance_line_quotes(char *line, char quote);
+
 void	init_options(char **option, char **option_name);
 
 void printer(char **table, int *org);
@@ -141,6 +142,10 @@ void printer(char **table, int *org);
 t_list	*build_lexer_list(char *line);
 
 char *build_new_line(t_list *list);
+void	fix_previous_line(char *line, int t, int i, t_list **list);
+
+
+int	ignore_symbol(char *str, int position);
 
 /* Protoypes minishell reader. */
 
@@ -152,7 +157,9 @@ t_prog		*initalize_prog(char **envp, char **builtin_str);
 t_arguments	*intialize_arg(t_prog *prog);
 /* PRE-FILTER */
 int			pre_filter(char *line);
-int			non_closed_quote(char *line, char quote);
+int			pre_filter_simple(char *line);
+int			pre_filter_advanced(char *line);
+int			quotes_filter(char *line);
 /* PARSER */
 char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
@@ -163,6 +170,10 @@ char		**remove_quote(char **table);
 /* QUOTE MANAGEMENT */
 char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
+/* QUOTE AUXILIAR */
+int			is_quote(char symbol);
+char		*advance_line_quotes(char *line, char quote);
+int			advance_to_next_quote(char *line, int i);
 /* READER */
 void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 void		shell_reader(char *envp[], t_arguments *args);

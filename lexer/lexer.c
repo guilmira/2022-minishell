@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/15 14:05:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:29:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,26 @@ static char	**build_lexer_table(char **table)
 	return (table);
 }
 
+/** PURPOSE : Check if there are two lexer units next to each other. */
+int	check_lexer_errors(char **table)
+{
+	int i;
+	int	flag;
+
+	i = -1;
+	flag = 0;
+	while (table[++i])
+	{
+		if (!ft_strncmp("lex_", table[i], 4))
+			flag++;
+		else
+			flag = 0;
+		if (flag == 2)
+			return (1);
+	}
+	return (0);
+}
+
 /** PURPOSE : Lexical Analyzer. 
  * Corrects command line after reading it and interprets symbols. */
 char	**main_lexer(char *line, t_arguments *args)
@@ -92,11 +112,19 @@ char	**main_lexer(char *line, t_arguments *args)
 	if (!args->argv)
 		ft_shutdown(MEM, errno, args);
 	ft_fullclear(list);
-	if (!ft_strchr(list_line, '\"') && !ft_strchr(list_line, '\''))
+	if (!ft_strchr(list_line, '\"') && !ft_strchr(list_line, SINGLE))
 		clean_line = ft_split(list_line, ' ');
 	else
 		clean_line = quote_split(list_line, ' ');
 	lexer_table = build_lexer_table(clean_line);
+	if (check_lexer_errors(lexer_table))
+	{
+		args->flag_execution = 1;
+		//ft_free_split(args->argv);
+		printf("Lexer symbols cant be together\n");
+		ft_free_split(lexer_table);
+		return (NULL);
+	}
 	lexer_table = remove_quote(lexer_table);
 	return (lexer_table);
 }
