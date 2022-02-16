@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/12 16:41:43 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/02/16 10:41:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ int
 				break ;
 		store_program(prog, arguments);
 		ft_free_split(arguments->envp);
-	/* 	if (arguments->flag_execution)
-			if (!ft_strcmp(arguments->argv[0], "cd"))
-				arguments->argv[1] = NULL; */
 		free_heap_memory(arguments);
 		if (0) //temporal
 			break ;
@@ -64,7 +61,6 @@ int
  void	ft_leaks(void)
 {
 	system("leaks minishell");
-	//return (NULL);
 }
 
 /** EXECUTION : ./minishell
@@ -74,7 +70,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
-//	atexit(ft_leaks); //on exit, gves seg fault.
+	//atexit(ft_leaks);
 	 if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));

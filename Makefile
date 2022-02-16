@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
+#    By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/01/20 15:22:30 by guilmira         ###   ########.fr        #
+#    Updated: 2022/02/16 11:30:21 by asydykna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 NAME		= minishell
 CC			= gcc #-g
 CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Wno-error=unused-result# -O -fsanitize=leak #-fsanitize=address -g
+#CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g
 READLINE	= -lreadline -lcurses
 #sudo apt-get install libreadline-dev 
 #--------------------------------------------------------------------------------------------------------------LIBS
