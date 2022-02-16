@@ -37,7 +37,7 @@ size_t
 
 	len = 0;
 	p = str;
-	while (*p != '\0')
+	while (*p != '\0' && *p != *delim)
 	{
 		delim_copy = delim;
 		while (*delim_copy != '\0')
