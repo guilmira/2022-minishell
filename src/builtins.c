@@ -67,7 +67,7 @@ int
 		ft_putendl_fd(arg->builtin_str[i], 1);
 		i++;
 	}
-	ft_putendl_fd("Use the man command for information on other programs.", 1);
+	ft_putendl_fd("Use the man command for information on other commands.", 1);
 	set_status(arg, 0);
 	return (1);
 }
