@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/17 11:51:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:17:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize
- void	ft_leaks(void)
+void	ft_leaks(void)
 {
 	system("leaks minishell");
 }
@@ -74,4 +74,4 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 
-//TODO should it identify '\'??
+//TODO ctrl + c complexity when several levels of ms. it has to close. it can work with PID

@@ -6,24 +6,20 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:15:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 11:39:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:19:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//hacer funcion que solo quite las comillas del exteiror
-
 //TODO, : thing like [echo "hola ' "] must work and its not working at the moment
 
-
 /** PURPOSE : Chech for arguments such as > " " */
-static int hanging_quotes(char *line)
+static int	hanging_quotes(char *line)
 {
 	int		i;
 	int		flag;
 	char	**table;
-	
 
 	table = ft_split(line, ' ');
 	flag = 0;
@@ -49,7 +45,8 @@ int	pre_filter_advanced(char *line)
 	}
 	if (hanging_quotes(line))
 	{
-		printf("Incorrect quoting use. Please make sure quotes are not empty when entering commands\n");
+		printf("Incorrect quoting use.\n");
+		printf("Please make sure quotes are not empty when entering commands\n");
 		return (1);
 	}
 	return (0);

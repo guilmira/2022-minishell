@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 17:29:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:20:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	**build_lexer_table(char **table)
 /** PURPOSE : Check if there are two lexer units next to each other. */
 int	check_lexer_errors(char **table)
 {
-	int i;
+	int	i;
 	int	flag;
 
 	i = -1;
@@ -107,7 +107,7 @@ char	**main_lexer(char *line, t_arguments *args)
 	lexer_table = NULL;
 	list = build_lexer_list(line);
 	list_line = build_new_line(list);
-	printf("RESULT: %s\n", list_line); //ls -la  |    wc -l  |     cat -e      >    a.txt
+	//printf("RESULT: %s\n", list_line);
 	args->argv = ft_split(list_line, ' ');
 	if (!args->argv)
 		ft_shutdown(MEM, errno, args);
