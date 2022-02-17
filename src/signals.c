@@ -16,7 +16,7 @@ void
 	sig_handler(int signum __attribute__((unused)))
 {
 	ft_putendl_fd("", 2);
-	//rl_replace_line("", 0);
+	//rl_replace_line("", 0); THIS LINE MUST BE UNCOMMENTED
 	rl_on_new_line();
 	rl_redisplay();
 }

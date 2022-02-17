@@ -55,8 +55,8 @@ void
 	size_t	len;
 	size_t	j;
 
-	if (*(ft_strchr(str, '=') + 1) == SINGLE
-		|| *(ft_strchr(str, '=') + 1) == DOUBLE)
+	if (ft_strchr(str, '=') && (*(ft_strchr(str, '=') + 1) == '\''
+			|| *(ft_strchr(str, '=') + 1) == '\"'))
 	{
 		len = ft_strlen(str);
 		tmp = (char *)malloc(len - 1 * sizeof(char));

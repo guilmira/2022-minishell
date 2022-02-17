@@ -35,7 +35,8 @@ char	*read_and_filter_line(t_arguments *args)
 
 	line = read_shell_line();
 	if (!line)
-		ft_shutdown(LINE, errno, args);
+		return (NULL);
+		//ft_shutdown(LINE, errno, args);
 	//args->status = 1;// I guess this line should be higher, so status is put before exit
 	//NO NEED TO PUT STATUS HERE
 	if (pre_filter(line))

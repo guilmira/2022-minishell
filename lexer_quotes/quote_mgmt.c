@@ -58,10 +58,10 @@ char	*erase_quote(char *str, char sym)
 static int	needs_remove(char *str)
 {
 	int i;
-	int j;
+	//int j;
 
 	i = -1;
-	j = -1;
+	//j = -1;
 	while (str[++i])
 	{
 		if (str[i] == DOUBLE)
