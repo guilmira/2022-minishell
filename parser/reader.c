@@ -6,11 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 12:52:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:43:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+//ctrl + c complexity when several levels of ms. it has to close. it can work with PID
 
 /** PURPOSE : Reads command line and allocates it into string.
  * If pointer line exists and is not empty, adds it to history. */
@@ -62,13 +64,10 @@ void	shell_reader(char *envp[], t_arguments	*args)
 		eof_exit(args);
 	if (!line[0])
 		return ;
-	lexer_table = main_lexer(line);
+	lexer_table = main_lexer(line, args);
+	free(line);
 	if (!lexer_table)
 		return ;
-	args->argv = ft_split(line, ' ');
-	if (!args->argv)
-		ft_shutdown(MEM, errno, args);
-	free(line);
 	lexer_type = class_lex_table(lexer_table);
 	if (!lexer_type)
 		ft_shutdown(MEM, errno, args);

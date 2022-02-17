@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 11:04:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:58:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char		*ft_multistr_concat(int count, ...);
 
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
-# define TOTAL_SYMBOLS 6
+# define TOTAL_SYMBOLS 5
 # define MSHELL "msh> "
 # define INVALID_ARGC "Program execution does not admit arguments\n."
 # define MEM "Failed memory allocation.\n"
@@ -131,11 +131,23 @@ char		*ft_multistr_concat(int count, ...);
 # define EXE_ERROR "Execve function failure.\n"
 
 # define PIPE "lex_PIPE"
-
+# define SINGLE '\''
+# define DOUBLE '"'
 # define EMPTY_LINE ""
 
 
+
+void	init_options(char **option, char **option_name);
+
 void printer(char **table, int *org);
+
+t_list	*build_lexer_list(char *line);
+
+char *build_new_line(t_list *list);
+void	fix_previous_line(char *line, int t, int i, t_list **list);
+
+
+int	ignore_symbol(char *str, int position);
 
 /* Protoypes minishell reader. */
 
@@ -147,17 +159,23 @@ t_prog		*initalize_prog(char **envp, char **builtin_str);
 t_arguments	*intialize_arg(t_prog *prog);
 /* PRE-FILTER */
 int			pre_filter(char *line);
-int			non_closed_quote(char *line, char quote);
+int			pre_filter_simple(char *line);
+int			pre_filter_advanced(char *line);
+int			quotes_filter(char *line);
 /* PARSER */
 char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 /* LEXER */
-char		**main_lexer(char *line);
+char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);
 char		**remove_quote(char **table);
 /* QUOTE MANAGEMENT */
 char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
+/* QUOTE AUXILIAR */
+int			is_quote(char symbol);
+char		*advance_line_quotes(char *line, char quote);
+int			advance_to_next_quote(char *line, int i);
 /* READER */
 void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 void		shell_reader(char *envp[], t_arguments *args);

@@ -6,14 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 11:45:38 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/13 13:02:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/16 11:43:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /** PURPOSE : Ignore quotes. */
-static int	ignore_symbol(char *str, int position)
+int	ignore_symbol(char *str, int position)
 {
 	int	i;
 
@@ -21,8 +21,8 @@ static int	ignore_symbol(char *str, int position)
 	if (str[i] == '\"')
 		while (str[++i] != '\"')
 			;
-	if (str[i] == '\'')
-		while (str[++i] != '\'')
+	if (str[i] == SINGLE)
+		while (str[++i] != SINGLE)
 			;
 	return (i);
 }
