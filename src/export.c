@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 11:15:59 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/17 11:50:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 13:35:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void
 	size_t	len;
 	size_t	j;
 
-	if (*(ft_strchr(str, '=') + 1) == SINGLE
-		|| *(ft_strchr(str, '=') + 1) == DOUBLE)
+	if (*(ft_strchr(str, '=') + 1) == '\''
+		|| *(ft_strchr(str, '=') + 1) == '\"')
 	{
 		len = ft_strlen(str);
 		tmp = (char *)malloc(len - 1 * sizeof(char));
