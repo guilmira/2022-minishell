@@ -6,11 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 11:01:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:43:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+//ctrl + c complexity when several levels of ms. it has to close. it can work with PID
 
 /** PURPOSE : Reads command line and allocates it into string.
  * If pointer line exists and is not empty, adds it to history. */

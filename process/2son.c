@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 11:08:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:44:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int
 		i++;
 	}
 	set_status(args, 0);
-	return (execve(command_struct->path, command_struct->command, NULL));
+	return (execve(command_struct->path, command_struct->command, args->envp));
 }
 
 /** PURPOSE : Executes first forked proccess. The only thing
@@ -104,7 +104,7 @@ int
 		i++;
 	}
 	set_status(args, 0);
-	return (execve(command_struct->path, command_struct->command, NULL));
+	return (execve(command_struct->path, command_struct->command, args->envp));
 }
 
 
@@ -124,9 +124,9 @@ int	single_son(t_arguments *args)
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
-	//printf("%s\n", command_struct->command[0]); COMMAND TOP
-	//printf("%s\n", command_struct->path);
-	if (execve(command_struct->path, command_struct->command, NULL) == -1)
+	printf("%s\n", command_struct->command[0]); //COMMAND TOP
+	printf("%s\n", command_struct->path);
+	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);
 		ft_shutdown(EXE_ERROR, 0, args);

@@ -6,13 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/16 11:20:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:46:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-//ejecutar comandos en ruta absoluta. ejecutar antes de buscar nada.
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)

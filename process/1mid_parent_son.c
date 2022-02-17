@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/08 12:28:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:44:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int
 		i++;
 	}
 	set_status(args, 0);
-	return (execve(command_struct->path, command_struct->command, NULL));
+	return (execve(command_struct->path, command_struct->command, args->envp));
 }
 
 /** PURPOSE : Mid process for all the commands that are not
