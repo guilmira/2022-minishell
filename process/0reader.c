@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 17:06:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:26:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static char	**get_env_path(char *envp[])
 /** PURPOSE : Builds command and path for the structure.
  * Manages input commands such as /bin/ls.
  * Transforms it into the clean command and adjusts path. */
-void	build_command_structure(t_command	*command_struct, char **folders, char **envp)
+void	build_command_structure(t_command	*command_struct, \
+char **folders, char **envp)
 {
 	char	*tmp;
 

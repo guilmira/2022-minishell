@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 11:45:38 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 11:43:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:22:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ignore_symbol(char *str, int position)
 	int	i;
 
 	i = position;
-	if (str[i] == '\"')
-		while (str[++i] != '\"')
+	if (str[i] == DOUBLE)
+		while (str[++i] != DOUBLE)
 			;
 	if (str[i] == SINGLE)
 		while (str[++i] != SINGLE)

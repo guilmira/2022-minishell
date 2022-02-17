@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:53:32 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/20 15:23:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:25:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static char	*build_new_string(char *original, char *sufix, t_arguments	*args)
  * -> is it pipe? Do not add.
  * -> is it a sufix(command line option) or a text like echo "text". Then add
  * -> is it a command on its own? then it should go on next position. */
-static void	build_command_table(char **lexer_table, char **table, t_arguments *args, int *type)
+static void	build_command_table(char **lexer_table, char **table, \
+t_arguments *args, int *type)
 {
 	int		i;
 	int		j;
@@ -52,7 +53,7 @@ static void	build_command_table(char **lexer_table, char **table, t_arguments *a
 	while (lexer_table[++i])
 	{
 		token = lexer_table[i];
-		if (!type[i]) //is pipe
+		if (!type[i])
 			j++;
 		else if (type[i] != 5)
 			;

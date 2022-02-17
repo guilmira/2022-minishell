@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/17 12:20:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:21:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	**main_lexer(char *line, t_arguments *args)
 	if (!args->argv)
 		ft_shutdown(MEM, errno, args);
 	ft_fullclear(list);
-	if (!ft_strchr(list_line, '\"') && !ft_strchr(list_line, SINGLE))
+	if (!ft_strchr(list_line, DOUBLE) && !ft_strchr(list_line, SINGLE))
 		clean_line = ft_split(list_line, ' ');
 	else
 		clean_line = quote_split(list_line, ' ');

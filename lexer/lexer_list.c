@@ -6,15 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 17:24:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:23:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-//he<ls|wc<"jsdhghjsjkgk"""<<whatever>>final test
-
-//missign to correct echo "" (take nothing on origin)
 
 int	is_one_of_lexer_symbols(char symbol)
 {
@@ -34,7 +30,7 @@ int	is_one_of_lexer_symbols(char symbol)
 
 void	fix_previous_line(char *line, int t, int i, t_list **list)
 {
-	int	lenght;
+	int		lenght;
 	char	*str;
 
 	if (i - 1 < 0)
@@ -45,7 +41,7 @@ void	fix_previous_line(char *line, int t, int i, t_list **list)
 		return ;
 	ft_lstadd_back(list, ft_lstnew(str));
 }
- 
+
 static char	*obtain_symbol(char *line, int i)
 {
 	char	*str;
@@ -92,15 +88,6 @@ int	advance_to_last_quote(char *line, int i)
 	return (i);
 }
 
-/* static int	empty_case(char *line, int i)
-{
-	if (ft_strncmp("\"", &line[i], 2))
-		return (1);
-	if (ft_strncmp("'", &line[i], 2))
-		return (1);
-	return (0);
-} */
-
 t_list	*build_lexer_list(char *line)
 {
 	int		i;
@@ -140,7 +127,7 @@ t_list	*build_lexer_list(char *line)
 	return (list);
 }
 
-char *build_new_line(t_list *list)
+char	*build_new_line(t_list *list)
 {
 	char	*str;
 	char	*tmp;

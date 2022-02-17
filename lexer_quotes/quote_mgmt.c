@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 17:31:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:25:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char	*erase_quote(char *str, char sym)
 
 static int	needs_remove(char *str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = -1;
@@ -96,7 +96,7 @@ char	*clean_quotes(char *str)
 	return (new_str);
 }
 
-char *build_line_form_list(t_list *list)
+char	*build_line_form_list(t_list *list)
 {
 	char	*str;
 	char	*tmp;
@@ -121,7 +121,7 @@ char *build_line_form_list(t_list *list)
 	return (str);
 }
 
-char *ultra_quotes(char *str)
+char	*ultra_quotes(char *str)
 {
 	int		i;
 	int		t;
@@ -176,5 +176,4 @@ char	**remove_quote(char **table)
 		}
 	}
 	return (table);
-	
 }
