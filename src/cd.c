@@ -57,6 +57,7 @@ void
 /*
 ** SYNOPSIS: changes the values of 'OLDPWD' and 'PWD' variables.
 */
+
 void
 	renew_pwds(t_arguments *arg, char *old_path)
 {
@@ -112,7 +113,7 @@ int
 	if (chdir(path) != 0)
 	{
 		perror("msh");
-		free_pointers(2, path, old_path); //check it with wrong directory
+		free_pointers(2, path, old_path);
 		set_status(arg, 1);
 	}
 	else

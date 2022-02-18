@@ -13,14 +13,6 @@
 #include "../include/minishell.h"
 
 /*
-** TODO: arg->envp might be malloced, mind memory leaks
-*/
-
-/* src/builtins_2.c:42:12: error: comparison of unsigned expression >= 0 is always true [-Werror=type-limits]
-   42 |  if (count >= 0 && count < 256) */
-   //error wont let me compile. i change the line of code to (if count)
-
-/*
 ** SYNOPSIS: converts string passed to exit commadn to int.
 ** Specific version of ft_atoi function.
 */
@@ -47,9 +39,7 @@ int
 		count += (*str - 48) * sign;
 		str++;
 	}
-	//if (count >= 0 && count < 256) //in my computer, i always get a compilation error here. It reads: comparison of unsigned expression >= 0 is always true
-		//return ((int)count);
-	if (count && count < 256) //in my computer, i always get a compilation error here. It reads: comparison of unsigned expression >= 0 is always true
+	if (count && count < 256)
 		return ((int)count);
 	else
 		return ((int)count % 256);

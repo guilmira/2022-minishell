@@ -33,7 +33,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				lexer.c lexer_class.c lexer_list.c build_command_table.c  \
 				quote_mgmt.c quote_split.c quote_auxiliars.c \
 				printstemp.c \
-				signals.c ft_multistr_concat.c
+				signals.c ft_multistr_concat.c utilities_2.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 
