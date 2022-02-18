@@ -54,6 +54,7 @@ void	ft_structclear(t_list *lst)
  * initialized to NULL at the beginning of the program. */
 void	free_heap_memory(t_arguments *args)
 {
+	printf("detecting leaks\n");
 	if (args)
 	{
 		if (args->argv)
