@@ -31,6 +31,7 @@ int
 	t_prog		*prog;
 	t_arguments	*arguments;
 	char		*builtin_str[9];
+	int			ret;
 
 	prog = NULL;
 	arguments = NULL;
@@ -50,7 +51,9 @@ int
 	ft_free_split(prog->envp);
 	free(prog); //is not freed in free_heap_memory
 	ft_free_split(arguments->envp);
-	return (arguments->status);
+	ret = arguments->status;
+	free_pointers(1, arguments);
+	return (ret);
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize
