@@ -13,26 +13,6 @@
 #include "../include/minishell.h"
 
 /*
-** SYNOPSIS: concatenates two strings and returns new \0 terminated string.
-*/
-char*
-	ft_concat(const char *s1, const char *s2)
-{
-	char	*result;
-	size_t	len1;
-	size_t	len2;
-
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	result = (char *)malloc(len1 + len2 + 1 * sizeof(char));
-	if (!result)
-		return (NULL);
-	ft_memcpy(result, s1, len1);
-	ft_memcpy(result + len1, s2, len2 + 1);
-	return (result);
-}
-
-/*
 ** SYNOPSIS: sets status of executed command.
 */
 void
@@ -91,12 +71,25 @@ char *
 }
 
 void
+	set_shlvl(t_arguments *arg, char *tmp)
+{
+	char	**arr;
+
+	arr = (char **)get_arr(3, sizeof(char *));
+	arr[0] = "export";
+	arr[1] = tmp;
+	arr[2] = NULL;
+	export_new_variables(arr, arg);
+	arr[1] = NULL;
+	free(arr);
+}
+
+void
 	set_shlvl_num(t_arguments *arg)
 {
 	static bool	shlvl_set;
 	char		*tmp;
 	int			num;
-	char		**arr;
 	char		*num_tmp;
 
 	if (!shlvl_set)
@@ -105,18 +98,11 @@ void
 		if (tmp)
 		{
 			num = ft_atoi(tmp);
-			arr = (char **)get_arr(3, sizeof(char *));
-			arr[0] = "export";
 			free(tmp);
 			num_tmp = ft_itoa(num + 1);
 			tmp = ft_strjoin("SHLVL=", num_tmp);
 			free_pointers(1, num_tmp);
-			arr[1] = tmp;
-			arr[2] = NULL;
-			export_new_variables(arr, arg);
-			arr[1] = NULL;//free(tmp);
-			free(arr);
-			//ft_free_split(arr);
+			set_shlvl(arg, tmp);
 		}
 		shlvl_set = true;
 	}

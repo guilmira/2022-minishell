@@ -50,6 +50,5 @@ char
 	}
 	va_end(ap);
 	ret[len] = '\0';
-	//*ret = '\0';
 	return (ret);
 }
