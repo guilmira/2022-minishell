@@ -32,7 +32,7 @@ static int
 		return (single_process(arguments));
 	arguments->fds = arg_descriptors(arguments);
 	process_exe(arguments);
-	return (1); //status, 0 o 1
+	return (1);
 }
 
 /** PURPOSE : Main execution function.
