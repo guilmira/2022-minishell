@@ -42,10 +42,7 @@ int
 		shell_reader(envp, arguments);
 		if (arguments->flag_execution)
 			if (!msh_execute(arguments->argv, arguments))
-			{
-				free_heap_memory(arguments);
 				break ;
-			}
 		store_program(prog, arguments);
 		free_heap_memory(arguments);
 		if (0) //temporal
