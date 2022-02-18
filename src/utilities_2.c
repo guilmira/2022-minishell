@@ -59,3 +59,17 @@ char *
 		head = get_env_var(arg->envp, args[i] + 1);
 	return (head);
 }
+
+/*
+** SYNOPSIS: calculates the length of a variable up to the "=" sign.
+*/
+size_t
+	get_envv_len(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != '=')
+		i++;
+	return (i);
+}

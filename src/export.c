@@ -31,20 +31,6 @@ void
 }
 
 /*
-** SYNOPSIS: calculates the length of a variable up to the "=" sign.
-*/
-size_t
-	get_envv_len(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != '=')
-		i++;
-	return (i);
-}
-
-/*
 ** SYNOPSIS: allows to get rid of quotes in the beginning and
 ** at the end of environmental variable.
 */
@@ -76,6 +62,18 @@ void
 	}
 }
 
+void
+	export_new_vars_cont(char **args, int i, size_t envp_len, char **new_envp)
+{
+	if (count_chars(args[i], "=") > 1)
+		export_multi_var(args, i, envp_len, new_envp);
+	else if (!new_envp[envp_len])
+	{
+		new_envp[envp_len] = ft_strdup(args[i]);
+		free_pointers(1, args[i]);
+	}
+}
+
 /*
 ** SYNOPSIS: called if there are more than 1 argument passed to export command.
 */
@@ -92,22 +90,14 @@ void
 	{
 		delete_env_var(arg, get_envv_len(args[i]), args[i]);
 		envp_len = get_arr_len(arg->envp);
-		new_envp = (char **)get_arr(envp_len + 2, sizeof(char *));
-		copy_arr_entries(new_envp, arg->envp, envp_len);
-		new_envp[envp_len] = NULL;
+		new_envp = copy_array(new_envp, arg->envp, 2);
 		if (!ft_strchr(args[i], '='))
 		{
 			temp = ft_multistr_concat(3, args[i], "=", "''");
 			new_envp[envp_len] = temp;
 		}
 		get_rid_of_quotes(args, i, args[i]);
-		if (count_chars(args[i], "=") > 1)
-			export_multi_var(args, i, envp_len, new_envp);
-		else if (!new_envp[envp_len])
-		{
-			new_envp[envp_len] = ft_strdup(args[i]);
-			free_pointers(1, args[i]);
-		}
+		export_new_vars_cont(args, i, envp_len, new_envp);
 		new_envp[envp_len + 1] = NULL;
 		ft_free_split(arg->envp);
 		arg->envp = new_envp;
@@ -127,7 +117,7 @@ int
 	if (args_len == 1)
 	{
 		arr = NULL;
-		arr = copy_array(arr, arg->envp);
+		arr = copy_array(arr, arg->envp, 1);
 		ft_str_arr_sort(arr, get_arr_len(arr));
 		print_str_arr(arr, 1);
 		ft_free_split(arr);
