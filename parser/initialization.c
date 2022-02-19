@@ -13,12 +13,12 @@
 #include "../include/minishell.h"
 
 char **
-	copy_array(char **dest, char **src)
+	copy_array(char **dest, char **src, unsigned int extra_cells)
 {
 	size_t	len;
 
 	len = get_arr_len(src);
-	dest = (char **)get_arr(len + 1, sizeof(char *));
+	dest = (char **)get_arr(len + extra_cells, sizeof(char *));
 	copy_arr_entries(dest, src, len);
 	dest[len] = NULL;
 	return (dest);
@@ -32,7 +32,7 @@ t_prog	*initalize_prog(char **envp, char **builtin_str)
 	prog = ft_calloc(1, sizeof(t_prog));
 	if (!prog)
 		ft_shut(MEM, 0);
-	prog->envp = copy_array(prog->envp, envp);
+	prog->envp = copy_array(prog->envp, envp, 1);
 	init_builtins(builtin_str);
 	prog->builtin_str = builtin_str;
 	prog->status = 0;
@@ -60,7 +60,7 @@ t_arguments	*intialize_arg(t_prog *prog)
 	args->prog = prog;
 	if (args->envp)
 		ft_free_split(args->envp);
-	args->envp = copy_array(args->envp, prog->envp);
+	args->envp = copy_array(args->envp, prog->envp, 1);
 	init_builtin_func_arr(args->builtin_func);
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;

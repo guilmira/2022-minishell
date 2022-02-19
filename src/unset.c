@@ -51,12 +51,7 @@ int
 	size_t	len;
 	char	*tmp;
 
-	if (get_arr_len(args) < 2)
-	{
-		perror("unset: not enough arguments"); //WTF? unset: not enough arguments: No such file or directory
-		set_status(arg, 1);
-	}
-	else
+	if (get_arr_len(args) >= 2)
 	{
 		i = 1;
 		while (args[i])
@@ -64,10 +59,10 @@ int
 			tmp = ft_strjoin(args[i], "=");
 			len = ft_strlen(tmp);
 			delete_env_var(arg, len, tmp);
-			free(tmp);
+			free_pointers(1, tmp);
 			i++;
 		}
-		set_status(arg, 0);
 	}
+	set_status(arg, 0);
 	return (1);
 }

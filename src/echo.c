@@ -12,40 +12,21 @@
 
 #include "../include/minishell.h"
 
-char *
-	find_tail(char **args, int i)
-{
-	char	*tail;
-
-	if (ft_strchr(args[i], '='))
-		tail = ft_strdup(ft_strchr(args[i], '='));
-	else
-		tail = NULL;
-	return (tail);
-}
-
-char *
-	find_head(char **args, t_arguments *arg, int i, const char *tail)
-{
-	char	*head;
-	size_t	var_len;
-
-	if (tail)
-	{
-		var_len = ft_strchr(args[i], '=') - (args[i] + 1);
-		head = get_env_var(arg->envp, ft_substr(args[i] + 1, 0, var_len));
-	}
-	else
-		head = get_env_var(arg->envp, args[i] + 1);
-	return (head);
-}
-
 void
 	print_echo_output(char *head, char *tail)
 {
 	ft_putstr_fd(head, 1);
 	if (tail)
 		ft_putstr_fd(tail, 1);
+}
+
+void
+	print_output(char *const *args, int i, char *head, char *tail)
+{
+	print_echo_output(head, tail);
+	if (args[i + 1])
+		ft_putstr_fd(" ", 1);
+	free_pointers(2, head, tail);
 }
 
 /*
@@ -73,10 +54,7 @@ void
 		}
 		else
 			head = ft_strdup(args[i]);
-		print_echo_output(head, tail);
-		if (args[i + 1])
-			ft_putstr_fd(" ", 1);
-		free_pointers(2, head, tail);
+		print_output(args, i, head, tail);
 		i++;
 	}
 	set_status(arg, 0);

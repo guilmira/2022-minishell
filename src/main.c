@@ -6,7 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/17 13:49:58 by guilmira         ###   ########.fr       */
+=======
+/*   Updated: 2022/02/09 13:13:36 by guilmira         ###   ########.fr       */
+>>>>>>> 30f19c7da4b3491c926cbf72f3b08b2645808708
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +23,7 @@ static void	store_program(t_prog *prog, t_arguments *args)
 {
 	if (prog->envp)
 		ft_free_split(prog->envp);
-	prog->envp = copy_array(prog->envp, args->envp);
+	prog->envp = copy_array(prog->envp, args->envp, 1);
 	prog->status = args->status;
 	prog->builtin_str = args->builtin_str;
 }
@@ -33,6 +37,7 @@ int
 	t_prog		*prog;
 	t_arguments	*arguments;
 	char		*builtin_str[9];
+	int			ret;
 
 	prog = NULL;
 	arguments = NULL;
@@ -52,7 +57,9 @@ int
 	ft_free_split(prog->envp);
 	free(prog); //is not freed in free_heap_memory
 	ft_free_split(arguments->envp);
-	return (arguments->status);
+	ret = arguments->status;
+	free_pointers(1, arguments);
+	return (ret);
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize

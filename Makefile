@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
+#    By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/02/17 13:30:11 by guilmira         ###   ########.fr        #
+#    Updated: 2022/02/17 14:19:09 by asydykna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= minishell
 CC			= gcc #-g
 CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+#CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 READLINE	= -lreadline -lcurses
 #sudo apt-get install libreadline-dev 
 #--------------------------------------------------------------------------------------------------------------LIBS
@@ -33,7 +33,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				lexer.c lexer_class.c lexer_list.c build_command_table.c  \
 				quote_mgmt.c quote_split.c quote_auxiliars.c \
 				printstemp.c \
-				signals.c ft_multistr_concat.c
+				signals.c ft_multistr_concat.c utilities_2.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 

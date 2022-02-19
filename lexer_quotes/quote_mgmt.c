@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quote_mgmt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/17 13:45:38 by guilmira         ###   ########.fr       */
+=======
+/*   Updated: 2022/02/17 14:20:55 by asydykna         ###   ########.fr       */
+>>>>>>> 30f19c7da4b3491c926cbf72f3b08b2645808708
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +61,17 @@ char	*erase_quote(char *str, char sym)
 
 static int	needs_remove(char *str)
 {
+<<<<<<< HEAD
 	int	i;
 
 	i = -1;
+=======
+	int i;
+	//int j;
+
+	i = -1;
+	//j = -1;
+>>>>>>> 30f19c7da4b3491c926cbf72f3b08b2645808708
 	while (str[++i])
 	{
 		if (str[i] == DOUBLE)
