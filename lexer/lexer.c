@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/17 12:21:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/19 12:59:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,11 @@ char	**main_lexer(char *line, t_arguments *args)
 		clean_line = ft_split(list_line, ' ');
 	else
 		clean_line = quote_split(list_line, ' ');
+	free(list_line);
 	lexer_table = build_lexer_table(clean_line);
 	if (check_lexer_errors(lexer_table))
 	{
 		args->flag_execution = 1;
-		//ft_free_split(args->argv);
 		printf("Lexer symbols cant be together\n");
 		ft_free_split(lexer_table);
 		return (NULL);

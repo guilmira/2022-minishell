@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/17 12:16:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:00:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	free(lexer_type);
 	arg_reader(count_table(args->argv), table, envp, args);
 	ft_free_split(table);
+		
 }

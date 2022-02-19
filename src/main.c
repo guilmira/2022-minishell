@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/19 11:29:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:08:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int
 		store_program(prog, arguments);
 		ft_free_split(arguments->envp);
 		free_heap_memory(arguments);
+		system("leaks minishell");
 	}
 	ft_free_split(prog->envp);
 	free(prog); //is not freed in free_heap_memory

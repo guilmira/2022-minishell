@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:02 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/17 11:58:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/19 12:24:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void
 	sig_handler(int signum __attribute__((unused)))
 {
 	ft_putendl_fd("", 2);
-	//rl_replace_line("", 0); THIS LINE MUST BE UNCOMMENTED
+	//rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
