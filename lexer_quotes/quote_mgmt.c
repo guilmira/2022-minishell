@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 14:41:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:20:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ char	*ultra_quotes(char *str)
 	{
 		if (is_quote(str[i]))
 		{
-			printf("entra\n");
 			i = advance_to_next_quote(str, i);
 			fix_previous_line(str, t, i, &list);
 			t = i + 1;

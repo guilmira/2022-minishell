@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/19 13:00:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:30:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*read_and_filter_line(t_arguments *args)
 	line = read_shell_line();
 	if (!line)
 		return (NULL);
-		//ft_shutdown(LINE, errno, args);
 	//args->status = 1;// I guess this line should be higher, so status is put before exit
 	if (pre_filter(line))
 	{
@@ -43,6 +42,17 @@ char	*read_and_filter_line(t_arguments *args)
 	}
 	args->flag_execution = 1;
 	return (line);
+}
+
+static int case_space(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (!ft_isspaces(str[i]))
+			return (0);
+	return (1);
 }
 
 /** PURPOSE : Reads command line. Loads arguments into structure. 
@@ -74,6 +84,12 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	table = get_command_table(lexer_table, args, lexer_type);
 	ft_free_split(lexer_table);
 	free(lexer_type);
+	if (case_space(table[0]))
+	{
+		ft_free_split(table);
+		args->flag_execution = 1;
+		return ;
+	}
 	arg_reader(count_table(args->argv), table, envp, args);
 	ft_free_split(table);
 		

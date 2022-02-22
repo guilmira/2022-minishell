@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:47:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 16:31:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:31:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	quotes_filter(char *line)
 	{
 		if ((ft_strchr(line, DOUBLE) && ft_strchr(line, SINGLE)))
 		{
-			printf("DE_BERIA\n"); //echo f"hola"'f'"""
 			line = double_quote_filter(line, flag);
 			if (flag)
 				return (1);
