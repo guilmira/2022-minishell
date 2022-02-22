@@ -80,7 +80,7 @@ void
 	arr[1] = tmp;
 	arr[2] = NULL;
 	export_new_variables(arr, arg);
-	arr[1] = NULL;
+	free(arr[1]);
 	free(arr);
 }
 

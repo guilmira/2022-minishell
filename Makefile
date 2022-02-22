@@ -13,8 +13,8 @@
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
 CC			= gcc #-g
-#CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
-CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
+#CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address -g
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 #CFLAGS		= -Wall -Wextra -Werror #-lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 #READLINE	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
