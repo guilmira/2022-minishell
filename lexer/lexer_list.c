@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/19 12:44:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 14:33:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,17 @@ void	fix_previous_line(char *line, int t, int i, t_list **list)
 	int		lenght;
 	char	*str;
 
+	str = NULL;
 	if (i - 1 < 0)
 		return ;
 	lenght = i - t;
-	str = ft_substr(line, t, lenght);
+	if (is_quote(line[t]) && is_quote(line[t + 1]))
+		str = ft_strdup(" ");
+	else
+	{
+		str = ft_substr(line, t, lenght);
+		printf("heree with %s\n", str);
+	}
 	if (!str)
 		return ;
 	ft_lstadd_back(list, ft_lstnew(str));

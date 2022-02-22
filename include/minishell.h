@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/19 11:54:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 14:26:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_arguments
 }			t_arguments;
 
 void rl_replace_line(const char *txt, int clear_undo);
+
 
 /* Protoypes minishell builtins. */
 int			msh_echo(char **args, t_arguments *arg);
