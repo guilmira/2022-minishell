@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 11:33:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:35:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,13 @@ void	ft_structclear(t_list *lst)
  * initialized to NULL at the beginning of the program. */
 void	free_heap_memory(t_arguments *args)
 {
-	
-	printf("detecting leaks\n");
 	if (args)
 	{
 		if (args->argv)
 			ft_free_split(args->argv);
 		if (args->commands_lst && args->commands_lst->content)
 		{
-			printf("it has to enter\n");
+			//printf("it has to enter\n");
 			ft_structclear(args->commands_lst);
 		}
 		if (args->fds)
