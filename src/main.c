@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/22 13:55:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 14:00:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int
 		free_heap_memory(arguments);
 	}
 	ft_free_split(prog->envp);
-	free(prog); //is not freed in free_heap_memory
+	free(prog);
 	ft_free_split(arguments->envp);
 	ret = arguments->status;
 	free_pointers(1, arguments);
