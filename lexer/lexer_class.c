@@ -6,11 +6,24 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 11:42:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:45:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/** PURPOSE : Counts positions on a table .*/
+int	count_table(char **table)
+{
+	int	i;
+
+	if (!table)
+		return (0);
+	i = -1;
+	while (table[++i])
+		;
+	return (i);
+}
 
 static int	is_lex_symbol(char *string) //temporal apra borrar
 {
@@ -33,19 +46,6 @@ static int	is_heredoc(char *string)
 	if (!ft_strcmp(string, "lex_HEREDOC"))
 		return (1);
 	return (0);
-}
-
-/** PURPOSE : Counts positions on a table .*/
-int	count_table(char **table)
-{
-	int	i;
-
-	if (!table)
-		return (0);
-	i = -1;
-	while (table[++i])
-		;
-	return (i);
 }
 
 /** PURPOSE : Assigns a number for each token.

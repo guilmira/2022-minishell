@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/19 11:34:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 13:54:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ char	*ultra_quotes(char *str)
 		t = i;
 	}
 	new_str = build_line_form_list(list);
+	ft_fullclear(list);
 	return (new_str);
 }
 
