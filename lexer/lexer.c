@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/19 12:59:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:38:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ char	**main_lexer(char *line, t_arguments *args)
 		return (NULL);
 	}
 	lexer_table = remove_quote(lexer_table);
+	system("leaks minishell");
 	return (lexer_table);
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/15 13:16:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:42:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,16 @@ static int	is_lex_symbol(char *string) //temporal apra borrar
 	return (0);
 }
 
-static int	is_double_symbol(char *string) //temporal apra borrar
+static int	is_append(char *string)
+{
+	if (!ft_strcmp(string, "lex_APPEND"))
+		return (1);
+	return (0);
+}
+
+static int	is_heredoc(char *string)
 {
 	if (!ft_strcmp(string, "lex_HEREDOC"))
-		return (1);
-	if (!ft_strcmp(string, "lex_APPEND"))
 		return (1);
 	return (0);
 }
@@ -67,8 +72,10 @@ int	*class_lex_table(char **lexer_table)
 			type[i] = 0;
 		else if (is_lex_symbol(lexer_table[i]))
 			type[i] = 1;
-		else if (is_double_symbol(lexer_table[i]))
+		else if (is_append(lexer_table[i]))
 			type[i] = 3;
+		else if (is_heredoc(lexer_table[i]))
+			type[i] = 4;
 		else if (i != 0 && type[i - 1] == 1)
 			type[i] = 2;
 		else
