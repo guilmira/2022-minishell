@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/19 13:10:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:33:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	ft_structclear(t_list *lst)
 			command_struct = lst->content;
 		if (lst->content)
 		{
-			//if (command_struct)
-			//	ft_free_split(command_struct->command);
+			if (command_struct)
+				ft_free_split(command_struct->command);
 			if (command_struct->path)
 				free(command_struct->path);
 			free(command_struct);
