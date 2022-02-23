@@ -54,7 +54,8 @@ int
 	free(prog);
 	ft_free_split(arguments->envp);
 	ret = arguments->status;
-	free_pointers(1, arguments);
+//	free_pointers(1, arguments);
+	free_heap_memory(arguments);
 	return (ret);
 }
 

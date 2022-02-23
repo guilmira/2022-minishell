@@ -26,6 +26,7 @@ void
 {
 	ft_putendl_fd("", 2);
 	ft_putendl_fd("exit", 2);
-	free_heap_memory(args); //Check if everything is OK
+	ft_free_split(args->envp);
+	free_heap_memory(args);
 	exit(EXIT_SUCCESS);
 }

@@ -12,6 +12,27 @@
 
 #include "../include/minishell.h"
 
+void	ft_free_split(char **table)
+{
+	int	w;
+
+	w = 0;
+	if (table)
+	{
+		while (table[w])
+		{
+			if (table[w] != NULL)
+			{
+				free(table[w]);
+				table[w] = NULL;
+			}
+			w++;
+		}
+		free(table);
+		table = NULL;
+	}
+}
+
 /** PURPOSE : Output error with given value 1, close the program.
  *  Exit signal must be 0 by default */
 void	ft_shut(char *str, int i)
@@ -38,11 +59,11 @@ void	ft_structclear(t_list *lst)
 			command_struct = lst->content;
 		if (lst->content)
 		{
-			if (command_struct)
+			if (command_struct && command_struct->command)
 				ft_free_split(command_struct->command);
-			if (command_struct->path)
-				free(command_struct->path);
-			free(command_struct);
+			if (command_struct && command_struct->path)
+				free_pointers(1, command_struct->path);
+			free_pointers(1, command_struct);
 			free(lst);
 		}
 		lst = tmp;
@@ -58,7 +79,7 @@ void	free_heap_memory(t_arguments *args)
 	{
 		if (args->argv)
 			ft_free_split(args->argv);
-		if (args->commands_lst && args->commands_lst->content)
+		if (args->commands_lst && args->commands_lst->content != NULL)
 			ft_structclear(args->commands_lst);
 		if (args->fds)
 			free(args->fds);

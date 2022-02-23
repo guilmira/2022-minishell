@@ -71,6 +71,7 @@ void
 	free_pointers(1, cwd);
 	delete_env_var(arg, 4, "PWD=");
 	set_new_var(cur_path, arg);
+	free_pointers(1, cur_path);
 }
 
 /*
@@ -91,7 +92,7 @@ void
 	else if (!ft_memcmp(args[1], "-", 2))
 		(*path) = get_env_var(arg->envp, "OLDPWD");
 	else
-		(*path) = args[1];
+		(*path) = ft_strdup(args[1]);
 }
 
 /*
@@ -120,6 +121,7 @@ int
 	{
 		free_pointers(1, path);
 		renew_pwds(arg, old_path);
+		free_pointers(1, old_path);
 		set_status(arg, 0);
 	}
 	return (1);

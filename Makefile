@@ -40,7 +40,7 @@ OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 
 RM = rm -rf
-VPATH = src include parser pre_filter lexer lexer_quotes process
+VPATH = include src parser pre_filter lexer lexer_quotes process
 
 all: $(LIB) $(NAME)
 
