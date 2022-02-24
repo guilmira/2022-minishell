@@ -6,13 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 11:46:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/24 07:55:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_free_split(char **table)
+//CHECK THE LIB, NOW ITS THE SAME
+/* void	ft_free_split(char **table)
 {
 	int	w;
 
@@ -31,7 +32,7 @@ void	ft_free_split(char **table)
 		free(table);
 		table = NULL;
 	}
-}
+} */
 
 /** PURPOSE : Output error with given value 1, close the program.
  *  Exit signal must be 0 by default */
