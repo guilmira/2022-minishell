@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 14:26:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/24 09:40:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,10 @@ size_t		get_envv_len(const char *s);
 # define EXE_ERROR "Execve function failure.\n"
 
 # define PIPE "lex_PIPE"
+# define IN "lex_INPUT"
+# define OUT "lex_OUTPUT"
+# define APPEND "lex_APPEND"
+# define HEREDOC "lex_HEREDOC"
 # define SINGLE '\''
 # define DOUBLE '"'
 # define EMPTY_LINE ""

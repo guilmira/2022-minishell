@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 11:45:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/24 09:42:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,25 @@ int	count_table(char **table)
 	return (i);
 }
 
-static int	is_lex_symbol(char *string) //temporal apra borrar
+static int	is_lex_symbol(char *string)
 {
-	if (!ft_strcmp(string, "lex_INPUT"))
+	if (!ft_strcmp(string, IN))
 		return (1);
-	if (!ft_strcmp(string, "lex_OUTPUT"))
+	if (!ft_strcmp(string, OUT))
 		return (1);
 	return (0);
 }
 
 static int	is_append(char *string)
 {
-	if (!ft_strcmp(string, "lex_APPEND"))
+	if (!ft_strcmp(string, APPEND))
 		return (1);
 	return (0);
 }
 
 static int	is_heredoc(char *string)
 {
-	if (!ft_strcmp(string, "lex_HEREDOC"))
+	if (!ft_strcmp(string, HEREDOC))
 		return (1);
 	return (0);
 }
