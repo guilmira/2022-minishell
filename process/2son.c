@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 11:39:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:51:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,20 @@ static void	output_to_file(char *path)
 {
 	int	fd_file;
 
-	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU); // TODO, question. if adding after O_CREAT, FULL_PERMISSIONS, overwrite stops working
-	if (fd_file < 0) //S_IRWXU File permission bits. Read, Write, eXecute.
+	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
+	if (fd_file < 0)
+		ft_shut(FILE_ERROR, 1);
+	if (dup2(fd_file, STDOUT_FILENO) == -1)
+		ft_shut(DUP_ERROR, 0);
+	close(fd_file);
+}
+
+static void	output_to_file_append(char *path)
+{
+	int	fd_file;
+
+	fd_file = open(path, O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
+	if (fd_file < 0)
 		ft_shut(FILE_ERROR, 1);
 	if (dup2(fd_file, STDOUT_FILENO) == -1)
 		ft_shut(DUP_ERROR, 0);
@@ -125,7 +137,9 @@ int	single_son(t_arguments *args)
 		ft_shutdown(LST, 0, args);
 	if (args->flag_file_in)
 		input_form_file(args->file_input);
-	if (args->flag_file_out)
+	if (args->flag_file_out == 2)
+		output_to_file_append(args->file_output);
+	else if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
