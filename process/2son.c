@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 09:42:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:39:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ int
 	if (dup2(args->fds[index], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
-	if (args->flag_file_out)
+	if (args->flag_file_out == 2)
+		output_to_file_append(args->file_output);
+	else if (args->flag_file_out)
 		output_to_file(args->file_output);
 	i = 0;
 	while (i < msh_num_builtins(args))

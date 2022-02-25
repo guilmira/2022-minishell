@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:51:24 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 11:11:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:38:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ static void	create_file_append(char *path, t_arguments *args)
 	close(fd_file);
 }
 
+/** PURPOSE : File is input type. */
+static int	input_type(int *ptr)
+{
+	if ((*ptr) == 1 || (*ptr) == 3)
+		return (1);
+	return (0);
+}
+
 /** PURPOSE : Iterate list and create every single file as is needed. 
  *  Codes: 1 is for output, 2 is for input, 3 for append and 4 for heredoc. */
 static void	create_output_files(t_list *list_files, t_list *list_type, t_arguments *args)
@@ -62,14 +70,17 @@ static void	create_output_files(t_list *list_files, t_list *list_type, t_argumen
 	{
 		file = list_files->content;
 		ptr = list_type->content;
-		if ((*ptr) == 1 || (*ptr) == 3)
+		if (input_type(ptr))
 		{
 			args->flag_file_out = 1;
 			args->file_output = file;
 			if ((*ptr) == 1)
 				create_file(file, args);
 			if ((*ptr) == 3)
+			{
 				create_file_append(file, args);
+				args->flag_file_out = 2;
+			}
 		}
 		if ((*ptr) == 2)
 		{

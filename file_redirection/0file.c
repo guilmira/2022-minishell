@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 11:24:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:33:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	prepare_file(char *content, t_list **list_files, t_arguments *args)
  * 1 is for output, 2 is for input, 3 for append and 4 for heredoc. */
 static void assign_type(char *content, t_list **list_type, t_arguments *args)
 {
-	int		*ptr;
+	int	*ptr;
 
 	ptr = NULL;
 	ptr = ft_calloc(1, sizeof(int));
