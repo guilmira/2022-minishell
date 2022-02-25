@@ -6,18 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/25 09:17:51 by guilmira         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-=======
-/*   Updated: 2022/02/25 09:18:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:23:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //en el proceso principal, tras los forks, todos los fd del pipe cerrados
->>>>>>> newguille
 #include "../include/minishell.h"
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */

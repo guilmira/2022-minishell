@@ -6,22 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/25 09:07:50 by guilmira         ###   ########.fr       */
-=======
-/*   Updated: 2022/02/25 11:11:31 by guilmira         ###   ########.fr       */
->>>>>>> newguille
+/*   Updated: 2022/02/25 11:24:22 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /** PURPOSE : Adds name of the list to files. */
-<<<<<<< HEAD
-static void	prepare_file(char *content, t_list **list_input, t_arguments *args)
-=======
 static void	prepare_file(char *content, t_list **list_files, t_arguments *args)
->>>>>>> newguille
 {	
 	char	*str;
 	
@@ -29,12 +21,7 @@ static void	prepare_file(char *content, t_list **list_files, t_arguments *args)
 	str = ft_strdup(content);
 	if (!str)
 		ft_shutdown(MEM, 0, args);
-<<<<<<< HEAD
-	ft_lstadd_back(list_input, ft_lstnew(str));
-	
-=======
 	ft_lstadd_back(list_files, ft_lstnew(str));
->>>>>>> newguille
 }
 
 /** PURPOSE : Assign a number to each of the elements of the list. 
@@ -80,9 +67,8 @@ void	management_file(char **table, t_arguments *args)
 			assign_type(table[i],  &list_type, args);
 		}
 	}
-	
+	//provisional
 	int  *ptr;
-	
 	file_setup(list_files, list_type, args);
 	while (list_files)
 	{
