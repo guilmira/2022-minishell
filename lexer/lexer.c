@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 14:05:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/24 09:44:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 void	init_options(char **option, char **option_name)
 {
 	option[0] = "|";
-	option_name[0] = "lex_PIPE";
+	option_name[0] = PIPE;
 	option[1] = "<";
-	option_name[1] = "lex_INPUT";
+	option_name[1] = IN;
 	option[2] = ">";
-	option_name[2] = "lex_OUTPUT";
+	option_name[2] = OUT;
 	option[3] = ">>";
-	option_name[3] = "lex_APPEND";
+	option_name[3] = APPEND;
 	option[4] = "<<";
-	option_name[4] = "lex_HEREDOC";
+	option_name[4] = HEREDOC;
 	option[5] = NULL;
 	option_name[5] = NULL;
 }

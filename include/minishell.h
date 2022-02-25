@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 14:26:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:15:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,10 @@ size_t		get_envv_len(const char *s);
 # define EXE_ERROR "Execve function failure.\n"
 
 # define PIPE "lex_PIPE"
+# define IN "lex_INPUT"
+# define OUT "lex_OUTPUT"
+# define APPEND "lex_APPEND"
+# define HEREDOC "lex_HEREDOC"
 # define SINGLE '\''
 # define DOUBLE '"'
 # define EMPTY_LINE ""
@@ -183,10 +187,14 @@ int			is_quote(char symbol);
 char		*advance_line_quotes(char *line, char quote);
 int			advance_to_next_quote(char *line, int i);
 /* READER */
-void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
+void		arg_reader(char *argv[], char *envp[], t_arguments *args);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
+/* FILE REDIRECTION */
+void		management_file(char **table, t_arguments *args);
+void		file_setup(t_list *list_files, t_list *list_type, t_arguments *args);
+int			file_exists(char *str);
 /* Protoypes minishell execution. */
 
 /* EXECUTION */
@@ -206,7 +214,7 @@ last_son(int index, t_arguments *args);
 int
 single_son(t_arguments *args);
 /* AUXILIAR */
-int			file_exists(char *str);
+
 int			*arg_descriptors(t_arguments *args);
 void		*ft_lst_position(t_list *lst, int n);
 /* MEMORY MGMT */

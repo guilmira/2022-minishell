@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 15:30:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:24:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,17 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	table = NULL;
 	printer(lexer_table, lexer_type);
 	table = get_command_table(lexer_table, args, lexer_type);
+	management_file(lexer_table, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);
-	if (case_space(table[0]))
+	if (case_space(table[0]) || args->flag_file_in == -1)
 	{
 		ft_free_split(table);
+		if (args->flag_file_in)
+			printf("%s: No such file or directory\n", args->file_input);
 		args->flag_execution = 1;
 		return ;
 	}
-	arg_reader(count_table(args->argv), table, envp, args);
+	arg_reader(table, envp, args);
 	ft_free_split(table);
-		
 }

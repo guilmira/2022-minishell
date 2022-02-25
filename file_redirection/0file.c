@@ -6,14 +6,22 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/25 09:07:50 by guilmira         ###   ########.fr       */
+=======
+/*   Updated: 2022/02/25 11:11:31 by guilmira         ###   ########.fr       */
+>>>>>>> newguille
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /** PURPOSE : Adds name of the list to files. */
+<<<<<<< HEAD
 static void	prepare_file(char *content, t_list **list_input, t_arguments *args)
+=======
+static void	prepare_file(char *content, t_list **list_files, t_arguments *args)
+>>>>>>> newguille
 {	
 	char	*str;
 	
@@ -21,8 +29,12 @@ static void	prepare_file(char *content, t_list **list_input, t_arguments *args)
 	str = ft_strdup(content);
 	if (!str)
 		ft_shutdown(MEM, 0, args);
+<<<<<<< HEAD
 	ft_lstadd_back(list_input, ft_lstnew(str));
 	
+=======
+	ft_lstadd_back(list_files, ft_lstnew(str));
+>>>>>>> newguille
 }
 
 /** PURPOSE : Assign a number to each of the elements of the list. 
@@ -54,30 +66,32 @@ static void assign_type(char *content, t_list **list_type, t_arguments *args)
 void	management_file(char **table, t_arguments *args)
 {
 	int		i;
-	t_list	*list_input;
+	t_list	*list_files;
 	t_list	*list_type;
 
-	list_input = NULL;
+	list_files = NULL;
 	list_type = NULL;
 	i = -1;
 	while (table[++i])
 	{
 		if (!ft_strcmp(table[i], OUT) || !ft_strcmp(table[i], APPEND) || !ft_strcmp(table[i], IN) || !ft_strcmp(table[i], HEREDOC))
 		{
-			prepare_file(table[i + 1], &list_input, args);
+			prepare_file(table[i + 1], &list_files, args);
 			assign_type(table[i],  &list_type, args);
 		}
 	}
 	
 	int  *ptr;
-	while (list_input)
+	
+	file_setup(list_files, list_type, args);
+	while (list_files)
 	{
 		ptr = list_type->content;
-		printf("lista: %s\n", list_input->content);
-		printf("tipo: %i\n", *ptr);
-		list_input = list_input->next;
+		/* printf("lista: %s\n", list_files->content);
+		printf("tipo: %i\n", *ptr); */
+		list_files = list_files->next;
 		list_type = list_type->next;
 	}
-	file_setup(list_input, list_type, args);
-	ft_fullclear(list_input); ft_fullclear(list_type);
+	ft_fullclear(list_files);
+	ft_fullclear(list_type);
 }

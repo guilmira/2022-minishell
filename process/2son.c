@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/17 11:44:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 09:42:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	signal_management_sons(void)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 }
+
+//TODO, keep shell in execution
 
 /** PURPOSE : Recieves input from file if needed. */
 static void	input_form_file(char *path)
@@ -124,8 +126,6 @@ int	single_son(t_arguments *args)
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
-	printf("%s\n", command_struct->command[0]); //COMMAND TOP
-	printf("%s\n", command_struct->path);
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);
