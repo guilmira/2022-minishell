@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/24 09:40:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 08:52:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,9 @@ void		arg_reader(int argc, char *argv[], char *envp[], t_arguments *args);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
+/* FILE REDIRECTION */
+void		management_file(char **table, t_arguments *args);
+int			file_exists(char *str);
 /* Protoypes minishell execution. */
 
 /* EXECUTION */
@@ -210,7 +213,7 @@ last_son(int index, t_arguments *args);
 int
 single_son(t_arguments *args);
 /* AUXILIAR */
-int			file_exists(char *str);
+
 int			*arg_descriptors(t_arguments *args);
 void		*ft_lst_position(t_list *lst, int n);
 /* MEMORY MGMT */

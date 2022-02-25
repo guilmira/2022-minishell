@@ -6,23 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:04:00 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/08 12:21:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 08:53:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/** PURPOSE : Does the path of the command exist? Returns bool. */
-int	file_exists(char *str)
-{
-	int	fp;
-
-	fp = open(str, O_RDONLY);
-	if (fp == -1)
-		return (0);
-	close(fp);
-	return (1);
-}
 
 /** PURPOSE : Build an int array with every file descriptor of pipes. */
 int	*arg_descriptors(t_arguments *args)

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/24 09:50:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 09:01:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ static t_list	*load_linked_list(char **table, char **envp, int total_commands)
 	ft_free_split(folders);
 	return (lst);
 }
+
+
 
 /** PURPOSE : Load arguments into structure. 
  * 1. Allocates memory for structure.
