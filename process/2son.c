@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 11:51:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:59:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void	signal_management_sons(void)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 }
-
-//TODO, keep shell in execution
 
 /** PURPOSE : Recieves input from file if needed. */
 static void	input_form_file(char *path)
