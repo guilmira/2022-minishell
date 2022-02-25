@@ -77,6 +77,11 @@ int
 		i++;
 	}
 	set_status(args, 0);
+	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+	{
+		mnge_heredoc(command_struct);
+		return (1);
+	}
 	return (execve(command_struct->path, command_struct->command, args->envp));
 }
 
@@ -106,10 +111,13 @@ int
 		i++;
 	}
 	set_status(args, 0);
+	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+	{
+		mnge_heredoc(command_struct);
+		return (1);
+	}
 	return (execve(command_struct->path, command_struct->command, args->envp));
 }
-
-
 
 /** PURPOSE : Executes a one only forked proccess. */
 int	single_son(t_arguments *args)
@@ -126,6 +134,11 @@ int	single_son(t_arguments *args)
 	if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
+	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+	{
+		mnge_heredoc(command_struct);
+		return (1);
+	}
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);

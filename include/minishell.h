@@ -113,6 +113,7 @@ char		*ft_multistr_concat(int count, ...);
 char		*find_tail(char **args, int i);
 char		*find_head(char **args, t_arguments *arg, int i, const char *tail);
 size_t		get_envv_len(const char *s);
+void		mnge_heredoc(t_command *command_struct);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
