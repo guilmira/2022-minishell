@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 08:52:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 09:30:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ void		shell_reader(char *envp[], t_arguments *args);
 char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
 /* FILE REDIRECTION */
 void		management_file(char **table, t_arguments *args);
+void		file_setup(t_list *list_files, t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
 /* Protoypes minishell execution. */
 

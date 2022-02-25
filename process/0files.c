@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 12:48:01 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 08:49:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 09:19:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static int	file_arrangement_out(int argc, char *argv[], t_arguments *args)
 {
 	int	i;
 	
-
 	i = -1;
 	while (++i < argc)
 		if (file_symbol_detected(argv[i], '>'))

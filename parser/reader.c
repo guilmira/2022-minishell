@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 08:46:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:09:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ static int case_space(char *str)
 	return (1);
 }
 
-
-
-
-
 /** PURPOSE : Reads command line. Loads arguments into structure. 
  * 1. Reads command line and applies a pre-filter.
  * 2. Parses and rearranges arguments. i.e: "ls -la" will be a single arg.
@@ -89,7 +85,7 @@ void	shell_reader(char *envp[], t_arguments	*args)
 	management_file(lexer_table, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);
-	if (case_space(table[0]))
+	if (case_space(table[0]) || args->flag_file_out == -1)
 	{
 		ft_free_split(table);
 		args->flag_execution = 1;

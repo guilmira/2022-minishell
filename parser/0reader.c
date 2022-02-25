@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 09:01:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 10:14:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ static t_list	*load_linked_list(char **table, char **envp, int total_commands)
  * 3. Creates linked list to manage any number of commands */
 void	arg_reader(int argc, char **table, char *envp[], t_arguments *args)
 {
-	file_management(argc, args->argv, args);
+	//file_management(argc, args->argv, args);
 	
 	args->commands_lst = load_linked_list(table, envp, args->total_commands);
 	if (!args->commands_lst)
