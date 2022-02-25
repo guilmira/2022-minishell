@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 10:02:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:11:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	management_file(char **table, t_arguments *args)
 	while (list_files)
 	{
 		ptr = list_type->content;
-		printf("lista: %s\n", list_files->content);
-		printf("tipo: %i\n", *ptr);
+		/* printf("lista: %s\n", list_files->content);
+		printf("tipo: %i\n", *ptr); */
 		list_files = list_files->next;
 		list_type = list_type->next;
 	}

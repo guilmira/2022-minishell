@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:51:24 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 10:14:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:11:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ static void	create_output_files(t_list *list_files, t_list *list_type, t_argumen
 		}
 		if ((*ptr) == 2)
 		{
+			args->file_input = list_files->content;
 			if (!file_exists(file))
 			{
 				args->flag_file_in = -1;
 				break;
 			}
 			args->flag_file_in = 1;
-			args->file_input = list_files->content;
 		}
 		list_files = list_files->next;
 		list_type = list_type->next;
