@@ -12,14 +12,10 @@
 
 #include "../include/minishell.h"
 
-/** PURPOSE : Call signal handler in child processes. */
-static void	signal_management_sons(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
-}
-
 //TODO, keep shell in execution
+
+int
+heredoc_routine(t_command *command_struct);
 
 /** PURPOSE : Recieves input from file if needed. */
 static void	input_form_file(char *path)
@@ -70,7 +66,7 @@ int
 	int			fd_write;
 	t_command	*command_struct;
 
-	signal_management_sons();
+	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct && !command_struct->command)
@@ -90,10 +86,7 @@ int
 	}
 	set_status(args, 0);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-	{
-		mnge_heredoc(command_struct);
-		return (1);
-	}
+		return (heredoc_routine(command_struct));
 	return (execve(command_struct->path, command_struct->command, args->envp));
 }
 
@@ -105,7 +98,7 @@ int
 	t_command	*command_struct;
 	int			i;
 
-	signal_management_sons();
+	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct && !command_struct->command)
@@ -126,10 +119,7 @@ int
 	}
 	set_status(args, 0);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-	{
-		mnge_heredoc(command_struct);
-		return (1);
-	}
+		return (heredoc_routine(command_struct));
 	return (execve(command_struct->path, command_struct->command, args->envp));
 }
 
@@ -138,7 +128,7 @@ int	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
 
-	signal_management_sons();
+	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
@@ -151,10 +141,7 @@ int	single_son(t_arguments *args)
 		output_to_file(args->file_output);
 	set_status(args, 0);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-	{
-		mnge_heredoc(command_struct);
-		return (1);
-	}
+		return (heredoc_routine(command_struct));
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);

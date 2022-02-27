@@ -114,6 +114,8 @@ char		*find_tail(char **args, int i);
 char		*find_head(char **args, t_arguments *arg, int i, const char *tail);
 size_t		get_envv_len(const char *s);
 void		mnge_heredoc(t_command *command_struct);
+void		set_signal(int sig_type);
+int			heredoc_routine(t_command *command_struct);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
@@ -145,6 +147,8 @@ void		mnge_heredoc(t_command *command_struct);
 # define SINGLE '\''
 # define DOUBLE '"'
 # define EMPTY_LINE ""
+
+# define HEREDOC_PROMPT "> "
 
 
 

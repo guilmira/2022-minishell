@@ -70,8 +70,7 @@ void	ft_leaks(void)
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
+	set_signal(1);
 	//atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);

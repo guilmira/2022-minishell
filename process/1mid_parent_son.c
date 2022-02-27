@@ -23,8 +23,7 @@ static int
 	t_command	*command_struct;
 	int			i;
 
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
+	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
