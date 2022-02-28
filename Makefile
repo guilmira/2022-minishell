@@ -18,10 +18,11 @@ CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 #CFLAGS		= -Wall -Wextra -Werror #-lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 #READLINE	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
-READLINE	= -lreadline -lcurses
+READLINE	=
 #sudo apt-get install libreadline-dev 
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
+LIB_READLINE = libreadline
 LIB			= $(LIB_DIR)/libft.a
 INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
 #--------------------------------------------------------------------------------------------------------------SOURCES
@@ -38,6 +39,20 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				printstemp.c \
 				signals.c ft_multistr_concat.c utilities_2.c heredoc.c
 OBJS		=	$(SRCS:.c=.o)
+
+OS_NAME			:= $(shell uname -s)
+ifeq ($(OS_NAME), Darwin)
+	INCLUDES		+= -I${LIB_READLINE}/include
+	READLINE		+= -L${LIB_READLINE}/lib
+	OS_V			:= $(shell sw_vers -productVersion | cut -f1,2 -d.)
+ifeq ($(shell echo "$(OS_V) <= 10.14" | bc), 1)
+	READLINE		+= -lreadline_macos_v10_14 -lcurses
+else
+	READLINE		+= -lreadline_macos_v10_15 -lcurses
+endif
+else
+	READLINE		+= -lreadline -lcurses
+endif
 #--------------------------------------------------------------------------------------------------------------RULES
 
 RM = rm -rf
