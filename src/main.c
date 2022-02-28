@@ -6,13 +6,15 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/28 15:07:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:19:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //en el proceso principal, tras los forks, todos los fd del pipe cerrados
 //ejecutarlos en paralelo, no en serie. todos los procesos del fork se lanazarian a la vez
 #include "../include/minishell.h"
+
+//coreegr echo " "what
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)

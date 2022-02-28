@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:53:32 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/17 12:25:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:27:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	count_pipes(char **lexer_table)
 	j = 0;
 	i = -1;
 	while (lexer_table[++i])
-		if (!ft_strcmp(lexer_table[i], PIPE))
+		if (!ft_strcmp(PIPE, lexer_table[i]))
 			j++;
 	return (j);
 }
