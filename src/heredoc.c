@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:25:59 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/25 13:26:00 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/02/28 14:49:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void
 		update_buf(&buf, readline_res);
 		free_pointers(1, readline_res);
 	}
-	rl_event_hook = NULL;
+	//rl_event_hook = NULL;
 	//free(buf);
 	//free(readline_res); //provokes segfault
 	//ft_putendl_fd(buf, 1); //where should we guard the result?
