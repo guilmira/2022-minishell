@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 10:24:28 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:25:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	shell_reader(char *envp[], t_arguments	*args)
 		args->flag_execution = 1;
 		return ;
 	}
+	//clear_table function. erase empty commands, as to ignore them (like echo "") then readapt things like number of commands 
+	//printf("%s\n", table[0]);
 	arg_reader(table, envp, args);
 	ft_free_split(table);
 }
