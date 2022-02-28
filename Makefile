@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/02/25 08:51:56 by guilmira         ###   ########.fr        #
+#    Updated: 2022/02/28 14:54:46 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				quote_mgmt.c quote_split.c quote_auxiliars.c \
 				0file.c 1file_aux.c \
 				printstemp.c \
-				signals.c ft_multistr_concat.c utilities_2.c
+				signals.c ft_multistr_concat.c utilities_2.c heredoc.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/25 11:59:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 14:56:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	ft_leaks(void)
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
+	set_signal(1);
 	//atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);

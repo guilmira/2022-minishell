@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 11:59:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 14:56:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static void	signal_management_sons(void)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 }
+//TODO, keep shell in execution
+
+int
+heredoc_routine(t_command *command_struct);
 
 /** PURPOSE : Recieves input from file if needed. */
 static void	input_form_file(char *path)
@@ -68,7 +72,7 @@ int
 	int			fd_write;
 	t_command	*command_struct;
 
-	signal_management_sons();
+	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct && !command_struct->command)
@@ -87,6 +91,8 @@ int
 		i++;
 	}
 	set_status(args, 0);
+	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+		return (heredoc_routine(command_struct));
 	return (execve(command_struct->path, command_struct->command, args->envp));
 }
 
@@ -98,7 +104,7 @@ int
 	t_command	*command_struct;
 	int			i;
 
-	signal_management_sons();
+	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct && !command_struct->command)
@@ -118,17 +124,17 @@ int
 		i++;
 	}
 	set_status(args, 0);
+	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+		return (heredoc_routine(command_struct));
 	return (execve(command_struct->path, command_struct->command, args->envp));
 }
-
-
 
 /** PURPOSE : Executes a one only forked proccess. */
 int	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
 
-	signal_management_sons();
+	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
@@ -140,6 +146,8 @@ int	single_son(t_arguments *args)
 	else if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
+	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+		return (heredoc_routine(command_struct));
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);
