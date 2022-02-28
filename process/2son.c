@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/28 15:25:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 16:57:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	output_to_file(char *path)
 	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
 	if (fd_file < 0)
 		ft_shut(FILE_ERROR, 1);
-	printf("HERE %s\n", path);
 	if (dup2(fd_file, STDOUT_FILENO) == -1)
 		ft_shut(DUP_ERROR, 0);
 	close(fd_file);
@@ -70,7 +69,7 @@ int
 	int			i;
 	int			fd_write;
 	t_command	*command_struct;
-printf("HERE %d\n", args->flag_file_out);
+printf("HERE firdt %d\n", args->flag_file_out);
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
@@ -136,19 +135,22 @@ int	single_son(t_arguments *args)
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	printf("HERE %d\n", args->flag_file_out);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
  	if (args->flag_file_in)
 		input_form_file(args->file_input);
 	if (args->flag_file_out == 2)
+	{
+
+	printf("HERE signle %d\n", args->flag_file_out);
 		output_to_file_append(args->file_output);
+	}
 	else if (args->flag_file_out)
 		output_to_file(args->file_output);
-	
 	set_status(args, 0);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
+	//printf("fin %s y %s\n", command_struct->path, command_struct->command[1]);
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);
