@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/24 09:42:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:18:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ int	*class_lex_table(char **lexer_table)
 	i = -1;
 	while (lexer_table[++i])
 	{
-		if (!ft_strcmp(lexer_table[i], PIPE))
+		if (!ft_strcmp(lexer_table[i], " "))
+			type[i] = 6;
+		else if (!ft_strcmp(lexer_table[i], PIPE))
 			type[i] = 0;
 		else if (is_lex_symbol(lexer_table[i]))
 			type[i] = 1;
@@ -76,7 +78,7 @@ int	*class_lex_table(char **lexer_table)
 			type[i] = 3;
 		else if (is_heredoc(lexer_table[i]))
 			type[i] = 4;
-		else if (i != 0 && type[i - 1] == 1)
+		else if (i != 0 && (type[i - 1] == 1 || type[i - 1] == 3 || type[i - 1] == 4))
 			type[i] = 2;
 		else
 			type[i] = 5;

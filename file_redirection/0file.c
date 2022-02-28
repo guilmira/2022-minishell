@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 11:33:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:58:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ static void assign_type(char *content, t_list **list_type, t_arguments *args)
 	if (!ptr)
 		ft_shutdown(MEM, 0, args);
 	*ptr = -1;
-	if (!ft_strcmp(content, OUT))
+	if (!ft_strcmp(OUT, content))
 		*ptr = 1;
-	else if (!ft_strcmp(content, IN))
+	else if (!ft_strcmp(IN, content))
 		*ptr = 2;
-	else if (!ft_strcmp(content, APPEND))
+	else if (!ft_strcmp(APPEND, content))
 		*ptr = 3;
-	else if (!ft_strcmp(content, HEREDOC))
+	else if (!ft_strcmp(HEREDOC, content))
 		*ptr = 4;
 	ft_lstadd_back(list_type, ft_lstnew(ptr));
 }
@@ -61,7 +61,7 @@ void	management_file(char **table, t_arguments *args)
 	i = -1;
 	while (table[++i])
 	{
-		if (!ft_strcmp(table[i], OUT) || !ft_strcmp(table[i], APPEND) || !ft_strcmp(table[i], IN) || !ft_strcmp(table[i], HEREDOC))
+		if (!ft_strcmp(OUT, table[i]) || !ft_strcmp(APPEND, table[i]) || !ft_strcmp(IN, table[i]) || !ft_strcmp(HEREDOC, table[i]))
 		{
 			prepare_file(table[i + 1], &list_files, args);
 			assign_type(table[i],  &list_type, args);
@@ -69,7 +69,8 @@ void	management_file(char **table, t_arguments *args)
 	}
 	//provisional
 	int  *ptr;
-	file_setup(list_files, list_type, args);
+	if (list_files && list_type)
+		file_setup(list_files, list_type, args);
 	while (list_files)
 	{
 		ptr = list_type->content;

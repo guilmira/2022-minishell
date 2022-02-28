@@ -6,12 +6,18 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 11:51:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/02/28 16:57:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+/** PURPOSE : Call signal handler in child processes. */
+/* static void	signal_management_sons(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
+} */
 //TODO, keep shell in execution
 
 int
@@ -23,8 +29,6 @@ static void	input_form_file(char *path)
 	int	fd_file;
 
 	fd_file = open(path, O_RDONLY);
-	/* if (fd_file < 0)
-		perror("ERROR:"); */
 	if (fd_file < 0)
 		ft_shut(FILE_ERROR, 1);
 	if (dup2(fd_file, STDIN_FILENO) == -1)
@@ -65,7 +69,7 @@ int
 	int			i;
 	int			fd_write;
 	t_command	*command_struct;
-
+printf("HERE firdt %d\n", args->flag_file_out);
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
@@ -133,15 +137,20 @@ int	single_son(t_arguments *args)
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
-	if (args->flag_file_in)
+ 	if (args->flag_file_in)
 		input_form_file(args->file_input);
 	if (args->flag_file_out == 2)
+	{
+
+	printf("HERE signle %d\n", args->flag_file_out);
 		output_to_file_append(args->file_output);
+	}
 	else if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
+	//printf("fin %s y %s\n", command_struct->path, command_struct->command[1]);
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);
