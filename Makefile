@@ -19,7 +19,7 @@ CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -
 #CFLAGS		= -Wall -Wextra -Werror #-lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 #READLINE	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 READLINE	=
-#sudo apt-get install libreadline-dev 
+#sudo apt-get install libreadline-dev
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
 LIB_READLINE = libreadline
@@ -42,7 +42,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 OS_NAME			:= $(shell uname -s)
 ifeq ($(OS_NAME), Darwin)
-	INCLUDES		+= -I${LIB_READLINE}/include
+	INCLUDES		+= -I ./${LIB_READLINE}/include/readline
 	READLINE		+= -L${LIB_READLINE}/lib
 	OS_V			:= $(shell sw_vers -productVersion | cut -f1,2 -d.)
 ifeq ($(shell echo "$(OS_V) <= 10.14" | bc), 1)
@@ -64,7 +64,7 @@ $(LIB):
 	@make -C $(LIB_DIR)
 
 $(NAME): $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) $(OBJS) $(READLINE) $(INCLUDES) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(READLINE) $(LIB) -o $(NAME)
 	@echo $(GREEN) "$(NAME) compiled" $(NONE)
 
 exe: $(NAME)
