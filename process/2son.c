@@ -149,7 +149,11 @@ int	single_son(t_arguments *args)
 		output_to_file(args->file_output);
 	set_status(args, 0);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+	{
+		printf("struct 0 = %s, struct 1 = %s\n", command_struct->command[0], command_struct->command[1]);
+
 		return (heredoc_routine(command_struct));
+	}
 	//printf("fin %s y %s\n", command_struct->path, command_struct->command[1]);
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{

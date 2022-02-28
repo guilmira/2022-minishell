@@ -35,9 +35,13 @@ void
 	delim = command_struct->command[1];
 	readline_res = NULL;
 	buf = ft_strdup("");
+	printf("delim = %s\n", command_struct->command[1]);
+	printf("grv = %d\n", g_rv);
 	while (delim && g_rv)
 	{
+		printf("IN HERE\n");
 		readline_res = readline(HEREDOC_PROMPT);
+		printf("readline_res = %s\n", readline_res);
 		if (!readline_res)
 		{
 			ft_putendl_fd("minishell: warning: here-document delimited by end-of-file (wanted `%s\')\n", 2);// manage %
@@ -48,7 +52,7 @@ void
 		update_buf(&buf, readline_res);
 		free_pointers(1, readline_res);
 	}
-	rl_event_hook = NULL;
+	//rl_event_hook = NULL;
 	//free(buf);
 	//free(readline_res); //provokes segfault
 	//ft_putendl_fd(buf, 1); //where should we guard the result?
