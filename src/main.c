@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/01 10:10:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:23:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 //ejecutarlos en paralelo, no en serie. todos los procesos del fork se lanazarian a la vez
 #include "../include/minishell.h"
 
-
+//TODO: commandos simples con comillas, deben ser una undad. les haces split en loaded linked list.
 //TODO, : thing like [echo "hola ' "] must work and its not working at the moment
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */

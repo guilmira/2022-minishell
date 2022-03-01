@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/01 09:17:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:24:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,16 +135,13 @@ int	single_son(t_arguments *args)
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
+	printf("HERE %s\n", get_env_var(args->envp, "PATH"));
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
  	if (args->flag_file_in)
 		input_form_file(args->file_input);
 	if (args->flag_file_out == 2)
-	{
-
-	printf("HERE signle %d\n", args->flag_file_out);
 		output_to_file_append(args->file_output);
-	}
 	else if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
