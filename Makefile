@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/02/28 14:54:46 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/01 09:25:39 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				lexer.c lexer_class.c lexer_list.c build_command_table.c  \
 				quote_mgmt.c quote_split.c quote_auxiliars.c \
 				0file.c 1file_aux.c \
+				0dollar_expansion.c \
 				printstemp.c \
 				signals.c ft_multistr_concat.c utilities_2.c heredoc.c
 OBJS		=	$(SRCS:.c=.o)
@@ -56,7 +57,7 @@ endif
 #--------------------------------------------------------------------------------------------------------------RULES
 
 RM = rm -rf
-VPATH = include src parser pre_filter file_redirection lexer lexer_quotes process
+VPATH = include src parser pre_filter file_redirection lexer lexer_quotes lexer_dollar_exp process
 
 all: $(LIB) $(NAME)
 
