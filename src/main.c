@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/28 18:19:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/01 10:10:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 //ejecutarlos en paralelo, no en serie. todos los procesos del fork se lanazarian a la vez
 #include "../include/minishell.h"
 
-//coreegr echo " "what
+
+//TODO, : thing like [echo "hola ' "] must work and its not working at the moment
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)

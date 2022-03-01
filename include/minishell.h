@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 10:15:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/01 09:50:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int			heredoc_routine(t_command *command_struct);
 # define HEREDOC "lex_HEREDOC"
 # define SINGLE '\''
 # define DOUBLE '"'
+# define EXPAN '$'
 # define EMPTY_LINE ""
 
 # define HEREDOC_PROMPT "> "
@@ -196,6 +197,8 @@ void		arg_reader(char *argv[], char *envp[], t_arguments *args);
 void		shell_reader(char *envp[], t_arguments *args);
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
+/* DOLLAR EXPANSION */
+char		**dollar_expansion(char **table, t_arguments *args);
 /* FILE REDIRECTION */
 void		management_file(char **table, t_arguments *args);
 void		file_setup(t_list *list_files, t_list *list_type, t_arguments *args);
