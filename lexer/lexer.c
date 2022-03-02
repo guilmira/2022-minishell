@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 12:22:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:32:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char	**main_lexer(char *line, t_arguments *args)
 		ft_free_split(lexer_table);
 		return (NULL);
 	}
-	lexer_table = dollar_expansion(lexer_table, args);
-	lexer_table = remove_quote(lexer_table);
+	//lexer_table = dollar_expansion(lexer_table, args);
+	//lexer_table = remove_quote(lexer_table);
 	return (lexer_table);
 }
