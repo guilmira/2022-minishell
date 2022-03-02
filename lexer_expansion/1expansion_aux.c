@@ -6,13 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 13:41:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:54:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/** PURPOSE : Builds a signle string from all nodes. */
+/** PURPOSE : Builds a single string from all nodes. */
 char	*build_from_list(t_list *list)
 {
 	char	*str;
@@ -70,6 +70,7 @@ static char	*get_variable_onstring(char *str)
 	return (new_str);
 }
 
+/** PURPOSE : Turn value of variable into a string and adds it to a linked list. */
 static int   variable_to_string(char *str, int i, t_list **list, t_arguments *args)
 {
 	char	*value;
@@ -114,7 +115,6 @@ char	*ultra_expansion(char *str, t_arguments *args)
 			while (str[i] && str[i] != EXPAN && str[i] != SINGLE)
 				i++;
 			fix_previous_line(str, t, i, &list);
-            printf("%i\n", i);
 		}
 		t = i;
 	}
