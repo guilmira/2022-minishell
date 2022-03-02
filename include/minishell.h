@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/01 09:50:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 09:31:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,10 +157,11 @@ void	init_options(char **option, char **option_name);
 
 void printer(char **table, int *org);
 
-t_list	*build_lexer_list(char *line);
+
 
 char *build_new_line(t_list *list);
-void	fix_previous_line(char *line, int t, int i, t_list **list);
+
+
 
 
 int	ignore_symbol(char *str, int position);
@@ -185,6 +186,7 @@ int			prepare_process(int fd_to_close, int fd_to_prepare);
 char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);
 char		**remove_quote(char **table);
+t_list		*build_lexer_list(char *line);
 /* QUOTE MANAGEMENT */
 char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
@@ -203,6 +205,8 @@ char		**dollar_expansion(char **table, t_arguments *args);
 void		management_file(char **table, t_arguments *args);
 void		file_setup(t_list *list_files, t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
+/* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
+void		fix_previous_line(char *line, int t, int i, t_list **list);
 /* Protoypes minishell execution. */
 
 /* EXECUTION */
