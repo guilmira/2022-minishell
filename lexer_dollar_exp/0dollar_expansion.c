@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:21:40 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 11:46:05 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:31:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,18 @@ int	needs_expansion(char *str)
 	i = 0;
 	while (str[i])
 	{
-		printf("aqui\n");
 		if (!ft_strchr(&str[i], EXPAN))
 			return (0);
 		if (str[i] == SINGLE)
 		{
 			
 			i = advance_to_next_quote(str, i);
-			printf("%i\n", i);
 			if (!str[i])
 				break;
 		}
 		else if (str[i] == EXPAN && str[i + 1])
 		{
-			if (str[i + 1] != SINGLE && str[i + 1] != DOUBLE && str[i + 1] != EXPAN)
+			if (str[i + 1] != SINGLE && str[i + 1] != DOUBLE && str[i + 1] != EXPAN) //ifisalfanumer
 				return (1);
 			i++;
 		}

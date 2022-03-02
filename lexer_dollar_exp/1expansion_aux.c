@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 11:52:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:47:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,18 @@ static char	*get_variable_onstring(char *str)
 			new_str = ft_substr(str, 1, i - 1);
 			break;
 		}
+        printf("va %i\n", i);
 	}
 	return (new_str);
 }
 
 static int   variable_to_string(char *str, int i, t_list **list, t_arguments *args)
 {
-    char	*fragment;
 	char	*value;
+    char	*fragment;
     
-    fragment = NULL;
 	value = NULL;
+    fragment = NULL;
     fragment = get_variable_onstring(&str[i]);
 	value = get_env_var(args->envp, fragment);
     printf("value: %s\n", value);
@@ -105,19 +106,17 @@ char	*ultra_expansion(char *str, t_arguments *args)
 		{
 			i = advance_to_next_quote(str, i);
 			fix_previous_line(str, t, i, &list);
-			t = i + 1;
 		}
 		else if (str[i] == EXPAN)
 		{
-            i = variable_to_string(&str[i], i, &list, args);
-			t = i + 1;
+            i = variable_to_string(str, i, &list, args);
 		}
 		else
 		{
 			while (str[i] && str[i] != EXPAN && str[i] != SINGLE)
 				i++;
 			fix_previous_line(str, t, i, &list);
-			t = i;
+            printf("%i\n", i);
 		}
 		t = i;
 	}

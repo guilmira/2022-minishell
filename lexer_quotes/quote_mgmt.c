@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 11:47:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:22:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*clean_quotes(char *str)
 
 	if (is_quote(str[0]) && is_quote(str[1]) && !str[2])
 		new_str = ft_strdup(" ");
-	if (str[0] == SINGLE)
+	else if (str[0] == SINGLE)
 		new_str = ft_strtrim(str, "'");
 	else if (str[0] == DOUBLE)
 		new_str = ft_strtrim(str, "\"");
@@ -147,6 +147,8 @@ char	*ultra_quotes(char *str)
 	return (new_str);
 }
 
+//echo hola"" leak
+
 /** PURPOSE : Takes a table of strings and erases the quotes.
  * It works for both " and '. Some examples: 
  * ls "-l-a"			--> 	ltable[0] = ls, table[1] = -l-a. */
@@ -159,6 +161,7 @@ char	**remove_quote(char **table)
 	i = -1;
 	new_str = NULL;
 	str = NULL;
+	
 	while (table[++i])
 	{
 		str = table[i];
