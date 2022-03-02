@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/02 13:33:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:36:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 //TODO: commandos simples con comillas, deben ser una undad. les haces split en loaded linked list.
 //TODO, : thing like [echo "hola ' "] must work and its not working at the moment
+
+//TODO: this segfaults export a=ls b=wc delta=-l comeonletsgo=|
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 12:47:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:41:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static char	*get_variable_onstring(char *str)
 			new_str = ft_substr(str, 1, i - 1);
 			break;
 		}
-        printf("va %i\n", i);
 	}
 	return (new_str);
 }
@@ -80,7 +79,6 @@ static int   variable_to_string(char *str, int i, t_list **list, t_arguments *ar
     fragment = NULL;
     fragment = get_variable_onstring(&str[i]);
 	value = get_env_var(args->envp, fragment);
-    printf("value: %s\n", value);
     ft_lstadd_back(list, ft_lstnew(value));
     i = advance_to_next_variable(str, i);
 	free(fragment);
