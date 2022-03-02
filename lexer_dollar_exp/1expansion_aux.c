@@ -6,16 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 10:28:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 11:47:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
-
-
-
+/** PURPOSE : Builds a signle string from all nodes. */
 char	*build_from_list(t_list *list)
 {
 	char	*str;
@@ -81,42 +78,30 @@ char	*ultra_expansion(char *str, t_arguments *args)
 	int		i;
 	int		t;
 	char	*new_str;
-	char	*fragment;
-	char	*value;
 	t_list	*list;
-
 
 	i = 0;
 	t = 0;
 	list = NULL;
 	new_str = NULL;
-	fragment = NULL;
-	value = NULL;
 	while (str[i])
 	{
 		if (str[i] == SINGLE)
 		{
 			i = advance_to_next_quote(str, i);
 			fix_previous_line(str, t, i, &list);
-			t = i + 1;
+			t = i + 1;//quiza
 		}
 		else if (str[i] == EXPAN)
 		{
-			fragment = get_variable_onstring(&str[i]);
-			i = advance_to_next_fragment(str, i);
-			t = i + 1;
-			value = get_env_var(args->envp, fragment);
-			printf("value: %s\n", value);
-			ft_lstadd_back(&list, ft_lstnew(value));
-
-			free(fragment);
+            i = variable_to_string(&str[i], i, &list, args);
+			t = i + 1; //quiza
 		}
 		else
 		{
 			while (str[i] && str[i] != EXPAN && str[i] != SINGLE)
 				i++;
 			fix_previous_line(str, t, i, &list);
-			t = i;
 		}
 		t = i;
 	}

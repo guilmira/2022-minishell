@@ -146,7 +146,6 @@ int	single_son(t_arguments *args)
 	set_status(args, 0);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	//printf("fin %s y %s\n", command_struct->path, command_struct->command[1]);
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);
