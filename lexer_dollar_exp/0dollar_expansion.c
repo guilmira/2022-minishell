@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:21:40 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/01 10:06:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 11:16:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,30 @@ char	*ultra_expansion(char *str, t_arguments *args)
 static int	needs_expansion(char *str)
 {
 	int	i;
-
-	i = -1;
-	while (str[++i])
+	
+	i = 0;
+	while (str[i])
 	{
+		printf("aqui\n");
+		if (!ft_strchr(&str[i], EXPAN))
+			return (0);
 		if (str[i] == SINGLE)
 		{
+			
 			i = advance_to_next_quote(str, i);
+			printf("%i\n", i);
 			if (!str[i])
 				break;
 		}
 		else if (str[i] == EXPAN && str[i + 1])
-			if (str[i + 1] != SINGLE && str[i + 1] != DOUBLE)
+		{
+			if (str[i + 1] != SINGLE && str[i + 1] != DOUBLE && str[i + 1] != EXPAN)
 				return (1);
+			i++;
+		}
+		else
+			i++;
+		
 	}
 	return (0);
 }
@@ -89,12 +100,11 @@ char	**dollar_expansion(char **table, t_arguments *args)
 		str = table[i];
 		if (needs_expansion(str))
 		{
-			printf("NECESTA EXPANDIR\n");
-			args = (void *) args;
-			/* new_str = ultra_expansion(str, args);
+			new_str = ultra_expansion(str, args);
 			free(str);
-			table[i] = new_str; */
+			table[i] = new_str;
 		}
 	}
+	
 	return (table);
 }
