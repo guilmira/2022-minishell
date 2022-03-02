@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 11:47:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 11:52:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,21 @@ static char	*get_variable_onstring(char *str)
 	return (new_str);
 }
 
+static int   variable_to_string(char *str, int i, t_list **list, t_arguments *args)
+{
+    char	*fragment;
+	char	*value;
+    
+    fragment = NULL;
+	value = NULL;
+    fragment = get_variable_onstring(&str[i]);
+	value = get_env_var(args->envp, fragment);
+    printf("value: %s\n", value);
+    ft_lstadd_back(list, ft_lstnew(value));
+    i = advance_to_next_variable(str, i);
+	free(fragment);
+    return (i);
+}
 
 /** PURPOSE : Takes a string, expands $VARIABLES by loading
  * a linked list and then joiniing each node to create a single string result. */
@@ -90,18 +105,19 @@ char	*ultra_expansion(char *str, t_arguments *args)
 		{
 			i = advance_to_next_quote(str, i);
 			fix_previous_line(str, t, i, &list);
-			t = i + 1;//quiza
+			t = i + 1;
 		}
 		else if (str[i] == EXPAN)
 		{
             i = variable_to_string(&str[i], i, &list, args);
-			t = i + 1; //quiza
+			t = i + 1;
 		}
 		else
 		{
 			while (str[i] && str[i] != EXPAN && str[i] != SINGLE)
 				i++;
 			fix_previous_line(str, t, i, &list);
+			t = i;
 		}
 		t = i;
 	}

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 09:31:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 11:49:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ void		shell_reader(char *envp[], t_arguments *args);
 char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
 /* DOLLAR EXPANSION */
 char		**dollar_expansion(char **table, t_arguments *args);
+char		*ultra_expansion(char *str, t_arguments *args);
 /* FILE REDIRECTION */
 void		management_file(char **table, t_arguments *args);
 void		file_setup(t_list *list_files, t_list *list_type, t_arguments *args);
