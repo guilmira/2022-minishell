@@ -46,6 +46,7 @@ typedef struct s_command
 typedef struct s_program
 {
 	char	**envp;
+	char	**lenvp;
 	int		status;
 	char	**builtin_str;
 }	t_prog;
@@ -64,6 +65,7 @@ typedef struct s_arguments
 	char	*file_output;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
+	char	**lenvp;
 	char	**builtin_str;
 	int		status;
 	t_list	*commands_lst;
@@ -117,6 +119,7 @@ void		mnge_heredoc(t_command *command_struct);
 void		set_signal(int sig_type);
 int			heredoc_routine(t_command *command_struct);
 bool		var_have_val(char **envp, char *needle);
+void		export_new_l_variables(char **args, t_arguments *arg);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

@@ -68,6 +68,7 @@ void
 	ft_putendl_fd("", 2);
 	ft_putendl_fd("exit", 2);
 	ft_free_split(args->envp);
+	ft_free_split(args->lenvp);
 	free_heap_memory(args);
 	exit(EXIT_SUCCESS);
 }

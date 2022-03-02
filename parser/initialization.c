@@ -33,6 +33,7 @@ t_prog	*initalize_prog(char **envp, char **builtin_str)
 	if (!prog)
 		ft_shut(MEM, 0);
 	prog->envp = copy_array(prog->envp, envp, 1);
+	prog->lenvp = (char **)malloc(1 * sizeof(char *));
 	init_builtins(builtin_str);
 	prog->builtin_str = builtin_str;
 	prog->status = 0;
@@ -48,7 +49,8 @@ t_arguments	*intialize_arg(t_prog *prog)
 	if (!args)
 		ft_shut(MEM, 0);
 	args->argv = NULL;
-	args->commands_lst = NULL;
+	//args->commands_lst = NULL;
+	args->commands_lst = (t_list *)malloc(sizeof(t_command));
 	args->flag_execution = 0;
 	args->command_number = 0;
 	args->total_commands = 0;
@@ -60,7 +62,10 @@ t_arguments	*intialize_arg(t_prog *prog)
 	args->prog = prog;
 	if (args->envp)
 		ft_free_split(args->envp);
+	if (args->lenvp)
+		ft_free_split(args->lenvp);
 	args->envp = copy_array(args->envp, prog->envp, 1);
+	args->lenvp = (char **)malloc(1 * sizeof(char *));
 	init_builtin_func_arr(args->builtin_func);
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;

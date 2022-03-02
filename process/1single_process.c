@@ -29,6 +29,17 @@ int
 	while (++i < msh_num_builtins(args))
 		if (ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]) == 0)
 			return ((args->builtin_func[i])(command_struct->command, args));
+	i = 0;
+	int n;
+	n = get_arr_len(command_struct->command);
+	export_new_l_variables(command_struct->command, args);
+	/*while (i < n)
+	{
+		if (!ft_strchr(command_struct->command[i], '='))
+			continue ;
+
+		i++;
+	}*/
 	g_rv = 1;
 	identifier = fork();
 	if (identifier == 0)

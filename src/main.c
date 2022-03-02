@@ -25,6 +25,9 @@ static void	store_program(t_prog *prog, t_arguments *args)
 	if (prog->envp)
 		ft_free_split(prog->envp);
 	prog->envp = copy_array(prog->envp, args->envp, 1);
+	if (prog->lenvp)
+		ft_free_split(prog->lenvp);
+	prog->lenvp = copy_array(prog->lenvp, args->lenvp, 1);
 	prog->status = args->status;
 	prog->builtin_str = args->builtin_str;
 }
@@ -53,12 +56,14 @@ int
 				break ;
 		store_program(prog, arguments);
 		ft_free_split(arguments->envp);
+		ft_free_split(arguments->lenvp);
 		free_heap_memory(arguments);
 		//system("leaks minishell");
 	}
 	ft_free_split(prog->envp);
 	free(prog);
 	ft_free_split(arguments->envp);
+	ft_free_split(arguments->lenvp);
 	ret = arguments->status;
 //	free_pointers(1, arguments);
 	free_heap_memory(arguments);
