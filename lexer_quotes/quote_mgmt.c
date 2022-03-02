@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:34:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 12:22:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:28:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,14 @@ static int	needs_remove(char *str)
  * As in "example". */
 static char	*clean_quotes(char *str)
 {
+	char	*tmp;
 	char	*new_str;
 
+	tmp = NULL;
+	new_str = NULL;
 	if (is_quote(str[0]) && is_quote(str[1]) && !str[2])
-		new_str = ft_strdup(" ");
-	else if (str[0] == SINGLE)
+		tmp = ft_strdup(" ");
+	if (str[0] == SINGLE)
 		new_str = ft_strtrim(str, "'");
 	else if (str[0] == DOUBLE)
 		new_str = ft_strtrim(str, "\"");
@@ -91,6 +94,8 @@ static char	*clean_quotes(char *str)
 		new_str = ft_strdup(str);
 	if (!new_str)
 		return (NULL);
+	if (new_str && tmp)
+		free (tmp);
 	return (new_str);
 }
 

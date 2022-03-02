@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/15 12:48:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:30:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int
 	}
 	else if (identifier > 0)
 	{
-		//d seg fault en este momento cuand purebo /Users/guilmira/Desktop/kev/ms/minishell
 		wait(&status);
 	}
 	else
