@@ -38,7 +38,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				0file.c 1file_aux.c \
 				0dollar_expansion.c \
 				printstemp.c \
-				signals.c ft_multistr_concat.c utilities_2.c heredoc.c
+				signals.c ft_multistr_concat.c utilities_2.c heredoc.c builtin_utils_2.c
 OBJS		=	$(SRCS:.c=.o)
 
 OS_NAME			:= $(shell uname -s)

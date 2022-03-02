@@ -116,6 +116,7 @@ size_t		get_envv_len(const char *s);
 void		mnge_heredoc(t_command *command_struct);
 void		set_signal(int sig_type);
 int			heredoc_routine(t_command *command_struct);
+bool		var_have_val(char **envp, char *needle);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
