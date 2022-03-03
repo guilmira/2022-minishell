@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 13:03:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 13:11:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,11 @@ static int   variable_to_string(char *str, int i, t_list **list, t_arguments *ar
 		value = get_env_var(args->envp, fragment);
 		if (!fragment)
 			ft_shutdown("Failure on env variable\n", 1, args);
+		if (!value) 
+		value = get_env_var(args->lenvp, fragment);
 		if (!value)
 			value = ft_strdup(" "); 
-		//printf("val: %s\n", value);
+		printf("value obtained(either local or global is): %s\n", value);
 		free(fragment);
     	i = advance_to_next_variable(str, i);
 	}
