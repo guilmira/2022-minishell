@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:21:40 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 07:16:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 07:20:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,23 @@ int	needs_expansion(char *str)
 {
 	int	i;
 	
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if (!ft_strchr(&str[i], EXPAN))
 			return (0);
 		if (str[i] == SINGLE)
 		{
-			
 			i = advance_to_next_quote(str, i);
 			if (!str[i])
 				break;
+			i = i - 1;
 		}
 		else if (str[i] == EXPAN && str[i + 1])
 		{
 			if (str[i + 1] == RIDDLER || ft_isalnum(str[i + 1]))
 				return (1);
-			i++;
 		}
-		else
-			i++;
 	}
 	return (0);
 }
@@ -62,6 +59,7 @@ char	**dollar_expansion(char **table, t_arguments *args)
 		str = table[i];
 		if (needs_expansion(str))
 		{
+			printf("ENTRA\n"); //export a=whatever b=dhhskhg
 			new_str = ultra_expansion(str, args);
 			free(str);
 			table[i] = new_str;

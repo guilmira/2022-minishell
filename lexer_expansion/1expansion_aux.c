@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 13:54:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 07:27:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,19 @@ static int   variable_to_string(char *str, int i, t_list **list, t_arguments *ar
     
 	value = NULL;
     fragment = NULL;
-    fragment = get_variable_onstring(&str[i]);
-	value = get_env_var(args->envp, fragment);
+	if (str[i + 1] == RIDDLER)
+	{
+		value = ft_itoa(args->status);
+		i = i + 2;
+	}
+	else
+	{
+    	fragment = get_variable_onstring(&str[i]);
+		value = get_env_var(args->envp, fragment);
+		free(fragment);
+    	i = advance_to_next_variable(str, i);
+	}
     ft_lstadd_back(list, ft_lstnew(value));
-    i = advance_to_next_variable(str, i);
-	free(fragment);
     return (i);
 }
 
