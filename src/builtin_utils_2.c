@@ -17,7 +17,7 @@ bool
 {
 	char	*var;
 
-	var = get_env_var(envp, needle);
+	var = get_env_var(envp, needle, false);
 	if (!var)
 		return (false);
 	if (!ft_strchr(needle, '='))

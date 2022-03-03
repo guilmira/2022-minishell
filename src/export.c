@@ -85,6 +85,10 @@ void
 	i = 0;
 	while (args[++i])
 	{
+		temp = NULL;
+		temp = get_env_var(arg->lenvp, args[i], true);
+		if (temp)
+			args[i] = temp;
 		if (var_have_val(arg->envp, args[i]))
 			continue ;
 		delete_env_var(arg, get_envv_len(args[i]), args[i]);

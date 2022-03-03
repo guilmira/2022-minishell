@@ -96,7 +96,8 @@ void		export_new_variables(char **args, t_arguments *arg);
 void		export_multi_var(char *const *args, int i,
 				 size_t envp_len, char **new_envp);
 void		loop_and_print_echo_args(char **args, t_arguments *arg, int i);
-char		*get_env_var(char **envp, char *needle);
+char *
+get_env_var(char **envp, char *needle, bool do_expand);
 void		renew_pwds(t_arguments *arg, char *old_path);
 char		*ft_concat(const char *s1, const char *s2);
 void		set_status(t_arguments *arg, int status);

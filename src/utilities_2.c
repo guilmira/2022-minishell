@@ -53,10 +53,10 @@ char *
 	if (tail)
 	{
 		var_len = ft_strchr(args[i], '=') - (args[i] + 1);
-		head = get_env_var(arg->envp, ft_substr(args[i] + 1, 0, var_len));
+		head = get_env_var(arg->envp, ft_substr(args[i] + 1, 0, var_len), false);
 	}
 	else
-		head = get_env_var(arg->envp, args[i] + 1);
+		head = get_env_var(arg->envp, args[i] + 1, false);
 	return (head);
 }
 

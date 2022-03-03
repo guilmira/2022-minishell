@@ -17,7 +17,7 @@
 ** If variable is not found returns NULL
 */
 char *
-	get_env_var(char **envp, char *needle)
+get_env_var(char **envp, char *needle, bool do_expand)
 {
 	char	*var;
 	int		i;
@@ -32,7 +32,10 @@ char *
 		if (!ft_memcmp(envp[i], var, len))
 		{
 			free_pointers(1, var);
-			var = ft_strdup(envp[i] + len);
+			if (do_expand)
+				var = ft_strdup(envp[i]);
+			else
+				var = ft_strdup(envp[i] + len);
 			return (var);
 		}
 		i++;
@@ -88,9 +91,9 @@ void
 	(*old_path) = ft_strjoin("OLDPWD=", cwd);
 	free_pointers(1, cwd);
 	if (!args[1] || !ft_memcmp(args[1], "~", 2) || !ft_memcmp(args[1], "--", 3))
-		(*path) = get_env_var(arg->envp, "HOME");
+		(*path) = get_env_var(arg->envp, "HOME", false);
 	else if (!ft_memcmp(args[1], "-", 2))
-		(*path) = get_env_var(arg->envp, "OLDPWD");
+		(*path) = get_env_var(arg->envp, "OLDPWD", false);
 	else
 		(*path) = ft_strdup(args[1]);
 }
