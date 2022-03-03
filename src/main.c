@@ -62,6 +62,7 @@ int
 		//system("leaks minishell");
 	}
 	ft_free_split(prog->envp);
+	ft_free_split(prog->lenvp);
 	free(prog);
 	ft_free_split(arguments->envp);
 	ft_free_split(arguments->lenvp);

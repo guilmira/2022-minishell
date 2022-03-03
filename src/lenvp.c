@@ -60,9 +60,15 @@ bool
 	while (args[i])
 	{
 		if (ft_strchr(args[i], '$'))
+		{
+			i++;
 			continue ;
+		}
 		if (!ft_strchr(args[i], '='))
+		{
+			i++;
 			continue ;
+		}
 		ret = true;
 		delete_lenv_var(arg, get_envv_len(args[i]), args[i]);
 		lenvp_len = get_arr_len(arg->lenvp);

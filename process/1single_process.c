@@ -29,9 +29,6 @@ int
 	while (++i < msh_num_builtins(args))
 		if (ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]) == 0)
 			return ((args->builtin_func[i])(command_struct->command, args));
-	i = 0;
-	int n;
-	n = get_arr_len(command_struct->command);
 	if (export_new_l_variables(command_struct->command, args))
 		return (1);
 	g_rv = 1;
