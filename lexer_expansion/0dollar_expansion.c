@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:21:40 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 07:20:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 07:45:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ char	**dollar_expansion(char **table, t_arguments *args)
 	i = -1;
 	new_str = NULL;
 	str = NULL;
+	
 	while (table[++i])
 	{
 		str = table[i];
 		if (needs_expansion(str))
 		{
-			printf("ENTRA\n"); //export a=whatever b=dhhskhg
 			new_str = ultra_expansion(str, args);
 			free(str);
 			table[i] = new_str;

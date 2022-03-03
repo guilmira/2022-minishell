@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 14:52:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 09:10:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	is_one_of_lexer_symbols(char symbol)
 	return (0);
 }
 
+/* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void	fix_previous_line(char *line, int t, int i, t_list **list)
 {
 	int		lenght;
