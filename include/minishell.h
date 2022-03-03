@@ -91,7 +91,7 @@ size_t		get_arr_len(char **arr);
 void		**get_arr(size_t elem_num, size_t elem_size);
 void		copy_arr_entries(char **dest, char **src, size_t n);
 int			count_chars(char *p, char *needle);
-void		delete_env_var(t_arguments *arg, size_t len, const char *tmp);
+void		delete_env_var(char **envp, size_t len, const char *tmp);
 void		export_new_variables(char **args, t_arguments *arg);
 void		export_multi_var(char *const *args, int i,
 				 size_t envp_len, char **new_envp);

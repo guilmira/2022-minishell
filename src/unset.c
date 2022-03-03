@@ -16,23 +16,23 @@
 ** SYNOPSIS: deletes environmental variable.
 */
 void
-	delete_env_var(t_arguments *arg, size_t len, const char *tmp)
+	delete_env_var(char **envp, size_t len, const char *tmp)
 {
 	int		i;
 	char	*tmp2;
 
 	i = 0;
-	while (arg->envp[i])
+	while (envp[i])
 	{
-		if (!ft_strncmp(arg->envp[i], tmp, len))
+		if (!ft_strncmp(envp[i], tmp, len))
 		{
-			tmp2 = arg->envp[i];
-			arg->envp[i] = NULL;
+			tmp2 = envp[i];
+			envp[i] = NULL;
 			free_pointers(1, tmp2);
-			while (arg->envp[i + 1])
+			while (envp[i + 1])
 			{
-				arg->envp[i] = arg->envp[i + 1];
-				arg->envp[i + 1] = NULL;
+				envp[i] = envp[i + 1];
+				envp[i + 1] = NULL;
 				i++;
 			}
 			return ;
@@ -58,7 +58,8 @@ int
 		{
 			tmp = ft_strjoin(args[i], "=");
 			len = ft_strlen(tmp);
-			delete_env_var(arg, len, tmp);
+			delete_env_var(arg->envp, len, tmp);
+			delete_env_var(arg->lenvp, len, tmp);
 			free_pointers(1, tmp);
 			i++;
 		}

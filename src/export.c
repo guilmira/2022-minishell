@@ -91,7 +91,7 @@ void
 			args[i] = temp;
 		if (var_have_val(arg->envp, args[i]))
 			continue ;
-		delete_env_var(arg, get_envv_len(args[i]), args[i]);
+		delete_env_var(arg->envp, get_envv_len(args[i]), args[i]);
 		envp_len = get_arr_len(arg->envp);
 		new_envp = copy_array(new_envp, arg->envp, 2);
 		if (!ft_strchr(args[i], '='))
