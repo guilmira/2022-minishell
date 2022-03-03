@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:06:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/16 12:34:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 12:07:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,35 @@ int	advance_to_next_quote(char *line, int i)
 		}
 	}
 	return (i);
+}
+
+/** PURPOSE : Build new line from a linked list. */
+char	*build_new_line(t_list *list)
+{
+	char	*str;
+	char	*tmp;
+	char	*fragment;
+
+	str = NULL;
+	fragment = NULL;
+	tmp = NULL;
+	tmp = ft_strdup(" ");
+	if (!tmp)
+		return (NULL);
+	if (!list)
+		return (tmp);
+	while (list)
+	{
+		fragment = ft_strjoin(list->content, " ");
+		if (!fragment)
+			return (NULL);
+		str = ft_strjoin(tmp, fragment);
+		if (!str)
+			return (NULL);
+		free(tmp);
+		free(fragment);
+		tmp = str;
+		list = list->next;
+	}
+	return (str);
 }

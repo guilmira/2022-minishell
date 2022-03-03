@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 09:10:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 13:03:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*build_from_list(t_list *list)
 	str = NULL;
 	tmp = NULL;
 	str = ft_strdup(list->content);
+	if (!str)
+		return (NULL);
 	list = list->next;
 	while (list)
 	{
@@ -72,7 +74,7 @@ static char	*get_variable_onstring(char *str)
 }
 
 /** PURPOSE : Turn value of variable into a string and adds it to a linked list. */
-static int   variable_to_string(char *str, int i, t_list *list, t_arguments *args)
+static int   variable_to_string(char *str, int i, t_list **list, t_arguments *args)
 {
 	char	*value;
     char	*fragment;
@@ -92,10 +94,11 @@ static int   variable_to_string(char *str, int i, t_list *list, t_arguments *arg
 			ft_shutdown("Failure on env variable\n", 1, args);
 		if (!value)
 			value = ft_strdup(" "); 
+		//printf("val: %s\n", value);
 		free(fragment);
     	i = advance_to_next_variable(str, i);
 	}
-    ft_lstadd_back(&list, ft_lstnew(value));
+    ft_lstadd_back(list, ft_lstnew(value));
     return (i);
 }
 
@@ -123,7 +126,7 @@ char	*ultra_expansion(char *str, t_arguments *args)
 		}
 		else if (str[i] == EXPAN)
 		{
-            i = variable_to_string(str, i, list, args);
+            i = variable_to_string(str, i, &list, args);
 		}
 		else
 		{
@@ -132,8 +135,9 @@ char	*ultra_expansion(char *str, t_arguments *args)
 			fix_previous_line(str, t, i, &list);
 		}
 		t = i;
-		
+
 	}
+	
 	new_str = build_from_list(list);
 	ft_fullclear(list);
 	return (new_str);

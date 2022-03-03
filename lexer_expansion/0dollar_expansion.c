@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:21:40 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 07:45:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 12:40:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	**dollar_expansion(char **table, t_arguments *args)
 	
 	while (table[++i])
 	{
+		printf("RESULT: %s\n", table[i]);
 		str = table[i];
 		if (needs_expansion(str))
 		{
@@ -64,7 +65,7 @@ char	**dollar_expansion(char **table, t_arguments *args)
 			free(str);
 			table[i] = new_str;
 		}
+		
 	}
-	
 	return (table);
 }

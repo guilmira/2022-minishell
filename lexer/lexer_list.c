@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 11:45:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 12:32:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ static char	*obtain_symbol(char *line, int i)
 } */
 
 
-
+/** PURPOSE : Redo line separating symbols that might come without spaces.
+ * Uses a linked list to load each fragmen of the new built line with spaces. */
 t_list	*build_lexer_list(char *line)
 {
 	int		i;
@@ -113,6 +114,8 @@ t_list	*build_lexer_list(char *line)
 		}
 		else if (ft_isspaces(line[i]))
 			i++;
+		else if (line[i] == '=') //export a=ls b=wc delta=-l co=|
+			i = i + 2;
 		else if (is_one_of_lexer_symbols(line[i])) //ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
 		{
 			fix_previous_line(line, t, i, &list);
@@ -134,32 +137,3 @@ t_list	*build_lexer_list(char *line)
 	return (list);
 }
 
-char	*build_new_line(t_list *list)
-{
-	char	*str;
-	char	*tmp;
-	char	*fragment;
-
-	str = NULL;
-	fragment = NULL;
-	tmp = NULL;
-	tmp = ft_strdup(" ");
-	if (!tmp)
-		return (NULL);
-	if (!list)
-		return (tmp);
-	while (list)
-	{
-		fragment = ft_strjoin(list->content, " ");
-		if (!fragment)
-			return (NULL);
-		str = ft_strjoin(tmp, fragment);
-		if (!str)
-			return (NULL);
-		free(tmp);
-		free(fragment);
-		tmp = str;
-		list = list->next;
-	}
-	return (str);
-}
