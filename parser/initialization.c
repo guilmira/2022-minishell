@@ -62,11 +62,17 @@ t_arguments	*intialize_arg(t_prog *prog)
 	args->prog = prog;
 	if (args->envp)
 		ft_free_split(args->envp);
-	if (args->lenvp)
-		ft_free_split(args->lenvp);
 	args->envp = copy_array(args->envp, prog->envp, 1);
-	args->lenvp = malloc(1 * sizeof(char *));
-	args->lenvp[0] = NULL;
+	if (!args->lenvp)
+	{
+		args->lenvp = malloc(1 * sizeof(char *));
+		args->lenvp[0] = NULL;
+	}
+	else
+	{
+		ft_free_split(args->lenvp);
+		args->lenvp = copy_array(args->lenvp, prog->lenvp, 1);
+	}
 	init_builtin_func_arr(args->builtin_func);
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;
