@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 11:49:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 07:09:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ export_new_l_variables(char **args, t_arguments *arg);
 # define SINGLE '\''
 # define DOUBLE '"'
 # define EXPAN '$'
+# define RIDDLER '?'
 # define EMPTY_LINE ""
 
 # define HEREDOC_PROMPT "> "
@@ -195,6 +196,7 @@ t_list		*build_lexer_list(char *line);
 /* QUOTE MANAGEMENT */
 char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
+char		*ultra_quotes(char *str);
 /* QUOTE AUXILIAR */
 int			is_quote(char symbol);
 char		*advance_line_quotes(char *line, char quote);
