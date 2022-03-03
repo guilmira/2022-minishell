@@ -119,7 +119,8 @@ void		mnge_heredoc(t_command *command_struct);
 void		set_signal(int sig_type);
 int			heredoc_routine(t_command *command_struct);
 bool		var_have_val(char **envp, char *needle);
-void		export_new_l_variables(char **args, t_arguments *arg);
+bool
+export_new_l_variables(char **args, t_arguments *arg);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

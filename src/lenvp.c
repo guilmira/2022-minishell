@@ -47,25 +47,31 @@ void
 		new_envp[envp_len] = ft_strdup(args[i]);
 }
 
-void
+bool
 	export_new_l_variables(char **args, t_arguments *arg)
 {
 	int		i;
 	size_t	lenvp_len;
 	char	**new_lenvp;
-//	char	*temp;
+	bool	ret;
 
+	ret = false;
 	i = 0;
-	while (args[++i])
+	while (args[i])
 	{
+		if (ft_strchr(args[i], '$'))
+			continue ;
+		if (!ft_strchr(args[i], '='))
+			continue ;
+		ret = true;
 		delete_lenv_var(arg, get_envv_len(args[i]), args[i]);
 		lenvp_len = get_arr_len(arg->lenvp);
 		new_lenvp = copy_array(new_lenvp, arg->lenvp, 2);
-		if (!ft_strchr(args[i], '='))
-			continue ;
 		export_new_l_vars_cont(args, i, lenvp_len, new_lenvp);
 		new_lenvp[lenvp_len + 1] = NULL;
 		ft_free_split(arg->lenvp);
 		arg->lenvp = new_lenvp;
+		i++;
 	}
+	return (ret);
 }

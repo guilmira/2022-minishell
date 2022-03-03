@@ -32,14 +32,8 @@ int
 	i = 0;
 	int n;
 	n = get_arr_len(command_struct->command);
-	export_new_l_variables(command_struct->command, args);
-	/*while (i < n)
-	{
-		if (!ft_strchr(command_struct->command[i], '='))
-			continue ;
-
-		i++;
-	}*/
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
 	g_rv = 1;
 	identifier = fork();
 	if (identifier == 0)
