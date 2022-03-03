@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:21:40 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 12:31:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 07:16:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ int	needs_expansion(char *str)
 		}
 		else if (str[i] == EXPAN && str[i + 1])
 		{
-			if (str[i + 1] != SINGLE && str[i + 1] != DOUBLE && str[i + 1] != EXPAN) //ifisalfanumer
+			if (str[i + 1] == RIDDLER || ft_isalnum(str[i + 1]))
 				return (1);
 			i++;
 		}
 		else
 			i++;
-		
 	}
 	return (0);
 }

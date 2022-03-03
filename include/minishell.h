@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 13:47:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 07:09:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ bool		var_have_val(char **envp, char *needle);
 # define SINGLE '\''
 # define DOUBLE '"'
 # define EXPAN '$'
+# define RIDDLER '?'
 # define EMPTY_LINE ""
 
 # define HEREDOC_PROMPT "> "
