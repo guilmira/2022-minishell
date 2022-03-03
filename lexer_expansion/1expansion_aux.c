@@ -89,11 +89,11 @@ static int   variable_to_string(char *str, int i, t_list **list, t_arguments *ar
 	else
 	{
     	fragment = get_variable_onstring(&str[i]);
-		value = get_env_var(args->envp, fragment);
 		if (!fragment)
 			ft_shutdown("Failure on env variable\n", 1, args);
+		value = get_env_var(args->envp, fragment, false);
 		if (!value)
-			value = get_env_var(args->lenvp, fragment);
+			value = get_env_var(args->lenvp, fragment, false);
 		printf("value obtained(either local or global is): %s\n", value);
 		if (!value)
 			value = ft_strdup(" "); 

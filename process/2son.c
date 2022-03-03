@@ -149,6 +149,8 @@ int	single_son(t_arguments *args)
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
 	{
 		set_status(args, 1);
+		ft_free_split(args->envp);
+		ft_free_split(args->lenvp);
 		ft_shutdown(EXE_ERROR, 0, args);
 	}
 	return (1);

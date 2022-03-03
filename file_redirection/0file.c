@@ -68,12 +68,12 @@ void	management_file(char **table, t_arguments *args)
 		}
 	}
 	//provisional
-	int  *ptr;
+	//int  *ptr;
 	if (list_files && list_type)
 		file_setup(list_files, list_type, args);
 	while (list_files)
 	{
-		ptr = list_type->content;
+		//ptr = list_type->content;
 		/* printf("lista: %s\n", list_files->content);
 		printf("tipo: %i\n", *ptr); */
 		list_files = list_files->next;
