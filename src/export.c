@@ -88,7 +88,10 @@ void
 		temp = NULL;
 		temp = get_env_var(arg->lenvp, args[i], true);
 		if (temp)
+		{
 			args[i] = temp;
+			delete_env_var(arg->lenvp, get_envv_len(temp), temp);
+		}
 		if (var_have_val(arg->envp, args[i]))
 			continue ;
 		delete_env_var(arg->envp, get_envv_len(args[i]), args[i]);
@@ -123,7 +126,7 @@ int
 		arr = copy_array(arr, arg->envp, 1);
 		ft_str_arr_sort(arr, get_arr_len(arr));
 		print_str_arr(arr, 1);
-		ft_free_split(arr);
+		ft_free_split(arr); //may be we can print arr-envp directly
 	}
 	else
 		export_new_variables(args, arg);

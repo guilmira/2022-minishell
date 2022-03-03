@@ -84,11 +84,13 @@ int
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
-		if (ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]) == 0)
+		if (!ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]))
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
 	set_status(args, 0);
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
 	return (execve(command_struct->path, command_struct->command, args->envp));
@@ -117,11 +119,13 @@ int
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
-		if (ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]) == 0)
+		if (!ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]))
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
 	set_status(args, 0);
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
 	return (execve(command_struct->path, command_struct->command, args->envp));
@@ -144,6 +148,8 @@ int	single_son(t_arguments *args)
 	else if (args->flag_file_out)
 		output_to_file(args->file_output);
 	set_status(args, 0);
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
 	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
