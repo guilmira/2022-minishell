@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:49:33 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 08:59:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 09:35:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void printer(char **table, int *org)
 
 	i = -1;
 	while (table[++i])
-		printf("tabla %i: %12s  % 4i\n", i, table[i], org[i]);
+		printf("tabla %i:         _%s_  % 4i\n", i, table[i], org[i]);
 	printf("--------------\n");
 }

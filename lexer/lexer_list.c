@@ -6,13 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 09:10:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:44:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	is_one_of_lexer_symbols(char symbol)
+static int	is_one_of_lexer_symbols(char symbol)
 {
 	int		i;
 	char	*option[TOTAL_SYMBOLS + 1];
@@ -39,6 +39,7 @@ void	fix_previous_line(char *line, int t, int i, t_list **list)
 		return ;
 	lenght = i - t;
 	str = ft_substr(line, t, lenght);
+	printf("%s\n", str); //"ls -l" "|" "wc -l"
 	if (!str)
 		return ;
 	ft_lstadd_back(list, ft_lstnew(str));
@@ -65,8 +66,9 @@ static char	*obtain_symbol(char *line, int i)
 	return (str);
 }
 
+//OBSOLETO
 /** PURPOSE : Advance string to next position skiping ALL quotes. */
-int	advance_to_last_quote(char *line, int i)
+/* static int	advance_to_last_quote(char *line, int i)
 {
 	if (!line)
 		return (i);
@@ -88,7 +90,9 @@ int	advance_to_last_quote(char *line, int i)
 			return (i);
 	}
 	return (i);
-}
+} */
+
+
 
 t_list	*build_lexer_list(char *line)
 {
@@ -104,14 +108,16 @@ t_list	*build_lexer_list(char *line)
 	{
 		if (is_quote(line[i]))
 		{
-			i = advance_to_last_quote(line, i);
-			i++;
+			i = advance_to_next_quote(line, i);
+			fix_previous_line(line, t, i, &list);
+			t = i;
 		}
 		else if (ft_isspaces(line[i]))
 			i++;
-		else if (is_one_of_lexer_symbols(line[i]))
+		else if (is_one_of_lexer_symbols(line[i])) //ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
 		{
 			fix_previous_line(line, t, i, &list);
+			printf("pilla %c (%i) hasta %c (%i)\n", line[t], t, line[i], i);
 			t = i + 1;
 			str = obtain_symbol(line, i);
 			if (line[i + 1] == '<' || line[i + 1] == '>')
@@ -124,6 +130,7 @@ t_list	*build_lexer_list(char *line)
 		}
 		else
 			i++;
+	
 	}
 	fix_previous_line(line, t, i, &list);
 	return (list);
