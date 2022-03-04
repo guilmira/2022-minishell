@@ -17,7 +17,7 @@
 ** If variable is not found returns NULL
 */
 char *
-get_env_var(char **envp, char *needle, bool do_expand)
+	get_env_var(char **envp, char *needle, bool do_expand)
 {
 	char	*var;
 	int		i;
