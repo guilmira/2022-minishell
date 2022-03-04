@@ -52,7 +52,7 @@ void
 {
 	char	*temp_args[3];
 
-	temp_args[0] = "nothing";
+	temp_args[0] = "export";
 	temp_args[1] = var;
 	temp_args[2] = NULL;
 	export_new_variables(temp_args, arg);

@@ -21,6 +21,18 @@ void
 		new_envp[envp_len] = ft_strdup(args[i]);
 }
 
+char **
+	pack_single_var(char *var)
+{
+	char	**arr;
+
+	arr = (char **)get_arr(3, sizeof(char *));
+	arr[0] = "export";
+	arr[1] = var;
+	arr[2] = NULL;
+	return (arr);
+}
+
 bool
 	export_new_l_variables(char **args, t_arguments *arg)
 {
@@ -76,13 +88,7 @@ bool
 			arg->lenvp = new_lenvp;
 		}
 		else
-		{
-			char	*arr[3];
-			arr[0] = "export";
-			arr[1] = args[i];
-			arr[2] = NULL;
-			export_new_variables(arr, arg);
-		}
+			set_new_var(args[i], arg);
 		i++;
 	}
 	return (ret);

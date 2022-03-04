@@ -126,7 +126,7 @@ int
 		arr = copy_array(arr, arg->envp, 1);
 		ft_str_arr_sort(arr, get_arr_len(arr));
 		print_str_arr(arr, 1);
-		ft_free_split(arr); //may be we can print arr-envp directly
+		ft_free_split(arr);
 	}
 	else
 		export_new_variables(args, arg);

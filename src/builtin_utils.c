@@ -71,20 +71,6 @@ char *
 }
 
 void
-	set_shlvl(t_arguments *arg, char *tmp)
-{
-	char	**arr;
-
-	arr = (char **)get_arr(3, sizeof(char *));
-	arr[0] = "export";
-	arr[1] = tmp;
-	arr[2] = NULL;
-	export_new_variables(arr, arg);
-	free(arr[1]);
-	free(arr);
-}
-
-void
 	set_shlvl_num(t_arguments *arg)
 {
 	static bool	shlvl_set;
@@ -102,7 +88,8 @@ void
 			num_tmp = ft_itoa(num + 1);
 			tmp = ft_strjoin("SHLVL=", num_tmp);
 			free_pointers(1, num_tmp);
-			set_shlvl(arg, tmp);
+			set_new_var(tmp, arg);
+			free_pointers(1, tmp);
 		}
 		shlvl_set = true;
 	}

@@ -94,10 +94,9 @@ int			count_chars(char *p, char *needle);
 void		delete_env_var(char **envp, size_t len, const char *tmp);
 void		export_new_variables(char **args, t_arguments *arg);
 void		export_multi_var(char *const *args, int i,
-				 size_t envp_len, char **new_envp);
+		size_t envp_len, char **new_envp);
 void		loop_and_print_echo_args(char **args, t_arguments *arg, int i);
-char *
-get_env_var(char **envp, char *needle, bool do_expand);
+char		*get_env_var(char **envp, char *needle, bool do_expand);
 void		renew_pwds(t_arguments *arg, char *old_path);
 char		*ft_concat(const char *s1, const char *s2);
 void		set_status(t_arguments *arg, int status);
@@ -120,8 +119,8 @@ void		mnge_heredoc(t_command *command_struct);
 void		set_signal(int sig_type);
 int			heredoc_routine(t_command *command_struct);
 bool		var_have_val(char **envp, char *needle);
-bool
-export_new_l_variables(char **args, t_arguments *arg);
+bool		export_new_l_variables(char **args, t_arguments *arg);
+void		set_new_var(char *var, t_arguments *arg);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
