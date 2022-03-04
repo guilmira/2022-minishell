@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 
 /*
-** SYNOPSIS: converts string passed to exit commadn to int.
+** SYNOPSIS: converts string passed to exit command to int.
 ** Specific version of ft_atoi function.
 */
 int

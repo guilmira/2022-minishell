@@ -121,6 +121,8 @@ int			heredoc_routine(t_command *command_struct);
 bool		var_have_val(char **envp, char *needle);
 bool		export_new_l_variables(char **args, t_arguments *arg);
 void		set_new_var(char *var, t_arguments *arg);
+void		expand_l_var(char **args, t_arguments *arg, int i, char *temp);
+void		get_rid_of_quotes(char **args, size_t i, char *str);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

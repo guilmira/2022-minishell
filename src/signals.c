@@ -26,7 +26,6 @@ void
 {
 	if (signum == SIGQUIT)
 	{
-		//rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -34,7 +33,6 @@ void
 	{
 		g_rv = 0; //update status accordingly
 		rl_replace_line("", 0);
-		//rl_on_new_line();
 		rl_redisplay();
 	}
 }

@@ -78,7 +78,7 @@ void
 }
 
 /*
-** SYNOPSIS: gets correct path depending of the argument
+** SYNOPSIS: gets correct path depending on the argument
 ** passed to cd  command ('--' or '~').
 */
 void
