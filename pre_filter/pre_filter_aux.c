@@ -6,14 +6,15 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:47:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 16:42:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:21:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// OBSOLETO PARA BORRAR
 /** PURPOSE : Reads string and evaluates if the char "quotes" is unclosed. */
-static int	non_closed_quote(char *line, char quotes)
+/* static int	non_closed_quote(char *line, char quotes)
 {
 	int	i;
 	int	j;
@@ -40,10 +41,10 @@ static int	non_closed_quote(char *line, char quotes)
 		}
 	}
 	return (not_closed);
-}
+} */
 
 /** PURPOSE : Checks for a command line that has " and ' . */
-static char	*double_quote_filter(char *line, int flag)
+/* static char	*double_quote_filter(char *line, int flag)
 {
 	if (ft_strchr(line, DOUBLE) > ft_strchr(line, SINGLE))
 	{
@@ -64,10 +65,10 @@ static char	*double_quote_filter(char *line, int flag)
 		line = advance_line_quotes(line, DOUBLE);
 	}
 	return (line);
-}
+} */
 
 /** PURPOSE : Prevent unclosed quotes in command line. */
-int	quotes_filter(char *line)
+/* int	quotes_filter(char *line)
 {
 	int	flag;
 
@@ -90,6 +91,34 @@ int	quotes_filter(char *line)
 				return (1);
 			line = advance_line_quotes(line, DOUBLE);
 			line = advance_line_quotes(line, SINGLE);
+		}
+	}
+	return (0);
+} */
+
+/** PURPOSE : Prevent unclosed quotes in command line. */
+int	quotes_filter(char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i] == SINGLE)
+		{
+			while (line[++i])
+				if (line[i] == SINGLE)
+					break ;
+			if (line[i] != SINGLE)
+				return (1);
+		}
+		else if (line[i] == DOUBLE)
+		{
+			while (line[++i])
+				if (line[i] == DOUBLE)
+					break ;
+			if (line[i] != DOUBLE)
+				return (1);
 		}
 	}
 	return (0);
