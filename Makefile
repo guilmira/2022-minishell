@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/07 16:11:30 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/07 17:30:39 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
 SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
   				builtin_utils.c utilities.c echo.c cd.c export.c unset.c \
   				exit.c ft_strtok.c \
-				execution.c 0files.c 0parser.c 0reader.c \
+				execution.c 0files.c 0parser.c 0linked_listed.c \
 				1mid_parent_son.c 1single_process.c 2son.c 3single_son.c 4auxiliar.c 5mgmt.c 6file_creator.c \
 				initialization.c reader.c \
 				pre_filter.c pre_filter_simple.c pre_filter_advanced.c pre_filter_aux.c \

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:21:40 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 12:40:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:49:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	needs_expansion(char *str)
 {
 	int	i;
-	
+
 	i = -1;
 	while (str[++i])
 	{
@@ -27,7 +27,7 @@ int	needs_expansion(char *str)
 		{
 			i = advance_to_next_quote(str, i);
 			if (!str[i])
-				break;
+				break ;
 			i = i - 1;
 		}
 		else if (str[i] == EXPAN && str[i + 1])
@@ -46,7 +46,6 @@ int	needs_expansion(char *str)
  * 	--> 	table[0] = ls (output result, ls) */
 char	**dollar_expansion(char **table, t_arguments *args)
 {
-
 	int		i;
 	char	*new_str;
 	char	*str;
@@ -54,7 +53,6 @@ char	**dollar_expansion(char **table, t_arguments *args)
 	i = -1;
 	new_str = NULL;
 	str = NULL;
-	
 	while (table[++i])
 	{
 		str = table[i];
@@ -64,7 +62,6 @@ char	**dollar_expansion(char **table, t_arguments *args)
 			free(str);
 			table[i] = new_str;
 		}
-		
 	}
 	return (table);
 }

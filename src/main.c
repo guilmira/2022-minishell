@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/07 16:44:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:33:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 
 //TODO funcion de checckeo por si te meten un Null en la talbla, 
 //por memoria o de la manera que sea, cierre minishell en shutdown.
-
-//' ' " " " ' '   segfault
-
-//"""""""""''
-
-//""'""
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 13:16:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:54:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,8 @@ static int	advance_to_next_variable(char *line, int i)
 	if (!line)
 		return (i);
 	while (line[++i])
-	{
 		if (line[i] == RIDDLER || !ft_isalnum(line[i]) || ft_isspaces(line[i]))
-			break;
-
-	}
+			break ;
 	return (i);
 }
 
@@ -65,7 +62,7 @@ static char	*get_variable_onstring(char *str)
 		if (str[i] == RIDDLER || ft_isspaces(str[i]) || !ft_isalnum(str[i]))
 		{
 			new_str = ft_substr(str, 1, i - 1);
-			break;
+			break ;
 		}
 		else if (!str[i + 1])
 			new_str = ft_substr(str, 1, i);
@@ -73,14 +70,16 @@ static char	*get_variable_onstring(char *str)
 	return (new_str);
 }
 
-/** PURPOSE : Turn value of variable into a string and adds it to a linked list. */
-static int   variable_to_string(char *str, int i, t_list **list, t_arguments *args)
+/** PURPOSE : Turn value of variable into a string 
+ * and adds it to a linked list. */
+static int   variable_to_string(char *str, int i, \
+t_list **list, t_arguments *args)
 {
 	char	*value;
-    char	*fragment;
-    
+	char	*fragment;
+
 	value = NULL;
-    fragment = NULL;
+	fragment = NULL;
 	if (str[i + 1] == RIDDLER)
 	{
 		value = ft_itoa(args->status);
@@ -88,7 +87,7 @@ static int   variable_to_string(char *str, int i, t_list **list, t_arguments *ar
 	}
 	else
 	{
-    	fragment = get_variable_onstring(&str[i]);
+		fragment = get_variable_onstring(&str[i]);
 		if (!fragment)
 			ft_shutdown("Failure on env variable\n", 1, args);
 		value = get_env_var(args->envp, fragment, false);
@@ -96,16 +95,17 @@ static int   variable_to_string(char *str, int i, t_list **list, t_arguments *ar
 			value = get_env_var(args->lenvp, fragment, false);
 		printf("value obtained(either local or global is): %s\n", value);
 		if (!value)
-			value = ft_strdup(" "); 
+			value = ft_strdup(" ");
 		free(fragment);
-    	i = advance_to_next_variable(str, i);
+		i = advance_to_next_variable(str, i);
 	}
-    ft_lstadd_back(list, ft_lstnew(value));
-    return (i);
+	ft_lstadd_back(list, ft_lstnew(value));
+	return (i);
 }
 
-/** PURPOSE : Takes a string, expands $VARIABLES by loading
- * a linked list and then joiniing each node to create a single string result. */
+/** PURPOSE : Takes a string.
+ * 1. Expands $VARIABLES by loading a linked list.
+ * 2. Joins each node and creates a single string.  */
 char	*ultra_expansion(char *str, t_arguments *args)
 {
 	int		i;
@@ -120,16 +120,14 @@ char	*ultra_expansion(char *str, t_arguments *args)
 	while (str[i])
 	{
 		if (!str[i])
-			break;
+			break ;
 		if (str[i] == SINGLE)
 		{
 			i = advance_to_next_quote(str, i);
 			fix_previous_line(str, t, i, &list);
 		}
 		else if (str[i] == EXPAN)
-		{
-            i = variable_to_string(str, i, &list, args);
-		}
+			i = variable_to_string(str, i, &list, args);
 		else
 		{
 			while (str[i] && str[i] != EXPAN && str[i] != SINGLE)
@@ -137,9 +135,7 @@ char	*ultra_expansion(char *str, t_arguments *args)
 			fix_previous_line(str, t, i, &list);
 		}
 		t = i;
-
 	}
-	
 	new_str = build_from_list(list);
 	ft_fullclear(list);
 	return (new_str);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 13:46:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 13:47:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:41:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ char	*erase_quote(char *str, char sym)
 	last = ft_strrchr(str, sym) - str;
 	return (stirng_quote_copy(new_str, str, first, last));
 }
-
-
 
 /** PURPOSE : Cleans quotes from string.
  * Expects the string that has been previously treated.
