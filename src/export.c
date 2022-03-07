@@ -46,6 +46,23 @@ void
 		new_envp[envp_len] = ft_strdup(args[i]);
 }
 
+bool
+is_valid_var(char *const *args, t_arguments *arg, int i)
+{
+	char	*temp;
+
+	if (!isalpha(*args[i]))
+	{
+		set_status(arg, 1);
+		temp = ft_multistr_concat(3, "minishell: export: '", args[i],
+				"': not a valid identifier");
+		perror(temp);
+		free_pointers(1, temp);
+		return (false);
+	}
+	return (true);
+}
+
 /*
 ** SYNOPSIS: called if there are more than 1 argument passed to export command.
 */
@@ -62,6 +79,8 @@ void
 	while (args[++i])
 	{
 		temp = NULL;
+		if (!is_valid_var(args, arg, i))
+			continue ;
 		temp2 = ft_concat(args[i], "=");
 		expand_l_var(args, arg, i, temp);
 		if (var_have_val(arg->envp, args[i]))
