@@ -60,7 +60,8 @@ static int case_space(char *str)
  * 2. Parses and rearranges arguments. i.e: "ls -la" will be a single arg.
  * 3. Counts number of total commands. i.e: "ls -la" "wc -l" = 2 total args.
  * 4. Creates linked list to manage any number of commands. */
-void	shell_reader(char *envp[], t_arguments	*args)
+void
+	shell_reader(t_arguments *args)
 {
 	char		*line;
 	char		**table;
@@ -93,6 +94,6 @@ void	shell_reader(char *envp[], t_arguments	*args)
 		args->flag_execution = 1;
 		return ;
 	}
-	arg_reader(table, envp, args);
+	arg_reader(table, args);
 	ft_free_split(table);
 }

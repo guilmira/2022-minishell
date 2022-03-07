@@ -127,7 +127,8 @@ static t_list	*load_linked_list(char **table, char **envp, int total_commands)
  * 1. Allocates memory for structure.
  * 2. Checks whether program needs to take into account in/output files.
  * 3. Creates linked list to manage any number of commands */
-void	arg_reader(char **table, char *envp[] __attribute__((unused)), t_arguments *args)
+void
+	arg_reader(char **table, t_arguments *args)
 {
 	//file_management(argc, args->argv, args);
 	args->commands_lst = load_linked_list(table, args->envp, args->total_commands);

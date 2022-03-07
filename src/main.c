@@ -49,7 +49,7 @@ int
 	{
 		arguments = intialize_arg(prog);
 		set_shlvl_num(arguments);
-		shell_reader(envp, arguments);
+		shell_reader(arguments);
 		if (arguments->flag_execution)
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
