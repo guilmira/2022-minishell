@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 12:32:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:02:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_list	*build_lexer_list(char *line)
 		}
 		else if (ft_isspaces(line[i]))
 			i++;
-		else if (line[i] == '=') //export a=ls b=wc delta=-l co=|
+		else if (line[i] == '=' && line[i + 1]) //export a=ls b=wc delta=-l co=|
 			i = i + 2;
 		else if (is_one_of_lexer_symbols(line[i])) //ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
 		{
