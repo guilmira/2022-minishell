@@ -6,13 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:47:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/22 15:31:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:42:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-
 
 /** PURPOSE : Reads string and evaluates if the char "quotes" is unclosed. */
 static int	non_closed_quote(char *line, char quotes)
@@ -31,13 +29,10 @@ static int	non_closed_quote(char *line, char quotes)
 			not_closed++;
 			j = i;
 			while (line[++j])
-			{
 				if (line[j] == quotes)
-				{
-					not_closed = 0;
 					break ;
-				}
-			}
+			if (line[j] == quotes)
+				not_closed = 0;
 			if (not_closed)
 				return (not_closed);
 			else
@@ -48,9 +43,9 @@ static int	non_closed_quote(char *line, char quotes)
 }
 
 /** PURPOSE : Checks for a command line that has " and ' . */
-static char *double_quote_filter(char *line, int flag)
+static char	*double_quote_filter(char *line, int flag)
 {
-	if (ft_strchr(line, DOUBLE) > ft_strchr(line, SINGLE)) //tratar las simples
+	if (ft_strchr(line, DOUBLE) > ft_strchr(line, SINGLE))
 	{
 		if (non_closed_quote(line, SINGLE))
 		{

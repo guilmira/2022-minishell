@@ -6,13 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:15:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/01 10:10:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:27:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-
 
 /** PURPOSE : Chech for arguments such as > " " */
 /* static int	hanging_quotes(char *line)

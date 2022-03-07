@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 07:09:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:15:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ typedef struct s_arguments
 	t_prog	*prog;
 }			t_arguments;
 
-void rl_replace_line(const char *txt, int clear_undo);
-
-
 /* Protoypes minishell builtins. */
 int			msh_echo(char **args, t_arguments *arg);
 int			msh_cd(char **args, t_arguments *arg);
@@ -93,8 +90,8 @@ void		copy_arr_entries(char **dest, char **src, size_t n);
 int			count_chars(char *p, char *needle);
 void		delete_env_var(char **envp, size_t len, const char *tmp);
 void		export_new_variables(char **args, t_arguments *arg);
-void		export_multi_var(char *const *args, int i,
-		size_t envp_len, char **new_envp);
+void		export_multi_var(char *const *args, int i, \
+			size_t envp_len, char **new_envp);
 void		loop_and_print_echo_args(char **args, t_arguments *arg, int i);
 char		*get_env_var(char **envp, char *needle, bool do_expand);
 void		renew_pwds(t_arguments *arg, char *old_path);
@@ -102,7 +99,8 @@ char		*ft_concat(const char *s1, const char *s2);
 void		set_status(t_arguments *arg, int status);
 bool		is_within_range(const char *str);
 int			atoi_exit_code(const char *str);
-void		init_builtin_func_arr(int (*builtin_func[])(char **, t_arguments *));
+void		init_builtin_func_arr(int (*builtin_func[])(char **, \
+			t_arguments *));
 void		init_builtins(char **builtin_str);
 void		free_pointers(int num, ...);
 char		*ft_strtok(char *str, const char *delim);
@@ -159,20 +157,14 @@ void		get_rid_of_quotes(char **args, size_t i, char *str);
 
 # define HEREDOC_PROMPT "> "
 
+/* TO delete. */
 
-
-void	init_options(char **option, char **option_name);
-
-void printer(char **table, int *org);
-
-
-
-char *build_new_line(t_list *list);
-
-
-
-
-int	ignore_symbol(char *str, int position);
+/* Others. */
+void		printer(char **table, int *org);
+void		init_options(char **option, char **option_name);
+char		*build_new_line(t_list *list);
+int			ignore_symbol(char *str, int position);
+void		rl_replace_line(const char *txt, int clear_undo);
 
 /* Protoypes minishell reader. */
 
@@ -204,41 +196,38 @@ int			is_quote(char symbol);
 char		*advance_line_quotes(char *line, char quote);
 int			advance_to_next_quote(char *line, int i);
 /* READER */
-void
-arg_reader(char **table, t_arguments *args);
-void
-shell_reader(t_arguments *args);
+void		arg_reader(char **table, t_arguments *args);
+void		shell_reader(t_arguments *args);
 /* READER SPLIT COMMANDS */
-char		**get_command_table(char **lexer_table, t_arguments *args, int *type);
+char		**get_command_table(char **lexer_table, \
+			t_arguments *args, int *type);
 /* DOLLAR EXPANSION */
 char		**dollar_expansion(char **table, t_arguments *args);
 char		*ultra_expansion(char *str, t_arguments *args);
 /* FILE REDIRECTION */
 void		management_file(char **table, t_arguments *args);
-void		file_setup(t_list *list_files, t_list *list_type, t_arguments *args);
+void		file_setup(t_list *list_files, \
+			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
 /* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void		fix_previous_line(char *line, int t, int i, t_list **list);
 /* Protoypes minishell execution. */
 
 /* EXECUTION */
-int
-process_exe(t_arguments *args);
+int			process_exe(t_arguments *args);
 int			msh_execute(char **args, t_arguments *arguments);
 /* PARENT PROCESS */
-int
-mid_process(t_arguments *args);
-int
-single_process(t_arguments *args);
+int			mid_process(t_arguments *args);
+int			single_process(t_arguments *args);
 /* SON PROCESS */
-int
-first_son(t_arguments *args);
-int
-last_son(int index, t_arguments *args);
-int
-single_son(t_arguments *args);
+int			first_son(t_arguments *args);
+int			last_son(int index, t_arguments *args);
+int			single_son(t_arguments *args);
+/* FILES AT SONS*/
+void		input_form_file(char *path);
+void		output_to_file(char *path);
+void		output_to_file_append(char *path);
 /* AUXILIAR */
-
 int			*arg_descriptors(t_arguments *args);
 void		*ft_lst_position(t_list *lst, int n);
 /* MEMORY MGMT */

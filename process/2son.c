@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/02 10:05:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:10:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,43 +23,7 @@
 int
 	heredoc_routine(t_command *command_struct);
 
-/** PURPOSE : Recieves input from file if needed. */
-static void	input_form_file(char *path)
-{
-	int	fd_file;
 
-	fd_file = open(path, O_RDONLY);
-	if (fd_file < 0)
-		ft_shut(FILE_ERROR, 1);
-	if (dup2(fd_file, STDIN_FILENO) == -1)
-		ft_shut(DUP_ERROR, 0);
-	close(fd_file);
-}
-
-/** PURPOSE : Sends output to file if needed. */
-static void	output_to_file(char *path)
-{
-	int	fd_file;
-
-	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
-	if (fd_file < 0)
-		ft_shut(FILE_ERROR, 1);
-	if (dup2(fd_file, STDOUT_FILENO) == -1)
-		ft_shut(DUP_ERROR, 0);
-	close(fd_file);
-}
-
-static void	output_to_file_append(char *path)
-{
-	int	fd_file;
-
-	fd_file = open(path, O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
-	if (fd_file < 0)
-		ft_shut(FILE_ERROR, 1);
-	if (dup2(fd_file, STDOUT_FILENO) == -1)
-		ft_shut(DUP_ERROR, 0);
-	close(fd_file);
-}
 
 /** PURPOSE : Executes first forked proccess. The only thing
  * that it takes into account is if input comes from file. */
@@ -69,7 +33,7 @@ int
 	int			i;
 	int			fd_write;
 	t_command	*command_struct;
-	
+
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
@@ -129,35 +93,4 @@ int
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
 	return (execve(command_struct->path, command_struct->command, args->envp));
-}
-
-/** PURPOSE : Executes a one only forked proccess. */
-int	single_son(t_arguments *args)
-{
-	t_command	*command_struct;
-
-	set_signal(1);
-	command_struct = NULL;
-	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct)
-		ft_shutdown(LST, 0, args);
- 	if (args->flag_file_in)
-		input_form_file(args->file_input);
-	if (args->flag_file_out == 2)
-		output_to_file_append(args->file_output);
-	else if (args->flag_file_out)
-		output_to_file(args->file_output);
-	set_status(args, 0);
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
-	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-		return (heredoc_routine(command_struct));
-	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
-	{
-		set_status(args, 1);
-		ft_free_split(args->envp);
-		ft_free_split(args->lenvp);
-		ft_shutdown(EXE_ERROR, 0, args);
-	}
-	return (1);
 }

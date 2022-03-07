@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/01 13:41:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:26:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ static int	end_process(t_arguments *args)
  * 1. Create first pipe. 
  * 2. Fork process in a loop, and inside each son process, run command.
  * 3. Continue running program until last fork. */
-int
-	process_exe(t_arguments *args)
+int	process_exe(t_arguments *args)
 {
 	int	i;
 	int	status;
