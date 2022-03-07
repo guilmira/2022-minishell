@@ -21,7 +21,7 @@
 //TODO, keep shell in execution
 
 int
-heredoc_routine(t_command *command_struct);
+	heredoc_routine(t_command *command_struct);
 
 /** PURPOSE : Recieves input from file if needed. */
 static void	input_form_file(char *path)
@@ -84,7 +84,7 @@ int
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
-		if (!ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]))
+		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
@@ -119,7 +119,7 @@ int
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
-		if (!ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]))
+		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}

@@ -37,7 +37,7 @@ static int
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
-		if (!ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]))
+		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
