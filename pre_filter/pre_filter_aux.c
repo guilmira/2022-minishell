@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 08:47:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 17:21:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:04:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,19 @@
 	}
 	return (0);
 } */
+
+/** PURPOSE : Counts positions on a table .*/
+int	count_table(char **table)
+{
+	int	i;
+
+	if (!table)
+		return (0);
+	i = -1;
+	while (table[++i])
+		;
+	return (i);
+}
 
 /** PURPOSE : Prevent unclosed quotes in command line. */
 int	quotes_filter(char *line)

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/01 13:04:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:37:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*read_and_filter_line(t_arguments *args)
 	line = read_shell_line();
 	if (!line)
 		return (NULL);
-	//args->status = 1;// I guess this line should be higher, so status is put before exit
 	if (pre_filter(line))
 	{
 		free(line);
@@ -44,7 +43,7 @@ char	*read_and_filter_line(t_arguments *args)
 	return (line);
 }
 
-static int case_space(char *str)
+static int	case_space(char *str)
 {
 	int	i;
 
@@ -53,6 +52,17 @@ static int case_space(char *str)
 		if (!ft_isspaces(str[i]))
 			return (0);
 	return (1);
+}
+
+/** PURPOSE : Load arguments into structure. 
+ * 1. Allocates memory for structure.
+ * 2. Creates linked list to manage any number of commands */
+static void	arg_reader(char **table, t_arguments *args)
+{
+	args->commands_lst = load_linked_list(table, args->envp, \
+	args->total_commands);
+	if (!args->commands_lst)
+		ft_shutdown(ARG, 0, args);
 }
 
 /** PURPOSE : Reads command line. Loads arguments into structure. 

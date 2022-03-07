@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 15:08:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:13:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ static char	*obtain_symbol(char *line, int i)
 	return (str);
 }
 
-/** PURPOSE : Redo line separating symbols that might come without spaces.
- * Uses a linked list to load each fragment of the new built line with spaces. */
+/** PURPOSE : Redo line separating symbols that come without spaces.
+ * Uses a linked list to load each fragment 
+ * of the new built line with spaces. */
 t_list	*build_lexer_list(char *line)
 {
 	int		i;
@@ -91,7 +92,7 @@ t_list	*build_lexer_list(char *line)
 			i++;
 		else if (line[i] == '=' && line[i + 1])
 			i = i + 2;
-		else if (is_one_of_lexer_symbols(line[i])) //ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
+		else if (is_one_of_lexer_symbols(line[i]))
 		{
 			fix_previous_line(line, t, i, &list);
 			t = i + 1;
@@ -106,9 +107,7 @@ t_list	*build_lexer_list(char *line)
 		}
 		else
 			i++;
-	
 	}
 	fix_previous_line(line, t, i, &list);
 	return (list);
 }
-

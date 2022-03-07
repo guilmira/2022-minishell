@@ -6,24 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/01 08:53:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:11:47 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/** PURPOSE : Counts positions on a table .*/
-int	count_table(char **table)
-{
-	int	i;
-
-	if (!table)
-		return (0);
-	i = -1;
-	while (table[++i])
-		;
-	return (i);
-}
 
 static int	is_lex_symbol(char *string)
 {
@@ -48,14 +35,8 @@ static int	is_heredoc(char *string)
 	return (0);
 }
 
-/** PURPOSE : Assigns a number for each token.
- * 0	PIPE
- * 1	REDIRECT
- * 2	FILE
- * 5	COMMAND TOKEN . */
-int	*class_lex_table(char **lexer_table)
+static int	*alloc_type(char **lexer_table)
 {
-	int	i;
 	int	*type;
 	int	total_types;
 
@@ -65,23 +46,46 @@ int	*class_lex_table(char **lexer_table)
 	type = ft_calloc(total_types, sizeof(int));
 	if (!type)
 		return (NULL);
+	return (type);
+}
+
+/** PURPOSE : Corresponding numbers are:
+ * 0	PIPE
+ * 1	REDIRECT
+ * 2	FILE
+ * 3	APPEND
+ * 4	HEREDOC
+ * 5	COMMAND TOKEN
+ * 6	EMPTY */
+static void	classification(char **lexer_table, int *type, int i)
+{
+	if (!ft_strcmp(lexer_table[i], " "))
+		type[i] = 6;
+	else if (!ft_strcmp(lexer_table[i], PIPE))
+		type[i] = 0;
+	else if (is_lex_symbol(lexer_table[i]))
+		type[i] = 1;
+	else if (is_append(lexer_table[i]))
+		type[i] = 3;
+	else if (is_heredoc(lexer_table[i]))
+		type[i] = 4;
+	else if (i != 0 && (type[i - 1] == 1 || type[i - 1] == 3))
+		type[i] = 2;
+	else
+		type[i] = 5;
+}
+
+/** PURPOSE : Assigns a number for each token in lexer table.  */
+int	*class_lex_table(char **lexer_table)
+{
+	int	i;
+	int	*type;
+
+	type = alloc_type(lexer_table);
+	if (!type)
+		return (NULL);
 	i = -1;
 	while (lexer_table[++i])
-	{
-		if (!ft_strcmp(lexer_table[i], " "))
-			type[i] = 6;
-		else if (!ft_strcmp(lexer_table[i], PIPE))
-			type[i] = 0;
-		else if (is_lex_symbol(lexer_table[i]))
-			type[i] = 1;
-		else if (is_append(lexer_table[i]))
-			type[i] = 3;
-		else if (is_heredoc(lexer_table[i]))
-			type[i] = 4;
-		else if (i != 0 && (type[i - 1] == 1 || type[i - 1] == 3))
-			type[i] = 2;
-		else
-			type[i] = 5;
-	}
+		classification(lexer_table, type, i);
 	return (type);
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 12:34:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:16:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ char	**main_lexer(char *line, t_arguments *args)
 	list = build_lexer_list(line);
 	list_line = build_new_line(list);
 	printf("RESULT: %s\n", list_line);
-	
 	args->argv = ft_split(list_line, ' ');
 	if (!args->argv)
 		ft_shutdown(MEM, errno, args);
@@ -127,7 +126,6 @@ char	**main_lexer(char *line, t_arguments *args)
 		return (NULL);
 	}
 	lexer_table = dollar_expansion(lexer_table, args);
-	
 	lexer_table = remove_quote(lexer_table);
 	return (lexer_table);
 }
