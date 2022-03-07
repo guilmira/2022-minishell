@@ -6,15 +6,15 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/03 13:37:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:09:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//ESTUDIAR
 //en el proceso principal, tras los forks, todos los fd del pipe cerrados
 //ejecutarlos en paralelo, no en serie. todos los procesos del fork se lanazarian a la vez
 #include "../include/minishell.h"
 
-//TODO: this segfaults export a=ls b=wc delta=-l comeonletsgo=|
 //TODO funcion de checckeo por si te meten un Null en la talbla, por memoria o de la manera que sea, cierre minishell en shutdown.
 //TDO egmentando a="ksejhghegh"
 

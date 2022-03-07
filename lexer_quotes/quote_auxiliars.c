@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:06:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/03 12:07:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:24:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@ int	advance_to_next_quote(char *line, int i)
 		if (line[i] == SINGLE)
 		{
 			while (line[++i] != SINGLE)
-				;
+				if (!line[i])
+					return (i);
 			return (++i);
 		}
 		else if (line[i] == DOUBLE)
 		{
 			while (line[++i] != DOUBLE)
-				;
+				if (!line[i])
+					return (i);
 			i++;
 		}
 	}

@@ -6,12 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 15:02:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:08:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+/** PURPOSE : Check for symbols. */
 static int	is_one_of_lexer_symbols(char symbol)
 {
 	int		i;
@@ -44,6 +45,7 @@ void	fix_previous_line(char *line, int t, int i, t_list **list)
 	ft_lstadd_back(list, ft_lstnew(str));
 }
 
+/** PURPOSE : Return string of symbol to load in linkedL. */
 static char	*obtain_symbol(char *line, int i)
 {
 	char	*str;
@@ -65,35 +67,8 @@ static char	*obtain_symbol(char *line, int i)
 	return (str);
 }
 
-//OBSOLETO
-/** PURPOSE : Advance string to next position skiping ALL quotes. */
-/* static int	advance_to_last_quote(char *line, int i)
-{
-	if (!line)
-		return (i);
-	while (!is_quote(line[i]))
-	{
-		if (line[i] == SINGLE)
-		{
-			while (line[++i] != SINGLE)
-				;
-			i++;
-		}
-		else if (line[i] == DOUBLE)
-		{
-			while (line[++i] != DOUBLE)
-				;
-			i++;
-		}
-		else
-			return (i);
-	}
-	return (i);
-} */
-
-
 /** PURPOSE : Redo line separating symbols that might come without spaces.
- * Uses a linked list to load each fragmen of the new built line with spaces. */
+ * Uses a linked list to load each fragment of the new built line with spaces. */
 t_list	*build_lexer_list(char *line)
 {
 	int		i;
@@ -114,7 +89,7 @@ t_list	*build_lexer_list(char *line)
 		}
 		else if (ft_isspaces(line[i]))
 			i++;
-		else if (line[i] == '=' && line[i + 1]) //export a=ls b=wc delta=-l co=|
+		else if (line[i] == '=' && line[i + 1])
 			i = i + 2;
 		else if (is_one_of_lexer_symbols(line[i])) //ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
 		{
