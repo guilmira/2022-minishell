@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/09 11:05:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:00:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	prepare_process(int fd_to_close, int fd_to_prepare)
 }
 
 /** PURPOSE : Creates string with needed adress. */
-static char	*obtain_current_directory_adress(char** envp)
+static char	*obtain_current_directory_adress(char **envp)
 {
 	int		i;
-	char 	*full_address;
 	char	*str;
+	char	*full_address;
 
 	i = -1;
 	str = NULL;
