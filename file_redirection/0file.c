@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/28 17:58:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:16:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	prepare_file(char *content, t_list **list_files, t_arguments *args)
 {	
 	char	*str;
-	
+
 	str = NULL;
 	str = ft_strdup(content);
 	if (!str)
@@ -26,7 +26,7 @@ static void	prepare_file(char *content, t_list **list_files, t_arguments *args)
 
 /** PURPOSE : Assign a number to each of the elements of the list. 
  * 1 is for output, 2 is for input, 3 for append and 4 for heredoc. */
-static void assign_type(char *content, t_list **list_type, t_arguments *args)
+static void	assign_type(char *content, t_list **list_type, t_arguments *args)
 {
 	int	*ptr;
 
@@ -61,18 +61,15 @@ void	management_file(char **table, t_arguments *args)
 	i = -1;
 	while (table[++i])
 	{
-		if (!ft_strcmp(OUT, table[i]) || !ft_strcmp(APPEND, table[i]) || !ft_strcmp(IN, table[i]) || !ft_strcmp(HEREDOC, table[i]))
+		if (!ft_strcmp(OUT, table[i]) || !ft_strcmp(APPEND, table[i]) \
+		|| !ft_strcmp(IN, table[i]) || !ft_strcmp(HEREDOC, table[i]))
 		{
 			prepare_file(table[i + 1], &list_files, args);
 			assign_type(table[i], &list_type, args);
 		}
 	}
-	//provisional
-	//int  *ptr;
 	if (list_files && list_type)
 		file_setup(list_files, list_type, args);
-	
-	//ls > z.txt is not working atm, check out TODO
 	ft_fullclear(list_files);
 	ft_fullclear(list_type);
 }

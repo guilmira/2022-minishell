@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:51:24 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/25 11:38:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:17:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	file_exists(char *str)
 	close(fp);
 	return (1);
 }
-
-// TODO, question. if adding after O_CREAT, FULL_PERMISSIONS, overwrite stops working
 
 /** PURPOSE : Sends output to file if needed. 
  * //S_IRWXU File permission bits. Read, Write, eXecute. */
@@ -88,7 +86,7 @@ static void	create_output_files(t_list *list_files, t_list *list_type, t_argumen
 			if (!file_exists(file))
 			{
 				args->flag_file_in = -1;
-				break;
+				break ;
 			}
 			args->flag_file_in = 1;
 		}
@@ -102,5 +100,4 @@ static void	create_output_files(t_list *list_files, t_list *list_type, t_argumen
 void	file_setup(t_list *list_files, t_list *list_type, t_arguments *args)
 {
 	create_output_files(list_files, list_type, args);
-	
 }
