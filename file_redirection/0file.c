@@ -64,21 +64,15 @@ void	management_file(char **table, t_arguments *args)
 		if (!ft_strcmp(OUT, table[i]) || !ft_strcmp(APPEND, table[i]) || !ft_strcmp(IN, table[i]) || !ft_strcmp(HEREDOC, table[i]))
 		{
 			prepare_file(table[i + 1], &list_files, args);
-			assign_type(table[i],  &list_type, args);
+			assign_type(table[i], &list_type, args);
 		}
 	}
 	//provisional
 	//int  *ptr;
 	if (list_files && list_type)
 		file_setup(list_files, list_type, args);
-	while (list_files)
-	{
-		//ptr = list_type->content;
-		/* printf("lista: %s\n", list_files->content);
-		printf("tipo: %i\n", *ptr); */
-		list_files = list_files->next;
-		list_type = list_type->next;
-	}
+	
+	//ls > z.txt is not working atm, check out TODO
 	ft_fullclear(list_files);
 	ft_fullclear(list_type);
 }

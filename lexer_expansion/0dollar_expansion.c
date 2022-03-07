@@ -57,7 +57,6 @@ char	**dollar_expansion(char **table, t_arguments *args)
 	
 	while (table[++i])
 	{
-		printf("RESULT: %s\n", table[i]);
 		str = table[i];
 		if (needs_expansion(str))
 		{
