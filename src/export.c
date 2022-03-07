@@ -56,15 +56,18 @@ void
 	size_t	envp_len;
 	char	**new_envp;
 	char	*temp;
+	char	*temp2;
 
 	i = 0;
 	while (args[++i])
 	{
 		temp = NULL;
+		temp2 = ft_concat(args[i], "=");
 		expand_l_var(args, arg, i, temp);
 		if (var_have_val(arg->envp, args[i]))
 			continue ;
-		delete_env_var(arg->envp, get_envv_len(args[i]), args[i]);
+		delete_env_var(arg->envp, get_envv_len(args[i]) + 1, temp2);
+		free_pointers(1, temp2);
 		envp_len = get_arr_len(arg->envp);
 		new_envp = copy_array(new_envp, arg->envp, 2);
 		if (!ft_strchr(args[i], '='))
