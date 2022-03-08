@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/08 16:14:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 17:32:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	manage_loop_heap(t_arguments *arguments, t_prog *prog)
 	ft_free_split(arguments->lenvp);
 	free_heap_memory(arguments);
 }
-//system("leaks minishell");
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
