@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/08 15:14:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 17:52:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void
 	table = NULL;
 	printer(lexer_table, lexer_type);
 	table = get_command_table(lexer_table, args, lexer_type);
+	printer(table, lexer_type);
 	management_file(lexer_table, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);
