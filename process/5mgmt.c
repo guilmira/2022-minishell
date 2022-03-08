@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 16:26:05 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:57:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void	free_heap_memory(t_arguments *args)
 			ft_structclear(args->commands_lst);
 		if (args->fds)
 			free(args->fds);
+		if (args->file_output)
+			free(args->file_output);
+		if (args->file_input)
+			free(args->file_input);
 		free(args);
 	}
 }
