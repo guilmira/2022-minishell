@@ -6,28 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 18:13:25 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:51:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/** PURPOSE : Check for symbols. */
-static int	is_one_of_lexer_symbols(char symbol)
-{
-	int		i;
-	char	*option[TOTAL_SYMBOLS + 1];
-	char	*option_name[TOTAL_SYMBOLS + 1];
 
-	if (!symbol)
-		return (0);
-	init_options(option, option_name);
-	i = -1;
-	while (option[++i])
-		if (symbol == option[i][0])
-			return (1);
-	return (0);
-}
 
 /* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void	fix_previous_line(char *line, int t, int i, t_list **list)

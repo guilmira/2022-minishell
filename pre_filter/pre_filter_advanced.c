@@ -6,31 +6,49 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:15:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 16:27:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 17:10:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/** PURPOSE : Chech for arguments such as > " " */
-/* static int	hanging_quotes(char *line)
+/** PURPOSE : Check for lexer symbols. */
+int	is_one_of_lexer_symbols(char symbol)
 {
 	int		i;
-	int		flag;
-	char	**table;
+	char	*option[TOTAL_SYMBOLS + 1];
+	char	*option_name[TOTAL_SYMBOLS + 1];
 
-	table = ft_split(line, ' ');
-	flag = 0;
+	if (!symbol)
+		return (0);
+	init_options(option, option_name);
 	i = -1;
-	while (table[++i])
-		if (!ft_strcmp(table[i], "\"") || !ft_strcmp(table[i], "\'"))
+	while (option[++i])
+		if (symbol == option[i][0])
+			return (1);
+	return (0);
+}
+
+/** PURPOSE : Prevent unclosed symbols like ls | or
+ * ls < , ls << and so on. */
+int	unclosed_filter(char *line)
+{
+	int	i;
+	int flag;
+
+	i = -1;
+	flag = 0;
+	while (line[++i])
+	{
+		if (is_one_of_lexer_symbols(line[i]))
 			flag++;
-	ft_free_split(table);
+		else if (ft_isalnum(line[i]))
+			flag=0;
+	}
 	if (flag)
 		return (1);
-	else
-		return (0);
-} */
+	return (0);
+}
 
 /** PURPOSE : SECOND filter of command line.
  * Related to proper use of quotes. */
@@ -41,11 +59,10 @@ int	pre_filter_advanced(char *line)
 		printf("Quotes (\" or '') must be closed\n");
 		return (1);
 	}
-	/* if (hanging_quotes(line))
+	if (unclosed_filter(line))
 	{
-		printf("Incorrect quoting use.\n");
-		printf("Please make sure quotes are not empty when entering commands\n");
+		printf("Lexer symbols must be followed by sensible content\n");
 		return (1);
-	} */
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 17:36:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:52:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ char		*get_env_var_body(char **envp, bool do_expand, int i, int len);
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
 # define TOTAL_SYMBOLS 5
+# define MAX_COMMANDS 50
 # define MSHELL "msh> "
 # define INVALID_ARGC "Program execution does not admit arguments\n."
 # define MEM "Failed memory allocation.\n"
@@ -181,6 +182,7 @@ int			pre_filter(char *line);
 int			pre_filter_simple(char *line);
 int			pre_filter_advanced(char *line);
 int			quotes_filter(char *line);
+int			is_one_of_lexer_symbols(char symbol);
 /* PARSER */
 char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);

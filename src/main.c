@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/08 15:40:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:14:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ int
 }
 
 //PROVISIONAL -- comment if compiling with fsanitize
-/* void	ft_leaks(void)
+void	ft_leaks(void)
 {
 	system("leaks minishell");
-} */
+}
 
 /** EXECUTION : ./minishell
  * This program will run a student made version of the bash console.
