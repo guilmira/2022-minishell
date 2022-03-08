@@ -57,7 +57,7 @@ int
 		i = 1;
 		while (args[i])
 		{
-			tmp = ft_strjoin(args[i], "=");
+			tmp = ft_strdup(args[i]);
 			len = ft_strlen(tmp);
 			delete_env_var(arg->envp, len, tmp);
 			delete_env_var(arg->lenvp, len, tmp);

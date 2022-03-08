@@ -22,49 +22,17 @@ char *
 	char	*var;
 	int		i;
 	int		len;
-	bool	has_equal_sign;
 
-	/*var = NULL;
-	var = ft_concat(needle, "=");
-	len = (int )ft_strlen(var);
-	i = 0;
-	while (envp[i])
-	{
-		if (!ft_memcmp(envp[i], var, len))
-		{
-			free_pointers(1, var);
-			if (do_expand)
-				var = ft_strdup(envp[i]);
-			else
-				var = ft_strdup(envp[i] + len);
-			return (var);
-		}
-		i++;
-	}
-	free_pointers(1, var);
-	return (NULL);*/
 	var = NULL;
-	has_equal_sign = false;
-	//var = ft_concat(needle, "=");
 	len = (int )ft_strlen(needle);
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strchr(envp[i], '='))
-			has_equal_sign = true;
 		if (!ft_memcmp(envp[i], needle, len))
 		{
 			if (((envp[i])[len]) == '=' || ((envp[i])[len]) == '\0')
 			{
-				if (do_expand)
-					var = ft_strdup(envp[i]);
-				else
-				{
-					if (has_equal_sign)
-						var = ft_strdup(envp[i] + len + 1);
-					else
-						var = ft_strdup(envp[i] + len);
-				}
+				var = get_env_var_body(envp, do_expand, i, len);
 				return (var);
 			}
 		}
@@ -96,12 +64,12 @@ void
 	char	*cur_path;
 	char	*cwd;
 
-	delete_env_var(arg->envp, 7, "OLDPWD=");
+	delete_env_var(arg->envp, 7, "OLDPWD");
 	set_new_var(old_path, arg);
 	cwd = getcwd(NULL, 0);
 	cur_path = ft_strjoin("PWD=", cwd);
 	free_pointers(1, cwd);
-	delete_env_var(arg->envp, 4, "PWD=");
+	delete_env_var(arg->envp, 4, "PWD");
 	set_new_var(cur_path, arg);
 	free_pointers(1, cur_path);
 }
