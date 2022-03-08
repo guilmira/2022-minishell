@@ -33,6 +33,7 @@ int
 	int			i;
 	int			fd_write;
 	t_command	*command_struct;
+	char		*path;
 
 	set_signal(1);
 	command_struct = NULL;
@@ -57,7 +58,13 @@ int
 		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	return (execve(command_struct->path, command_struct->command, args->envp));
+	path = get_path(command_struct);
+	if (execve(path, command_struct->command, args->envp) == -1)
+	{
+		errno = ENOENT;
+		perror("minishell");
+	}
+	return (1);
 }
 
 /** PURPOSE : Executes first forked proccess. The only thing
@@ -67,6 +74,7 @@ int
 {	
 	t_command	*command_struct;
 	int			i;
+	char		*path;
 
 	set_signal(1);
 	command_struct = NULL;
@@ -92,5 +100,11 @@ int
 		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	return (execve(command_struct->path, command_struct->command, args->envp));
+	path = get_path(command_struct);
+	if (execve(path, command_struct->command, args->envp) == -1)
+	{
+		errno = ENOENT;
+		perror("minishell");
+	}
+	return (1);
 }

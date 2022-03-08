@@ -31,18 +31,36 @@ int
 			return ((args->builtin_func[i])(command_struct->command, args));
 	if (export_new_l_variables(command_struct->command, args))
 		return (1);
-	g_rv = 1;
+//	g_rv = 1;
+	set_status(args, 0);
+	printf("status before fork = %d\n", args->status); //delete
+	printf("errno before fork = %d\n", errno); //delete
+
+	int writepipe[2];
+	int b;
+	b = pipe(writepipe);
+
 	identifier = fork();
 	if (identifier == 0)
 	{
-		g_rv = single_son(args);
+		int	x;
+		x = single_son(args);
+		close(writepipe[0]);
+		write(writepipe[1], &x, sizeof(int));
+		close(writepipe[1]);
 		exit(0);
 	}
 	else if (identifier > 0)
 	{
 		wait(&status);
+		close(writepipe[1]);
+		read(writepipe[0], &args->status, sizeof(int));
+		close(writepipe[0]);
+		printf("status after wait = %d\n", args->status); //delete
+		printf("grv after wait = %d\n", g_rv); //delete
+
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
-	return (g_rv);
+	return (1);
 }

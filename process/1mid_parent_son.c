@@ -22,6 +22,7 @@ static int
 {
 	t_command	*command_struct;
 	int			i;
+	char		*path;
 
 	set_signal(1);
 	command_struct = NULL;
@@ -42,7 +43,18 @@ static int
 		i++;
 	}
 	set_status(args, 0);
-	return (execve(command_struct->path, command_struct->command, args->envp));
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
+	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+		return (heredoc_routine(command_struct));
+	path = get_path(command_struct);
+	if (execve(path, command_struct->command, args->envp) == -1)
+	{
+		errno = ENOENT;
+		perror("minishell");
+		set_status(args, 127);
+	}
+	return (1);
 }
 
 /** PURPOSE : Mid process for all the commands that are not

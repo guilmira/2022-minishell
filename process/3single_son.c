@@ -21,6 +21,17 @@
 	ft_shutdown(EXE_ERROR, 0, args);
 }*/
 
+char *
+	get_path(t_command *command_struct)
+{
+	char	*path;
+
+	path = command_struct->path;
+	if (!path)
+		path = getcwd(NULL, 0);
+	return (path);
+}
+
 /** PURPOSE : Executes a one only forked proccess. */
 int	single_son(t_arguments *args)
 {
@@ -43,13 +54,11 @@ int	single_son(t_arguments *args)
 		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	path = command_struct->path;
-	if (!path)
-		path = getcwd(NULL, 0);
+	path = get_path(command_struct);
 	if (execve(path, command_struct->command, args->envp) == -1)
 	{
 		errno = ENOENT;
 		perror("minishell");
 	}
-	return (1);
+	return (127);
 }
