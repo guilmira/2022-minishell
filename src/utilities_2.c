@@ -80,7 +80,7 @@ bool
 {
 	char	*temp;
 
-	if (!isalpha(*args[i]))
+	if (!ft_isalpha(*args[i]))
 	{
 		set_status(arg, 1);
 		temp = ft_multistr_concat(3, "minishell: export: '", args[i],

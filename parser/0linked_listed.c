@@ -16,13 +16,17 @@
  * the characters PATH= and splits it into a table. */
 static char	**get_full_path(char *envp[])
 {
-	int	i;
+	int		i;
+	char	**hand_made_full_path;
 
 	i = -1;
 	while (envp[++i])
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 			return (ft_split(envp[i], ':'));
-	return (NULL);
+	hand_made_full_path = (char **)(malloc(2 * sizeof(char *)));
+	hand_made_full_path[0] = getcwd(NULL, 0);
+	hand_made_full_path[1] = NULL;
+	return (hand_made_full_path);
 }
 
 /** PURPOSE : Reforms the string table by adding the char slash '/'. */
@@ -57,13 +61,17 @@ static char	**get_env_path(char *envp[])
 	full_path = get_full_path(envp);
 	if (!full_path)
 		return (NULL);
-	new_string = ft_strdup(ft_strchr(full_path[0], '/'));
+	/*if (!full_path)
+		full_path[0] = getcwd(NULL, 0);
+		new_string = ft_strdup(ft_strchr(getcwd(NULL, 0), '/'));
+	else*/
+		new_string = ft_strdup(ft_strchr(full_path[0], '/'));
 	if (!new_string)
 	{
 		ft_free_split(full_path);
 		return (NULL);
 	}
-	free(full_path[0]);
+	free_pointers(1, full_path[0]);
 	full_path[0] = new_string;
 	corrected_path = add_slash_to_path(full_path);
 	if (!corrected_path)

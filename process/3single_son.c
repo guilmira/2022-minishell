@@ -13,18 +13,19 @@
 #include "../include/minishell.h"
 
 /** PURPOSE : Cleans heap in case of error. */
-static void	error_single_son(t_arguments *args)
+/*static void	error_single_son(t_arguments *args)
 {
 	set_status(args, 1);
 	ft_free_split(args->envp);
 	ft_free_split(args->lenvp);
 	ft_shutdown(EXE_ERROR, 0, args);
-}
+}*/
 
 /** PURPOSE : Executes a one only forked proccess. */
 int	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
+	char		*path;
 
 	set_signal(1);
 	command_struct = NULL;
@@ -42,7 +43,13 @@ int	single_son(t_arguments *args)
 		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	if (execve(command_struct->path, command_struct->command, args->envp) == -1)
-		error_single_son(args);
+	path = command_struct->path;
+	if (!path)
+		path = getcwd(NULL, 0);
+	if (execve(path, command_struct->command, args->envp) == -1)
+	{
+		errno = ENOENT;
+		perror("minishell");
+	}
 	return (1);
 }
