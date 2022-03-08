@@ -83,7 +83,8 @@ fclean: clean
 re: fclean all
 
 norm:
-	norminette ./src ./include $(LIB_DIR)
+	norminette ./file_redirection ./include ./lexer ./lexer_expansion ./lexer_quotes \
+	./parser ./pre_filter ./process ./src $(LIB_DIR)
 
 .PHONY: all clean fclean re norm
 #--------------------------------------------------------------------------------------------------------------FORMAT
