@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilities_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 11:01:17 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/18 11:01:18 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:31:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ bool
 {
 	char	*temp;
 
-	if (!isalpha(*args[i]))
+	if (!ft_isalpha(*args[i]))
 	{
 		set_status(arg, 1);
 		temp = ft_multistr_concat(3, "minishell: export: '", args[i],

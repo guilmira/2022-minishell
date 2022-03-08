@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/07 18:16:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 15:17:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 //ejecutarlos en paralelo, no en serie. 
 //todos los procesos del fork se lanazarian a la vez
 #include "../include/minishell.h"
+
+//TODO checkear leaks tras introducir el save memory de fichers
 
 //TODO funcion de checckeo por si te meten un Null en la talbla, 
 //por memoria o de la manera que sea, cierre minishell en shutdown.
@@ -96,7 +98,7 @@ void	ft_leaks(void)
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	set_signal(1);
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));

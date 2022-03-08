@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:51:24 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 18:17:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/08 15:13:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ static void	create_file_append(char *path, t_arguments *args)
 	close(fd_file);
 }
 
-/** PURPOSE : File is input type. */
+/** PURPOSE : File is input type. 
+ *  * 1 is for output, 2 is for input, 3 for append 
+ * and 4 for heredoc. */
 static int	input_type(int *ptr)
 {
 	if ((*ptr) == 1 || (*ptr) == 3)
@@ -71,7 +73,11 @@ static void	create_output_files(t_list *list_files, t_list *list_type, t_argumen
 		if (input_type(ptr))
 		{
 			args->flag_file_out = 1;
-			args->file_output = file;
+			if (args->file_output)
+				free(args->file_output);
+			args->file_output = ft_strdup(file);
+			if (!args->file_output)
+				ft_shutdown(MEM, 1, args);
 			if ((*ptr) == 1)
 				create_file(file, args);
 			if ((*ptr) == 3)
@@ -82,7 +88,11 @@ static void	create_output_files(t_list *list_files, t_list *list_type, t_argumen
 		}
 		if ((*ptr) == 2)
 		{
-			args->file_input = list_files->content;
+			if (args->file_input)
+				free(args->file_input);
+			args->file_input = ft_strdup(file);
+			if (!args->file_input)
+				ft_shutdown(MEM, 1, args);
 			if (!file_exists(file))
 			{
 				args->flag_file_in = -1;
@@ -93,6 +103,7 @@ static void	create_output_files(t_list *list_files, t_list *list_type, t_argumen
 		list_files = list_files->next;
 		list_type = list_type->next;
 	}
+
 }
 
 /** PURPOSE : Load structure with due arguments.
