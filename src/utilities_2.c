@@ -74,3 +74,20 @@ size_t
 		i++;
 	return (i);
 }
+
+bool
+	is_valid_var(char *const *args, t_arguments *arg, int i)
+{
+	char	*temp;
+
+	if (!isalpha(*args[i]))
+	{
+		set_status(arg, 1);
+		temp = ft_multistr_concat(3, "minishell: export: '", args[i],
+				"': not a valid identifier");
+		perror(temp);
+		free_pointers(1, temp);
+		return (false);
+	}
+	return (true);
+}

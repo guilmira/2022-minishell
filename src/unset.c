@@ -24,7 +24,8 @@ void
 	i = 0;
 	while (envp[i])
 	{
-		if (!ft_strncmp(envp[i], tmp, len))
+		if (!ft_strncmp(envp[i], tmp, len)
+			&& (((envp[i])[len] == '=') || ((envp[i])[len] == '\0')))
 		{
 			tmp2 = envp[i];
 			envp[i] = NULL;

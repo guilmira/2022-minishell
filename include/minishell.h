@@ -121,6 +121,7 @@ bool		export_new_l_variables(char **args, t_arguments *arg);
 void		set_new_var(char *var, t_arguments *arg);
 void		expand_l_var(char **args, t_arguments *arg, int i, char *temp);
 void		get_rid_of_quotes(char **args, size_t i, char *str);
+bool		is_valid_var(char *const *args, t_arguments *arg, int i);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

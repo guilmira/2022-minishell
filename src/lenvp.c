@@ -45,7 +45,7 @@ char *
 		{
 			free_pointers(1, temp);
 			temp = ft_substr(args[i], 0, len + 1);
-			delete_env_var(arg->envp, get_envv_len(args[i]) + 1, temp);
+			delete_env_var(arg->envp, get_envv_len(args[i]), temp);
 			free_pointers(1, temp);
 			temp = "envp";
 		}

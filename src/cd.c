@@ -22,8 +22,9 @@ char *
 	char	*var;
 	int		i;
 	int		len;
+	bool	has_equal_sign;
 
-	var = NULL;
+	/*var = NULL;
 	var = ft_concat(needle, "=");
 	len = (int )ft_strlen(var);
 	i = 0;
@@ -41,6 +42,34 @@ char *
 		i++;
 	}
 	free_pointers(1, var);
+	return (NULL);*/
+	var = NULL;
+	has_equal_sign = false;
+	//var = ft_concat(needle, "=");
+	len = (int )ft_strlen(needle);
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strchr(envp[i], '='))
+			has_equal_sign = true;
+		if (!ft_memcmp(envp[i], needle, len))
+		{
+			if (((envp[i])[len]) == '=' || ((envp[i])[len]) == '\0')
+			{
+				if (do_expand)
+					var = ft_strdup(envp[i]);
+				else
+				{
+					if (has_equal_sign)
+						var = ft_strdup(envp[i] + len + 1);
+					else
+						var = ft_strdup(envp[i] + len);
+				}
+				return (var);
+			}
+		}
+		i++;
+	}
 	return (NULL);
 }
 
