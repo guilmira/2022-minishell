@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 13:29:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:36:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,8 +173,6 @@ char		*build_new_line(t_list *list);
 int			ignore_symbol(char *str, int position);
 void		rl_replace_line(const char *txt, int clear_undo);
 
-
-
 /* Protoypes minishell reader. */
 
 int			count_table(char **table);
@@ -208,9 +206,9 @@ int			advance_to_next_quote(char *line, int i);
 /* READER */
 void		shell_reader(t_arguments *args);
 void		arg_reader(char **table, t_arguments *args);
-t_list		*load_linked_list(char **table, char **envp,\
+t_list		*load_linked_list(char **table, char **envp, \
 			int total_commands, t_arguments *args);
-void		load_command_struct(t_command *command_struct,\
+void		load_command_struct(t_command *command_struct, \
 			char **table, int i, t_arguments *args);
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, \
@@ -223,6 +221,8 @@ void		management_file(char **table, t_arguments *args);
 void		file_setup(t_list *list_files, \
 			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
+void		create_file(char *path, t_arguments *args);
+void		create_file_append(char *path, t_arguments *args);
 /* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void		fix_previous_line(char *line, int t, int i, t_list **list);
 /* Protoypes minishell execution. */
