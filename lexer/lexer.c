@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/08 15:22:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:38:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ char	**main_lexer(char *line, t_arguments *args)
 	else
 		clean_line = quote_split(list_line, ' ');
 	free(list_line);
+	//printf("EHE _%s_\n", clean_line[1]);
 	lexer_table = build_lexer_table(clean_line);
 	if (check_lexer_errors(lexer_table))
 	{

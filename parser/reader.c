@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 13:28:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:30:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void
 	lexer_type = class_lex_table(lexer_table);
 	if (!lexer_type)
 		ft_shutdown(MEM, errno, args);
-	//printer(lexer_table, lexer_type);
 	if (!file_redirections(lexer_table, lexer_type, args))
 		return ;
 	arg_reader(lexer_table, args);

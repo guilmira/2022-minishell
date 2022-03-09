@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 11:45:38 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/17 12:22:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:44:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static char	**quote_allocate(char *str, char **table, char c)
 	start = 0;
 	while (str[++i])
 	{
+		//printf("va por %c y %i\n", str[i], i);
 		i = ignore_symbol(str, i);
 		if ((str[i + 1] == c || !str[i + 1]))
 		{
