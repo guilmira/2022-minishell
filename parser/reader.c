@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 09:49:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 11:02:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,47 @@ static int	case_space(char *str)
 	return (1);
 }
 
+/** PURPOSE : Count total number of pipes. */
+static int	count_pipes(char **lexer_table)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = -1;
+	while (lexer_table[++i])
+		if (!ft_strcmp(PIPE, lexer_table[i]))
+			j++;
+	return (j);
+}
+
 /** PURPOSE : Load arguments into structure. 
  * 1. Allocates memory for structure.
  * 2. Creates linked list to manage any number of commands */
 static void	arg_reader(char **table, t_arguments *args)
 {
+	args->total_commands = count_pipes(table) + 1;
 	args->commands_lst = load_linked_list(table, args->envp, \
 	args->total_commands);
 	if (!args->commands_lst)
 		ft_shutdown(ARG, 0, args);
 }
+
+
+/** PURPOSE : Handles file creation (in case of multipe redirections). */
+void	file_redirections(char **lexer_table, t_arguments *args)
+{
+	management_file(lexer_table, args);
+	if (case_space(lexer_table[0]) || args->flag_file_in == -1)
+	{
+		ft_free_split(lexer_table);
+		if (args->flag_file_in)
+			printf("%s: No such file or directory\n", args->file_input);
+		args->flag_execution = 1;
+		return ;
+	}
+}
+
 
 /** PURPOSE : Reads command line. Loads arguments into structure. 
  * 1. Reads command line and applies a pre-filter.
@@ -74,7 +105,7 @@ void
 	shell_reader(t_arguments *args)
 {
 	char		*line;
-	char		**table;
+	//char		**table;
 	char		**lexer_table;
 	int			*lexer_type;
 
@@ -90,21 +121,13 @@ void
 	lexer_type = class_lex_table(lexer_table);
 	if (!lexer_type)
 		ft_shutdown(MEM, errno, args);
-	table = NULL;
+	
 	printer(lexer_table, lexer_type);
-	table = get_command_table(lexer_table, args, lexer_type);
-	printer(table, lexer_type);
-	management_file(lexer_table, args);
+	file_redirections(lexer_table, args);
+	arg_reader(lexer_table, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);
-	if (case_space(table[0]) || args->flag_file_in == -1)
-	{
-		ft_free_split(table);
-		if (args->flag_file_in)
-			printf("%s: No such file or directory\n", args->file_input);
-		args->flag_execution = 1;
-		return ;
-	}
-	arg_reader(table, args);
-	ft_free_split(table);
+	//table = get_command_table(lexer_table, args, lexer_type);  esto estaba antes de file redirections.. mantener de momento
+	//printer(table, lexer_type);
+	//ft_free_split(table);
 }

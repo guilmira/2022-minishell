@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/08 18:37:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 11:02:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,71 @@ char **folders, char **envp)
 	return (new_table); 
 } */
 
+
+int	count_command_words(char **table, int i)
+{
+	int words;
+
+	words = 1;
+	if (!table || !table[0])
+		return (0);
+	while (table[++i])
+	{
+		if (!ft_strncmp(table[i], "lex_", 4)) //ojo aquie en ve de lex_ odrias ser PIPE
+			return (words);
+		words++;
+	}
+	return (words);
+}
+
+/** PURPOSE : Number of command 0 is equivalent to first command. */
+static int	obtain_position(char **table, int number_of_command)
+{
+	int	i;
+	int	number_appeared;
+
+	if (!number_of_command)
+		return (0);
+	i = -1;
+	number_appeared = 0;
+	while (table[++i])
+	{
+		
+		if (!ft_strcmp(PIPE, table[i]))
+			number_appeared++;
+		if (number_appeared == number_of_command)
+			return (i + 1);
+	}
+	return (i);
+}
+
+void	load_command_struct(t_command *command_struct, char **table, int i)
+{
+	int		j;
+	char	**command_table;
+	int words;
+
+	i = obtain_position(table, i);
+	words = count_command_words(table, i);
+	/* printf("res: %i\n", i);
+	printf("words: %i\n", words); */
+
+	command_table = ft_calloc((count_command_words(table, i) + 1), sizeof(char *));
+	if (!command_table)
+		return ;
+	j = 0;
+	i = i - 1;
+	while (table[++i])
+	{
+		if (!ft_strncmp("lex_", table[i], 4))
+			break;
+		command_table[j] = ft_strdup(table[i]);
+		j++;
+	}
+	command_table[j] = NULL;
+	command_struct->command = command_table;
+}
+
 /** PURPOSE : Builds linked list by allocating memory for a structure and
  * making that same structure the content of each node. Fills the path and 
  * the command fields. */
@@ -122,8 +187,6 @@ t_list	*load_linked_list(char **table, char **envp, int total_commands)
 	char		**folders;
 	t_list		*lst;
 	t_command	*command_struct;
-
-	
 
 	lst = NULL;
 	folders = get_env_path(envp);
@@ -138,9 +201,8 @@ t_list	*load_linked_list(char **table, char **envp, int total_commands)
 			ft_free_split(folders);
 			return (NULL);
 		}
-		command_struct->command = ft_split(table[i], ' '); //UNICO CAMBIO EN ESTA FUNCION
-		//new_table = create_new_table(table);
-		//command_struct->command = new_table;
+		load_command_struct(command_struct, table, i);
+		//command_struct->command = ft_split(table[i], ' '); //UNICO CAMBIO EN ESTA FUNCION
 		build_command_structure(command_struct, folders, envp);
 		ft_lstadd_back(&lst, ft_lstnew(command_struct));
 	}

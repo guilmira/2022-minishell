@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/08 16:52:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 11:00:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ void		init_options(char **option, char **option_name);
 char		*build_new_line(t_list *list);
 int			ignore_symbol(char *str, int position);
 void		rl_replace_line(const char *txt, int clear_undo);
+
+
 
 /* Protoypes minishell reader. */
 

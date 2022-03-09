@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 16:03:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 10:50:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int
 		return (1);
 //	g_rv = 1;
 	set_status(args, 0);
-	printf("status before fork = %d\n", args->status); //delete
-	printf("errno before fork = %d\n", errno); //delete
+	//printf("status before fork = %d\n", args->status); //delete
+	//printf("errno before fork = %d\n", errno); //delete
 
 	int writepipe[2];
 	int b;
@@ -56,8 +56,8 @@ int
 		close(writepipe[1]);
 		read(writepipe[0], &args->status, sizeof(int));
 		close(writepipe[0]);
-		printf("status after wait = %d\n", args->status); //delete
-		printf("grv after wait = %d\n", g_rv); //delete
+		//printf("status after wait = %d\n", args->status); //delete
+		//printf("grv after wait = %d\n", g_rv); //delete
 
 	}
 	else
