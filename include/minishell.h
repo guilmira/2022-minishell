@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 11:00:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 12:48:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ char		*advance_line_quotes(char *line, char quote);
 int			advance_to_next_quote(char *line, int i);
 /* READER */
 void		shell_reader(t_arguments *args);
-t_list		*load_linked_list(char **table, char **envp, int total_commands);
+t_list		*load_linked_list(char **table, char **envp, int total_commands, t_arguments *args);
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, \
 			t_arguments *args, int *type);

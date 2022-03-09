@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 12:42:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 12:56:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int	count_command_words(char **table, int i)
 		return (0);
 	while (table[++i])
 	{
-		printf("_%s_\n", table[0]);
 		if (!ft_strncmp("lex_", table[i], 4)) //ojo aquie en ve de lex_ podria ser PIPE
 			return (words);
 		words++;
@@ -152,24 +151,19 @@ static int	obtain_position(char **table, int number_of_command)
 	return (i);
 }
 
-void	load_command_struct(t_command *command_struct, char **table, int i)
+void	load_command_struct(t_command *command_struct, char **table, int i, t_arguments *args)
 {
 	int		j;
 	char	**command_table;
 	int words;
 
 	i = obtain_position(table, i);
-	/* if (!table[0])
-		return ; */
 	words = count_command_words(table, i);
-
 	if (!words)
-		return ;
-	/* printf("res: %i\n", i);
-	printf("words: %i\n", words); */
+		ft_shutdown(MEM, 2, args);
 	command_table = ft_calloc((count_command_words(table, i) + 1), sizeof(char *));
 	if (!command_table)
-		return ;
+		ft_shutdown(MEM, 2, args);
 	j = 0;
 	i = i - 1;
 	while (table[++i])
@@ -177,6 +171,8 @@ void	load_command_struct(t_command *command_struct, char **table, int i)
 		if (!ft_strncmp("lex_", table[i], 4))
 			break;
 		command_table[j] = ft_strdup(table[i]);
+		if (!command_table[j])
+			ft_shutdown(MEM, 2, args);
 		j++;
 	}
 	command_table[j] = NULL;
@@ -186,7 +182,7 @@ void	load_command_struct(t_command *command_struct, char **table, int i)
 /** PURPOSE : Builds linked list by allocating memory for a structure and
  * making that same structure the content of each node. Fills the path and 
  * the command fields. */
-t_list	*load_linked_list(char **table, char **envp, int total_commands)
+t_list	*load_linked_list(char **table, char **envp, int total_commands, t_arguments *args)
 {
 	int			i;
 	char		**folders;
@@ -204,9 +200,9 @@ t_list	*load_linked_list(char **table, char **envp, int total_commands)
 		if (!command_struct)
 		{
 			ft_free_split(folders);
-			return (NULL);
+			ft_shutdown(MEM, 2, args);
 		}
-		load_command_struct(command_struct, table, i);
+		load_command_struct(command_struct, table, i, args);
 		
 		//command_struct->command = ft_split(table[i], ' '); //UNICO CAMBIO EN ESTA FUNCION
 		build_command_structure(command_struct, folders, envp);

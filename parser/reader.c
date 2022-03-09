@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 12:45:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 12:54:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,20 @@ static void	arg_reader(char **table, t_arguments *args)
 {
 	args->total_commands = count_pipes(table) + 1;
 	args->commands_lst = load_linked_list(table, args->envp, \
-	args->total_commands);
+	args->total_commands, args);
 	if (!args->commands_lst)
 		ft_shutdown(ARG, 0, args);
 }
 
 
 /** PURPOSE : Handles file creation (in case of multipe redirections). */
-int	file_redirections(char **lexer_table, t_arguments *args)
+int	file_redirections(char **lexer_table, int *lexer_type, t_arguments *args)
 {
 	management_file(lexer_table, args);
 	if (case_space(lexer_table[0]) || args->flag_file_in == -1)
 	{
 		ft_free_split(lexer_table);
+		free(lexer_type);
 		if (args->flag_file_in)
 			printf("%s: No such file or directory\n", args->file_input);
 		args->flag_execution = 1;
@@ -122,9 +123,8 @@ void
 	lexer_type = class_lex_table(lexer_table);
 	if (!lexer_type)
 		ft_shutdown(MEM, errno, args);
-	
-	printer(lexer_table, lexer_type);
-	if (!file_redirections(lexer_table, args))
+	//printer(lexer_table, lexer_type);
+	if (!file_redirections(lexer_table, lexer_type, args))
 		return ;
 	arg_reader(lexer_table, args);
 	ft_free_split(lexer_table);
