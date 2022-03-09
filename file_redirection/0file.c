@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/08 15:14:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:26:47 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	prepare_file(char *content, t_list **list_files, t_arguments *args)
 	str = NULL;
 	str = ft_strdup(content);
 	if (!str)
-		ft_shutdown(MEM, 0, args);
+		ft_shutdown(MEM, 2, args);
 	ft_lstadd_back(list_files, ft_lstnew(str));
 }
 

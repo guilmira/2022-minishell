@@ -6,21 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/09 14:12:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:21:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//ESTUDIAR
-//en el proceso principal, tras los forks, todos los fd del pipe cerrados
-//ejecutarlos en paralelo, no en serie. 
-//todos los procesos del fork se lanazarian a la vez
 #include "../include/minishell.h"
-
-
-//TODO funcion de checckeo por si te meten un Null en la talbla, 
-//por memoria o de la manera que sea, cierre minishell en shutdown.
-
-////ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
@@ -112,9 +102,14 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
 //echo $TEST > $TEST
 
-//export a="ls -la"
-
-
-//echo "'"what"'"
-
 //meter un control de top | cat
+
+//ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
+
+//TODO funcion de checckeo por si te meten un Null en la talbla, 
+//por memoria o de la manera que sea, cierre minishell en shutdown.
+
+//ESTUDIAR
+//en el proceso principal, tras los forks, todos los fd del pipe cerrados
+//ejecutarlos en paralelo, no en serie. 
+//todos los procesos del fork se lanazarian a la vez
