@@ -102,5 +102,6 @@ bool
 			set_new_var(args[i], arg);
 		i++;
 	}
+	set_status(arg, 0);
 	return (ret);
 }

@@ -48,10 +48,6 @@ void
 		update_buf(&buf, readline_res);
 		free_pointers(1, readline_res);
 	}
-	//rl_event_hook = NULL;
-	//free(buf);
-	//free(readline_res); //provokes segfault
-	//ft_putendl_fd(buf, 1); //where should we guard the result?
 }
 
 int

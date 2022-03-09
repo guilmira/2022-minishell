@@ -19,25 +19,35 @@ static int	end_process(t_arguments *args)
 	int	identifier;
 	int	status;
 	int	last_index;
+	int	i;
+	int	pipe_status;
 
+	i = 1;
 	args->command_number++;
 	last_index = (args->command_number * 2) - 2;
+	set_status(args, 0);
+	pipe_status = pipe(args->wpipe);
+	if (pipe_status == -1)
+	{
+		perror("PIPE ERROR\n");
+		set_status(args, 1);
+		return (1);
+	}
 	identifier = fork();
 	if (identifier == 0)
 	{
-		g_rv = last_son(last_index, args);
-		if (g_rv < 0)
-			ft_shutdown(EXE_ERROR, 0, args);
-		else if (g_rv == 0)
-			return (0);
-		else
-			exit(0);
+		i = last_son(last_index, args);
+		write_child_status(args, &i);
+		exit(0);
 	}
 	else if (identifier > 0)
+	{
 		wait(&status);
+		read_child_status(args);
+	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
-	return (0);
+	return (i);
 }
 
 /** PURPOSE : Executes fork function to run commands.
@@ -49,23 +59,24 @@ int	process_exe(t_arguments *args)
 	int	i;
 	int	status;
 	int	identifier;
+	int	pipe_status;
+	int	x;
 
 	if (pipe(args->fds) == -1)
 		ft_shutdown(MSG, 0, args);
-	g_rv = 1;
+	pipe_status = pipe(args->wpipe);
+	if (pipe_status == -1)
+	{
+		perror("PIPE ERROR\n");
+		set_status(args, 1);
+		return (1);
+	}
 	identifier = fork();
 	if (identifier == 0)
 	{
-		g_rv = first_son(args);
-		if (g_rv < 0)
-		{
-			set_status(args, 1);
-			ft_shutdown(EXE_ERROR, 0, args);
-		}
-		else if (g_rv == 0)
-			return (0);
-		else
-			exit(0);
+		x = first_son(args);
+		write_child_status(args, &x);
+		exit(0);
 	}
 	else if (identifier > 0)
 	{
@@ -74,25 +85,24 @@ int	process_exe(t_arguments *args)
 		close(args->fds[1]);
 		while (++i < args->total_commands - 2)
 		{
-			g_rv = mid_process(args);
-			if (g_rv < 0)
+			x = mid_process(args);
+			read_child_status(args);
+			if (x < 0)
 			{
 				set_status(args, 1);
 				ft_shutdown(EXE_ERROR, 0, args);
 			}
-			else if (g_rv == 0)
+			else if (x == 0)
 				return (0);
 		}
-		g_rv = end_process(args);
-		if (g_rv < 0)
+		x = end_process(args);
+		if (x < 0)
 		{
 			set_status(args, 1);
 			ft_shutdown(EXE_ERROR, 0, args);
 		}
-		else if (g_rv == 0)
-			return (0);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
-	return (g_rv);
+	return (1);
 }
