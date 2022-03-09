@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 11:02:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 12:45:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	arg_reader(char **table, t_arguments *args)
 
 
 /** PURPOSE : Handles file creation (in case of multipe redirections). */
-void	file_redirections(char **lexer_table, t_arguments *args)
+int	file_redirections(char **lexer_table, t_arguments *args)
 {
 	management_file(lexer_table, args);
 	if (case_space(lexer_table[0]) || args->flag_file_in == -1)
@@ -91,8 +91,9 @@ void	file_redirections(char **lexer_table, t_arguments *args)
 		if (args->flag_file_in)
 			printf("%s: No such file or directory\n", args->file_input);
 		args->flag_execution = 1;
-		return ;
+		return (0);
 	}
+	return (1);
 }
 
 
@@ -123,7 +124,8 @@ void
 		ft_shutdown(MEM, errno, args);
 	
 	printer(lexer_table, lexer_type);
-	file_redirections(lexer_table, args);
+	if (!file_redirections(lexer_table, args))
+		return ;
 	arg_reader(lexer_table, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);

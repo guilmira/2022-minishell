@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 11:02:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 12:42:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ int	count_command_words(char **table, int i)
 		return (0);
 	while (table[++i])
 	{
-		if (!ft_strncmp(table[i], "lex_", 4)) //ojo aquie en ve de lex_ odrias ser PIPE
+		printf("_%s_\n", table[0]);
+		if (!ft_strncmp("lex_", table[i], 4)) //ojo aquie en ve de lex_ podria ser PIPE
 			return (words);
 		words++;
 	}
@@ -158,10 +159,14 @@ void	load_command_struct(t_command *command_struct, char **table, int i)
 	int words;
 
 	i = obtain_position(table, i);
+	/* if (!table[0])
+		return ; */
 	words = count_command_words(table, i);
+
+	if (!words)
+		return ;
 	/* printf("res: %i\n", i);
 	printf("words: %i\n", words); */
-
 	command_table = ft_calloc((count_command_words(table, i) + 1), sizeof(char *));
 	if (!command_table)
 		return ;
@@ -202,6 +207,7 @@ t_list	*load_linked_list(char **table, char **envp, int total_commands)
 			return (NULL);
 		}
 		load_command_struct(command_struct, table, i);
+		
 		//command_struct->command = ft_split(table[i], ' '); //UNICO CAMBIO EN ESTA FUNCION
 		build_command_structure(command_struct, folders, envp);
 		ft_lstadd_back(&lst, ft_lstnew(command_struct));
