@@ -32,33 +32,34 @@ char *
 	return (path);
 }
 
+int
+	do_execve(t_arguments *args, t_command *command_struct)
+{
+	char	*path;
+
+	path = get_path(command_struct);
+	execve(path, command_struct->command, args->envp);
+	errno = ENOENT;
+	perror("minishell");
+	return (127);
+}
+
 /** PURPOSE : Executes a one only forked proccess. */
 int	single_son(t_arguments *args)
 {
 	t_command	*command_struct;
-	char		*path;
 
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
-	if (args->flag_file_in)
-		input_form_file(args->file_input);
-	if (args->flag_file_out == 2)
-		output_to_file_append(args->file_output);
-	else if (args->flag_file_out)
-		output_to_file(args->file_output);
+	manage_input_redirection(args);
+	manage_output_redirection(args);
 	set_status(args, 0);
 	if (export_new_l_variables(command_struct->command, args))
 		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	path = get_path(command_struct);
-	if (execve(path, command_struct->command, args->envp) == -1)
-	{
-		errno = ENOENT;
-		perror("minishell");
-	}
-	return (127);
+	return (do_execve(args, command_struct));
 }

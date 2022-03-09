@@ -25,7 +25,7 @@ int
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct->command)
-		return (0);
+		return (0); //should we exit here??
 	i = -1;
 	while (++i < msh_num_builtins(args))
 		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))

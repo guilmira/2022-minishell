@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 
 /** PURPOSE : Recieves input from file if needed. */
-void	input_form_file(char *path)
+void	input_from_file(char *path)
 {
 	int	fd_file;
 
@@ -49,4 +49,20 @@ void	output_to_file_append(char *path)
 	if (dup2(fd_file, STDOUT_FILENO) == -1)
 		ft_shut(DUP_ERROR, 0);
 	close(fd_file);
+}
+
+void
+	manage_input_redirection(t_arguments *args)
+{
+	if (args->flag_file_in)
+		input_from_file(args->file_input);
+}
+
+void
+	manage_output_redirection(t_arguments *args)
+{
+	if (args->flag_file_out == 2)
+		output_to_file_append(args->file_output);
+	else if (args->flag_file_out)
+		output_to_file(args->file_output);
 }

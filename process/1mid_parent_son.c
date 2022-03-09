@@ -22,7 +22,6 @@ static int
 {
 	t_command	*command_struct;
 	int			i;
-	char		*path;
 
 	set_signal(1);
 	command_struct = NULL;
@@ -47,14 +46,7 @@ static int
 		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	path = get_path(command_struct);
-	if (execve(path, command_struct->command, args->envp) == -1)
-	{
-		errno = ENOENT;
-		perror("minishell");
-		set_status(args, 127);
-	}
-	return (1);
+	return (do_execve(args, command_struct));
 }
 
 /** PURPOSE : Mid process for all the commands that are not
@@ -74,7 +66,7 @@ int
 	args->command_number++;
 	index = args->command_number * 2;
 	if (pipe(&args->fds[index]) == -1)
-		ft_shutdown(MSG, 0, args);
+		ft_shutdown(MSG, 0, args);//exit here?
 	set_status(args, 0);
 	pipe_status = pipe(args->wpipe);
 	if (pipe_status == -1)

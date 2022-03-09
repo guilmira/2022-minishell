@@ -127,6 +127,9 @@ char		*get_env_var_body(char **envp, bool do_expand, int i, int len);
 char		*get_path(t_command *command_struct);
 void		write_child_status(const t_arguments *args, int *i);
 void		read_child_status(t_arguments *args);
+void		manage_input_redirection(t_arguments *args);
+void		manage_output_redirection(t_arguments *args);
+int			do_execve(t_arguments *args, t_command *command_struct);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
@@ -240,7 +243,7 @@ int			first_son(t_arguments *args);
 int			last_son(int index, t_arguments *args);
 int			single_son(t_arguments *args);
 /* FILES AT SONS*/
-void		input_form_file(char *path);
+void		input_from_file(char *path);
 void		output_to_file(char *path);
 void		output_to_file_append(char *path);
 /* AUXILIAR */

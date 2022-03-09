@@ -33,7 +33,6 @@ int
 	int			i;
 	int			fd_write;
 	t_command	*command_struct;
-	char		*path;
 
 	set_signal(1);
 	command_struct = NULL;
@@ -41,8 +40,7 @@ int
 	if (!command_struct && !command_struct->command)
 		ft_shutdown(LST, 0, args);
 	fd_write = prepare_process(args->fds[0], args->fds[1]);
-	if (args->flag_file_in)
-		input_form_file(args->file_input);
+	manage_input_redirection(args);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
@@ -58,13 +56,7 @@ int
 		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	path = get_path(command_struct);
-	if (execve(path, command_struct->command, args->envp) == -1)
-	{
-		errno = ENOENT;
-		perror("minishell");
-	}
-	return (1);
+	return (do_execve(args, command_struct));
 }
 
 /** PURPOSE : Executes first forked proccess. The only thing
@@ -74,7 +66,6 @@ int
 {	
 	t_command	*command_struct;
 	int			i;
-	char		*path;
 
 	set_signal(1);
 	command_struct = NULL;
@@ -84,10 +75,7 @@ int
 	if (dup2(args->fds[index], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
-	if (args->flag_file_out == 2)
-		output_to_file_append(args->file_output);
-	else if (args->flag_file_out)
-		output_to_file(args->file_output);
+	manage_output_redirection(args);
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
@@ -100,11 +88,5 @@ int
 		return (1);
 	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
 		return (heredoc_routine(command_struct));
-	path = get_path(command_struct);
-	if (execve(path, command_struct->command, args->envp) == -1)
-	{
-		errno = ENOENT;
-		perror("minishell");
-	}
-	return (1);
+	return (do_execve(args, command_struct));
 }
