@@ -87,7 +87,7 @@ void	ft_leaks(void)
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	set_signal(1);
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));

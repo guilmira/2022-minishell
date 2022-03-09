@@ -13,11 +13,31 @@
 #include "../include/minishell.h"
 
 /** PURPOSE : Executes fork function for a single command. */
+volatile sig_atomic_t shutdown_flag = 1;
+void cleanupRoutine(int signal_number __attribute__((unused)))
+{
+	shutdown_flag = 0;
+}
+
+void
+kill_child(int *status, int identifier, int ret)
+{
+	ret = kill(identifier, SIGTERM);
+	if (ret == -1) {
+		perror("kill");
+		exit(EXIT_FAILURE);
+	}
+	if (waitpid(identifier, status, WUNTRACED | WCONTINUED) == -1) {
+		perror("waitpid");
+		exit(EXIT_FAILURE);
+	}
+}
+
 int
 	single_process(t_arguments *args)
 {
 	int			i;
-	int			status;
+	int			wstatus;
 	int			identifier;
 	t_command	*command_struct;
 	int			pipe_status;
@@ -45,11 +65,11 @@ int
 	{
 		i = single_son(args);
 		write_child_status(args, &i);
-		exit(0);
+		kill (getpid(), SIGKILL);
 	}
 	else if (identifier > 0)
 	{
-		wait(&status);
+		wait(&wstatus);
 		read_child_status(args);
 	}
 	else
