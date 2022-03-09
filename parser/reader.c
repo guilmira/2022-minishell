@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 13:30:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:41:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static int	case_space(char *str)
 }
 
 /** PURPOSE : Handles file creation (in case of multipe redirections). */
-static int	file_redirections(char **lexer_table, int *lexer_type, t_arguments *args)
+static int	file_redirections(char **lexer_table, int *lexer_type, \
+t_arguments *args)
 {
 	management_file(lexer_table, args);
 	if (case_space(lexer_table[0]) || args->flag_file_in == -1)
@@ -70,7 +71,6 @@ static int	file_redirections(char **lexer_table, int *lexer_type, t_arguments *a
 	}
 	return (1);
 }
-
 
 /** PURPOSE : Reads command line. Loads arguments into structure. 
  * 1. Reads command line and applies a pre-filter.

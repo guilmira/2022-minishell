@@ -6,13 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:01:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:44:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-
 
 /* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void	fix_previous_line(char *line, int t, int i, t_list **list)
@@ -93,7 +91,6 @@ t_list	*build_lexer_list(char *line)
 		else
 			i++;
 	}
-	//echo "'"what"'"
 	fix_previous_line(line, t, i, &list);
 	return (list);
 }

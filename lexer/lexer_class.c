@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 14:54:39 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 18:11:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:43:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ static int	is_lex_symbol(char *string)
 static int	is_append(char *string)
 {
 	if (!ft_strcmp(string, APPEND))
-		return (1);
-	return (0);
-}
-
-static int	is_heredoc(char *string)
-{
-	if (!ft_strcmp(string, HEREDOC))
 		return (1);
 	return (0);
 }

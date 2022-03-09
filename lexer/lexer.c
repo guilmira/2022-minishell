@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 13:54:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:57:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*obtain_syntax(char *token)
 	return (0);
 }
 
-/** PURPOSE : Coonstruct lexer table. It will substitute
+/** PURPOSE : Construct lexer table. It will substitute
  * symbols like the pipe for its corresponding identfier (lex_PIPE) */
 static char	**build_lexer_table(char **table)
 {
@@ -93,30 +93,12 @@ int	check_lexer_errors(char **table)
 	return (0);
 }
 
-/** PURPOSE : Lexical Analyzer. 
- * Corrects command line after reading it and interprets symbols. */
-char	**main_lexer(char *line, t_arguments *args)
+/** PURPOSE : Lexer table with expansions and no quotes. */
+static char	**get_lexer_table(char **clean_line, t_arguments *args)
 {
-	char	**clean_line;
 	char	**lexer_table;
-	char	*list_line;
-	t_list	*list;
 
-	if (!line)
-		return (NULL);
 	lexer_table = NULL;
-	list = build_lexer_list(line);
-	list_line = build_new_line(list);
-	//printf("RESULT: %s\n", list_line);
-	args->argv = ft_split(list_line, ' ');
-	if (!args->argv)
-		ft_shutdown(MEM, errno, args);
-	ft_fullclear(list);
-	if (!ft_strchr(list_line, DOUBLE) && !ft_strchr(list_line, SINGLE))
-		clean_line = ft_split(list_line, ' ');
-	else
-		clean_line = quote_split(list_line, ' ');
-	free(list_line);
 	lexer_table = build_lexer_table(clean_line);
 	if (check_lexer_errors(lexer_table))
 	{
@@ -127,5 +109,32 @@ char	**main_lexer(char *line, t_arguments *args)
 	}
 	lexer_table = dollar_expansion(lexer_table, args);
 	lexer_table = remove_quote(lexer_table);
+	return (lexer_table);
+}
+
+/** PURPOSE : Lexical Analyzer. 
+ * Corrects command line after reading it and interprets symbols. */
+char	**main_lexer(char *line, t_arguments *args)
+{
+	t_list	*list;
+	char	*list_line;
+	char	**clean_line;
+	char	**lexer_table;
+
+	if (!line)
+		return (NULL);
+	lexer_table = NULL;
+	list = build_lexer_list(line);
+	list_line = build_new_line(list);
+	args->argv = ft_split(list_line, ' ');
+	if (!args->argv)
+		ft_shutdown(MEM, errno, args);
+	ft_fullclear(list);
+	if (!ft_strchr(list_line, DOUBLE) && !ft_strchr(list_line, SINGLE))
+		clean_line = ft_split(list_line, ' ');
+	else
+		clean_line = quote_split(list_line, ' ');
+	free(list_line);
+	lexer_table = get_lexer_table(clean_line, args);
 	return (lexer_table);
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:36:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:43:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ int			pre_filter_simple(char *line);
 int			pre_filter_advanced(char *line);
 int			quotes_filter(char *line);
 int			is_one_of_lexer_symbols(char symbol);
+int			is_heredoc(char *string);
 /* PARSER */
 char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
