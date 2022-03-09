@@ -1,6 +1,0 @@
-       0       0       0
-total 8
-drwxr-xr-x   3 guilmira  2019   102 Mar  9 09:41 .
-drwxr-xr-x  74 guilmira  2019  2516 Mar  9 10:52 ..
--rw-r--r--   1 guilmira  2019     5 Mar  9 09:41 a.txt
-      67      69     832

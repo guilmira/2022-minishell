@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/09 12:57:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:07:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //export a="ls -la"
 
-//seg
-//" "   ""
+
+//echo "'"what"'"
 
 //meter un control de top | cat

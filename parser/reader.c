@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 12:54:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:28:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*read_and_filter_line(t_arguments *args)
 	return (line);
 }
 
+/** PURPOSE : Check if string only has spaces. */
 static int	case_space(char *str)
 {
 	int	i;
@@ -54,35 +55,8 @@ static int	case_space(char *str)
 	return (1);
 }
 
-/** PURPOSE : Count total number of pipes. */
-static int	count_pipes(char **lexer_table)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	i = -1;
-	while (lexer_table[++i])
-		if (!ft_strcmp(PIPE, lexer_table[i]))
-			j++;
-	return (j);
-}
-
-/** PURPOSE : Load arguments into structure. 
- * 1. Allocates memory for structure.
- * 2. Creates linked list to manage any number of commands */
-static void	arg_reader(char **table, t_arguments *args)
-{
-	args->total_commands = count_pipes(table) + 1;
-	args->commands_lst = load_linked_list(table, args->envp, \
-	args->total_commands, args);
-	if (!args->commands_lst)
-		ft_shutdown(ARG, 0, args);
-}
-
-
 /** PURPOSE : Handles file creation (in case of multipe redirections). */
-int	file_redirections(char **lexer_table, int *lexer_type, t_arguments *args)
+static int	file_redirections(char **lexer_table, int *lexer_type, t_arguments *args)
 {
 	management_file(lexer_table, args);
 	if (case_space(lexer_table[0]) || args->flag_file_in == -1)
