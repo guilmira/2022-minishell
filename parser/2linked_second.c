@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 13:24:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:11:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /** PURPOSE : Count words in command in order to allocate. */
 static int	count_command_words(char **table, int i)
 {
-	int words;
+	int	words;
 
 	words = 1;
 	if (!table || !table[0])
@@ -41,7 +41,6 @@ static int	obtain_position(char **table, int number_of_command)
 	number_appeared = 0;
 	while (table[++i])
 	{
-		
 		if (!ft_strcmp(PIPE, table[i]))
 			number_appeared++;
 		if (number_appeared == number_of_command)

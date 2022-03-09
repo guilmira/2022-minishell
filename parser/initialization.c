@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 06:22:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/01/20 15:23:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:14:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,9 @@ t_prog	*initalize_prog(char **envp, char **builtin_str)
 	return (prog);
 }
 
-/** PURPOSE : Init arguments variable. */
-t_arguments	*intialize_arg(t_prog *prog)
+/** PURPOSE : Set variables to zero. */
+static void	variales_to_zero(t_arguments *args)
 {
-	t_arguments	*args;
-
-	args = ft_calloc(1, sizeof(t_arguments));
-	if (!args)
-		ft_shut(MEM, 0);
 	args->argv = NULL;
 	args->commands_lst = NULL;
 	args->flag_execution = 0;
@@ -59,7 +54,18 @@ t_arguments	*intialize_arg(t_prog *prog)
 	args->flag_file_out = 0;
 	args->file_input = NULL;
 	args->file_output = NULL;
+}
+
+/** PURPOSE : Init arguments variable. */
+t_arguments	*intialize_arg(t_prog *prog)
+{
+	t_arguments	*args;
+
+	args = ft_calloc(1, sizeof(t_arguments));
+	if (!args)
+		ft_shut(MEM, 0);
 	args->prog = prog;
+	variales_to_zero(args);
 	if (args->envp)
 		ft_free_split(args->envp);
 	args->envp = copy_array(args->envp, prog->envp, 1);

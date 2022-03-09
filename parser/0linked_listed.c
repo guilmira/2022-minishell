@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 13:25:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:10:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,23 +100,11 @@ char **folders, char **envp)
 		folders, envp);
 }
 
-/* char **create_new_table(char **table)
-{
-	char **new_table;
-	int i = -1;
-	
-	new_table = ft_calloc(count_table(table), sizeof(char *));
-	while (table[++i])
-	{
-		new_table[i] = ft_strdup(table[i]);
-	}
-	return (new_table); 
-} */
-
 /** PURPOSE : Builds linked list by allocating memory for a structure and
  * making that same structure the content of each node. Fills the path and 
  * the command fields. */
-t_list	*load_linked_list(char **table, char **envp, int total_commands, t_arguments *args)
+t_list	*load_linked_list(char **table, char **envp, \
+int total_commands, t_arguments *args)
 {
 	int			i;
 	char		**folders;
@@ -137,8 +125,6 @@ t_list	*load_linked_list(char **table, char **envp, int total_commands, t_argume
 			ft_shutdown(MEM, 2, args);
 		}
 		load_command_struct(command_struct, table, i, args);
-		
-		//command_struct->command = ft_split(table[i], ' '); //UNICO CAMBIO EN ESTA FUNCION
 		build_command_structure(command_struct, folders, envp);
 		ft_lstadd_back(&lst, ft_lstnew(command_struct));
 	}

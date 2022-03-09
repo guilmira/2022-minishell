@@ -6,28 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:57:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:03:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/** PURPOSE : Tokens in existence. */
-void	init_options(char **option, char **option_name)
-{
-	option[0] = "|";
-	option_name[0] = PIPE;
-	option[1] = "<";
-	option_name[1] = IN;
-	option[2] = ">";
-	option_name[2] = OUT;
-	option[3] = ">>";
-	option_name[3] = APPEND;
-	option[4] = "<<";
-	option_name[4] = HEREDOC;
-	option[5] = NULL;
-	option_name[5] = NULL;
-}
 
 /** PURPOSE : Filter tokens. */
 static char	*obtain_syntax(char *token)

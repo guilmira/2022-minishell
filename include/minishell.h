@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:43:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:03:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void		read_child_status(t_arguments *args);
 
 /* Others. */
 void		printer(char **table, int *org);
-void		init_options(char **option, char **option_name);
+
 char		*build_new_line(t_list *list);
 int			ignore_symbol(char *str, int position);
 void		rl_replace_line(const char *txt, int clear_undo);
@@ -191,6 +191,7 @@ int			is_heredoc(char *string);
 /* PARSER */
 char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
+void		init_options(char **option, char **option_name);
 /* LEXER */
 char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);

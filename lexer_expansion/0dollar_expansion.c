@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:21:40 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 17:49:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:03:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,21 @@ char	**dollar_expansion(char **table, t_arguments *args)
 		}
 	}
 	return (table);
+}
+
+/** PURPOSE : Tokens in existence. */
+void	init_options(char **option, char **option_name)
+{
+	option[0] = "|";
+	option_name[0] = PIPE;
+	option[1] = "<";
+	option_name[1] = IN;
+	option[2] = ">";
+	option_name[2] = OUT;
+	option[3] = ">>";
+	option_name[3] = APPEND;
+	option[4] = "<<";
+	option_name[4] = HEREDOC;
+	option[5] = NULL;
+	option_name[5] = NULL;
 }
