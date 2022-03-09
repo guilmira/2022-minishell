@@ -67,6 +67,7 @@ int
 
 	prog = NULL;
 	arguments = NULL;
+	g_rv = 1;
 	prog = initalize_prog(envp, builtin_str);
 	while (true)
 	{

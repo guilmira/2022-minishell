@@ -68,33 +68,36 @@ int
 	int	index;
 	int	status;
 	int	identifier;
+	int	i;
+	int	pipe_status;
 
 	args->command_number++;
 	index = args->command_number * 2;
 	if (pipe(&args->fds[index]) == -1)
 		ft_shutdown(MSG, 0, args);
+	set_status(args, 0);
+	pipe_status = pipe(args->wpipe);
+	if (pipe_status == -1)
+	{
+		perror("PIPE ERROR\n");
+		set_status(args, 1);
+		return (1);
+	}
 	identifier = fork();
 	if (identifier == 0)
 	{
 		close(args->fds[index]);
-		g_rv = mid_son(index, args);
-		if (g_rv < 0)
-		{
-			args->status = 1;
-			ft_shutdown(EXE_ERROR, 0, args);
-		}
-		else if (g_rv == 0)
-			return (0);
-		else
-			exit(0);
+		i = mid_son(index, args);
+		write_child_status(args, &i);
+		exit(0);
 	}
 	else if (identifier > 0)
 	{
 		wait(&status);
+		read_child_status(args);
 		close(args->fds[index + 1]);
-		return (g_rv);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
-	return (g_rv);
+	return (1);
 }

@@ -69,5 +69,6 @@ t_arguments	*intialize_arg(t_prog *prog)
 	init_builtin_func_arr(args->builtin_func);
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;
+	args->wpipe = (int *)(malloc(2 * sizeof(int)));
 	return (args);
 }

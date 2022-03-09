@@ -70,6 +70,7 @@ typedef struct s_arguments
 	int		status;
 	t_list	*commands_lst;
 	t_prog	*prog;
+	int		*wpipe;
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
@@ -124,6 +125,8 @@ void		get_rid_of_quotes(char **args, size_t i, char *str);
 bool		is_valid_var(char *const *args, t_arguments *arg, int i);
 char		*get_env_var_body(char **envp, bool do_expand, int i, int len);
 char		*get_path(t_command *command_struct);
+void		write_child_status(const t_arguments *args, int *i);
+void		read_child_status(t_arguments *args);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
