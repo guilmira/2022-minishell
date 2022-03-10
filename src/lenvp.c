@@ -32,7 +32,6 @@ char *
 	len = ft_strchr(args[i], '=') - (args[i]);
 	temp2 = ft_substr(args[i], 0, len);
 	temp = get_env_var(arg->lenvp, temp2, false);
-	free(temp2);
 	if (temp)
 	{
 		free_pointers(1, temp);
@@ -43,7 +42,7 @@ char *
 	}
 	else
 	{
-		temp = get_env_var(arg->envp, ft_substr(args[i], 0, len), false);
+		temp = get_env_var(arg->envp, temp2, false);
 		if (temp)
 		{
 			free_pointers(1, temp);
@@ -53,6 +52,7 @@ char *
 			temp = "envp";
 		}
 	}
+	free(temp2);
 	return (temp);
 }
 
