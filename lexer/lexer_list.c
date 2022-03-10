@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:44:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:10:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,34 +50,18 @@ static char	*obtain_symbol(char *line, int i)
 	return (str);
 }
 
-/** PURPOSE : Redo line separating symbols that come without spaces.
- * Uses a linked list to load each fragment 
- * of the new built line with spaces. */
-t_list	*build_lexer_list(char *line)
+/** PURPOSE : Normi forced. */
+static int	advance_and_fix(char *line, int *t, int i, t_list **list)
 {
-	int		i;
-	int		t;
-	char	*str;
-	t_list	*list;
+	i = advance_to_next_quote(line, i);
+	fix_previous_line(line, *t, i, list);
+	*t = i;
+	return (i);
+}
 
-	list = NULL;
-	i = 0;
-	t = 0;
-	while (line[i])
-	{
-		if (is_quote(line[i]))
-		{
-			i = advance_to_next_quote(line, i);
-			fix_previous_line(line, t, i, &list);
-			t = i;
-		}
-		else if (ft_isspaces(line[i]))
-			i++;
-		else if (line[i] == '=' && line[i + 1])
-			i = i + 2;
-		else if (is_one_of_lexer_symbols(line[i]))
-		{
-			fix_previous_line(line, t, i, &list);
+
+			//NO BORRAR previo
+			/* fix_previous_line(line, t, i, &list);
 			t = i + 1;
 			str = obtain_symbol(line, i);
 			if (line[i + 1] == '<' || line[i + 1] == '>')
@@ -86,8 +70,48 @@ t_list	*build_lexer_list(char *line)
 				t++;
 			}
 			ft_lstadd_back(&list, ft_lstnew(str));
+			i++; */  //y no tenia el t=i
+
+/** PURPOSE : Normi forced. */
+static int	arrange_symbols(char *line, int *t, int i, t_list **list)
+{
+	char	*str;
+
+	str = NULL;
+	fix_previous_line(line, *t, i, list);
+	str = obtain_symbol(line, i);
+	if (line[i + 1] == '<' || line[i + 1] == '>')
+		i++;
+	ft_lstadd_back(list, ft_lstnew(str));
+	i++;
+	*t = i;
+	return (i);
+}
+
+//echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
+
+/** PURPOSE : Redo line separating symbols that come without spaces.
+ * Uses a linked list to load each fragment 
+ * of the new built line with spaces. */
+t_list	*build_lexer_list(char *line)
+{
+	int		i;
+	int		t;
+	t_list	*list;
+
+	i = 0;
+	t = 0;
+	list = NULL;
+	while (line[i])
+	{
+		if (is_quote(line[i]))
+			i = advance_and_fix(line, &t, i, &list);
+		else if (ft_isspaces(line[i]))
 			i++;
-		}
+		else if (line[i] == '=' && line[i + 1])
+			i = i + 2;
+		else if (is_one_of_lexer_symbols(line[i]))
+			i = arrange_symbols(line, &t, i, &list);
 		else
 			i++;
 	}

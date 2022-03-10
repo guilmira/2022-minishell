@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:33:15 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 19:12:28 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:31:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	manage_output(char *file, t_arguments *args)
 
 static void	manage_heredoc(char *file, t_arguments *args)
 {
-	char *str;
-	
+	char	*str;
+
 	str = ft_strdup(file);
 	if (!str)
 		ft_shutdown(MEM, 1, args);
@@ -60,7 +60,7 @@ static void	manage_heredoc(char *file, t_arguments *args)
 
 /** PURPOSE : Iterate list and create every single file as is needed. 
  *  Codes: 1 is for output, 2 is for input, 3 for append and 4 for heredoc. */
-static void	create_output_files(t_list *list_files, \
+void	create_output_files(t_list *list_files, \
 t_list *list_type, t_arguments *args)
 {
 	int		*ptr;
@@ -88,11 +88,4 @@ t_list *list_type, t_arguments *args)
 		list_files = list_files->next;
 		list_type = list_type->next;
 	}
-}
-
-/** PURPOSE : Load structure with due arguments.
- * Also create files if needed. */
-void	file_setup(t_list *list_files, t_list *list_type, t_arguments *args)
-{
-	create_output_files(list_files, list_type, args);
 }

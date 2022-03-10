@@ -6,13 +6,17 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/10 19:18:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:22:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //>> a.txt	tiene que crear el fichero.
+
+//esto tiene que funcionar
+//ls "akjf<"
+//echo '$a'
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)

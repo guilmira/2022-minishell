@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 15:09:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:24:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,25 @@ static char	*get_variable_onstring(char *str)
 	return (new_str);
 }
 
+/** PURPOSE : Normi impossed. */
+static char	*get_value_variable(char *fragment, t_arguments *args)
+{
+	char	*value;
+
+	if (!fragment)
+		ft_shutdown("Failure on env variable\n", 1, args);
+	value = get_env_var(args->envp, fragment, false);
+	if (!value)
+		value = get_env_var(args->lenvp, fragment, false);
+	if (!value)
+		value = ft_strdup(" ");
+	free(fragment);
+	return (value);
+}
+
 /** PURPOSE : Turn value of variable into a string 
  * and adds it to a linked list. */
-static int   variable_to_string(char *str, int i, \
+static int	variable_to_string(char *str, int i, \
 t_list **list, t_arguments *args)
 {
 	char	*value;
@@ -87,16 +103,8 @@ t_list **list, t_arguments *args)
 	}
 	else
 	{
-		//FUNCION value = get_value(STR, &str[i] )
 		fragment = get_variable_onstring(&str[i]);
-		if (!fragment)
-			ft_shutdown("Failure on env variable\n", 1, args);
-		value = get_env_var(args->envp, fragment, false);
-		if (!value)
-			value = get_env_var(args->lenvp, fragment, false);
-		if (!value)
-			value = ft_strdup(" ");
-		free(fragment);
+		value = get_value_variable(fragment, args);
 		i = advance_to_next_variable(str, i);
 	}
 	ft_lstadd_back(list, ft_lstnew(value));
