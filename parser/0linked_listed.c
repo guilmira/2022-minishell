@@ -61,10 +61,6 @@ static char	**get_env_path(char *envp[])
 	full_path = get_full_path(envp);
 	if (!full_path)
 		return (NULL);
-	/*if (!full_path)
-		full_path[0] = getcwd(NULL, 0);
-		new_string = ft_strdup(ft_strchr(getcwd(NULL, 0), '/'));
-	else*/
 	new_string = ft_strdup(ft_strchr(full_path[0], '/'));
 	if (!new_string)
 	{

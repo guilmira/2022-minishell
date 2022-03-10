@@ -27,9 +27,12 @@ char *
 	find_var_location(char *const *args, t_arguments *arg, int i, char *temp)
 {
 	long	len;
+	char	*temp2;
 
 	len = ft_strchr(args[i], '=') - (args[i]);
-	temp = get_env_var(arg->lenvp, ft_substr(args[i], 0, len), false);
+	temp2 = ft_substr(args[i], 0, len);
+	temp = get_env_var(arg->lenvp, temp2, false);
+	free(temp2);
 	if (temp)
 	{
 		free_pointers(1, temp);
