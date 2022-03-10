@@ -71,6 +71,7 @@ typedef struct s_arguments
 	t_list	*commands_lst;
 	t_prog	*prog;
 	int		*wpipe;
+	int		*rpipe;
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
@@ -125,8 +126,10 @@ void		get_rid_of_quotes(char **args, size_t i, char *str);
 bool		is_valid_var(char *const *args, t_arguments *arg, int i);
 char		*get_env_var_body(char **envp, bool do_expand, int i, int len);
 char		*get_path(t_command *command_struct);
-void		write_child_status(const t_arguments *args, int *i);
-void		read_child_status(t_arguments *args);
+void
+write_pipe_to(int *pipe, int *to);
+void
+read_pipe_from(int *pipe, int *from);
 void		manage_input_redirection(t_arguments *args);
 void		manage_output_redirection(t_arguments *args);
 int			do_execve(t_arguments *args, t_command *command_struct);

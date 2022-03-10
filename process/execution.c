@@ -37,13 +37,13 @@ static int	end_process(t_arguments *args)
 	if (identifier == 0)
 	{
 		i = last_son(last_index, args);
-		write_child_status(args, &i);
+		write_pipe_to(args->wpipe, &i);
 		exit(0);
 	}
 	else if (identifier > 0)
 	{
 		wait(&status);
-		read_child_status(args);
+		read_pipe_from(args->wpipe, &args->status);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
@@ -75,7 +75,7 @@ int	process_exe(t_arguments *args)
 	if (identifier == 0)
 	{
 		x = first_son(args);
-		write_child_status(args, &x);
+		write_pipe_to(args->wpipe, &x);
 		exit(0);
 	}
 	else if (identifier > 0)
@@ -86,7 +86,7 @@ int	process_exe(t_arguments *args)
 		while (++i < args->total_commands - 2)
 		{
 			x = mid_process(args);
-			read_child_status(args);
+			read_pipe_from(args->wpipe, &args->status);
 			if (x < 0)
 			{
 				set_status(args, 1);

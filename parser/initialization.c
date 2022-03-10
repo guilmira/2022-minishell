@@ -76,5 +76,6 @@ t_arguments	*intialize_arg(t_prog *prog)
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;
 	args->wpipe = (int *)(malloc(2 * sizeof(int)));
+	args->rpipe = (int *)(malloc(2 * sizeof(int)));
 	return (args);
 }

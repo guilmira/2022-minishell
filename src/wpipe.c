@@ -13,17 +13,17 @@
 #include "../include/minishell.h"
 
 void
-	write_child_status(const t_arguments *args, int *i)
+	write_pipe_to(int *pipe, int *to)
 {
-	close(args->wpipe[0]);
-	write(args->wpipe[1], i, sizeof(int));
-	close(args->wpipe[1]);
+	close(pipe[0]);
+	write(pipe[1], to, sizeof(int));
+	close(pipe[1]);
 }
 
 void
-	read_child_status(t_arguments *args)
+	read_pipe_from(int *pipe, int *from)
 {
-	close(args->wpipe[1]);
-	read(args->wpipe[0], &args->status, sizeof(int));
-	close(args->wpipe[0]);
+	close(pipe[1]);
+	read(pipe[0], from, sizeof(int));
+	close(pipe[0]);
 }

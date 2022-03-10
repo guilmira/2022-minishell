@@ -80,13 +80,14 @@ int
 	{
 		close(args->fds[index]);
 		i = mid_son(index, args);
-		write_child_status(args, &i);
-		exit(0);
+		write_pipe_to(args->wpipe, &i);
+		kill(getpid(), SIGKILL);
+		//exit(0);
 	}
 	else if (identifier > 0)
 	{
 		wait(&status);
-		read_child_status(args);
+		read_pipe_from(args->wpipe, &args->status);
 		close(args->fds[index + 1]);
 	}
 	else

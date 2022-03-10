@@ -41,6 +41,7 @@ int
 	int			identifier;
 	t_command	*command_struct;
 	int			pipe_status;
+	int mypid;
 
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
@@ -60,17 +61,29 @@ int
 		set_status(args, 1);
 		return (1);
 	}
+	pipe_status = pipe(args->rpipe);
+	if (pipe_status == -1)
+	{
+		perror("PIPE ERROR\n");
+		set_status(args, 1);
+		return (1);
+	}
 	identifier = fork();
+	printf("identifier =  %d\n", identifier);
 	if (identifier == 0)
 	{
 		i = single_son(args);
-		write_child_status(args, &i);
-		kill (getpid(), SIGKILL);
+		write_pipe_to(args->wpipe, &i);
+		read_pipe_from(args->rpipe, &mypid);
+		printf("mypid read = %d\n", mypid);
+		kill(mypid, SIGKILL); //getpid unallowed
+		exit(0);
 	}
 	else if (identifier > 0)
 	{
+		read_pipe_from(args->wpipe, &args->status);
+		write_pipe_to(args->rpipe, &identifier);
 		wait(&wstatus);
-		read_child_status(args);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
