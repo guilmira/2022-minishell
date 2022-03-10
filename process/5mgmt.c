@@ -67,7 +67,6 @@ void	free_heap_memory(t_arguments *args)
 		if (args->file_input)
 			free(args->file_input);
 		free_pointers(1, args->wpipe);
-		free_pointers(1, args->rpipe);
 		free(args);
 	}
 }

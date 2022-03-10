@@ -24,6 +24,11 @@ void
 	{
 		i = single_son(args);
 		write_pipe_to(args->wpipe, &i);
+	/*	free_heap_memory(args);
+		ft_free_split(args->envp);
+		ft_free_split(args->lenvp);
+		ft_free_split(args->prog->envp);
+		ft_free_split(args->prog->lenvp);*/
 		exit(0);
 	}
 	else if (identifier > 0)

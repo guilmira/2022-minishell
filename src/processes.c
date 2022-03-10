@@ -26,7 +26,7 @@ int
  * 2. Create argument descriptors to link pipes. 
  * 3. Accesses main process function. */
 static int
-	process_excution(t_arguments *arguments)
+	process_execution(t_arguments *arguments)
 {
 	if (arguments->total_commands > MAX_COMMANDS)
 	{
@@ -49,5 +49,5 @@ int
 {
 	if (args[0] == NULL || !arguments || !arguments->commands_lst)
 		return (1);
-	return (process_excution(arguments));
+	return (process_execution(arguments));
 }

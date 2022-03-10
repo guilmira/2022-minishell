@@ -44,7 +44,7 @@ static int	end_process(t_arguments *args)
 	args->command_number++;
 	last_index = (args->command_number * 2) - 2;
 	set_status(args, 0);
-	if (pipe(args->wpipe) == -1 || pipe(args->rpipe) == -1)
+	if (pipe(args->wpipe) == -1)
 	{
 		perror("PIPE ERROR\n");
 		set_status(args, 1);

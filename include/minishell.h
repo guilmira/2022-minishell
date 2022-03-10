@@ -71,7 +71,6 @@ typedef struct s_arguments
 	t_list	*commands_lst;
 	t_prog	*prog;
 	int		*wpipe;
-	int		*rpipe;
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
