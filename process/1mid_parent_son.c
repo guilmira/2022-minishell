@@ -59,7 +59,6 @@ void
 	fork_mid_child(t_arguments *args, int index)
 {
 	int	i;
-	int	child_pid;
 	int	wstatus;
 	int	identifier;
 
@@ -69,15 +68,13 @@ void
 		close(args->fds[index]);
 		i = mid_son(index, args);
 		write_pipe_to(args->wpipe, &i);
-		read_pipe_from(args->rpipe, &child_pid);
-		kill(child_pid, SIGKILL);
+		exit(0);
 	}
 	else if (identifier > 0)
 	{
 		read_pipe_from(args->wpipe, &args->status);
-		write_pipe_to(args->rpipe, &identifier);
-		close(args->fds[index + 1]);
 		wait(&wstatus);
+		close(args->fds[index + 1]);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
@@ -96,9 +93,9 @@ int
 	args->command_number++;
 	index = args->command_number * 2;
 	if (pipe(&args->fds[index]) == -1)
-		ft_shutdown(MSG, 0, args);//exit here?
+		ft_shutdown(MSG, 0, args);
 	set_status(args, 0);
-	if (pipe(args->wpipe) == -1 || pipe(args->rpipe) == -1)
+	if (pipe(args->wpipe) == -1)
 	{
 		perror("PIPE ERROR\n");
 		set_status(args, 1);

@@ -15,7 +15,6 @@
 void
 	fork_single_child(t_arguments *args)
 {
-	int	child_pid;
 	int	identifier;
 	int	i;
 	int	wstatus;
@@ -25,13 +24,11 @@ void
 	{
 		i = single_son(args);
 		write_pipe_to(args->wpipe, &i);
-		read_pipe_from(args->rpipe, &child_pid);
-		kill((child_pid), SIGKILL);
+		exit(0);
 	}
 	else if (identifier > 0)
 	{
 		read_pipe_from(args->wpipe, &args->status);
-		write_pipe_to(args->rpipe, &identifier);
 		wait(&wstatus);
 	}
 	else
@@ -56,7 +53,7 @@ int
 	if (export_new_l_variables(command_struct->command, args))
 		return (1);
 	set_status(args, 0);
-	if (pipe(args->wpipe) == -1 || pipe(args->rpipe) == -1)
+	if (pipe(args->wpipe) == -1)
 	{
 		perror("PIPE ERROR\n");
 		set_status(args, 1);
