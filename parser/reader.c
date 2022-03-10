@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:41:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 17:01:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,12 @@ void
 		ft_shutdown(MEM, errno, args);
 	if (!file_redirections(lexer_table, lexer_type, args))
 		return ;
+	printer(lexer_table, lexer_type);
+
 	arg_reader(lexer_table, args);
+	
 	ft_free_split(lexer_table);
 	free(lexer_type);
 	//table = get_command_table(lexer_table, args, lexer_type);  esto estaba antes de file redirections.. mantener de momento
-	//printer(table, lexer_type);
 	//ft_free_split(table);
 }

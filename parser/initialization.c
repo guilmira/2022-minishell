@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 06:22:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 15:14:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 16:31:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	variales_to_zero(t_arguments *args)
 {
 	args->argv = NULL;
 	args->commands_lst = NULL;
+	args->heredoc_list = NULL;
 	args->flag_execution = 0;
 	args->command_number = 0;
 	args->total_commands = 0;
