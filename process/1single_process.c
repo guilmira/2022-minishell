@@ -12,36 +12,39 @@
 
 #include "../include/minishell.h"
 
-/** PURPOSE : Executes fork function for a single command. */
-volatile sig_atomic_t shutdown_flag = 1;
-void cleanupRoutine(int signal_number __attribute__((unused)))
-{
-	shutdown_flag = 0;
-}
-
 void
-kill_child(int *status, int identifier, int ret)
+	fork_single_child(t_arguments *args)
 {
-	ret = kill(identifier, SIGTERM);
-	if (ret == -1) {
-		perror("kill");
-		exit(EXIT_FAILURE);
+	int	child_pid;
+	int	identifier;
+	int	i;
+	int	wstatus;
+
+	identifier = fork();
+	if ((identifier) == 0)
+	{
+		i = single_son(args);
+		write_pipe_to(args->wpipe, &i);
+		read_pipe_from(args->rpipe, &child_pid);
+		kill((child_pid), SIGKILL);
+		exit(0);
 	}
-	if (waitpid(identifier, status, WUNTRACED | WCONTINUED) == -1) {
-		perror("waitpid");
-		exit(EXIT_FAILURE);
+	else if (identifier > 0)
+	{
+		read_pipe_from(args->wpipe, &args->status);
+		write_pipe_to(args->rpipe, &identifier);
+		wait(&wstatus);
 	}
+	else
+		ft_shutdown(FORK_ERROR, 0, args);
 }
 
+/** PURPOSE : Executes fork function for a single command. */
 int
 	single_process(t_arguments *args)
 {
 	int			i;
-	int			wstatus;
-	int			identifier;
 	t_command	*command_struct;
-	int			pipe_status;
-	int mypid;
 
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
@@ -54,38 +57,12 @@ int
 	if (export_new_l_variables(command_struct->command, args))
 		return (1);
 	set_status(args, 0);
-	pipe_status = pipe(args->wpipe);
-	if (pipe_status == -1)
+	if (pipe(args->wpipe) == -1 || pipe(args->rpipe) == -1)
 	{
 		perror("PIPE ERROR\n");
 		set_status(args, 1);
 		return (1);
 	}
-	pipe_status = pipe(args->rpipe);
-	if (pipe_status == -1)
-	{
-		perror("PIPE ERROR\n");
-		set_status(args, 1);
-		return (1);
-	}
-	identifier = fork();
-	printf("identifier =  %d\n", identifier);
-	if (identifier == 0)
-	{
-		i = single_son(args);
-		write_pipe_to(args->wpipe, &i);
-		read_pipe_from(args->rpipe, &mypid);
-		printf("mypid read = %d\n", mypid);
-		kill(mypid, SIGKILL); //getpid unallowed
-		exit(0);
-	}
-	else if (identifier > 0)
-	{
-		read_pipe_from(args->wpipe, &args->status);
-		write_pipe_to(args->rpipe, &identifier);
-		wait(&wstatus);
-	}
-	else
-		ft_shutdown(FORK_ERROR, 0, args);
+	fork_single_child(args);
 	return (1);
 }
