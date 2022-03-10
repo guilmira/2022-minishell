@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 17:19:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:20:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char		*find_head(char **args, t_arguments *arg, int i, const char *tail);
 size_t		get_envv_len(const char *s);
 void		mnge_heredoc(t_list *command_struct);
 void		set_signal(int sig_type);
-int			heredoc_routine(t_list *command_struct);
+int			heredoc_routine(t_list *heredoc_list);
 bool		var_have_val(char **envp, char *needle);
 bool		export_new_l_variables(char **args, t_arguments *arg);
 void		set_new_var(char *var, t_arguments *arg);
