@@ -13,20 +13,12 @@
 #include "../include/minishell.h"
 
 void
-	print_echo_output(char *head, char *tail)
+	print_output(char *const *args, int i, char *token)
 {
-	ft_putstr_fd(head, 1);
-	if (tail)
-		ft_putstr_fd(tail, 1);
-}
-
-void
-	print_output(char *const *args, int i, char *head, char *tail)
-{
-	print_echo_output(head, tail);
+	ft_putstr_fd(token, 1);
 	if (args[i + 1])
 		ft_putstr_fd(" ", 1);
-	free_pointers(2, head, tail);
+	free_pointers(1, token);
 }
 
 /*
@@ -35,26 +27,13 @@ void
 void
 	loop_and_print_echo_args(char **args, t_arguments *arg, int i)
 {
-	char	*head;
-	char	*tail;
+	char	*token;
 
-	head = NULL;
-	tail = NULL;
+	token = NULL;
 	while (args[i])
 	{
-		if (args[i][0] == '$')
-		{
-			if (args[i][1] == '?')
-			{
-				ft_putnbr_fd(arg->status, 1);
-				break ;
-			}
-			tail = find_tail(args, i);
-			head = find_head(args, arg, i, tail);
-		}
-		else
-			head = ft_strdup(args[i]);
-		print_output(args, i, head, tail);
+		token = ft_strdup(args[i]);
+		print_output(args, i, token);
 		i++;
 	}
 	set_status(arg, 0);

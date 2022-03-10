@@ -96,7 +96,6 @@ void		export_multi_var(char *const *args, int i, \
 void		loop_and_print_echo_args(char **args, t_arguments *arg, int i);
 char		*get_env_var(char **envp, char *needle, bool do_expand);
 void		renew_pwds(t_arguments *arg, char *old_path);
-char		*ft_concat(const char *s1, const char *s2);
 void		set_status(t_arguments *arg, int status);
 bool		is_within_range(const char *str);
 int			atoi_exit_code(const char *str);
@@ -111,8 +110,6 @@ void		set_shlvl_num(t_arguments *arg);
 char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 char		**copy_array(char **dest, char **src, unsigned int extra_cells);
 char		*ft_multistr_concat(int count, ...);
-char		*find_tail(char **args, int i);
-char		*find_head(char **args, t_arguments *arg, int i, const char *tail);
 size_t		get_envv_len(const char *s);
 void		mnge_heredoc(t_command *command_struct);
 void		set_signal(int sig_type);
@@ -131,6 +128,10 @@ void		manage_input_redirection(t_arguments *args);
 void		manage_output_redirection(t_arguments *args);
 int			do_execve(t_arguments *args, t_command *command_struct);
 int			do_lvar_heredoc_execve(t_arguments *args, t_command *command_struct);
+char		*lenvp_routine(char *const *args, t_arguments *arg,
+				int i, char *temp);
+char		*envp_routine(char *const *args, t_arguments *arg,
+				int i, char *temp);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

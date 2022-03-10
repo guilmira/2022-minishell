@@ -36,9 +36,7 @@ char *
 	{
 		free_pointers(1, temp);
 		temp = ft_substr(args[i], 0, len);
-		delete_env_var(arg->lenvp, get_envv_len(args[i]), temp);
-		free_pointers(1, temp);
-		temp = "lenvp";
+		temp = lenvp_routine(args, arg, i, temp);
 	}
 	else
 	{
@@ -47,9 +45,7 @@ char *
 		{
 			free_pointers(1, temp);
 			temp = ft_substr(args[i], 0, len + 1);
-			delete_env_var(arg->envp, get_envv_len(args[i]), temp);
-			free_pointers(1, temp);
-			temp = "envp";
+			temp = envp_routine(args, arg, i, temp);
 		}
 	}
 	free(temp2);

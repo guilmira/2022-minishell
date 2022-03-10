@@ -31,7 +31,7 @@ void
 	}
 	else if (signum == SIGINT)
 	{
-		g_rv = 0; //update status accordingly
+		g_rv = 0;
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
@@ -40,7 +40,6 @@ void
 void
 	handler_child(int signum __attribute__((unused)))
 {
-
 }
 
 void
