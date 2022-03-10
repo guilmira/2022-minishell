@@ -126,13 +126,12 @@ void		get_rid_of_quotes(char **args, size_t i, char *str);
 bool		is_valid_var(char *const *args, t_arguments *arg, int i);
 char		*get_env_var_body(char **envp, bool do_expand, int i, int len);
 char		*get_path(t_command *command_struct);
-void
-write_pipe_to(int *pipe, int *to);
-void
-read_pipe_from(int *pipe, int *from);
+void		write_pipe_to(int *pipe, int *to);
+void		read_pipe_from(int *pipe, int *from);
 void		manage_input_redirection(t_arguments *args);
 void		manage_output_redirection(t_arguments *args);
 int			do_execve(t_arguments *args, t_command *command_struct);
+int			do_lvar_heredoc_execve(t_arguments *args, t_command *command_struct);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

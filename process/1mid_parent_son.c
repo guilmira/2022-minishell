@@ -12,6 +12,17 @@
 
 #include "../include/minishell.h"
 
+int
+	do_lvar_heredoc_execve(t_arguments *args, t_command *command_struct)
+{
+	set_status(args, 0);
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
+	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
+		return (heredoc_routine(command_struct));
+	return (do_execve(args, command_struct));
+}
+
 /** PURPOSE : Executes forked process for all the mid commands
  * 1. Sets truct of command. Identify its path.
  * 2. Sets the proper inputs and outputs, redirecting the
@@ -41,12 +52,36 @@ static int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
-	set_status(args, 0);
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
-	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-		return (heredoc_routine(command_struct));
-	return (do_execve(args, command_struct));
+	return (do_lvar_heredoc_execve(args, command_struct));
+}
+
+void
+	fork_mid_child(t_arguments *args, int index)
+{
+	int	i;
+	int	child_pid;
+	int	wstatus;
+	int	identifier;
+
+	identifier = fork();
+	if (identifier == 0)
+	{
+		close(args->fds[index]);
+		i = mid_son(index, args);
+		write_pipe_to(args->wpipe, &i);
+		read_pipe_from(args->rpipe, &child_pid);
+		kill(child_pid, SIGKILL);
+		exit(0);
+	}
+	else if (identifier > 0)
+	{
+		read_pipe_from(args->wpipe, &args->status);
+		write_pipe_to(args->rpipe, &identifier);
+		close(args->fds[index + 1]);
+		wait(&wstatus);
+	}
+	else
+		ft_shutdown(FORK_ERROR, 0, args);
 }
 
 /** PURPOSE : Mid process for all the commands that are not
@@ -58,39 +93,18 @@ int
 	mid_process(t_arguments *args)
 {
 	int	index;
-	int	status;
-	int	identifier;
-	int	i;
-	int	pipe_status;
 
 	args->command_number++;
 	index = args->command_number * 2;
 	if (pipe(&args->fds[index]) == -1)
 		ft_shutdown(MSG, 0, args);//exit here?
 	set_status(args, 0);
-	pipe_status = pipe(args->wpipe);
-	if (pipe_status == -1)
+	if (pipe(args->wpipe) == -1 || pipe(args->rpipe) == -1)
 	{
 		perror("PIPE ERROR\n");
 		set_status(args, 1);
 		return (1);
 	}
-	identifier = fork();
-	if (identifier == 0)
-	{
-		close(args->fds[index]);
-		i = mid_son(index, args);
-		write_pipe_to(args->wpipe, &i);
-		kill(getpid(), SIGKILL);
-		//exit(0);
-	}
-	else if (identifier > 0)
-	{
-		wait(&status);
-		read_pipe_from(args->wpipe, &args->status);
-		close(args->fds[index + 1]);
-	}
-	else
-		ft_shutdown(FORK_ERROR, 0, args);
+	fork_mid_child(args, index);
 	return (1);
 }

@@ -56,10 +56,5 @@ int	single_son(t_arguments *args)
 		ft_shutdown(LST, 0, args);
 	manage_input_redirection(args);
 	manage_output_redirection(args);
-	set_status(args, 0);
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
-	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-		return (heredoc_routine(command_struct));
-	return (do_execve(args, command_struct));
+	return (do_lvar_heredoc_execve(args, command_struct));
 }
