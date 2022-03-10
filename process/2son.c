@@ -20,11 +20,6 @@
 } */
 //TODO, keep shell in execution
 
-int
-	heredoc_routine(t_command *command_struct);
-
-
-
 /** PURPOSE : Executes first forked proccess. The only thing
  * that it takes into account is if input comes from file. */
 int
@@ -51,12 +46,7 @@ int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
-	set_status(args, 0);
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
-	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-		return (heredoc_routine(command_struct));
-	return (do_execve(args, command_struct));
+	return (do_lvar_heredoc_execve(args, command_struct));
 }
 
 /** PURPOSE : Executes first forked proccess. The only thing
@@ -83,10 +73,5 @@ int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
-	set_status(args, 0);
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
-	if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-		return (heredoc_routine(command_struct));
-	return (do_execve(args, command_struct));
+	return (do_lvar_heredoc_execve(args, command_struct));
 }

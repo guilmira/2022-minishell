@@ -71,7 +71,6 @@ void
 		write_pipe_to(args->wpipe, &i);
 		read_pipe_from(args->rpipe, &child_pid);
 		kill(child_pid, SIGKILL);
-		exit(0);
 	}
 	else if (identifier > 0)
 	{

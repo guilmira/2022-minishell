@@ -12,42 +12,49 @@
 
 #include "../include/minishell.h"
 
-/** PURPOSE : End of the process.
- * 1. Final fork + execute last son. */
-static int	end_process(t_arguments *args)
+void
+	fork_end_son(t_arguments *args, int last_index)
 {
+	int	child_pid;
 	int	identifier;
-	int	status;
-	int	last_index;
 	int	i;
-	int	pipe_status;
+	int	wstatus;
 
-	i = 1;
-	args->command_number++;
-	last_index = (args->command_number * 2) - 2;
-	set_status(args, 0);
-	pipe_status = pipe(args->wpipe);
-	if (pipe_status == -1)
-	{
-		perror("PIPE ERROR\n");
-		set_status(args, 1);
-		return (1);
-	}
 	identifier = fork();
 	if (identifier == 0)
 	{
 		i = last_son(last_index, args);
 		write_pipe_to(args->wpipe, &i);
-		exit(0);
+		read_pipe_from(args->rpipe, &child_pid);
+		kill((child_pid), SIGKILL);
 	}
 	else if (identifier > 0)
 	{
-		wait(&status);
 		read_pipe_from(args->wpipe, &args->status);
+		write_pipe_to(args->rpipe, &identifier);
+		wait(&wstatus);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
-	return (i);
+}
+
+/** PURPOSE : End of the process.
+ * 1. Final fork + execute last son. */
+static int	end_process(t_arguments *args)
+{
+	int	last_index;
+
+	args->command_number++;
+	last_index = (args->command_number * 2) - 2;
+	set_status(args, 0);
+	if (pipe(args->wpipe) == -1 || pipe(args->rpipe) == -1)
+	{
+		perror("PIPE ERROR\n");
+		set_status(args, 1);
+		return (1);
+	}
+	fork_end_son(args, last_index);
+	return (1);
 }
 
 /** PURPOSE : Executes fork function to run commands.
@@ -57,15 +64,14 @@ static int	end_process(t_arguments *args)
 int	process_exe(t_arguments *args)
 {
 	int	i;
-	int	status;
+	int	wstatus;
 	int	identifier;
-	int	pipe_status;
 	int	x;
+	int	child_pid;
 
 	if (pipe(args->fds) == -1)
 		ft_shutdown(MSG, 0, args);
-	pipe_status = pipe(args->wpipe);
-	if (pipe_status == -1)
+	if (pipe(args->wpipe) == -1 || pipe(args->rpipe) == -1)
 	{
 		perror("PIPE ERROR\n");
 		set_status(args, 1);
@@ -76,17 +82,18 @@ int	process_exe(t_arguments *args)
 	{
 		x = first_son(args);
 		write_pipe_to(args->wpipe, &x);
-		exit(0);
+		read_pipe_from(args->rpipe, &child_pid);
+		kill((child_pid), SIGKILL);
 	}
 	else if (identifier > 0)
 	{
+		read_pipe_from(args->wpipe, &args->status);
+		write_pipe_to(args->rpipe, &identifier);
 		i = -1;
-		wait(&status);
 		close(args->fds[1]);
 		while (++i < args->total_commands - 2)
 		{
 			x = mid_process(args);
-			read_pipe_from(args->wpipe, &args->status);
 			if (x < 0)
 			{
 				set_status(args, 1);
@@ -96,6 +103,7 @@ int	process_exe(t_arguments *args)
 				return (0);
 		}
 		x = end_process(args);
+		wait(&wstatus);
 		if (x < 0)
 		{
 			set_status(args, 1);
