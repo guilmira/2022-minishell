@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 18:03:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 21:03:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static int	obtain_position(char **table, int number_of_command)
 
 	if (!number_of_command)
 		return (0);
-	/* if (!ft_strncmp("lex_", table[i]))
-		return (0); */
 	i = -1;
 	number_appeared = 0;
 	while (table[++i])
@@ -52,7 +50,8 @@ static int	obtain_position(char **table, int number_of_command)
 }
 
 /** PURPOSE : Converter. */
-void	load_command_struct(t_command *command_struct, char **table, int i, t_arguments *args)
+void	load_command_struct(t_command *command_struct, char **table, \
+int i, t_arguments *args)
 {
 	int		j;
 	int		words;
@@ -62,7 +61,8 @@ void	load_command_struct(t_command *command_struct, char **table, int i, t_argum
 	words = count_command_words(table, i);
 	if (!words)
 		ft_shutdown(MEM, 2, args);
-	command_table = ft_calloc((count_command_words(table, i) + 1), sizeof(char *));
+	command_table = ft_calloc((count_command_words(table, i) + 1), \
+	sizeof(char *));
 	if (!command_table)
 		ft_shutdown(MEM, 2, args);
 	j = 0;

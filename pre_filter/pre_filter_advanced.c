@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:15:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/08 17:10:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 21:04:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ int	is_one_of_lexer_symbols(char symbol)
 	return (0);
 }
 
-/** PURPOSE : Prevent unclosed symbols like ls | or
+/** PURPOSE : Prevent unclosed symbols like ls | 
+ * or
  * ls < , ls << and so on. */
 int	unclosed_filter(char *line)
 {
 	int	i;
-	int flag;
+	int	flag;
 
 	i = -1;
 	flag = 0;
@@ -43,7 +44,7 @@ int	unclosed_filter(char *line)
 		if (is_one_of_lexer_symbols(line[i]))
 			flag++;
 		else if (ft_isalnum(line[i]))
-			flag=0;
+			flag = 0;
 	}
 	if (flag)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 20:29:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 21:04:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,8 @@ void
 	shell_reader(t_arguments *args)
 {
 	char		*line;
-	//char		**table;
-	char		**lexer_table;
 	int			*lexer_type;
+	char		**lexer_table;
 
 	line = read_and_filter_line(args);
 	if (!line)
@@ -103,6 +102,4 @@ void
 	arg_reader(lexer_table, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);
-	//table = get_command_table(lexer_table, args, lexer_type);  esto estaba antes de file redirections.. mantener de momento
-	//ft_free_split(table);
 }
