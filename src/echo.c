@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 10:56:48 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/11 11:26:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 12:11:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@ void
 	manage_output_redirection(t_arguments *args);
 
 void
-	print_output(char *const *args, int i, char *token, t_arguments *arg)
+	print_output(char *const *args, int i, char *token)
 {
 	//manage_output_redirection(arg);
 	ft_putstr_fd(token, 1);
 	if (args[i + 1])
 		ft_putstr_fd(" ", 1);
 	free_pointers(1, token);
-	printf("%i\n", arg->status);
 }
 
 /*
@@ -37,7 +36,7 @@ void
 	while (args[i])
 	{
 		token = ft_strdup(args[i]);
-		print_output(args, i, token, arg);
+		print_output(args, i, token);
 		i++;
 	}
 	set_status(arg, 0);
