@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 10:56:48 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/16 10:56:49 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:35:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int
 	int		i;
 	bool	have_option;
 
+	printf("when it enters echo %s\n", args[1]);
 	i = 1;
 	have_option = false;
 	if (args[i])

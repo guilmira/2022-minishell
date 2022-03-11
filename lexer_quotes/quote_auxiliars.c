@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:06:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:00:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 21:01:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ char	*build_new_line(t_list *list)
 		if (!str)
 			return (NULL);
 		free(tmp);
-		//free(fragment);
 		tmp = str;
 		list = list->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:26:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:30:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,16 @@ static void	assign_type(char *content, t_list **list_type, t_arguments *args)
 	ft_lstadd_back(list_type, ft_lstnew(ptr));
 }
 
+/** PURPOSE : Load structure with due arguments.
+ * Also create files if needed. */
+static void	file_setup(t_list *list_files, t_list *list_type, t_arguments *args)
+{
+	create_output_files(list_files, list_type, args);
+}
+
 /** PURPOSE : Load arguments files into structure. 
  * 1. Checks whether files are given as parameter.
- * 2. Sets adsresses to input and output files (as a linked list).
+ * 2. Sets addresses to input and output files (as a linked list).
  * 3. Sets some of the values of "args" struct. */
 void	management_file(char **table, t_arguments *args)
 {

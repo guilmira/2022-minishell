@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 15:11:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 10:05:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,35 @@ static int	obtain_position(char **table, int number_of_command)
 }
 
 /** PURPOSE : Converter. */
-void	load_command_struct(t_command *command_struct, char **table, int i, t_arguments *args)
+void	load_command_struct(t_command *command_struct, char **table, \
+int i, t_arguments *args)
 {
 	int		j;
+	int		words;
 	char	**command_table;
-	int words;
 
 	i = obtain_position(table, i);
 	words = count_command_words(table, i);
 	if (!words)
 		ft_shutdown(MEM, 2, args);
-	command_table = ft_calloc((count_command_words(table, i) + 1), sizeof(char *));
+	command_table = ft_calloc((count_command_words(table, i) + 1), \
+	sizeof(char *));
 	if (!command_table)
 		ft_shutdown(MEM, 2, args);
 	j = 0;
 	i = i - 1;
 	while (table[++i])
 	{
-		if (!ft_strncmp("lex_", table[i], 4))
-			break;
+		/* if (!ft_strcmp(PIPE, table[i])) //estaba puest como !ft_strncmp("lex_", table[i], 4))
+			break ; */
+		/* if (!ft_strncmp("lex_", table[i], 4))
+			break ; */
+		if (!ft_strcmp(PIPE, table[i]))
+			break ;
+		if (!ft_strncmp("lex_", table[i], 4) && ft_strcmp(HEREDOC, table[i]))
+			break ;
 		command_table[j] = ft_strdup(table[i]);
+		printf("aqui %s\n", command_table[j]);
 		if (!command_table[j])
 			ft_shutdown(MEM, 2, args);
 		j++;

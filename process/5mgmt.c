@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 12:56:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:56:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	free_heap_memory(t_arguments *args)
 			ft_free_split(args->argv);
 		if (args->commands_lst && args->commands_lst->content != NULL)
 			ft_structclear(args->commands_lst);
+		if (args->heredoc_list && args->heredoc_list->content != NULL)
+			ft_fullclear(args->heredoc_list);
 		if (args->fds)
 			free(args->fds);
 		if (args->file_output)

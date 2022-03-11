@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 15:03:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:51:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_arguments
 	int		flag_file_out;
 	char	*file_input;
 	char	*file_output;
+	t_list	*heredoc_list;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
 	char	**lenvp;
@@ -111,9 +112,9 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 char		**copy_array(char **dest, char **src, unsigned int extra_cells);
 char		*ft_multistr_concat(int count, ...);
 size_t		get_envv_len(const char *s);
-void		mnge_heredoc(t_command *command_struct);
+void		mnge_heredoc(t_list *command_struct);
 void		set_signal(int sig_type);
-int			heredoc_routine(t_command *command_struct);
+int			heredoc_routine(t_list *heredoc_list);
 bool		var_have_val(char **envp, char *needle);
 bool		export_new_l_variables(char **args, t_arguments *arg);
 void		set_new_var(char *var, t_arguments *arg);
@@ -223,9 +224,11 @@ char		**get_command_table(char **lexer_table, \
 /* DOLLAR EXPANSION */
 char		**dollar_expansion(char **table, t_arguments *args);
 char		*ultra_expansion(char *str, t_arguments *args);
+int			variable_to_string(char *str, int i, \
+			t_list **list, t_arguments *args);
 /* FILE REDIRECTION */
 void		management_file(char **table, t_arguments *args);
-void		file_setup(t_list *list_files, \
+void		create_output_files(t_list *list_files, \
 			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
 void		create_file(char *path, t_arguments *args);

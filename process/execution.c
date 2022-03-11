@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/08 15:50:28 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 09:56:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ static int	end_process(t_arguments *args)
 	fork_end_son(args, last_index);
 	return (1);
 }
+
+/* int	waiting_process(&status)
+{
+	while (++t < 2)
+	{
+		wait(&status);
+	}
+} */
 
 /** PURPOSE : Executes fork function to run commands.
  * 1. Create first pipe. 
@@ -103,6 +111,7 @@ int	process_exe(t_arguments *args)
 			set_status(args, 1);
 			ft_shutdown(EXE_ERROR, 0, args);
 		}
+		//waiting_process(&status);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);

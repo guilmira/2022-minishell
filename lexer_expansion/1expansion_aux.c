@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:15:06 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 15:09:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/10 21:00:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,70 +36,20 @@ char	*build_from_list(t_list *list)
 	return (str);
 }
 
-/** PURPOSE : Advance to INMIDATE next piece of variable. */
-static int	advance_to_next_variable(char *line, int i)
+/** PURPOSE : Normi impossed.  */
+int	adv_and_fix(char *str, int t, int i, t_list **list)
 {
-	if (!line)
-		return (i);
-	while (line[++i])
-		if (line[i] == RIDDLER || !ft_isalnum(line[i]) || ft_isspaces(line[i]))
-			break ;
+	i = advance_to_next_quote(str, i);
+	fix_previous_line(str, t, i, list);
 	return (i);
 }
 
-/** PURPOSE : Reads a string and gets the first 
- * variable found: thisisastring$VARIABLE$SECONDVAR.
- * It will output $VARIABLE and allocate memory for it */
-static char	*get_variable_onstring(char *str)
+/** PURPOSE : Normi impossed.  */
+int	norm_and_fix(char *str, int t, int i, t_list **list)
 {
-	int		i;
-	char	*new_str;
-
-	new_str = NULL;
-	i = 0;
-	while (str[++i])
-	{
-		if (str[i] == RIDDLER || ft_isspaces(str[i]) || !ft_isalnum(str[i]))
-		{
-			new_str = ft_substr(str, 1, i - 1);
-			break ;
-		}
-		else if (!str[i + 1])
-			new_str = ft_substr(str, 1, i);
-	}
-	return (new_str);
-}
-
-/** PURPOSE : Turn value of variable into a string 
- * and adds it to a linked list. */
-static int   variable_to_string(char *str, int i, \
-t_list **list, t_arguments *args)
-{
-	char	*value;
-	char	*fragment;
-
-	value = NULL;
-	fragment = NULL;
-	if (str[i + 1] == RIDDLER)
-	{
-		value = ft_itoa(args->status);
-		i = i + 2;
-	}
-	else
-	{
-		//FUNCION value = get_value(STR, &str[i] )
-		fragment = get_variable_onstring(&str[i]);
-		if (!fragment)
-			ft_shutdown("Failure on env variable\n", 1, args);
-		value = get_env_var(args->envp, fragment, false);
-		if (!value)
-			value = get_env_var(args->lenvp, fragment, false);
-		if (!value)
-			value = ft_strdup(" ");
-		free(fragment);
-		i = advance_to_next_variable(str, i);
-	}
-	ft_lstadd_back(list, ft_lstnew(value));
+	while (str[i] && str[i] != EXPAN && str[i] != SINGLE)
+		i++;
+	fix_previous_line(str, t, i, list);
 	return (i);
 }
 
@@ -122,18 +72,11 @@ char	*ultra_expansion(char *str, t_arguments *args)
 		if (!str[i])
 			break ;
 		if (str[i] == SINGLE)
-		{
-			i = advance_to_next_quote(str, i);
-			fix_previous_line(str, t, i, &list);
-		}
+			i = adv_and_fix(str, t, i, &list);
 		else if (str[i] == EXPAN)
 			i = variable_to_string(str, i, &list, args);
 		else
-		{
-			while (str[i] && str[i] != EXPAN && str[i] != SINGLE)
-				i++;
-			fix_previous_line(str, t, i, &list);
-		}
+			i = norm_and_fix(str, t, i, &list);
 		t = i;
 	}
 	new_str = build_from_list(list);

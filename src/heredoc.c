@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:25:59 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/01 10:30:25 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:19:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ static void
 }
 
 void
-	mnge_heredoc(t_command *command_struct)
+	mnge_heredoc(t_list *heredoc_list)
 {
 	char	*delim;
 	char	*buf;
 	char	*readline_res;
 
-	delim = command_struct->command[1];
+	delim = heredoc_list->content; //access to first element of the list
+	printf("delimeter is: %s\n", delim);
 	readline_res = NULL;
 	buf = ft_strdup("");
 	while (delim && g_rv)
@@ -51,10 +52,10 @@ void
 }
 
 int
-	heredoc_routine(t_command *command_struct)
+	heredoc_routine(t_list *heredoc_list)
 {
 	set_signal(3);
-	mnge_heredoc(command_struct);
+	mnge_heredoc(heredoc_list);
 	set_signal(1);
 	return (1);
 }
