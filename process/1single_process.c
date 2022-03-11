@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 20:35:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 10:33:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,11 @@ int
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct->command)
-		return (0); //should we exit here??
+		return (0);
 	i = -1;
 	while (++i < msh_num_builtins(args))
 		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
-		{
-			printf("just before echo %s\n", command_struct->command[1]);
 			return ((args->builtin_func[i])(command_struct->command, args));
-		}
 	if (export_new_l_variables(command_struct->command, args))
 		return (1);
 	set_status(args, 0);

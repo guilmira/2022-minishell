@@ -6,19 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 10:29:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 10:34:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/** PURPOSE : Call signal handler in child processes. */
-/* static void	signal_management_sons(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
-} */
-//TODO, keep shell in execution
 
 /** PURPOSE : Executes first forked proccess. The only thing
  * that it takes into account is if input comes from file. */

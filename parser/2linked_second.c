@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 10:05:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 10:33:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int i, t_arguments *args)
 		if (!ft_strncmp("lex_", table[i], 4) && ft_strcmp(HEREDOC, table[i]))
 			break ;
 		command_table[j] = ft_strdup(table[i]);
-		printf("aqui %s\n", command_table[j]);
 		if (!command_table[j])
 			ft_shutdown(MEM, 2, args);
 		j++;
