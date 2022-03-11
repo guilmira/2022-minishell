@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:15:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 21:04:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 09:30:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ int	unclosed_filter(char *line)
 	flag = 0;
 	while (line[++i])
 	{
-		if (is_one_of_lexer_symbols(line[i]))
+		if (is_quote(line[i]))
+		{
+			i = advance_to_next_quote(line, i);
+			i = i - 1;
+		}
+		else if (is_one_of_lexer_symbols(line[i]))
 			flag++;
 		else if (ft_isalnum(line[i]))
 			flag = 0;
