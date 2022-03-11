@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 18:56:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 10:50:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_shut(char *str, int i)
 
 /** PURPOSE : clears linked list from first element to last, including content
  * Also frees internal struct memory. */
-void	ft_structclear(t_list *lst)
+static void	ft_structclear(t_list *lst)
 {
 	t_list		*tmp;
 	t_command	*command_struct;
