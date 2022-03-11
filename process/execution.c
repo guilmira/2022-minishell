@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 09:56:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/11 14:28:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ static int	end_process(t_arguments *args)
 	return (1);
 }
 
-/* int	waiting_process(&status)
-{
-	while (++t < 2)
-	{
-		wait(&status);
-	}
-} */
-
 /** PURPOSE : Executes fork function to run commands.
  * 1. Create first pipe. 
  * 2. Fork process in a loop, and inside each son process, run command.
@@ -105,6 +97,12 @@ int	process_exe(t_arguments *args)
 				return (0);
 		}
 		x = end_process(args);
+		/* int t = -1;
+		while (++t < 2)
+		{
+			printf("ese: %i\n", t);
+			wait(&wstatus);
+		} */
 		wait(&wstatus);
 		if (x < 0)
 		{
