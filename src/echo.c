@@ -51,10 +51,26 @@ void
 void
 	check_n_option(char *const *args, int *i, bool *have_option)
 {
-	if (!ft_memcmp(args[(*i)], "-n", 3))
+	int		j;
+	char	c;
+	char	d;
+
+	c = 'n';
+	if (!ft_memcmp(args[(*i)], "-n", 2))
 	{
-		(*have_option) = true;
-		(*i) += 1;
+		j = 2;
+		while (args[(*i)][j])
+		{
+			d = args[(*i)][j];
+			if (ft_memcmp(&d, &c, 1))
+				break ;
+			j++;
+		}
+		if (!args[(*i)][j])
+		{
+			(*have_option) = true;
+			(*i) += 1;
+		}
 	}
 }
 
