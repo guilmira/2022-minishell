@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 14:13:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 14:20:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	generate_output(t_list *list_out, int flag_file, t_arguments *args)
 
 
 
-/* static void	get_input(char *file, t_arguments *args)
+static void	get_input(char *file, t_arguments *args)
 {
 	if (args->file_input)
 		free(args->file_input);
@@ -56,17 +56,17 @@ static void	generate_output(t_list *list_out, int flag_file, t_arguments *args)
 	args->file_input = ft_strdup(file);
 	if (!args->file_input)
 		ft_shutdown(MEM, 1, args);
-} */
+}
 
 /** PURPOSE : Iterate list and take inputs. */
-/* static void	search_input(t_list *list_in, t_arguments *args)
+static void	search_input(t_list *list_in, t_arguments *args)
 {
 	while (list_in)
 	{
 		get_input(list_in->content, args);
 		list_in = list_in->next;
 	}
-} */
+}
 
 
 void	command_file_setup(t_command *command_struct, t_arguments *args)
@@ -74,15 +74,14 @@ void	command_file_setup(t_command *command_struct, t_arguments *args)
 	char	*file;
 
 	file = NULL;
-/* 	if (command_struct->list_in)
+	if (command_struct->list_in)
 	{
 		search_input(command_struct->list_in, args);
 		if (args->file_input)
 			input_from_file(args->file_input);
-	} */
+	}
 	if (command_struct->list_out)
 	{
-    printf("%s\n", command_struct->list_out->content);
 		generate_output(command_struct->list_out, command_struct->flag_file, args);
  		if (command_struct->flag_file == 2)
 			output_to_file_append(file);

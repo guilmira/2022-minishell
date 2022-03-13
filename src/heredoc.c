@@ -25,6 +25,26 @@ static void
 	free(res);
 }
 
+char *
+	do_inner_while(char *delim, char **buf, char *readline_res)
+{
+	while (delim && g_rv)
+	{
+		readline_res = readline(HEREDOC_PROMPT);
+		if (!readline_res)
+		{
+			printf("minishell: warning: here-document "
+				   "delimited by end-of-file (wanted `%s')\n", delim);
+			break ;
+		}
+		if (!ft_strcmp(delim, readline_res))
+			break ;
+		update_buf(buf, readline_res);
+		free_pointers(1, readline_res);
+	}
+	return (*buf);
+}
+
 void
 	mnge_heredoc(t_list *heredoc_list)
 {
@@ -32,23 +52,15 @@ void
 	char	*buf;
 	char	*readline_res;
 
-	delim = heredoc_list->content; //access to first element of the list
-	//printf("delimeter is: %s\n", delim);
 	readline_res = NULL;
-	buf = ft_strdup("");
-	while (delim && g_rv)
+	while (heredoc_list)
 	{
-		readline_res = readline(HEREDOC_PROMPT);
-		if (!readline_res)
-		{
-			ft_putendl_fd("minishell: warning: here-document delimited by end-of-file (wanted `%s\')\n", 2);// manage %
-			break ;
-		}
-		if (!ft_strcmp(delim, readline_res))
-			break ;
-		update_buf(&buf, readline_res);
-		free_pointers(1, readline_res);
+		delim = heredoc_list->content;
+		buf = ft_strdup("");
+		buf = do_inner_while(delim, &buf, readline_res);
+		heredoc_list = heredoc_list->next;
 	}
+	free_pointers(1, buf);
 }
 
 int

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 13:06:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 14:20:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int
 {
 	char	*path;
 
+	set_status(args, 0);
 	path = get_path(command_struct);
 	if (is_blank(args->command_number, args))
 		return (0);
@@ -58,6 +59,16 @@ int	single_son(t_arguments *args)
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
 	command_file_setup(command_struct, args);
+	return (do_execve(args, command_struct));
+}
+
+
+
+/* command_file_setup(command_struct, args);
 	//manage_input_redirection(args);
 	return (do_lvar_heredoc_execve(args, command_struct));
-}
+=======
+	manage_input_redirection(args);
+	manage_output_redirection(args);
+	return (do_execve(args, command_struct));
+>>>>>>> 9be6a509e52f49a42212dd471c4345aaa9a0eaad */
