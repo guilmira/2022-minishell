@@ -37,6 +37,7 @@ int
 {
 	char	*path;
 
+	set_status(args, 0);
 	path = get_path(command_struct);
 	if (is_blank(args->command_number, args))
 		return (0);
@@ -59,5 +60,5 @@ int	single_son(t_arguments *args)
 		ft_shutdown(LST, 0, args);
 	manage_input_redirection(args);
 	manage_output_redirection(args);
-	return (do_lvar_heredoc_execve(args, command_struct));
+	return (do_execve(args, command_struct));
 }

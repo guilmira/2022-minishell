@@ -12,15 +12,16 @@
 
 #include "../include/minishell.h"
 
-int
-	do_lvar_heredoc_execve(t_arguments *args, t_command *command_struct)
+static void
+	mnge_dups(int index, t_arguments *args, const t_command *command_struct)
 {
-	set_status(args, 0);
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
-	if (args->heredoc_list)
-		return (heredoc_routine(args->heredoc_list));
-	return (do_execve(args, command_struct));
+	if (!command_struct || !command_struct->command)
+		ft_shutdown(LST, 0, args);
+	if (dup2(args->fds[index - 2], STDIN_FILENO) == -1)
+		ft_shutdown(DUP_ERROR, 0, args);
+	close(args->fds[index - 2]);
+	if (dup2(args->fds[index + 1], STDOUT_FILENO) == -1)
+		ft_shutdown(DUP_ERROR, 0, args);
 }
 
 /** PURPOSE : Executes forked process for all the mid commands
@@ -37,14 +38,9 @@ static int
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct || !command_struct->command)
-		ft_shutdown(LST, 0, args);
-	if (dup2(args->fds[index - 2], STDIN_FILENO) == -1)
-		ft_shutdown(DUP_ERROR, 0, args);
-	close(args->fds[index - 2]);
-	if (dup2(args->fds[index + 1], STDOUT_FILENO) == -1)
-		ft_shutdown(DUP_ERROR, 0, args);
+	mnge_dups(index, args, command_struct);
 	close(args->fds[index + 1]);
+	set_status(args, 0);
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
@@ -52,7 +48,11 @@ static int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
-	return (do_lvar_heredoc_execve(args, command_struct));
+	if (args->heredoc_list)
+		return (heredoc_routine(args->heredoc_list));
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
+	return (do_execve(args, command_struct));
 }
 
 void

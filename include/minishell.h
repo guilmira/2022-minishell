@@ -132,7 +132,6 @@ void		read_pipe_from(int *pipe, int *from);
 void		manage_input_redirection(t_arguments *args);
 void		manage_output_redirection(t_arguments *args);
 int			do_execve(t_arguments *args, t_command *command_struct);
-int			do_lvar_heredoc_execve(t_arguments *args, t_command *command_struct);
 char		*lenvp_routine(char *const *args, t_arguments *arg,
 				int i, char *temp);
 char		*envp_routine(char *const *args, t_arguments *arg,
