@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 10:56:48 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/11 12:11:05 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 13:56:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@ void
 	manage_output_redirection(t_arguments *args);
 
 void
-	print_output(char *const *args, int i, char *token)
+	print_output(char *const *args, int i, char *token, t_arguments *arg)
 {
-	//manage_output_redirection(arg);
+	t_command	*command_struct;
+
+	command_struct = NULL;
+	command_struct = ft_lst_position(arg->commands_lst, arg->command_number);
+	if (!command_struct->command)
+		return ;
+	command_file_setup(command_struct, arg);
 	ft_putstr_fd(token, 1);
 	if (args[i + 1])
 		ft_putstr_fd(" ", 1);
@@ -36,7 +42,7 @@ void
 	while (args[i])
 	{
 		token = ft_strdup(args[i]);
-		print_output(args, i, token);
+		print_output(args, i, token, arg);
 		i++;
 	}
 	set_status(arg, 0);

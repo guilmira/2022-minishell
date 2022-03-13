@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 14:28:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 14:00:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,12 @@ int	process_exe(t_arguments *args)
 				return (0);
 		}
 		x = end_process(args);
-		/* int t = -1;
-		while (++t < 2)
-		{
-			printf("ese: %i\n", t);
-			wait(&wstatus);
-		} */
 		wait(&wstatus);
 		if (x < 0)
 		{
 			set_status(args, 1);
 			ft_shutdown(EXE_ERROR, 0, args);
 		}
-		//waiting_process(&status);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);

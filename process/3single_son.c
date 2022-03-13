@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 11:13:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 13:06:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	single_son(t_arguments *args)
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
-	manage_input_redirection(args);
-	manage_output_redirection(args);
+	command_file_setup(command_struct, args);
+	//manage_input_redirection(args);
 	return (do_lvar_heredoc_execve(args, command_struct));
 }

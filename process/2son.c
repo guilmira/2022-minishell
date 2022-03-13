@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 07:38:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 14:04:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int
 	if (!command_struct && !command_struct->command)
 		ft_shutdown(LST, 0, args);
 	fd_write = prepare_process(args->fds[0], args->fds[1]);
-	manage_input_redirection(args);
+	//manage_input_redirection(args);
+	command_file_setup(command_struct, args);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
@@ -57,7 +58,8 @@ int
 	if (dup2(args->fds[index], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
-	manage_output_redirection(args);
+	//manage_output_redirection(args);
+	command_file_setup(command_struct, args);
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{

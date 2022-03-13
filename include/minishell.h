@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 10:41:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 12:56:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,8 @@ int			*class_lex_table(char **lexer_table);
 char		**remove_quote(char **table);
 t_list		*build_lexer_list(char *line);
 int			obtain_position(char **table, int number_of_command);
+t_command	*alloc_command_struct(char **table, int *type, \
+			int i, t_arguments *args);
 /* QUOTE MANAGEMENT */
 char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
@@ -246,6 +248,7 @@ void		fix_previous_line(char *line, int t, int i, t_list **list);
 int			process_exe(t_arguments *args);
 int			msh_execute(char **args, t_arguments *arguments);
 int			is_blank(int i,  t_arguments *args);
+void		command_file_setup(t_command *command_struct, t_arguments *args);
 /* PARENT PROCESS */
 int			mid_process(t_arguments *args);
 int			single_process(t_arguments *args);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 09:32:25 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 14:08:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	case_space(char *str)
 static int	file_redirections(char **lexer_table, int *lexer_type, \
 t_arguments *args)
 {
-	management_file(lexer_table, args);
+	//management_file(lexer_table, args);
 	if (case_space(lexer_table[0]) || args->flag_file_in == -1 || args->flag_file_out == -1)
 	{
 		ft_free_split(lexer_table);

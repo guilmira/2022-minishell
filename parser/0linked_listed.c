@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 10:22:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 12:01:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,100 +98,6 @@ char **folders, char **envp)
 	else
 		command_struct->path = set_path(command_struct->command[0], \
 		folders, envp);
-}
-
-
-t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
-{
-	char	*str;
-	t_list	*list_in;
-
-	str = NULL;
-	list_in = NULL;
-	i = obtain_position(table, i);
-	i = i - 1;
-	while (table[++i])
-	{
-		if (type[i] == 0)
-			break ;
-		if (!ft_strcmp(IN, table[i]))
-		{
-			if (type[i + 1] == 2)
-			{	
-				str = ft_strdup(table[i + 1]);
-				if (!str)
-				ft_shutdown(str, i, args);
-				ft_lstadd_back(&list_in, ft_lstnew(str));
-			}
-		}
-	}
-	return (list_in);
-}
-
-t_list	*redirections_out(char **table, t_command	*command_struct, int i, t_arguments *args)
-{
-	char	*str;
-	t_list	*list_out;
-
-	str = NULL;
-	list_out = NULL;
-	i = obtain_position(table, i);
-	i = i - 1;
-	while (table[++i])
-	{
-		if (!ft_strcmp(PIPE, table[i]))
-			break ;
-		if (!ft_strcmp(APPEND, table[i]) || !ft_strcmp(OUT, table[i]))
-		{
-			command_struct->flag_file = 1;
-			str = ft_strdup(table[i + 1]);
-			if (!str)
-				ft_shutdown(str, i, args); //esto recuerda la prueba de PATH. puedes alterar la flag y listo
-			ft_lstadd_back(&list_out, ft_lstnew(str));
-			if (!ft_strcmp(APPEND, table[i]))
-				command_struct->flag_file = 2;
-		}
-	}
-	return (list_out);
-}
-
-void	struct_init(t_command *command_struct, int index)
-{
-	command_struct->index = index;
-	command_struct->path = NULL;
-	command_struct->command = NULL;
-	command_struct->list_in = NULL;
-	command_struct->list_out = NULL;
-	command_struct->flag_file = 0;
-}
-
-/** PURPOSE : Corresponding numbers are:
- * 0	PIPE
- * 1	REDIRECT
- * 2	FILE
- * 3	APPEND
- * 4	HEREDOC
- * 5	COMMAND TOKEN
- * 6	EMPTY */
-t_command	*alloc_command_struct(char **table, int *type, \
-int i, t_arguments *args)
-{
-	t_list		*list_in;
-	t_list		*list_out;
-	t_command	*command_struct;
-
-	list_in = NULL;
-	list_out = NULL;
-	command_struct = NULL;
-	command_struct = ft_calloc(1, sizeof(t_command));
-	if (!command_struct)
-		ft_shutdown(MEM, 2, args);
-	struct_init(command_struct, i);
-	list_in = redirections_in(table, type, i, args);
-	command_struct->list_in = list_in;
-	list_out = redirections_out(table, command_struct, i, args);
-	command_struct->list_out = list_out;
-	return (command_struct);
 }
 
 /** PURPOSE : Builds linked list by allocating memory for a structure and
