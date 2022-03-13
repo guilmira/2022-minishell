@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 14:23:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 14:27:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int
 
 	set_status(args, 0);
 	path = get_path(command_struct);
+	command_file_setup(command_struct, args);
 	if (is_blank(args->command_number, args))
 		return (0);
 	else
