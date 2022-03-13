@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 09:37:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:19:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,17 @@ static int	advance_and_fix(char *line, int *t, int i, t_list **list)
 /** PURPOSE : Normi forced. */
 static int	arrange_symbols(char *line, int *t, int i, t_list **list)
 {
+	char	*tmp;
 	char	*str;
 
+	tmp = NULL;
 	str = NULL;
 	fix_previous_line(line, *t, i, list);
-	str = obtain_symbol(line, i);
+	tmp = obtain_symbol(line, i);
 	if (line[i + 1] == '<' || line[i + 1] == '>')
 		i++;
+	str = ft_strjoin(" ", tmp);
+	free(tmp);
 	ft_lstadd_back(list, ft_lstnew(str));
 	i++;
 	*t = i;

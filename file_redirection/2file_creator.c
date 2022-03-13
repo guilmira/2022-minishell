@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:33:15 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 19:31:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:48:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ static int	input_type(int *ptr)
 	return (0);
 }
 
-static void	manage_input(int *ptr, char *file, t_arguments *args)
+static void	manage_output(int *ptr, char *file, t_arguments *args)
 {
 	args->flag_file_out = 1;
 	if (args->file_output)
 		free(args->file_output);
+	if (!file || !file[0])
+	{
+		args->flag_file_out = -1;
+		return ;
+	}
 	args->file_output = ft_strdup(file);
 	if (!args->file_output)
 		ft_shutdown(MEM, 1, args);
@@ -39,10 +44,15 @@ static void	manage_input(int *ptr, char *file, t_arguments *args)
 	}
 }
 
-static void	manage_output(char *file, t_arguments *args)
+static void	manage_input(char *file, t_arguments *args)
 {
 	if (args->file_input)
 		free(args->file_input);
+	if (!file)
+	{
+		args->flag_file_out = -1;
+		return ;
+	}
 	args->file_input = ft_strdup(file);
 	if (!args->file_input)
 		ft_shutdown(MEM, 1, args);
@@ -70,12 +80,10 @@ t_list *list_type, t_arguments *args)
 	{
 		ptr = list_type->content;
 		if (input_type(ptr))
-		{
-			manage_input(ptr, list_files->content, args);
-		}
+			manage_output(ptr, list_files->content, args);
 		if ((*ptr) == 2)
 		{
-			manage_output(list_files->content, args);
+			manage_input(list_files->content, args);
 			if (!file_exists(list_files->content))
 			{
 				args->flag_file_in = -1;

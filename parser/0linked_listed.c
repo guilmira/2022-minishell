@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 20:31:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 07:41:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ char **folders, char **envp)
 {
 	char	*tmp;
 
+	if (!command_struct)
+		return ;
+	if (!command_struct->command || !command_struct->command[0])
+		return ;
 	if ((ft_strchr(command_struct->command[0], '/')))
 	{
 		tmp = command_struct->command[0];

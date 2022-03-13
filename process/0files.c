@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 12:48:01 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 15:59:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:09:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,4 @@ void	file_management(int argc, char *argv[], t_arguments *args)
 		args->flag_file_out = 1;
 		file_arrangement_out(argc, argv, args);
 	}
-	args->command_number = 0;
 }

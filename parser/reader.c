@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 21:04:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:48:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ static int	file_redirections(char **lexer_table, int *lexer_type, \
 t_arguments *args)
 {
 	management_file(lexer_table, args);
-	if (case_space(lexer_table[0]) || args->flag_file_in == -1)
+	if (case_space(lexer_table[0]) || args->flag_file_in == -1 || args->flag_file_out == -1)
 	{
 		ft_free_split(lexer_table);
 		free(lexer_type);
 		if (args->flag_file_in)
 			printf("%s: No such file or directory\n", args->file_input);
+		if (args->flag_file_in == -1 || args->flag_file_out == -1)
+			printf("File or directory not found\n");
 		args->flag_execution = 1;
 		return (0);
 	}

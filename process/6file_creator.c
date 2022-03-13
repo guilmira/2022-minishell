@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:10:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/07 16:26:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 07:39:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,13 @@ void	output_to_file_append(char *path)
 	close(fd_file);
 }
 
-void
-	manage_input_redirection(t_arguments *args)
+void	manage_input_redirection(t_arguments *args)
 {
 	if (args->flag_file_in)
 		input_from_file(args->file_input);
 }
 
-void
-	manage_output_redirection(t_arguments *args)
+void	manage_output_redirection(t_arguments *args)
 {
 	if (args->flag_file_out == 2)
 		output_to_file_append(args->file_output);

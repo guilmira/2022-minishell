@@ -6,22 +6,29 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/11 12:54:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:50:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //>> a.txt	tiene que crear el fichero. TODO mio
-//ls|wc
 
-//echo $TEST > $TEST
+//< archivo grep  "hola buenos" | wc -l > archivo2
+//lsof -c minishell
 
-//echo $""HOME
+//VA a haber que reahceer el pipex. tendra que coger cosas como wawhtevr| ls >a.txt | grep ficero < a.txt
 
 // << eof | cat, cat | cat | ls
 
 //ls |  wc -l |  cat |  grep 72 |  grep 72 <<  fin
+
+//cat << pepo
+
+//export vs env
+//export todas, env solo seteadas
+
+//echo $""HOME   ->elimina dollar. No es necesario implementar, es una funcion ampliada
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
