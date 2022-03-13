@@ -44,6 +44,8 @@ int
 		return (0);
 	else
 		execve(path, command_struct->command, args->envp);
+	printf("current errno = %d\n", errno);
+	perror("it goes: ");
 	errno = ENOENT;
 	perror("minishell");
 	return (127);

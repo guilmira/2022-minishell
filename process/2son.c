@@ -32,6 +32,10 @@ int
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
 	set_status(args, 0);
+	if (args->heredoc_list)
+		return (heredoc_routine(args->heredoc_list));
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
@@ -39,10 +43,6 @@ int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
-	if (args->heredoc_list)
-		return (heredoc_routine(args->heredoc_list));
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
 	return (do_execve(args, command_struct));
 }
 
@@ -64,6 +64,10 @@ int
 	close(args->fds[index]);
 	command_file_setup(command_struct, args);
 	set_status(args, 0);
+	if (args->heredoc_list)
+		return (heredoc_routine(args->heredoc_list));
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
@@ -71,9 +75,5 @@ int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
-	if (args->heredoc_list)
-		return (heredoc_routine(args->heredoc_list));
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
 	return (do_execve(args, command_struct));
 }
