@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 08:12:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:28:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,6 @@ static int	count_command_words(char **table, int i)
 		words++;
 	}
 	return (words);
-}
-
-/** PURPOSE : Number of command 0 is equivalent to first command. */
-static int	obtain_position(char **table, int number_of_command)
-{
-	int	i;
-	int	number_appeared;
-
-	if (!number_of_command)
-		return (0);
-	i = -1;
-	number_appeared = 0;
-	while (table[++i])
-	{
-		if (!ft_strcmp(PIPE, table[i]))
-			number_appeared++;
-		if (number_appeared == number_of_command)
-			return (i + 1);
-	}
-	return (i);
 }
 
 /** PURPOSE : Converter. THE ONLY THING THAT SKIPS
@@ -72,11 +52,19 @@ int i, t_arguments *args)
 	{
 		if (!ft_strcmp(PIPE, table[i]))
 			break ;
-		command_table[j] = ft_strdup(table[i]);
-		if (!command_table[j])
-			ft_shutdown(MEM, 2, args);
-		j++;
+		if (!ft_strcmp(IN, table[i]) || !ft_strcmp(OUT, table[i]) || !ft_strcmp(APPEND, table[i]))
+			i++;
+		else
+		{
+			command_table[j] = ft_strdup(table[i]);
+			if (!command_table[j])
+				ft_shutdown(MEM, 2, args);
+			j++;
+		}
+		
 	}
 	command_table[j] = NULL;
+	if (!command_table[0])
+		command_table[0] = ft_strdup(BLANK);
 	command_struct->command = command_table;
 }

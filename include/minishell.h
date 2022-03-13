@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/10 20:51:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:41:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,12 @@ int	g_rv;
 /* Struct that stores command data. */
 typedef struct s_command
 {
+	int		index;
 	char	*path;
 	char	**command;
+	t_list	*list_in;
+	t_list	*list_out;
+	int		flag_file;
 }			t_command;
 
 /* Struct that stores the data kept between loops. */
@@ -162,6 +166,7 @@ char		*envp_routine(char *const *args, t_arguments *arg,
 # define OUT "lex_OUTPUT"
 # define APPEND "lex_APPEND"
 # define HEREDOC "lex_HEREDOC"
+# define BLANK "lex_BLANK"
 # define SINGLE '\''
 # define DOUBLE '"'
 # define EXPAN '$'
@@ -203,6 +208,7 @@ char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);
 char		**remove_quote(char **table);
 t_list		*build_lexer_list(char *line);
+int			obtain_position(char **table, int number_of_command);
 /* QUOTE MANAGEMENT */
 char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
@@ -213,9 +219,8 @@ char		*advance_line_quotes(char *line, char quote);
 int			advance_to_next_quote(char *line, int i);
 /* READER */
 void		shell_reader(t_arguments *args);
-void		arg_reader(char **table, t_arguments *args);
-t_list		*load_linked_list(char **table, char **envp, \
-			int total_commands, t_arguments *args);
+void		arg_reader(char **table, int *lexer_type, t_arguments *args);
+t_list		*load_linked_list(char **table, int *lexer_type, char **envp, t_arguments *args);
 void		load_command_struct(t_command *command_struct, \
 			char **table, int i, t_arguments *args);
 /* READER SPLIT COMMANDS */
@@ -240,6 +245,7 @@ void		fix_previous_line(char *line, int t, int i, t_list **list);
 /* EXECUTION */
 int			process_exe(t_arguments *args);
 int			msh_execute(char **args, t_arguments *arguments);
+int			is_blank(int i,  t_arguments *args);
 /* PARENT PROCESS */
 int			mid_process(t_arguments *args);
 int			single_process(t_arguments *args);

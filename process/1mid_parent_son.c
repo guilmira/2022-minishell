@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 14:28:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 11:13:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int
 	set_status(args, 0);
 	if (export_new_l_variables(command_struct->command, args))
 		return (1);
-	/* if (!(ft_strcmp(command_struct->command[0], "lex_HEREDOC")))
-		return (heredoc_routine(args->heredoc_list)); */
 	if (args->heredoc_list)
 		return (heredoc_routine(args->heredoc_list));
 	return (do_execve(args, command_struct));

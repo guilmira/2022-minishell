@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:14:49 by guilmira          #+#    #+#             */
-/*   Updated: 2022/02/28 15:07:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:53:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,6 @@ static int	non_specified_char(char z)
 	return (z == ';' || z == ':' || z == '\\');
 }
 
-/** PURPOSE : Boolean, checks if first char is just a symbol. */
-static int	only_symbol(char *line)
-{
-	char	z;
-
-	z = line[0];
-	return (z == '|' || z == '>' || z == '-');
-}
-
 /** PURPOSE : First filter of command line. */
 int	pre_filter_simple(char *line)
 {
@@ -64,11 +55,6 @@ int	pre_filter_simple(char *line)
 	if (only_quotes(line))
 	{
 		printf("Empty quotes, command line invalid.\n");
-		return (1);
-	}
-	if (only_symbol(line))
-	{
-		printf("parse error on initial symbol\n");
 		return (1);
 	}
 	if (non_specified_char(line[0]))

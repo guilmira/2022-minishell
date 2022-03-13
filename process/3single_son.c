@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 10:47:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 11:13:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int
 	char	*path;
 
 	path = get_path(command_struct);
-	execve(path, command_struct->command, args->envp);
+	if (is_blank(args->command_number, args))
+		return (0);
+	else
+		execve(path, command_struct->command, args->envp);
 	errno = ENOENT;
 	perror("minishell");
 	return (127);

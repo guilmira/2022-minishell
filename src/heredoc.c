@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:25:59 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/10 19:19:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 11:16:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void
 	char	*readline_res;
 
 	delim = heredoc_list->content; //access to first element of the list
-	printf("delimeter is: %s\n", delim);
+	//printf("delimeter is: %s\n", delim);
 	readline_res = NULL;
 	buf = ft_strdup("");
 	while (delim && g_rv)

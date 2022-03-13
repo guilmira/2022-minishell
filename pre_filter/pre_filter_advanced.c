@@ -6,11 +6,20 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:15:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 09:30:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:54:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/** PURPOSE : Boolean, checks if first char is just a symbol. */
+static int	only_symbol(char *line)
+{
+	char	z;
+
+	z = line[0];
+	return (z == '|' || z == '-');
+}
 
 /** PURPOSE : Check for lexer symbols. */
 int	is_one_of_lexer_symbols(char symbol)
@@ -60,6 +69,11 @@ int	unclosed_filter(char *line)
  * Related to proper use of quotes. */
 int	pre_filter_advanced(char *line)
 {
+	if (only_symbol(line))
+	{
+		printf("parse error on initial symbol\n");
+		return (1);
+	}
 	if (quotes_filter(line))
 	{
 		printf("Quotes (\" or '') must be closed\n");

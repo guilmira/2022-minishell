@@ -6,11 +6,32 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 14:24:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 10:40:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int is_blank(int i,  t_arguments *args)
+{
+	t_list		*list;
+	t_command	*command_struct;
+
+	list = NULL;
+	command_struct = NULL;
+	list = args->commands_lst;
+	while (list)
+	{
+		command_struct = list->content;
+		if (command_struct->index == i)
+			break;
+		list = list->next;
+	}
+	if (!ft_strcmp(BLANK, command_struct->command[0]))
+		return (1);
+	return (0);
+}
+
 
 void
 	fork_single_child(t_arguments *args)

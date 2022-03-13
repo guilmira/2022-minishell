@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 08:48:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 09:32:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void
 	if (!file_redirections(lexer_table, lexer_type, args))
 		return ;
 	printer(lexer_table, lexer_type);
-	arg_reader(lexer_table, args);
+	arg_reader(lexer_table, lexer_type, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);
 }
