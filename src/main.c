@@ -6,19 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/14 11:27:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:10:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-//lsof -c minishell
-//lsof -c minishell | grep PIPE
-
-//VA a haber que reahceer el pipex. tendra que coger cosas como wawhtevr| ls >a.txt | grep ficero < a.txt
-
-//export vs env
-//export todas, env solo seteadas
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
@@ -101,6 +93,11 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	return (shell_loop(envp));
 }
 
+//lsof -c minishell | grep PIPE
+
+//export vs env
+//export todas, env solo seteadas
+
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 
 //<< eof | cat, cat | cat | ls
@@ -108,10 +105,10 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //echo -nnnnnnnnn -n -nnnnnm
 
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
-//echo $""HOME   ->elimina dollar. No es necesario implementar, es una funcion ampliada
+//echo $""HOME   ->elimina dollar. NOPE
 //meter un control de top | cat
 
-//ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
+//NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
 
 //TODO funcion de checckeo por si te meten un Null en la talbla, 
 //por memoria o de la manera que sea, cierre minishell en shutdown.

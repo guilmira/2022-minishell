@@ -6,20 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 10:53:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:58:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/** PURPOSE : Cleans heap in case of error. */
-/*static void	error_single_son(t_arguments *args)
-{
-	set_status(args, 1);
-	ft_free_split(args->envp);
-	ft_free_split(args->lenvp);
-	ft_shutdown(EXE_ERROR, 0, args);
-}*/
 
 char *
 	get_path(t_command *command_struct)

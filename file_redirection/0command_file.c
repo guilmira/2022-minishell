@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 11:19:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:51:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	command_file_setup(t_command *command_struct, t_arguments *args)
 	}
 	if (command_struct->list_out)
 	{
-		generate_output(command_struct->list_out, command_struct->flag_file, args);
+		generate_output(command_struct->list_out, \
+		command_struct->flag_file, args);
 		if (!args->file_output)
 		{
 			command_struct->flag_file = -1;

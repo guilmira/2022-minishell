@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 10:26:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:00:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static int	heredoc_detection(char **lexer_table, int *lexer_type, \
 t_arguments *args)
 {
 	heredoc_build_list(lexer_table, args);
-	if (case_space(lexer_table[0]) || args->flag_file_in == -1 || args->flag_file_out == -1)
+	if (case_space(lexer_table[0]) || args->flag_file_in == -1 \
+	|| args->flag_file_out == -1)
 	{
 		ft_free_split(lexer_table);
 		free(lexer_type);
@@ -100,8 +101,9 @@ void
 		ft_shutdown(MEM, errno, args);
 	if (!heredoc_detection(lexer_table, lexer_type, args))
 		return ;
-	//printer(lexer_table, lexer_type);
 	arg_reader(lexer_table, lexer_type, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);
 }
+
+	//printer(lexer_table, lexer_type);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 10:28:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:48:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ static void	manage_heredoc(char *file, t_arguments *args)
 	ft_lstadd_back(&args->heredoc_list, ft_lstnew(str));
 }
 
-static void	create_heredoc_list(t_list *list_files, \
+/** PURPOSE : Load structure with due arguments.
+ * Also create files if needed. */
+static void	heredoc_setup(t_list *list_files, \
 t_list *list_type, t_arguments *args)
 {
 	int		*ptr;
@@ -70,13 +72,6 @@ t_list *list_type, t_arguments *args)
 		list_files = list_files->next;
 		list_type = list_type->next;
 	}
-}
-
-/** PURPOSE : Load structure with due arguments.
- * Also create files if needed. */
-static void	heredoc_setup(t_list *list_files, t_list *list_type, t_arguments *args)
-{
-	create_heredoc_list(list_files, list_type, args);
 }
 
 /** PURPOSE : Load arguments files into structure. 

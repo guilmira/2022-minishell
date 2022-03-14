@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 09:56:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:01:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char **folders, char **envp)
  * making that same structure the content of each node. Fills the path and 
  * the command fields. */
 t_list	*load_linked_list(char **table, int *lexer_type, \
-char **envp,  t_arguments *args)
+char **envp, t_arguments *args)
 {
 	int			i;
 	char		**folders;

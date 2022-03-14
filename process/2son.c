@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 12:40:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:58:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 /** PURPOSE : Executes first forked proccess. The only thing
  * that it takes into account is if input comes from file. */
-int
-	first_son(t_arguments *args)
+int	first_son(t_arguments *args)
 {
 	int			i;
 	int			fd_write;
@@ -47,8 +46,7 @@ int
 
 /** PURPOSE : Executes first forked proccess. The only thing
  * that it takes into account is if output comes from file. */
-int
-	last_son(int index, t_arguments *args)
+int	last_son(int index, t_arguments *args)
 {	
 	t_command	*command_struct;
 	int			i;
