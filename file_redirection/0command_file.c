@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 11:05:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:17:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,14 @@ void	command_file_setup(t_command *command_struct, t_arguments *args)
 	if (command_struct->list_out)
 	{
 		generate_output(command_struct->list_out, command_struct->flag_file, args);
+		if (!args->file_output)
+		{
+			command_struct->flag_file = -1;
+			printf("File or directory not found\n");
+		}
 		if (command_struct->flag_file == 2)
 			output_to_file_append(args->file_output);
-		else if (command_struct->flag_file)
+		else if (command_struct->flag_file == 1)
 			output_to_file(args->file_output);
 	}
 	

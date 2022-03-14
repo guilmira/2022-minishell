@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/14 11:07:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:16:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //echo -nnnnnnnnn -n -nnnnnm
 
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
-//echo $TEST > $TEST
 //echo $""HOME   ->elimina dollar. No es necesario implementar, es una funcion ampliada
 //meter un control de top | cat
 
@@ -125,8 +124,10 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //ls |  wc -l |  cat |  grep 72 |  grep 72 <<  fin
 
+//echo $TEST > $TEST
 //ls > omega | ls -la > final
-//wc < omega >dd | wc -l< final > cc
+//wc < omega >dd | wc -l< final > cc 
+//cat dd && cat cc
 
 //ls < aijshf | wc -l < nonexisten   WORKS FINE
 //ls < aijshf | wc -l | echo hola
