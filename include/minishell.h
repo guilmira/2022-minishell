@@ -135,7 +135,7 @@ char		*envp_routine(char *const *args, t_arguments *arg,
 				int i, char *temp);
 void		search_input(t_list *list_in, t_arguments *args);
 void		generate_output(t_list *list_out, int flag_file, t_arguments *args);
-int			get_stdout_copy(t_arguments *arg);
+int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
 int			builtin_routine(t_arguments *args, t_command *command_struct,
 				int save_stdout);
 

@@ -85,15 +85,15 @@ int
 }
 
 int
-	get_stdout_copy(t_arguments *arg)
+	get_stdout_copy(t_arguments *arg, t_command *command_struct)
 {
-	t_command	*command_struct;
+	//t_command	*command_struct;
 	int			save_stdout;
 
-	command_struct = NULL;
-	command_struct = ft_lst_position(arg->commands_lst, arg->command_number);
-	if (!command_struct->command)
-		return (0);
+//	command_struct = NULL;
+//	command_struct = ft_lst_position(arg->commands_lst, arg->command_number);
+	//if (!command_struct->command)
+	//	return (0);
 	if (command_struct->list_in)
 	{
 		search_input(command_struct->list_in, arg);

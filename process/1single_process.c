@@ -63,11 +63,11 @@ int
 	int			save_stdout;
 	int			ret;
 
-	save_stdout = get_stdout_copy(args);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct->command)
-		return (0);
+	if (!command_struct || !command_struct->command)
+		ft_shutdown(LST, 0, args); //return(0);
+	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout);
 	if (ret >= 0)
 		return (ret);
