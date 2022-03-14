@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 12:56:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 10:24:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ char		*ultra_expansion(char *str, t_arguments *args);
 int			variable_to_string(char *str, int i, \
 			t_list **list, t_arguments *args);
 /* FILE REDIRECTION */
-void		management_file(char **table, t_arguments *args);
+void		heredoc_build_list(char **table, t_arguments *args);
 void		create_output_files(t_list *list_files, \
 			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);

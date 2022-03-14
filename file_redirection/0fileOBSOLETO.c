@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 10:28:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/13 08:45:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,44 +46,18 @@ static void	assign_type(char *content, t_list **list_type, t_arguments *args)
 	ft_lstadd_back(list_type, ft_lstnew(ptr));
 }
 
-static void	manage_heredoc(char *file, t_arguments *args)
-{
-	char	*str;
-
-	str = ft_strdup(file);
-	if (!str)
-		ft_shutdown(MEM, 1, args);
-	ft_lstadd_back(&args->heredoc_list, ft_lstnew(str));
-}
-
-static void	create_heredoc_list(t_list *list_files, \
-t_list *list_type, t_arguments *args)
-{
-	int		*ptr;
-
-	ptr = NULL;
-	while (list_files)
-	{
-		ptr = list_type->content;
-		if ((*ptr) == 4)
-			manage_heredoc(list_files->content, args);
-		list_files = list_files->next;
-		list_type = list_type->next;
-	}
-}
-
 /** PURPOSE : Load structure with due arguments.
  * Also create files if needed. */
-static void	heredoc_setup(t_list *list_files, t_list *list_type, t_arguments *args)
+static void	file_setup(t_list *list_files, t_list *list_type, t_arguments *args)
 {
-	create_heredoc_list(list_files, list_type, args);
+	create_output_files(list_files, list_type, args);
 }
 
 /** PURPOSE : Load arguments files into structure. 
  * 1. Checks whether files are given as parameter.
  * 2. Sets addresses to input and output files (as a linked list).
  * 3. Sets some of the values of "args" struct. */
-void	heredoc_build_list(char **table, t_arguments *args)
+void	management_file(char **table, t_arguments *args)
 {
 	int		i;
 	t_list	*list_files;
@@ -94,14 +68,15 @@ void	heredoc_build_list(char **table, t_arguments *args)
 	i = -1;
 	while (table[++i])
 	{
-		if (!ft_strcmp(HEREDOC, table[i]))
+		if (!ft_strcmp(OUT, table[i]) || !ft_strcmp(APPEND, table[i]) \
+		|| !ft_strcmp(IN, table[i]) || !ft_strcmp(HEREDOC, table[i]))
 		{
 			prepare_file(table[i + 1], &list_files, args);
 			assign_type(table[i], &list_type, args);
 		}
 	}
 	if (list_files && list_type)
-		heredoc_setup(list_files, list_type, args);
+		file_setup(list_files, list_type, args);
 	ft_fullclear(list_files);
 	ft_fullclear(list_type);
 }
