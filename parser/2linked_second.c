@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 10:28:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 09:56:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int i, t_arguments *args)
 	{
 		if (!ft_strcmp(PIPE, table[i]))
 			break ;
-		if (!ft_strcmp(IN, table[i]) || !ft_strcmp(OUT, table[i]) || !ft_strcmp(APPEND, table[i]))
+		if (!ft_strcmp(IN, table[i]) || !ft_strcmp(OUT, table[i]) \
+		|| !ft_strcmp(APPEND, table[i]))
 			i++;
 		else
 		{
@@ -61,7 +62,6 @@ int i, t_arguments *args)
 				ft_shutdown(MEM, 2, args);
 			j++;
 		}
-		
 	}
 	command_table[j] = NULL;
 	if (!command_table[0])

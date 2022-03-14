@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 14:08:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 09:57:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static int	case_space(char *str)
 			return (0);
 	return (1);
 }
+
+//ERROR CHECK MODIFICAR
 
 /** PURPOSE : Handles file creation (in case of multipe redirections). */
 static int	file_redirections(char **lexer_table, int *lexer_type, \

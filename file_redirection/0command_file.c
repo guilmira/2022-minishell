@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 14:35:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 09:53:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static void	generate_output(t_list *list_out, int flag_file, t_arguments *args)
 	}
 }
 
-
-
 static void	get_input(char *file, t_arguments *args)
 {
 	if (args->file_input)
@@ -68,7 +66,6 @@ static void	search_input(t_list *list_in, t_arguments *args)
 	}
 }
 
-
 void	command_file_setup(t_command *command_struct, t_arguments *args)
 {
 	char	*file;
@@ -83,7 +80,7 @@ void	command_file_setup(t_command *command_struct, t_arguments *args)
 	if (command_struct->list_out)
 	{
 		generate_output(command_struct->list_out, command_struct->flag_file, args);
- 		if (command_struct->flag_file == 2)
+		if (command_struct->flag_file == 2)
 			output_to_file_append(args->file_output);
 		else if (args->file_output)
 			output_to_file(args->file_output);

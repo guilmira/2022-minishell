@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 08:13:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 09:54:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ char	**main_lexer(char *line, t_arguments *args)
 	lexer_table = NULL;
 	list = build_lexer_list(line);
 	list_line = build_new_line(list);
-	printf("line: %s\n", list_line);
 	args->argv = ft_split(list_line, ' ');
 	if (!args->argv)
 		ft_shutdown(MEM, errno, args);

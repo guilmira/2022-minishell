@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:17:03 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 08:19:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 09:54:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,6 @@ static int	advance_and_fix(char *line, int *t, int i, t_list **list)
 	return (i);
 }
 
-
-			//NO BORRAR previo
-			/* fix_previous_line(line, t, i, &list);
-			t = i + 1;
-			str = obtain_symbol(line, i);
-			if (line[i + 1] == '<' || line[i + 1] == '>')
-			{
-				i++;
-				t++;
-			}
-			ft_lstadd_back(&list, ft_lstnew(str));
-			i++; */  //y no tenia el t=i
-
 /** PURPOSE : Normi forced. */
 static int	arrange_symbols(char *line, int *t, int i, t_list **list)
 {
@@ -110,7 +97,8 @@ t_list	*build_lexer_list(char *line)
 			i = advance_and_fix(line, &t, i, &list);
 		else if (ft_isspaces(line[i]))
 			i++;
-		else if (line[i] == '=' && line[i + 1] && line[i + 1] != DOUBLE && line[i + 1] != SINGLE)
+		else if (line[i] == '=' && line[i + 1] && line[i + 1] \
+		!= DOUBLE && line[i + 1] != SINGLE)
 			i = i + 2;
 		else if (is_one_of_lexer_symbols(line[i]))
 			i = arrange_symbols(line, &t, i, &list);
