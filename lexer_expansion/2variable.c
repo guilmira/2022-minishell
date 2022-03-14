@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:48:27 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/11 12:27:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:50:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*get_value_variable(char *fragment, t_arguments *args)
 	if (!value)
 		value = get_env_var(args->lenvp, fragment, false);
 	if (!value)
-		value = ft_strdup(""); //CUIDADO AQUI PUEDE HABER SEGFAULTS Y LEAKS
+		value = ft_strdup("");
 	free(fragment);
 	return (value);
 }

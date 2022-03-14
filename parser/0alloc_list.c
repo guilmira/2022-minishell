@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:00:25 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 12:01:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 09:56:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
 			{	
 				str = ft_strdup(table[i + 1]);
 				if (!str)
-				ft_shutdown(str, i, args);
+					ft_shutdown(str, i, args);
 				ft_lstadd_back(&list_in, ft_lstnew(str));
 			}
 		}
@@ -41,7 +41,8 @@ t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
 }
 
 /** PURPOSE : Obtain linked list with files (output) of pipe segment. */
-t_list	*redirections_out(char **table, t_command	*command_struct, int i, t_arguments *args)
+t_list	*redirections_out(char **table, t_command	\
+*command_struct, int i, t_arguments *args)
 {
 	char	*str;
 	t_list	*list_out;
@@ -59,7 +60,7 @@ t_list	*redirections_out(char **table, t_command	*command_struct, int i, t_argum
 			command_struct->flag_file = 1;
 			str = ft_strdup(table[i + 1]);
 			if (!str)
-				ft_shutdown(str, i, args); //esto recuerda la prueba de PATH. puedes alterar la flag y listo
+				ft_shutdown(str, i, args);
 			ft_lstadd_back(&list_out, ft_lstnew(str));
 			if (!ft_strcmp(APPEND, table[i]))
 				command_struct->flag_file = 2;

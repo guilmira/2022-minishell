@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 11:13:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:43:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void
 	close(args->fds[index - 2]);
 	if (dup2(args->fds[index + 1], STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
+	close(args->fds[index + 1]);
 }
 
 /** PURPOSE : Executes forked process for all the mid commands
@@ -39,7 +40,6 @@ static int
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	mnge_dups(index, args, command_struct);
-	close(args->fds[index + 1]);
 	set_status(args, 0);
 	if (args->heredoc_list)
 		return (heredoc_routine(args->heredoc_list));
@@ -72,6 +72,7 @@ void
 	}
 	else if (identifier > 0)
 	{
+		close(args->fds[index - 2]);
 		read_pipe_from(args->wpipe, &args->status);
 		wait(&wstatus);
 		close(args->fds[index + 1]);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 10:28:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:12:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,12 @@ static int	count_command_words(char **table, int i)
 	return (words);
 }
 
-/** PURPOSE : Converter. THE ONLY THING THAT SKIPS
- * IS LEX_PIPE. THE REST, IS TREATED AS INPUT. */
-void	load_command_struct(t_command *command_struct, char **table, \
-int i, t_arguments *args)
+/** PURPOSE : Allocate space for table by counting words. */
+static char	**alloc_table(int i, char **table, t_arguments *args)
 {
-	int		j;
 	int		words;
 	char	**command_table;
 
-	i = obtain_position(table, i);
 	words = count_command_words(table, i);
 	if (!words)
 		ft_shutdown(MEM, 2, args);
@@ -46,13 +42,38 @@ int i, t_arguments *args)
 	sizeof(char *));
 	if (!command_table)
 		ft_shutdown(MEM, 2, args);
+	return (command_table);
+}
+
+/** PURPOSE : Normi impossed. */
+void	set_table(t_command *command_struct, \
+char **command_table, t_arguments *args)
+{
+	if (!command_table[0])
+		command_table[0] = ft_strdup(BLANK);
+	if (!command_table[0])
+		ft_shutdown(MEM, 2, args);
+	command_struct->command = command_table;
+}
+
+/** PURPOSE : Converter. Skips lex_PIPE, lex_symbols and file names
+ * If there is nothing to get, it yields lex_BLANK. */
+void	load_command_struct(t_command *command_struct, char **table, \
+int i, t_arguments *args)
+{
+	int		j;
+	char	**command_table;
+
+	i = obtain_position(table, i);
+	command_table = alloc_table(i, table, args);
 	j = 0;
 	i = i - 1;
 	while (table[++i])
 	{
 		if (!ft_strcmp(PIPE, table[i]))
 			break ;
-		if (!ft_strcmp(IN, table[i]) || !ft_strcmp(OUT, table[i]) || !ft_strcmp(APPEND, table[i]))
+		if (!ft_strcmp(IN, table[i]) || !ft_strcmp(OUT, table[i]) \
+		|| !ft_strcmp(APPEND, table[i]))
 			i++;
 		else
 		{
@@ -61,10 +82,7 @@ int i, t_arguments *args)
 				ft_shutdown(MEM, 2, args);
 			j++;
 		}
-		
 	}
 	command_table[j] = NULL;
-	if (!command_table[0])
-		command_table[0] = ft_strdup(BLANK);
-	command_struct->command = command_table;
+	set_table(command_struct, command_table, args);
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 09:26:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 10:01:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@ void	ft_shut(char *str, int i)
 {
 	write(2, str, ft_strlen(str));
 	exit(i);
+}
+
+/** PURPOSE : Free heap of structure. */
+static void	free_msh_struct(t_command *command_struct)
+{
+	if (command_struct && command_struct->command)
+		ft_free_split(command_struct->command);
+	if (command_struct && command_struct->path)
+		free_pointers(1, command_struct->path);
+	if (command_struct && command_struct->list_in)
+		ft_fullclear(command_struct->list_in);
+	if (command_struct && command_struct->list_out)
+		ft_fullclear(command_struct->list_out);
 }
 
 /** PURPOSE : clears linked list from first element to last, including content
@@ -38,14 +51,7 @@ static void	ft_structclear(t_list *lst)
 			command_struct = lst->content;
 		if (lst->content)
 		{
-			if (command_struct && command_struct->command)
-				ft_free_split(command_struct->command);
-			if (command_struct && command_struct->path)
-				free_pointers(1, command_struct->path);
-			if (command_struct && command_struct->list_in)
-				ft_fullclear(command_struct->list_in);
-			if (command_struct && command_struct->list_out)
-				ft_fullclear(command_struct->list_out);
+			free_msh_struct(command_struct);
 			free_pointers(1, command_struct);
 			free(lst);
 		}

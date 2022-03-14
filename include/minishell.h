@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 12:56:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:52:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,8 @@ int			advance_to_next_quote(char *line, int i);
 /* READER */
 void		shell_reader(t_arguments *args);
 void		arg_reader(char **table, int *lexer_type, t_arguments *args);
-t_list		*load_linked_list(char **table, int *lexer_type, char **envp, t_arguments *args);
+t_list		*load_linked_list(char **table, int *lexer_type, \
+			char **envp, t_arguments *args);
 void		load_command_struct(t_command *command_struct, \
 			char **table, int i, t_arguments *args);
 /* READER SPLIT COMMANDS */
@@ -233,7 +234,7 @@ char		*ultra_expansion(char *str, t_arguments *args);
 int			variable_to_string(char *str, int i, \
 			t_list **list, t_arguments *args);
 /* FILE REDIRECTION */
-void		management_file(char **table, t_arguments *args);
+void		heredoc_build_list(char **table, t_arguments *args);
 void		create_output_files(t_list *list_files, \
 			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
@@ -246,7 +247,7 @@ void		fix_previous_line(char *line, int t, int i, t_list **list);
 /* EXECUTION */
 int			process_exe(t_arguments *args);
 int			msh_execute(char **args, t_arguments *arguments);
-int			is_blank(int i,  t_arguments *args);
+int			is_blank(int i, t_arguments *args);
 void		command_file_setup(t_command *command_struct, t_arguments *args);
 /* PARENT PROCESS */
 int			mid_process(t_arguments *args);
