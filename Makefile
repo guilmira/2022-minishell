@@ -6,15 +6,15 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/14 13:15:10 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/14 13:31:39 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
-#CFLAGS		= -Wall -Wextra -Werror
+#CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
+CFLAGS		= -Wall -Wextra -Werror
 #READLINE	= 
 #INSTALL ==  sudo apt-get install libreadline-dev
 #--------------------------------------------------------------------------------------------------------------LIBS

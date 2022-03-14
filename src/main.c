@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/14 13:16:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:49:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
 		manage_loop_heap(arguments, prog);
+		system("leaks minishell");
 	}
 	manage_program_heap(arguments, prog);
 	ret = arguments->status;
@@ -87,7 +88,7 @@ void	ft_leaks(void)
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	set_signal(1);
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
