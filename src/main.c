@@ -6,28 +6,18 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/14 10:09:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:07:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//>> a.txt	tiene que crear el fichero. TODO mio
-
-//< archivo grep  "hola buenos" | wc -l > archivo2
 //lsof -c minishell
 
 //VA a haber que reahceer el pipex. tendra que coger cosas como wawhtevr| ls >a.txt | grep ficero < a.txt
 
-// << eof | cat, cat | cat | ls
-
-//ls |  wc -l |  cat |  grep 72 |  grep 72 <<  fin
-
-
 //export vs env
 //export todas, env solo seteadas
-
-//echo $""HOME   ->elimina dollar. No es necesario implementar, es una funcion ampliada
 
 /** PURPOSE : Store variables in struct that will be kept after loop. */
 static void	store_program(t_prog *prog, t_arguments *args)
@@ -118,7 +108,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
 //echo $TEST > $TEST
-
+//echo $""HOME   ->elimina dollar. No es necesario implementar, es una funcion ampliada
 //meter un control de top | cat
 
 //ejemplo importantisimo NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
@@ -130,3 +120,13 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //en el proceso principal, tras los forks, todos los fd del pipe cerrados
 //ejecutarlos en paralelo, no en serie. 
 //todos los procesos del fork se lanazarian a la vez
+
+// << eof | cat, cat | cat | ls
+
+//ls |  wc -l |  cat |  grep 72 |  grep 72 <<  fin
+
+//ls > omega | ls -la > final
+//wc < omega >dd | wc -l< final > cc
+
+//ls < aijshf | wc -l < nonexisten   WORKS FINE
+//ls < aijshf | wc -l | echo hola
