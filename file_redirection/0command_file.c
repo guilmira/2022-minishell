@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 11:17:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:19:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	generate_output(t_list *list_out, int flag_file, t_arguments *args)
 	}
 }
 
+/** PURPOSE : Obtain file inputs. */
 static void	get_input(char *file, t_arguments *args)
 {
 	if (args->file_input)
@@ -93,17 +94,4 @@ void	command_file_setup(t_command *command_struct, t_arguments *args)
 		else if (command_struct->flag_file == 1)
 			output_to_file(args->file_output);
 	}
-	
-
-//NECESSARRY ERROR CHECKING
-    /* if (args->flag_file_in == -1 || args->flag_file_out == -1)
-	{
-		if (args->flag_file_in)
-			printf("%s: No such file or directory\n", args->file_input);
-		if (args->flag_file_in == -1 || args->flag_file_out == -1)
-			printf("File or directory not found\n");
-		args->flag_execution = 1;
-		return (0);
-	} */
 }
-

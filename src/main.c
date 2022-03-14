@@ -6,13 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/14 11:16:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:27:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //lsof -c minishell
+//lsof -c minishell | grep PIPE
 
 //VA a haber que reahceer el pipex. tendra que coger cosas como wawhtevr| ls >a.txt | grep ficero < a.txt
 

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 14:27:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:40:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
 	fd_write = prepare_process(args->fds[0], args->fds[1]);
-	//manage_input_redirection(args);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
