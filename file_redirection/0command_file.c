@@ -35,7 +35,7 @@ static void	manage_output(int flag_file, char *file, t_arguments *args)
 
 /** PURPOSE : Iterate list and create every single file as is needed. 
  *  Flag file indicates if append is needed. */
-static void	generate_output(t_list *list_out, int flag_file, t_arguments *args)
+ void	generate_output(t_list *list_out, int flag_file, t_arguments *args)
 {
 	while (list_out)
 	{
@@ -60,7 +60,7 @@ static void	get_input(char *file, t_arguments *args)
 }
 
 /** PURPOSE : Iterate list and take inputs. */
-static void	search_input(t_list *list_in, t_arguments *args)
+ void	search_input(t_list *list_in, t_arguments *args)
 {
 	while (list_in)
 	{
@@ -72,9 +72,9 @@ static void	search_input(t_list *list_in, t_arguments *args)
 /** PURPOSE : Setup files for input and output in each file. */
 void	command_file_setup(t_command *command_struct, t_arguments *args)
 {
-	char	*file;
+	//char	*file;
 
-	file = NULL;
+	//file = NULL;
 	if (command_struct->list_in)
 	{
 		search_input(command_struct->list_in, args);

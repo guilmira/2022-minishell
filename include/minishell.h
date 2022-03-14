@@ -25,7 +25,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-
 # include <limits.h>
 # include <stdarg.h>
 
@@ -129,13 +128,13 @@ char		*get_env_var_body(char **envp, bool do_expand, int i, int len);
 char		*get_path(t_command *command_struct);
 void		write_pipe_to(int *pipe, int *to);
 void		read_pipe_from(int *pipe, int *from);
-void		manage_input_redirection(t_arguments *args);
-void		manage_output_redirection(t_arguments *args);
 int			do_execve(t_arguments *args, t_command *command_struct);
 char		*lenvp_routine(char *const *args, t_arguments *arg,
 				int i, char *temp);
 char		*envp_routine(char *const *args, t_arguments *arg,
 				int i, char *temp);
+ void	search_input(t_list *list_in, t_arguments *args);
+ void	generate_output(t_list *list_out, int flag_file, t_arguments *args);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

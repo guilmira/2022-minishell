@@ -11,24 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-void
-	manage_output_redirection(t_arguments *args);
-
-void
-	print_output(char *const *args, int i, char *token, t_arguments *arg)
-{
-	t_command	*command_struct;
-
-	command_struct = NULL;
-	command_struct = ft_lst_position(arg->commands_lst, arg->command_number);
-	if (!command_struct->command)
-		return ;
-	command_file_setup(command_struct, arg);
-	ft_putstr_fd(token, 1);
-	if (args[i + 1])
-		ft_putstr_fd(" ", 1);
-	free_pointers(1, token);
-}
 
 /*
 ** SYNOPSIS: checks arguments passed to echo command and prints them.
@@ -42,7 +24,10 @@ void
 	while (args[i])
 	{
 		token = ft_strdup(args[i]);
-		print_output(args, i, token, arg);
+		printf("%s", token);
+		if (args[i + 1])
+			printf(" ");
+		free_pointers(1, token);
 		i++;
 	}
 	set_status(arg, 0);
@@ -74,6 +59,51 @@ void
 	}
 }
 
+int
+	mnge_output_redirection(t_arguments *arg, t_command *command_struct)
+{
+	int	save_stdout;
+
+	save_stdout = 0;
+	if (command_struct->list_out)
+	{
+		generate_output(command_struct->list_out, \
+		command_struct->flag_file, arg);
+		if (!arg->file_output)
+		{
+			command_struct->flag_file = -1;
+			printf("File or directory not found\n");
+		}
+		if (arg->flag_file_out)
+			save_stdout = dup(1);
+		if (command_struct->flag_file == 2)
+			output_to_file_append(arg->file_output);
+		else if (command_struct->flag_file == 1)
+			output_to_file(arg->file_output);
+	}
+	return (save_stdout);
+}
+
+int
+	get_stdout_copy(t_arguments *arg)
+{
+	t_command	*command_struct;
+	int			save_stdout;
+
+	command_struct = NULL;
+	command_struct = ft_lst_position(arg->commands_lst, arg->command_number);
+	if (!command_struct->command)
+		return (0);
+	if (command_struct->list_in)
+	{
+		search_input(command_struct->list_in, arg);
+		if (arg->file_input)
+			input_from_file(arg->file_input);
+	}
+	save_stdout = mnge_output_redirection(arg, command_struct);
+	return (save_stdout);
+}
+
 /*
 ** SYNOPSIS: builtin echo command.
 */
@@ -82,7 +112,9 @@ int
 {
 	int		i;
 	bool	have_option;
+	int		save_stdout;
 
+	save_stdout = get_stdout_copy(arg);
 	i = 1;
 	have_option = false;
 	if (args[i])
@@ -91,7 +123,14 @@ int
 		loop_and_print_echo_args(args, arg, i);
 	}
 	if (!have_option)
-		ft_putstr_fd("\n", 1);
+		printf("\n");
 	set_status(arg, 0);
+	if (save_stdout)
+	{
+		rl_replace_line("", 0);
+		rl_redisplay();
+		dup2(save_stdout, 1);
+		close(save_stdout);
+	}
 	return (1);
 }
