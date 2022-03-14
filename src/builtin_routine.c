@@ -13,6 +13,46 @@
 #include "../include/minishell.h"
 
 int
+	mnge_output_redirection(t_arguments *arg, t_command *command_struct)
+{
+	int	save_stdout;
+
+	save_stdout = 0;
+	if (command_struct->list_out)
+	{
+		generate_output(command_struct->list_out, \
+		command_struct->flag_file, arg);
+		if (!arg->file_output)
+		{
+			command_struct->flag_file = -1;
+			printf("File or directory not found\n");
+		}
+		if (arg->flag_file_out)
+			save_stdout = dup(1);
+		if (command_struct->flag_file == 2)
+			output_to_file_append(arg->file_output);
+		else if (command_struct->flag_file == 1)
+			output_to_file(arg->file_output);
+	}
+	return (save_stdout);
+}
+
+int
+	get_stdout_copy(t_arguments *arg, t_command *command_struct)
+{
+	int			save_stdout;
+
+	if (command_struct->list_in)
+	{
+		search_input(command_struct->list_in, arg);
+		if (arg->file_input)
+			input_from_file(arg->file_input);
+	}
+	save_stdout = mnge_output_redirection(arg, command_struct);
+	return (save_stdout);
+}
+
+int
 	builtin_routine(t_arguments *args, t_command *command_struct,
 					int save_stdout)
 {
