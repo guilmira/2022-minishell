@@ -59,22 +59,18 @@ void
 int
 	single_process(t_arguments *args)
 {
-	int			i;
 	t_command	*command_struct;
+	int			save_stdout;
+	int			ret;
 
+	save_stdout = get_stdout_copy(args);
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct->command)
 		return (0);
-	set_status(args, 0);
-	i = -1;
-	while (++i < msh_num_builtins(args))
-		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
-			return ((args->builtin_func[i])(command_struct->command, args));
-	if (args->heredoc_list)
-		return (heredoc_routine(args->heredoc_list));
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
+	ret = builtin_routine(args, command_struct, save_stdout);
+	if (ret >= 0)
+		return (ret);
 	if (pipe(args->wpipe) == -1)
 	{
 		perror("PIPE ERROR\n");

@@ -133,8 +133,11 @@ char		*lenvp_routine(char *const *args, t_arguments *arg,
 				int i, char *temp);
 char		*envp_routine(char *const *args, t_arguments *arg,
 				int i, char *temp);
- void	search_input(t_list *list_in, t_arguments *args);
- void	generate_output(t_list *list_out, int flag_file, t_arguments *args);
+void		search_input(t_list *list_in, t_arguments *args);
+void		generate_output(t_list *list_out, int flag_file, t_arguments *args);
+int			get_stdout_copy(t_arguments *arg);
+int			builtin_routine(t_arguments *args, t_command *command_struct,
+				int save_stdout);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
@@ -180,7 +183,6 @@ void		printer(char **table, int *org);
 
 char		*build_new_line(t_list *list);
 int			ignore_symbol(char *str, int position);
-void		rl_replace_line(const char *txt, int clear_undo);
 
 /* Protoypes minishell reader. */
 

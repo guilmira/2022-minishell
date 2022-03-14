@@ -112,9 +112,9 @@ int
 {
 	int		i;
 	bool	have_option;
-	int		save_stdout;
+	//int		save_stdout;
 
-	save_stdout = get_stdout_copy(arg);
+	//save_stdout = get_stdout_copy(arg);
 	i = 1;
 	have_option = false;
 	if (args[i])
@@ -125,12 +125,12 @@ int
 	if (!have_option)
 		printf("\n");
 	set_status(arg, 0);
-	if (save_stdout)
+	/*if (save_stdout)
 	{
 		rl_replace_line("", 0);
 		rl_redisplay();
 		dup2(save_stdout, 1);
 		close(save_stdout);
-	}
+	}*/
 	return (1);
 }
