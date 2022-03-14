@@ -18,6 +18,7 @@ void
 	temp = get_env_var(arg->lenvp, args[i], true);
 	if (temp)
 	{
+		free(args[i]);
 		args[i] = temp;
 		delete_env_var(arg->lenvp, get_envv_len(temp), temp);
 	}
@@ -27,28 +28,28 @@ char *
 	find_var_location(char *const *args, t_arguments *arg, int i, char *temp)
 {
 	long	len;
-	char	*temp2;
+	char	*key;
 
 	len = ft_strchr(args[i], '=') - (args[i]);
-	temp2 = ft_substr(args[i], 0, len);
-	temp = get_env_var(arg->lenvp, temp2, false);
+	key = ft_substr(args[i], 0, len);
+	temp = get_env_var(arg->lenvp, key, false);
 	if (temp)
 	{
 		free_pointers(1, temp);
-		temp = ft_substr(args[i], 0, len);
-		temp = lenvp_routine(args, arg, i, temp);
+		temp = lenvp_routine(args, arg, i, key);
+		key = NULL;
 	}
 	else
 	{
-		temp = get_env_var(arg->envp, temp2, false);
+		temp = get_env_var(arg->envp, key, false);
 		if (temp)
 		{
 			free_pointers(1, temp);
-			temp = ft_substr(args[i], 0, len + 1);
-			temp = envp_routine(args, arg, i, temp);
+			temp = envp_routine(args, arg, i, key);
+			key = NULL;
 		}
 	}
-	free(temp2);
+	free_pointers(1, key);
 	return (temp);
 }
 

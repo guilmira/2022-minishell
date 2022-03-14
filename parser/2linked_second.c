@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   2linked_second.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 13:12:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:44:30 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int i, t_arguments *args)
 			j++;
 		}
 	}
+	free(command_table[j]);
 	command_table[j] = NULL;
 	set_table(command_struct, command_table, args);
 }

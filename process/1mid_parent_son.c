@@ -41,10 +41,6 @@ static int
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	mnge_dups(index, args, command_struct);
 	set_status(args, 0);
-	if (args->heredoc_list)
-		return (heredoc_routine(args->heredoc_list));
-	if (export_new_l_variables(command_struct->command, args))
-		return (1);
 	i = 0;
 	while (i < msh_num_builtins(args))
 	{
@@ -52,6 +48,10 @@ static int
 			return ((args->builtin_func[i])(command_struct->command, args));
 		i++;
 	}
+	if (args->heredoc_list)
+		return (heredoc_routine(args->heredoc_list));
+	if (export_new_l_variables(command_struct->command, args))
+		return (1);
 	return (do_execve(args, command_struct));
 }
 
