@@ -31,7 +31,7 @@ int	first_son(t_arguments *args)
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
-	ret = builtin_routine(args, command_struct, save_stdout);
+	ret = builtin_routine(args, command_struct, save_stdout, false);
 	if (ret >= 0)
 		return (ret);
 	return (do_execve(args, command_struct));
@@ -55,7 +55,7 @@ int	last_son(int index, t_arguments *args)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
 	command_file_setup(command_struct, args);
-	ret = builtin_routine(args, command_struct, save_stdout);
+	ret = builtin_routine(args, command_struct, save_stdout, false);
 	if (ret >= 0)
 		return (ret);
 	return (do_execve(args, command_struct));

@@ -46,7 +46,7 @@ char *
 }
 
 void
-	mnge_heredoc(t_list *heredoc_list)
+	mnge_heredoc(t_list *heredoc_list, t_arguments *args)
 {
 	char	*delim;
 	char	*buf;
@@ -60,14 +60,16 @@ void
 		buf = do_inner_while(delim, &buf, readline_res);
 		heredoc_list = heredoc_list->next;
 	}
-	free_pointers(1, buf);
+	//printf("%s", buf);
+	args->here_redir = buf;
+//	free_pointers(1, buf);
 }
 
 int
-	heredoc_routine(t_list *heredoc_list)
+	heredoc_routine(t_list *heredoc_list, t_arguments *args)
 {
 	set_signal(3);
-	mnge_heredoc(heredoc_list);
+	mnge_heredoc(heredoc_list, args);
 	set_signal(1);
 	return (1);
 }

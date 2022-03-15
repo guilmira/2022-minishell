@@ -16,7 +16,7 @@ void
 	sig_handler(int signum __attribute__((unused)))
 {
 	ft_putendl_fd("", 2);
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
@@ -32,7 +32,7 @@ void
 	else if (signum == SIGINT)
 	{
 		g_rv = 0;
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }

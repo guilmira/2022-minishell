@@ -44,7 +44,7 @@ static int
 		ft_shutdown(LST, 0, args);
 	save_stdout = get_stdout_copy(args, command_struct);
 	mnge_dups(index, args, command_struct);
-	ret = builtin_routine(args, command_struct, save_stdout);
+	ret = builtin_routine(args, command_struct, save_stdout, false);
 	if (ret >= 0)
 		return (ret);
 	return (do_execve(args, command_struct));
