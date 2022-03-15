@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 12:52:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 09:57:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int			builtin_routine(t_arguments *args, t_command *command_struct,
 # define FORK_ERROR "Error at fork creation\n"
 # define DUP_ERROR "Dup2 function failure.\n"
 # define EXE_ERROR "Execve function failure.\n"
+# define ONLYTOP "Executing only command top.\n"
 
 # define PIPE "lex_PIPE"
 # define IN "lex_INPUT"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/14 21:56:37 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/15 09:36:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int
 		ret = 1;
 	if (save_stdout)
 	{
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_redisplay();
 		dup2(save_stdout, 1);
 		close(save_stdout);

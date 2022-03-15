@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 12:51:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 10:00:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	manage_output(int flag_file, char *file, t_arguments *args)
 
 /** PURPOSE : Iterate list and create every single file as is needed. 
  *  Flag file indicates if append is needed. */
- void	generate_output(t_list *list_out, int flag_file, t_arguments *args)
+void	generate_output(t_list *list_out, int flag_file, t_arguments *args)
 {
 	while (list_out)
 	{
@@ -60,7 +60,7 @@ static void	get_input(char *file, t_arguments *args)
 }
 
 /** PURPOSE : Iterate list and take inputs. */
- void	search_input(t_list *list_in, t_arguments *args)
+void	search_input(t_list *list_in, t_arguments *args)
 {
 	while (list_in)
 	{
@@ -72,9 +72,6 @@ static void	get_input(char *file, t_arguments *args)
 /** PURPOSE : Setup files for input and output in each file. */
 void	command_file_setup(t_command *command_struct, t_arguments *args)
 {
-	//char	*file;
-
-	//file = NULL;
 	if (command_struct->list_in)
 	{
 		search_input(command_struct->list_in, args);

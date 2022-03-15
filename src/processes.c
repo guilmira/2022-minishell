@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/14 10:12:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 09:58:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int
 static int
 	process_execution(t_arguments *arguments)
 {
+	t_command	*command_table;
+
+	command_table = arguments->commands_lst->content;
 	if (arguments->total_commands > MAX_COMMANDS)
 	{
 		printf("Input commands must be less than %i.\n", MAX_COMMANDS);
@@ -35,6 +38,11 @@ static int
 	}
 	if (arguments->total_commands == 1)
 		return (single_process(arguments));
+	if (!ft_strcmp("top", command_table->command[0]))
+	{
+		printf(ONLYTOP);
+		return (single_process(arguments));
+	}
 	arguments->fds = arg_descriptors(arguments);
 	process_exe(arguments);
 	return (1);
