@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:02 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/15 10:07:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 10:19:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void
 	else if (signum == SIGINT)
 	{
 		g_rv = 0;
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/15 09:45:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 10:17:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 
 //<< eof | cat, cat | cat | ls
-
-//echo -nnnnnnnnn -n -nnnnnm
 
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
 //echo $""HOME   ->elimina dollar. NOPE
