@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/15 10:32:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:00:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void
 	int	i;
 	int	wstatus;
 
+	if (!check_command(args))
+	{
+		close(args->fds[last_index]);
+		close(args->fds[last_index + 1]);
+		return ;
+	}
 	identifier = fork();
 	if (identifier == 0)
 	{
@@ -72,6 +78,12 @@ int	process_exe(t_arguments *args)
 	{
 		perror("PIPE ERROR\n");
 		set_status(args, 1);
+		return (1);
+	}
+	if (!check_command(args))
+	{
+		close(args->fds[0]);
+		close(args->fds[1]);
 		return (1);
 	}
 	identifier = fork();

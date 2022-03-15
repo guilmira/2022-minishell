@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/15 10:11:33 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/15 11:09:42 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,10 @@ LIB_DIR		= libft_submodule
 LIB_READLINE = libreadline
 LIB			= $(LIB_DIR)/libft.a
 INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
+
+#FLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
+
+
 #--------------------------------------------------------------------------------------------------------------SOURCES
 SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
   				builtin_utils.c utilities.c echo.c cd.c export.c unset.c \

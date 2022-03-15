@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/15 10:30:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:49:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void
 	int	wstatus;
 	int	identifier;
 
+	if (!check_command(args))
+		return ;
 	identifier = fork();
 	if (identifier == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/15 09:57:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:47:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,9 @@ int			process_exe(t_arguments *args);
 int			msh_execute(char **args, t_arguments *arguments);
 int			is_blank(int i, t_arguments *args);
 void		command_file_setup(t_command *command_struct, t_arguments *args);
+/* CHECK PROCESS EXISTS */
+char		**get_env_path(char *envp[]);
+bool		check_command(t_arguments *args);
 /* PARENT PROCESS */
 int			mid_process(t_arguments *args);
 int			single_process(t_arguments *args);

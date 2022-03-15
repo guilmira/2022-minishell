@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 12:54:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:47:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,47 @@ int	is_blank(int i, t_arguments *args)
 	return (0);
 }
 
+int
+	is_executable(t_arguments *args)
+{
+	int			i;
+	int			path_exists;
+	char		**folders;
+	char		*command_path;
+	t_command	*cmd;
+
+	folders = get_env_path(args->envp);
+	cmd = args->commands_lst->content;
+	command_path = NULL;
+	i = -1;
+	path_exists = 0;
+	while (folders[++i] && !path_exists)
+	{
+		command_path = ft_strjoin(folders[i], cmd->command[0]);
+		if (file_exists(command_path))
+			path_exists++;
+		free(command_path);
+	}
+	ft_free_split(folders);
+	if (!path_exists)
+		return (0);
+	return (1);
+}
+
+bool	check_command(t_arguments *args)
+{
+	if (!is_executable(args))
+	{
+		errno = ENOENT;
+		perror("minishell");
+		set_status(args, 127);
+		close(args->wpipe[0]);
+		close(args->wpipe[1]);
+		return (0);
+	}
+	return (1);
+}
+
 void
 	fork_single_child(t_arguments *args)
 {
@@ -39,6 +80,8 @@ void
 	int	i;
 	int	wstatus;
 
+	if (!check_command(args))
+		return ;
 	identifier = fork();
 	if ((identifier) == 0)
 	{
@@ -67,8 +110,17 @@ int
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
+	
 	save_stdout = get_stdout_copy(args, command_struct);
+
 	ret = builtin_routine(args, command_struct, save_stdout);
+	/* if (!is_executable(args))
+	{
+		errno = ENOENT;
+		perror("minishell");
+		set_status(args, 127);
+		return (1);
+	} */
 	if (ret >= 0)
 		return (ret);
 	if (pipe(args->wpipe) == -1)

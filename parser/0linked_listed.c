@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 13:01:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 11:46:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	**add_slash_to_path(char **full_path)
 
 /** PURPOSE : Returns a string table with the direction of every single
  * folder where the commands might be contained. */
-static char	**get_env_path(char *envp[])
+char	**get_env_path(char *envp[])
 {
 	char	*new_string;
 	char	**full_path;
