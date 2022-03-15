@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/15 12:47:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:11:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,8 @@ int
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	
 	save_stdout = get_stdout_copy(args, command_struct);
-
 	ret = builtin_routine(args, command_struct, save_stdout);
-	/* if (!is_executable(args))
-	{
-		errno = ENOENT;
-		perror("minishell");
-		set_status(args, 127);
-		return (1);
-	} */
 	if (ret >= 0)
 		return (ret);
 	if (pipe(args->wpipe) == -1)

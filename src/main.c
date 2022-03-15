@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/15 11:09:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:18:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	return (shell_loop(envp));
 }
 
+//ls < a
 //lsof -c minishell | grep PIPE
 //export vs env
 //export todas, env solo seteadas
