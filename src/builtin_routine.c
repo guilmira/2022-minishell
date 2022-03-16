@@ -90,7 +90,7 @@ int
 	}
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, redirect_heredoc);
-	if (!g_rv)
-		ret = 1;
+/*	if (!g_rv)
+		ret = 1;*/
 	return (ret);
 }

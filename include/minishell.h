@@ -274,5 +274,9 @@ void		*ft_lst_position(t_list *lst, int n);
 void		ft_shut(char *str, int i);
 void		free_heap_memory(t_arguments *args);
 void		ft_shutdown(char *str, int i, t_arguments *args);
+void		manage_program_heap(t_arguments *arguments, t_prog *prog);
+void		manage_loop_heap(t_arguments *arguments, t_prog *prog);
+void		ft_leaks(void);
+void		set_status_and_shut(t_arguments *args, char *msg);
 
 #endif

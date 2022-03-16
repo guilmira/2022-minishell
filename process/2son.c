@@ -31,8 +31,13 @@ int	first_son(t_arguments *args)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
 	if (ret >= 0)
-		return (ret);
-	return (do_execve(args, command_struct));
+	{
+		write_pipe_to(args->wpipe, &ret);
+		exit(0);
+	}
+	ret = (do_execve(args, command_struct));
+	write_pipe_to(args->wpipe, &ret);
+	exit(0);
 }
 
 /** PURPOSE : Executes first forked proccess. The only thing
