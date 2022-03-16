@@ -6,7 +6,7 @@
 #    By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/16 14:32:21 by asydykna         ###   ########.fr        #
+#    Updated: 2022/03/16 18:00:08 by asydykna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				execution.c 0files.c 0parser.c \
 				0linked_listed.c 0alloc_list.c 1linked_aux.c 2linked_second.c \
 				1mid_parent_son.c 1single_process.c 2son.c 3single_son.c 4auxiliar.c 5mgmt.c 6file_creator.c \
-				initialization.c reader.c \
+				initialization.c reader.c 3error_check.c \
 				pre_filter.c pre_filter_simple.c pre_filter_advanced.c pre_filter_aux.c \
 				lexer.c lexer_class.c lexer_list.c  \
 				quote_mgmt.c quote_split.c quote_auxiliars.c quote_erase.c \

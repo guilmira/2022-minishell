@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/15 13:18:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:02:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //wc < omega >dd | wc -l< final > cc 
 //cat dd && cat cc
 
-//ls < aijshf | wc -l < nonexisten   WORKS FINE ---- LEAKS HERE!!
+//ls < aijshf | wc -l < nonexisten
 //ls < aijshf | wc -l | echo hola
+
+//ls < a | wc -l | echo hola NOT WORKING

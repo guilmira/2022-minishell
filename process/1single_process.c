@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/15 13:11:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:16:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,47 +30,6 @@ int	is_blank(int i, t_arguments *args)
 	if (!ft_strcmp(BLANK, command_struct->command[0]))
 		return (1);
 	return (0);
-}
-
-int
-	is_executable(t_arguments *args)
-{
-	int			i;
-	int			path_exists;
-	char		**folders;
-	char		*command_path;
-	t_command	*cmd;
-
-	folders = get_env_path(args->envp);
-	cmd = args->commands_lst->content;
-	command_path = NULL;
-	i = -1;
-	path_exists = 0;
-	while (folders[++i] && !path_exists)
-	{
-		command_path = ft_strjoin(folders[i], cmd->command[0]);
-		if (file_exists(command_path))
-			path_exists++;
-		free(command_path);
-	}
-	ft_free_split(folders);
-	if (!path_exists)
-		return (0);
-	return (1);
-}
-
-bool	check_command(t_arguments *args)
-{
-	if (!is_executable(args))
-	{
-		errno = ENOENT;
-		perror("minishell");
-		set_status(args, 127);
-		close(args->wpipe[0]);
-		close(args->wpipe[1]);
-		return (0);
-	}
-	return (1);
 }
 
 void

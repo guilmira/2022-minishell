@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/15 12:47:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:10:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,7 @@ void		generate_output(t_list *list_out, int flag_file, t_arguments *args);
 int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
 int			builtin_routine(t_arguments *args, t_command *command_struct,
 				int save_stdout, bool redirect_heredoc);
-int
-get_builtins_ret(t_arguments *args, t_command *command_struct);
+int			get_builtins_ret(t_arguments *args, t_command *command_struct);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
