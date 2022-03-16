@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:02 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/16 13:47:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:31:49 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,17 @@
 void
 	sig_handler(int signum __attribute__((unused)))
 {
-	ft_putendl_fd("", 2);
-	//rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	if (signum == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else if (signum == SIGINT)
+	{
+		ft_putendl_fd("", 2);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 void
@@ -32,7 +39,8 @@ void
 	else if (signum == SIGINT)
 	{
 		g_rv = 0;
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }
@@ -47,9 +55,7 @@ void
 {
 	sig_t		handler;
 
-	if (sig_type == 1)
-		handler = &sig_handler;
-	else if (sig_type == 2)
+	if (sig_type == 1 || sig_type == 2)
 		handler = &sig_handler;
 	else if (sig_type == 3)
 		handler = &handler_heredoc;
@@ -62,7 +68,6 @@ void
 void
 	eof_exit(t_arguments *args)
 {
-	ft_putendl_fd("", 2);
 	ft_putendl_fd("exit", 2);
 	ft_free_split(args->envp);
 	ft_free_split(args->lenvp);

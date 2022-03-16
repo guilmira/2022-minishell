@@ -87,6 +87,8 @@ void
 	int			*lexer_type;
 	char		**lexer_table;
 
+	//g_rv = 1;
+
 	line = read_and_filter_line(args);
 	if (!line)
 		eof_exit(args);

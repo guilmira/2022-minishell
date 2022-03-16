@@ -60,10 +60,11 @@ int
 
 	prog = NULL;
 	arguments = NULL;
-	g_rv = 1;
+	//g_rv = 1;
 	prog = initalize_prog(envp, builtin_str);
 	while (true)
 	{
+		g_rv = 1;
 		arguments = intialize_arg(prog);
 		set_shlvl_num(arguments);
 		shell_reader(arguments);
