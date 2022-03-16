@@ -6,16 +6,17 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/15 11:09:42 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/16 13:33:26 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
-CC			= gcc -g
+CC			= gcc
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
 CFLAGS		= -Wall -Wextra -Werror
-READLINE	= 
+READLINE	=
+
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
 LIB_READLINE = libreadline
@@ -48,7 +49,7 @@ ifeq ($(OS_NAME), Darwin)
 	INCLUDES		+= -I ./${LIB_READLINE}/include/readline
 	READLINE		+= -L${LIB_READLINE}/lib
 	OS_V			:= $(shell sw_vers -productVersion | cut -f1,2 -d.)
-ifeq ($(shell echo "$(OS_V) <= 10.14" | bc), 1)
+ifeq ($(shell echo "$(OS_V) < 10.15" | bc), 1)
 	READLINE		+= -lreadline_macos_v10_14 -lcurses
 else
 	READLINE		+= -lreadline_macos_v10_15 -lcurses
