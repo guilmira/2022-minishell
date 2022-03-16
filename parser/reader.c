@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 13:00:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:16:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,13 @@ void
 	int			*lexer_type;
 	char		**lexer_table;
 
+	
 	line = read_and_filter_line(args);
 	if (!line)
+	{
+		//printf("HERE ARRIVES, SHOULD CONTINUE LOOP \n");
 		eof_exit(args);
+	}
 	if (!line[0])
 		return ;
 	lexer_table = main_lexer(line, args);
