@@ -32,7 +32,7 @@ int
 	while (true)
 	{
 		g_rv = 1;
-		arguments = intialize_arg(prog);
+		arguments = initialize_arg(prog);
 		set_shlvl_num(arguments);
 		shell_reader(arguments);
 		if (arguments->flag_execution)

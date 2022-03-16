@@ -47,6 +47,14 @@ void
 	va_end(ap);
 }
 
+void
+	free_and_null(void *ptr)
+{
+	if (ptr && *(char *)ptr)
+		free(ptr);
+	ptr = NULL;
+}
+
 char *
 	get_env_val(t_arguments *arg, size_t len, const char *tmp)
 {

@@ -52,6 +52,7 @@ typedef struct s_program
 	char	**lenvp;
 	int		status;
 	char	**builtin_str;
+	char	*here_redir;
 }	t_prog;
 
 /* Struct that stores arguments and program parameters. */
@@ -140,6 +141,7 @@ int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
 int			builtin_routine(t_arguments *args, t_command *command_struct,
 				int save_stdout, bool redirect_heredoc);
 int			get_builtins_ret(t_arguments *args, t_command *command_struct);
+void		free_and_null(void *ptr);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
@@ -194,7 +196,7 @@ int			count_table(char **table);
 void		file_management(int argc, char *argv[], t_arguments *args);
 /* INITIALIZATION */
 t_prog		*initalize_prog(char **envp, char **builtin_str);
-t_arguments	*intialize_arg(t_prog *prog);
+t_arguments	*initialize_arg(t_prog *prog);
 /* PRE-FILTER */
 int			pre_filter(char *line);
 int			pre_filter_simple(char *line);

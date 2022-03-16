@@ -24,6 +24,8 @@ void
 	prog->lenvp = copy_array(prog->lenvp, args->lenvp, 1);
 	prog->status = args->status;
 	prog->builtin_str = args->builtin_str;
+	prog->here_redir = args->here_redir;
+	args->here_redir = NULL;
 }
 
 /** PURPOSE : Clear memory heap of a single loop */
@@ -32,6 +34,8 @@ void
 {
 	ft_free_split(prog->envp);
 	ft_free_split(prog->lenvp);
+	if (prog->here_redir)
+		free_pointers(1, prog->here_redir);
 	free(prog);
 	ft_free_split(arguments->envp);
 	ft_free_split(arguments->lenvp);

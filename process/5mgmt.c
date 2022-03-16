@@ -79,6 +79,8 @@ void	free_heap_memory(t_arguments *args)
 		if (args->file_input)
 			free(args->file_input);
 		free_pointers(1, args->wpipe);
+		if (args->here_redir)
+			free_and_null(args->here_redir);
 		free(args);
 	}
 }
@@ -86,7 +88,6 @@ void	free_heap_memory(t_arguments *args)
 /** PURPOSE : shutdown program freeing heap allocated memory. */
 void	ft_shutdown(char *str, int i, t_arguments *args)
 {
-	printf("aki\n");
 	perror("ERROR");
 	free_heap_memory(args);
 	ft_shut(str, i);

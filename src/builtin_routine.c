@@ -66,7 +66,6 @@ int
 		printf("%s", args->here_redir);
 		ret = 1;
 	}
-	free_pointers(1, args->here_redir);
 	if (save_stdout)
 	{
 		dup2(save_stdout, 1);
@@ -90,7 +89,5 @@ int
 	}
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, redirect_heredoc);
-/*	if (!g_rv)
-		ret = 1;*/
 	return (ret);
 }

@@ -23,11 +23,14 @@ static void
 	*buf = ft_strjoin(*buf, res);
 	free(tmp);
 	free(res);
+	free(readline_res);
 }
 
 char *
-	do_inner_while(char *delim, char **buf, char *readline_res)
+	do_inner_while(char *delim, char **buf)
 {
+	char	*readline_res;
+
 	while (delim && g_rv)
 	{
 		readline_res = readline(HEREDOC_PROMPT);
@@ -43,7 +46,6 @@ char *
 			break ;
 		}
 		update_buf(buf, readline_res);
-		free_pointers(1, readline_res);
 	}
 	return (*buf);
 }
@@ -53,18 +55,17 @@ void
 {
 	char	*delim;
 	char	*buf;
-	char	*readline_res;
 	t_list	*temp;
 
 	temp = heredoc_list;
-	readline_res = NULL;
-	while (temp)
+	buf = ft_strdup("");
+	while (heredoc_list && heredoc_list->content)
 	{
-		delim = temp->content;
-		buf = ft_strdup("");
-		buf = do_inner_while(delim, &buf, readline_res);
-		temp = temp->next;
+		delim = heredoc_list->content;
+		buf = do_inner_while(delim, &buf);
+		heredoc_list = heredoc_list->next;
 	}
+	args->heredoc_list = temp;
 	args->here_redir = buf;
 }
 
