@@ -13,14 +13,14 @@
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
 CC			= gcc #-g
-#CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
-CFLAGS		= -Wall -Wextra -Werror
-READLINE    = -lreadline -lcurses
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include# -Wno-error=unused-result# -O -fsanitize=leak
+#CFLAGS		= -Wall -Wextra -Werror
+READLINE    = -L${LIB_READLINE}/lib -lreadline_macos_v10_14 -lcurses
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
 LIB_READLINE = libreadline
 LIB			= $(LIB_DIR)/libft.a
-INCLUDES	= -I ./0includes -I ./libft_submodule/0includes
+INCLUDES	= -I ./0includes -I ./libft_submodule/0includes -I ./${LIB_READLINE}/include/readline
 
 #FLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
 
@@ -43,7 +43,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				lenvp.c wpipe.c builtin_routine.c
 OBJS		=	$(SRCS:.c=.o)
 
-OS_NAME			:= $(shell uname -s)
+#OS_NAME			:= $(shell uname -s)
 #ifeq ($(OS_NAME), Darwin)
 #	INCLUDES		+= -I ./${LIB_READLINE}/include/readline
 #	READLINE		+= -L${LIB_READLINE}/lib
