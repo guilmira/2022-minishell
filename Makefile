@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/15 11:09:42 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/16 13:43:45 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= minishell
 CC			= gcc #-g
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
 CFLAGS		= -Wall -Wextra -Werror
-READLINE	= -lreadline_macos_v10_14 -lcurses
+READLINE    = -lreadline -lcurses
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
 LIB_READLINE = libreadline

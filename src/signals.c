@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:02 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/15 13:25:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:47:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void
 	sig_handler(int signum __attribute__((unused)))
 {
 	ft_putendl_fd("", 2);
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
@@ -32,7 +32,7 @@ void
 	else if (signum == SIGINT)
 	{
 		g_rv = 0;
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
