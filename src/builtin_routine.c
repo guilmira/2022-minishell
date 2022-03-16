@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/16 16:48:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:05:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int
 }
 
 int
-	builtin_routine(t_arguments *args, t_command *command_struct, int save_stdout, bool redirect_heredoc)
+	builtin_routine(t_arguments *args, t_command *command_struct, \
+	int save_stdout, bool redirect_heredoc)
 {
 	int	ret;
 	int	i;
@@ -63,9 +64,7 @@ int
 	ret = -1;
 	while (++i < msh_num_builtins(args))
 		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
-		{
 			ret = ((args->builtin_func[i])(command_struct->command, args));
-		}
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
 	if (redirect_heredoc && save_stdout)
@@ -97,6 +96,6 @@ int
 	}
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, redirect_heredoc);
-	system("leaks minishell");
+	//system("leaks minishell");
 	return (ret);
 }

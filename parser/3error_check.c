@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:15:35 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/16 15:33:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:11:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	error_input(t_arguments *args, t_command *command_struct)
 	{
 		search_input(command_struct->list_in, args);
 		if (args->file_input)
-				return (!try_open(args->file_input));
+			return (!try_open(args->file_input));
 	}
 	return (0);
 }
