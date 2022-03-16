@@ -15,7 +15,7 @@ NAME		= minishell
 CC			= gcc #-g
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g# -Wno-error=unused-result# -O -fsanitize=leak
 CFLAGS		= -Wall -Wextra -Werror
-READLINE	= 
+READLINE	= -lreadline_macos_v10_14 -lcurses
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
 LIB_READLINE = libreadline
@@ -44,18 +44,18 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 OBJS		=	$(SRCS:.c=.o)
 
 OS_NAME			:= $(shell uname -s)
-ifeq ($(OS_NAME), Darwin)
-	INCLUDES		+= -I ./${LIB_READLINE}/include/readline
-	READLINE		+= -L${LIB_READLINE}/lib
-	OS_V			:= $(shell sw_vers -productVersion | cut -f1,2 -d.)
-ifeq ($(shell echo "$(OS_V) < 10.15" | bc), 1)
-	READLINE		+= -lreadline_macos_v10_14 -lcurses
-else
-	READLINE		+= -lreadline_macos_v10_15 -lcurses
-endif
-else
-	READLINE		+= -lreadline -lcurses
-endif
+#ifeq ($(OS_NAME), Darwin)
+#	INCLUDES		+= -I ./${LIB_READLINE}/include/readline
+#	READLINE		+= -L${LIB_READLINE}/lib
+#	OS_V			:= $(shell sw_vers -productVersion | cut -f1,2 -d.)
+#ifeq ($(shell echo "$(OS_V) < 10.15" | bc), 1)
+#	READLINE		+= -lreadline_macos_v10_14 -lcurses
+#else
+#	READLINE		+= -lreadline_macos_v10_15 -lcurses
+#endif
+#else
+#	READLINE		+= -lreadline -lcurses
+#endif
 #--------------------------------------------------------------------------------------------------------------RULES
 
 RM = rm -rf
