@@ -103,23 +103,13 @@ int
 	single_process(t_arguments *args)
 {
 	t_command	*command_struct;
-	int			save_stdout;
 	int			ret;
 
-	bool redirect_heredoc;
-
-	redirect_heredoc = false;
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	if (args->heredoc_list)
-	{
-		heredoc_routine(args->heredoc_list, args);
-		redirect_heredoc = true;
-	}
-	save_stdout = get_stdout_copy(args, command_struct);
-	ret = builtin_routine(args, command_struct, save_stdout, redirect_heredoc);
+	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0)
 		return (ret);
 	if (pipe(args->wpipe) == -1)

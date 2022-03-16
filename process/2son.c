@@ -18,7 +18,6 @@ int	first_son(t_arguments *args)
 {
 	int			fd_write;
 	t_command	*command_struct;
-	int			save_stdout;
 	int			ret;
 
 	set_signal(1);
@@ -26,12 +25,11 @@ int	first_son(t_arguments *args)
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	save_stdout = get_stdout_copy(args, command_struct);
+	ret = get_builtins_ret(args, command_struct);
 	fd_write = prepare_process(args->fds[0], args->fds[1]);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
-	ret = builtin_routine(args, command_struct, save_stdout, false);
 	if (ret >= 0)
 		return (ret);
 	return (do_execve(args, command_struct));
@@ -42,7 +40,6 @@ int	first_son(t_arguments *args)
 int	last_son(int index, t_arguments *args)
 {	
 	t_command	*command_struct;
-	int			save_stdout;
 	int			ret;
 
 	set_signal(1);
@@ -50,12 +47,11 @@ int	last_son(int index, t_arguments *args)
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	save_stdout = get_stdout_copy(args, command_struct);
+	ret = get_builtins_ret(args, command_struct);
 	if (dup2(args->fds[index], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
 	command_file_setup(command_struct, args);
-	ret = builtin_routine(args, command_struct, save_stdout, false);
 	if (ret >= 0)
 		return (ret);
 	return (do_execve(args, command_struct));

@@ -139,6 +139,8 @@ void		generate_output(t_list *list_out, int flag_file, t_arguments *args);
 int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
 int			builtin_routine(t_arguments *args, t_command *command_struct,
 				int save_stdout, bool redirect_heredoc);
+int
+get_builtins_ret(t_arguments *args, t_command *command_struct);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

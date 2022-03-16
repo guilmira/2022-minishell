@@ -38,7 +38,10 @@ char *
 			break ;
 		}
 		if (!ft_strcmp(delim, readline_res))
+		{
+			free(readline_res);
 			break ;
+		}
 		update_buf(buf, readline_res);
 		free_pointers(1, readline_res);
 	}
@@ -51,18 +54,18 @@ void
 	char	*delim;
 	char	*buf;
 	char	*readline_res;
+	t_list	*temp;
 
+	temp = heredoc_list;
 	readline_res = NULL;
-	while (heredoc_list)
+	while (temp)
 	{
-		delim = heredoc_list->content;
+		delim = temp->content;
 		buf = ft_strdup("");
 		buf = do_inner_while(delim, &buf, readline_res);
-		heredoc_list = heredoc_list->next;
+		temp = temp->next;
 	}
-	//printf("%s", buf);
 	args->here_redir = buf;
-//	free_pointers(1, buf);
 }
 
 int
