@@ -75,6 +75,7 @@ typedef struct s_arguments
 	t_list	*commands_lst;
 	t_prog	*prog;
 	int		*wpipe;
+	char	*here_redir;
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
@@ -115,9 +116,9 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 char		**copy_array(char **dest, char **src, unsigned int extra_cells);
 char		*ft_multistr_concat(int count, ...);
 size_t		get_envv_len(const char *s);
-void		mnge_heredoc(t_list *command_struct);
+void		mnge_heredoc(t_list *heredoc_list, t_arguments *args);
 void		set_signal(int sig_type);
-int			heredoc_routine(t_list *heredoc_list);
+int			heredoc_routine(t_list *heredoc_list, t_arguments *args);
 bool		var_have_val(char **envp, char *needle);
 bool		export_new_l_variables(char **args, t_arguments *arg);
 void		set_new_var(char *var, t_arguments *arg);
@@ -137,7 +138,9 @@ void		search_input(t_list *list_in, t_arguments *args);
 void		generate_output(t_list *list_out, int flag_file, t_arguments *args);
 int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
 int			builtin_routine(t_arguments *args, t_command *command_struct,
-				int save_stdout);
+				int save_stdout, bool redirect_heredoc);
+int
+get_builtins_ret(t_arguments *args, t_command *command_struct);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

@@ -128,5 +128,5 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //wc < omega >dd | wc -l< final > cc 
 //cat dd && cat cc
 
-//ls < aijshf | wc -l < nonexisten   WORKS FINE
+//ls < aijshf | wc -l < nonexisten   WORKS FINE ---- LEAKS HERE!!
 //ls < aijshf | wc -l | echo hola

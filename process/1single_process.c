@@ -103,15 +103,13 @@ int
 	single_process(t_arguments *args)
 {
 	t_command	*command_struct;
-	int			save_stdout;
 	int			ret;
 
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	save_stdout = get_stdout_copy(args, command_struct);
-	ret = builtin_routine(args, command_struct, save_stdout);
+	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0)
 		return (ret);
 	if (pipe(args->wpipe) == -1)

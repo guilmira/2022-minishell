@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/16 13:26:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:57:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int
 }
 
 int
-	builtin_routine(t_arguments *args, t_command *command_struct,
-					int save_stdout)
+	builtin_routine(t_arguments *args, t_command *command_struct, int save_stdout, bool redirect_heredoc)
 {
 	int	ret;
 	int	i;
@@ -65,16 +64,36 @@ int
 	while (++i < msh_num_builtins(args))
 		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
 			ret = ((args->builtin_func[i])(command_struct->command, args));
-	if (args->heredoc_list)
-		ret = (heredoc_routine(args->heredoc_list));
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
+	if (redirect_heredoc && save_stdout)
+	{
+		printf("%s", args->here_redir);
+		ret = 1;
+	}
+	free_pointers(1, args->here_redir);
 	if (save_stdout)
 	{
-		rl_replace_line("", 0);
-		rl_redisplay();
 		dup2(save_stdout, 1);
 		close(save_stdout);
 	}
+	return (ret);
+}
+
+int
+	get_builtins_ret(t_arguments *args, t_command *command_struct)
+{
+	int		ret;
+	bool	redirect_heredoc;
+	int		save_stdout;
+
+	redirect_heredoc = false;
+	if (args->heredoc_list)
+	{
+		heredoc_routine(args->heredoc_list, args);
+		redirect_heredoc = true;
+	}
+	save_stdout = get_stdout_copy(args, command_struct);
+	ret = builtin_routine(args, command_struct, save_stdout, redirect_heredoc);
 	return (ret);
 }

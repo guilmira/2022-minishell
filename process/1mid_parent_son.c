@@ -34,7 +34,6 @@ static int
 	mid_son(int index, t_arguments *args)
 {
 	t_command	*command_struct;
-	int			save_stdout;
 	int			ret;
 
 	set_signal(1);
@@ -42,11 +41,10 @@ static int
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	save_stdout = get_stdout_copy(args, command_struct);
-	mnge_dups(index, args, command_struct);
-	ret = builtin_routine(args, command_struct, save_stdout);
+	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0)
 		return (ret);
+	mnge_dups(index, args, command_struct);
 	return (do_execve(args, command_struct));
 }
 

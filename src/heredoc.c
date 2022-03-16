@@ -38,7 +38,10 @@ char *
 			break ;
 		}
 		if (!ft_strcmp(delim, readline_res))
+		{
+			free(readline_res);
 			break ;
+		}
 		update_buf(buf, readline_res);
 		free_pointers(1, readline_res);
 	}
@@ -46,28 +49,30 @@ char *
 }
 
 void
-	mnge_heredoc(t_list *heredoc_list)
+	mnge_heredoc(t_list *heredoc_list, t_arguments *args)
 {
 	char	*delim;
 	char	*buf;
 	char	*readline_res;
+	t_list	*temp;
 
+	temp = heredoc_list;
 	readline_res = NULL;
-	while (heredoc_list)
+	while (temp)
 	{
-		delim = heredoc_list->content;
+		delim = temp->content;
 		buf = ft_strdup("");
 		buf = do_inner_while(delim, &buf, readline_res);
-		heredoc_list = heredoc_list->next;
+		temp = temp->next;
 	}
-	free_pointers(1, buf);
+	args->here_redir = buf;
 }
 
 int
-	heredoc_routine(t_list *heredoc_list)
+	heredoc_routine(t_list *heredoc_list, t_arguments *args)
 {
 	set_signal(3);
-	mnge_heredoc(heredoc_list);
+	mnge_heredoc(heredoc_list, args);
 	set_signal(1);
 	return (1);
 }
