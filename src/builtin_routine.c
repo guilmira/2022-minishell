@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/16 13:57:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:42:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int
 {
 	int			save_stdout;
 
-	if (command_struct->list_in)
+	/* if (command_struct->list_in)
 	{
 		search_input(command_struct->list_in, arg);
 		if (arg->file_input)
 			input_from_file(arg->file_input);
-	}
+	} */
 	save_stdout = mnge_output_redirection(arg, command_struct);
 	return (save_stdout);
 }
