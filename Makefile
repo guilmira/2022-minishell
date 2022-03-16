@@ -48,7 +48,7 @@ ifeq ($(OS_NAME), Darwin)
 	INCLUDES		+= -I ./${LIB_READLINE}/include/readline
 	READLINE		+= -L${LIB_READLINE}/lib
 	OS_V			:= $(shell sw_vers -productVersion | cut -f1,2 -d.)
-ifeq ($(shell echo "$(OS_V) <= 10.14" | bc), 1)
+ifeq ($(shell echo "$(OS_V) < 10.15" | bc), 1)
 	READLINE		+= -lreadline_macos_v10_14 -lcurses
 else
 	READLINE		+= -lreadline_macos_v10_15 -lcurses
