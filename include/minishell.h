@@ -22,14 +22,18 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <sys/wait.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+//# include <readline/readline.h>
+//# include <readline/history.h>
 # include <signal.h>
 # include <limits.h>
 # include <stdarg.h>
 
 /* LIBFT */
 # include "../libft_submodule/0includes/libft.h"
+# include "../libreadline/include/readline/readline.h"
+# include "../libreadline/include/readline/readline.h"
+
+
 
 /* Global variables and structs*/
 int	g_rv;
