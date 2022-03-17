@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/16 17:11:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:43:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,8 @@ void
 		ft_shutdown(MEM, errno, args);
 	if (!heredoc_detection(lexer_table, lexer_type, args))
 		return ;
+	//printer(lexer_table, lexer_type);
 	arg_reader(lexer_table, lexer_type, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);
 }
-
-	//printer(lexer_table, lexer_type);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 12:58:28 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:12:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	first_son(t_arguments *args)
 	if (ret >= 0)
 	{
 		write_pipe_to(args->wpipe, &ret);
+		free_heap_memory(args);
 		exit(0);
 	}
 	ret = (do_execve(args, command_struct));

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:25:59 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/14 10:14:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:04:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char *
 				   "delimited by end-of-file (wanted `%s')\n", delim);
 			break ;
 		}
-		if (!ft_strcmp(delim, readline_res))
+		if (!ft_strcmp(readline_res, delim))
 		{
 			free(readline_res);
 			break ;
