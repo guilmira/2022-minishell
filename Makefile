@@ -3,19 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
+#    By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/16 15:20:33 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/16 18:06:59 by asydykna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
-CC			= gcc #-g
+CC			= gcc -g
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include# -Wno-error=unused-result# -O -fsanitize=leak
-#CFLAGS		= -Wall -Wextra -Werror
-CFLAGS     = -Wall -Wextra -Werror -g -Ilibreadline/include
+CFLAGS		= -Wall -Wextra -Werror -g -Ilibreadline/include
 READLINE    = -L${LIB_READLINE}/lib -lreadline_macos_v10_14 -lcurses
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
@@ -41,7 +40,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				0dollar_expansion.c 1expansion_aux.c 2variable.c \
 				printstemp.c \
 				signals.c ft_multistr_concat.c utilities_2.c heredoc.c builtin_utils_2.c\
-				lenvp.c wpipe.c builtin_routine.c
+				lenvp.c wpipe.c builtin_routine.c memory_mngmt.c
 OBJS		=	$(SRCS:.c=.o)
 
 #OS_NAME			:= $(shell uname -s)

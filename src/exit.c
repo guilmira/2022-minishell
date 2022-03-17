@@ -32,10 +32,7 @@ int
 {
 	set_status(arg, 0);
 	if (!args[1])
-	{
-		g_rv = 0;
 		return (0);
-	}
 	if (!is_within_range(args[1]))
 	{
 		manage_no_numeric_arg(args, arg);
@@ -48,6 +45,5 @@ int
 		return (1);
 	}
 	set_status(arg, atoi_exit_code(args[1]));
-	g_rv = 0;
 	return (0);
 }

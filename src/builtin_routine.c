@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/16 17:05:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:59:11 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ int
 {
 	int			save_stdout;
 
-	/* if (command_struct->list_in)
-	{
-		search_input(command_struct->list_in, arg);
-		if (arg->file_input)
-			input_from_file(arg->file_input);
-	} */
 	save_stdout = mnge_output_redirection(arg, command_struct);
 	return (save_stdout);
 }
@@ -72,7 +66,6 @@ int
 		printf("%s", args->here_redir);
 		ret = 1;
 	}
-	free_pointers(1, args->here_redir);
 	if (save_stdout)
 	{
 		dup2(save_stdout, 1);
@@ -96,6 +89,5 @@ int
 	}
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, redirect_heredoc);
-	//system("leaks minishell");
 	return (ret);
 }

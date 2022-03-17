@@ -44,7 +44,8 @@ void
 
 /** PURPOSE : End of the process.
  * 1. Final fork + execute last son. */
-static int	end_process(t_arguments *args)
+int
+	end_process(t_arguments *args)
 {
 	int	last_index;
 
@@ -61,38 +62,27 @@ static int	end_process(t_arguments *args)
 	return (1);
 }
 
-/** PURPOSE : Executes fork function to run commands.
- * 1. Create first pipe. 
- * 2. Fork process in a loop, and inside each son process, run command.
- * 3. Continue running program until last fork. */
-int	process_exe(t_arguments *args)
+void
+	do_end_process(t_arguments *args, int x)
+{
+	int	wstatus;
+
+	x = end_process(args);
+	wait(&wstatus);
+	if (x < 0)
+		set_status_and_shut(args, EXE_ERROR);
+}
+
+int
+	fork_ret(t_arguments *args)
 {
 	int	i;
-	int	wstatus;
 	int	identifier;
 	int	x;
 
-	if (pipe(args->fds) == -1)
-		ft_shutdown(MSG, 0, args);
-	if (pipe(args->wpipe) == -1)
-	{
-		perror("PIPE ERROR\n");
-		set_status(args, 1);
-		return (1);
-	}
-	if (!check_command(args))
-	{
-		close(args->fds[0]);
-		close(args->fds[1]);
-		return (1);
-	}
 	identifier = fork();
 	if (identifier == 0)
-	{
-		x = first_son(args);
-		write_pipe_to(args->wpipe, &x);
-		exit(0);
-	}
+		first_son(args);
 	else if (identifier > 0)
 	{
 		read_pipe_from(args->wpipe, &args->status);
@@ -102,22 +92,31 @@ int	process_exe(t_arguments *args)
 		{
 			x = mid_process(args);
 			if (x < 0)
-			{
-				set_status(args, 1);
-				ft_shutdown(EXE_ERROR, 0, args);
-			}
+				set_status_and_shut(args, EXE_ERROR);
 			else if (x == 0)
 				return (0);
 		}
-		x = end_process(args);
-		wait(&wstatus);
-		if (x < 0)
-		{
-			set_status(args, 1);
-			ft_shutdown(EXE_ERROR, 0, args);
-		}
+		do_end_process(args, x);
 	}
 	else
-		ft_shutdown(FORK_ERROR, 0, args);
+		set_status_and_shut(args, FORK_ERROR);
 	return (1);
+}
+
+/** PURPOSE : Executes fork function to run commands.
+ * 1. Create first pipe. 
+ * 2. Fork process in a loop, and inside each son process, run command.
+ * 3. Continue running program until last fork. */
+int
+	process_exe(t_arguments *args)
+{
+	if (pipe(args->fds) == -1 || pipe(args->wpipe) == -1)
+		set_status_and_shut(args, MSG);
+	if (!check_command(args))
+	{
+		close(args->fds[0]);
+		close(args->fds[1]);
+		return (1);
+	}
+	return (fork_ret(args));
 }

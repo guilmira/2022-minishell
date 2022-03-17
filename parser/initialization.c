@@ -42,7 +42,7 @@ t_prog	*initalize_prog(char **envp, char **builtin_str)
 }
 
 /** PURPOSE : Set variables to zero. */
-static void	variales_to_zero(t_arguments *args)
+void	variables_to_zero(t_arguments *args)
 {
 	args->argv = NULL;
 	args->commands_lst = NULL;
@@ -58,7 +58,7 @@ static void	variales_to_zero(t_arguments *args)
 }
 
 /** PURPOSE : Init arguments variable. */
-t_arguments	*intialize_arg(t_prog *prog)
+t_arguments	*initialize_arg(t_prog *prog)
 {
 	t_arguments	*args;
 
@@ -66,7 +66,7 @@ t_arguments	*intialize_arg(t_prog *prog)
 	if (!args)
 		ft_shut(MEM, 0);
 	args->prog = prog;
-	variales_to_zero(args);
+	variables_to_zero(args);
 	if (args->envp)
 		ft_free_split(args->envp);
 	args->envp = copy_array(args->envp, prog->envp, 1);
@@ -77,5 +77,7 @@ t_arguments	*intialize_arg(t_prog *prog)
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;
 	args->wpipe = (int *)(malloc(2 * sizeof(int)));
+	args->here_redir = prog->here_redir;
+	prog->here_redir = NULL;
 	return (args);
 }
