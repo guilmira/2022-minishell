@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:15:17 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/13 08:54:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:31:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ int	is_one_of_lexer_symbols(char symbol)
 	return (0);
 }
 
+static int	evaluate_inside_quotes(char *line, int i, int *flag)
+{
+	int	j;
+	
+	j = i;
+	i = advance_to_next_quote(line, i);
+	i = i - 1;
+	while (line[++j] && j < i)
+		if (!ft_isspaces(line[j]))
+			*flag = 3;
+	return (i);
+}
+
 /** PURPOSE : Prevent unclosed symbols like ls | 
  * or
  * ls < , ls << and so on. */
@@ -51,14 +64,16 @@ int	unclosed_filter(char *line)
 	while (line[++i])
 	{
 		if (is_quote(line[i]))
-		{
-			i = advance_to_next_quote(line, i);
-			i = i - 1;
-		}
+			i = evaluate_inside_quotes(line, i, &flag);
 		else if (is_one_of_lexer_symbols(line[i]))
 			flag++;
 		else if (ft_isalnum(line[i]))
 			flag = 0;
+		if (flag == 3)
+		{
+			flag = 0;
+			break ;
+		}
 	}
 	if (flag)
 		return (1);
