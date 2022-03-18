@@ -6,12 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:15:35 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/16 17:11:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/18 10:53:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+/** PURPOSE : Checks if binary program is executable. */
 static int	is_executable(t_arguments *args)
 {
 	int			i;
@@ -38,6 +39,7 @@ static int	is_executable(t_arguments *args)
 	return (1);
 }
 
+/** PURPOSE : Tries to open the file. */
 static int	try_open(char *path)
 {
 	int	fd_file;
@@ -48,6 +50,7 @@ static int	try_open(char *path)
 	return (1);
 }
 
+/** PURPOSE : Checks if input does not exist. */
 static int	error_input(t_arguments *args, t_command *command_struct)
 {
 	if (command_struct->list_in)
@@ -59,6 +62,9 @@ static int	error_input(t_arguments *args, t_command *command_struct)
 	return (0);
 }
 
+/** PURPOSE : Checks for error in commands.
+ * 1. Whether is executable or not, by checking if PATH var. is unset.
+ * 2. If file input is empty. */
 bool	check_command(t_arguments *args)
 {
 	t_command	*command_struct;
