@@ -6,14 +6,16 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/17 10:39:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/18 10:57:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //wc << fin
-//<< fin > a
+//<< fin > a IS WORKING PROPERLY
+
+//lsof -c minishell | grep PIPE
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
@@ -60,7 +62,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //> a  NOT WORKING
 //ls | a
-//lsof -c minishell | grep PIPE
+
 
 //export vs env
 //export todas, env solo seteadas
@@ -98,3 +100,8 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //ls < aijshf | wc -l | echo hola
 
 //ls < a | wc -l | echo hola NOT WORKING
+
+//wc << "fin" LEAKS
+
+//ls < klasjjkfh
+//dejo la salida bloqueada

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   2linked_second.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:22:08 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 14:44:30 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:42:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int i, t_arguments *args)
 		if (!ft_strcmp(PIPE, table[i]))
 			break ;
 		if (!ft_strcmp(IN, table[i]) || !ft_strcmp(OUT, table[i]) \
-		|| !ft_strcmp(APPEND, table[i]))
+		|| !ft_strcmp(APPEND, table[i]) || !ft_strcmp(HEREDOC, table[i]))
 			i++;
 		else
 		{
