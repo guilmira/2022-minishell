@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/17 13:42:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/18 11:01:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
 	ret = get_builtins_ret(args, command_struct);
-	//printf("%s", args->here_redir);
 	if (ret >= 0)
 		return (ret);
 	

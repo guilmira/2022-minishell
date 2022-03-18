@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 11:00:55 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/16 16:45:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/18 11:02:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,5 @@ int
 		free_pointers(1, old_path);
 		set_status(arg, 0);
 	}
-	printf("1%s\n", old_path);
-	printf("2%s\n", args[0]);
-	printf("2%s\n", args[1]);
-	printf("2%s\n", args[2]);
-	printf("3%s\n", path);
-	system("leaks minishell");
 	return (1);
 }
