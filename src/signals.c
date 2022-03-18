@@ -72,5 +72,6 @@ void
 	ft_free_split(args->envp);
 	ft_free_split(args->lenvp);
 	free_heap_memory(args);
+  //  free_and_null(args->here_redir);
 	exit(EXIT_SUCCESS);
 }
