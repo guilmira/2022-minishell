@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/18 15:05:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/18 15:17:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_arguments
 	char	*file_input;
 	char	*file_output;
 	t_list	*heredoc_list;
-	t_list	*heredoc_list_input;
+	t_list	*heredoc_list_output;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
 	char	**lenvp;

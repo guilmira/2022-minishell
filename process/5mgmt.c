@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/18 15:12:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/18 15:17:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	free_heap_memory(t_arguments *args)
 			ft_structclear(args->commands_lst);
 		if (args->heredoc_list && args->heredoc_list->content != NULL)
 			ft_fullclear(args->heredoc_list);
-		if (args->heredoc_list_input && args->heredoc_list_input->content != NULL)
-			ft_fullclear(args->heredoc_list_input); //povisional testeo
-		if (args->heredoc_list_input) //esta line habra que quitarla
-			free(args->heredoc_list_input);//povisional
+		if (args->heredoc_list_output && args->heredoc_list_output->content != NULL)
+			ft_fullclear(args->heredoc_list_output); //povisional testeo
+		if (args->heredoc_list_output) //esta line habra que quitarla
+			free(args->heredoc_list_output);//povisional
 		if (args->fds)
 			free(args->fds);
 		if (args->file_output)
