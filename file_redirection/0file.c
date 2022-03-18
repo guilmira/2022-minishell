@@ -57,7 +57,7 @@ static void	manage_heredoc(char *file, t_arguments *args)
 	//str_input = ft_strdup("TEST"); //provisional
 	str_input = NULL; //provisional
 	ft_lstadd_back(&args->heredoc_list, ft_lstnew(str));
-	ft_lstadd_back(&args->heredoc_list_output, ft_lstnew(str_input));
+	ft_lstadd_back(&args->here_output, ft_lstnew(str_input));
 }
 
 /** PURPOSE : Load structure with due arguments.

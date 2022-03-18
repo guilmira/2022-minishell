@@ -68,7 +68,7 @@ typedef struct s_arguments
 	char	*file_input;
 	char	*file_output;
 	t_list	*heredoc_list;
-	t_list	*heredoc_list_output;
+	t_list	*here_output;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
 	char	**lenvp;
@@ -118,7 +118,7 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 char		**copy_array(char **dest, char **src, unsigned int extra_cells);
 char		*ft_multistr_concat(int count, ...);
 size_t		get_envv_len(const char *s);
-void		mnge_heredoc(t_list *heredoc_list, t_arguments *args);
+void        mnge_heredoc(char *delim, t_arguments *args, int i, char *buf);
 void		set_signal(int sig_type);
 int			heredoc_routine(t_list *heredoc_list, t_arguments *args);
 bool		var_have_val(char **envp, char *needle);

@@ -47,7 +47,7 @@ void	variables_to_zero(t_arguments *args)
 	args->argv = NULL;
 	args->commands_lst = NULL;
 	args->heredoc_list = NULL;
-	args->heredoc_list_output = NULL;
+	args->here_output = NULL;
 	args->flag_execution = 0;
 	args->command_number = 0;
 	args->total_commands = 0;

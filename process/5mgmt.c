@@ -72,10 +72,10 @@ void	free_heap_memory(t_arguments *args)
 			ft_structclear(args->commands_lst);
 		if (args->heredoc_list && args->heredoc_list->content != NULL)
 			ft_fullclear(args->heredoc_list);
-		if (args->heredoc_list_output && args->heredoc_list_output->content != NULL)
-			ft_fullclear(args->heredoc_list_output); //povisional testeo
-		if (args->heredoc_list_output) //esta line habra que quitarla
-			free(args->heredoc_list_output);//povisional
+		if (args->here_output && args->here_output->content != NULL)
+			ft_fullclear(args->here_output); //povisional testeo
+		if (args->here_output) //esta line habra que quitarla
+			free(args->here_output);//povisional
 		if (args->fds)
 			free(args->fds);
 		if (args->file_output)
