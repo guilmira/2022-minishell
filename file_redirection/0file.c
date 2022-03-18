@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 12:48:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/18 15:10:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,15 @@ static void	assign_type(char *content, t_list **list_type, t_arguments *args)
 static void	manage_heredoc(char *file, t_arguments *args)
 {
 	char	*str;
+	char   	*str_input;
 
 	str = ft_strdup(file);
 	if (!str)
 		ft_shutdown(MEM, 1, args);
+	//str_input = ft_strdup("TEST"); //provisional
+	str_input = NULL; //provisional
 	ft_lstadd_back(&args->heredoc_list, ft_lstnew(str));
+	ft_lstadd_back(&args->heredoc_list_input, ft_lstnew(str_input));
 }
 
 /** PURPOSE : Load structure with due arguments.
