@@ -48,7 +48,7 @@ int
 
 int
 	builtin_routine(t_arguments *args, t_command *command_struct, \
-	int save_stdout, bool redirect_heredoc)
+	int save_stdout, bool redirect_heredoc __attribute__((unused)))
 {
 	int	ret;
 	int	i;
@@ -61,7 +61,8 @@ int
 			ret = ((args->builtin_func[i])(command_struct->command, args));
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
-	if (redirect_heredoc && save_stdout)
+    printf("test line here\n");
+    if (redirect_heredoc && save_stdout)
 	{
 		printf("%s", args->here_redir);
 		ret = 1;
