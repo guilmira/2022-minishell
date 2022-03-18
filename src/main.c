@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/18 10:57:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/18 11:12:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 //wc << fin
 //<< fin > a IS WORKING PROPERLY
 
+//while true ; do leaks -q minishell; sleep 3; done
 //lsof -c minishell | grep PIPE
+//lsof -c minishell -r2 | grep PIPE
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
@@ -67,7 +69,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //export vs env
 //export todas, env solo seteadas
 
-//while true ; do leaks -q minishell; sleep 3; done
+
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 
