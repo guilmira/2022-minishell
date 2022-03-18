@@ -15,7 +15,7 @@ NAME		= minishell
 CC			= gcc -g
 #CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include# -Wno-error=unused-result# -O -fsanitize=leak
 CFLAGS		= -Wall -Wextra -Werror -g -Ilibreadline/include
-READLINE    = #-L${LIB_READLINE}/lib -lreadline_macos_v10_14 -lcurses
+READLINE    = -L${LIB_READLINE}/lib -lreadline_macos_v10_14 -lcurses
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
 LIB_READLINE = libreadline
