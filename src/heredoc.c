@@ -85,7 +85,6 @@ int
 		buf = ft_strdup("");
 		mnge_heredoc(temp->content, args, i, buf);
 		set_signal(1);
-		printf("TEST. delim %d = %s\n", i, (char *)temp->content);
 		temp = temp->next;
 		i++;
 	}

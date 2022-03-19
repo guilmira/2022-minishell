@@ -18,7 +18,7 @@ int
 	int	save_stdout;
 
 	save_stdout = 0;
-	if (command_struct->list_out)
+	if (command_struct->list_out || arg->output_builtin)
 	{
 		generate_output(command_struct->list_out, \
 		command_struct->flag_file, arg);
@@ -65,25 +65,22 @@ void
 }
 
 int
-	builtin_routine(t_arguments *args, t_command *command_struct, \
-	int save_stdout, bool redirect_heredoc __attribute__((unused)))
+	builtin_routine(t_arguments *args, t_command *command_struct,
+					int save_stdout, int ret)
 {
-	int	ret;
 	int	i;
 
 	set_status(args, 0);
 	i = -1;
-	ret = -1;
 	while (++i < msh_num_builtins(args))
 		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
-			ret = ((args->builtin_func[i])(command_struct->command, args));
+			ret = (((args->builtin_func[i])(command_struct->command, args)));
+	/*if (!ret)
+		return (ret);*/
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
-	if (redirect_heredoc && save_stdout)
-	{
+	if (args->print_heredoc)
 		print_heredoc(args);
-		ret = 1;
-	}
 	if (save_stdout)
 	{
 		dup2(save_stdout, 1);
@@ -96,16 +93,12 @@ int
 	get_builtins_ret(t_arguments *args, t_command *command_struct)
 {
 	int		ret;
-	bool	redirect_heredoc;
 	int		save_stdout;
 
-	redirect_heredoc = false;
+	ret = -1;
 	if (args->heredoc_list)
-	{
-		heredoc_routine(args->heredoc_list, args);
-		redirect_heredoc = true;
-	}
+		ret = heredoc_routine(args->heredoc_list, args);
 	save_stdout = get_stdout_copy(args, command_struct);
-	ret = builtin_routine(args, command_struct, save_stdout, redirect_heredoc);
+	ret = builtin_routine(args, command_struct, save_stdout, ret);
 	return (ret);
 }

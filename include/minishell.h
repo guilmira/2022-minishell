@@ -52,7 +52,6 @@ typedef struct s_program
 	char	**lenvp;
 	int		status;
 	char	**builtin_str;
-	char	*here_redir;
 }	t_prog;
 
 /* Struct that stores arguments and program parameters. */
@@ -69,6 +68,10 @@ typedef struct s_arguments
 	char	*file_output;
 	t_list	*heredoc_list;
 	t_list	*here_output;
+	bool	print_heredoc;
+	bool	output_builtin;
+	// ^ this flag might be necessary here in order to know
+	// if the output of builtins should be redirected to other command
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
 	char	**lenvp;
@@ -77,7 +80,6 @@ typedef struct s_arguments
 	t_list	*commands_lst;
 	t_prog	*prog;
 	int		*wpipe;
-	char	*here_redir;
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
@@ -139,8 +141,8 @@ char		*envp_routine(char *const *args, t_arguments *arg,
 void		search_input(t_list *list_in, t_arguments *args);
 void		generate_output(t_list *list_out, int flag_file, t_arguments *args);
 int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
-int			builtin_routine(t_arguments *args, t_command *command_struct,
-				int save_stdout, bool redirect_heredoc);
+int
+builtin_routine(t_arguments *args, t_command *command_struct, int save_stdout, int ret);
 int			get_builtins_ret(t_arguments *args, t_command *command_struct);
 void		free_and_null(void *ptr);
 
