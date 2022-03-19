@@ -46,6 +46,24 @@ int
 	return (save_stdout);
 }
 
+void
+	print_heredoc(const t_arguments *args)
+{
+	int		i;
+	int		j;
+	t_list	*temp;
+
+	i = 0;
+	j = ft_lstsize(args->here_output);
+	temp = args->here_output;
+	while (i < j && temp->content)
+	{
+		printf("%s", (char *)temp->content);
+		temp = temp->next;
+		i++;
+	}
+}
+
 int
 	builtin_routine(t_arguments *args, t_command *command_struct, \
 	int save_stdout, bool redirect_heredoc __attribute__((unused)))
@@ -61,10 +79,9 @@ int
 			ret = ((args->builtin_func[i])(command_struct->command, args));
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
-    printf("test line here\n");
-    if (redirect_heredoc && save_stdout)
+	if (redirect_heredoc && save_stdout)
 	{
-		printf("%s", args->here_redir);
+		print_heredoc(args);
 		ret = 1;
 	}
 	if (save_stdout)

@@ -74,8 +74,8 @@ void	free_heap_memory(t_arguments *args)
 			ft_fullclear(args->heredoc_list);
 		if (args->here_output && args->here_output->content != NULL)
 			ft_fullclear(args->here_output); //povisional testeo
-		if (args->here_output) //esta line habra que quitarla
-			free(args->here_output);//povisional
+		/*if (args->here_output) //esta line habra que quitarla
+			free(args->here_output);//povisional*/
 		if (args->fds)
 			free(args->fds);
 		if (args->file_output)
