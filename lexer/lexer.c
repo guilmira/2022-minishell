@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 13:38:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 09:54:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/20 13:41:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ int	check_lexer_errors(char **table)
 	flag = 0;
 	while (table[++i])
 	{
-		if (!ft_strncmp("lex_", table[i], 4))
+		if (flag && !ft_strcmp(HEREDOC, table[i]))
+			flag = 0;
+		else if (!ft_strncmp("lex_", table[i], 4))
 			flag++;
 		else
 			flag = 0;
