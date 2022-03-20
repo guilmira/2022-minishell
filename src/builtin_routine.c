@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/20 14:06:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/20 14:08:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int
 	ret = -1;
 	if (args->heredoc_list)
 		ret = heredoc_routine(args->heredoc_list, args);
-	printf("%s aqui\n ", arg->file_output);
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
 	return (ret);
