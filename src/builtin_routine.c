@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/17 13:15:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/20 14:06:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int
 	{
 		generate_output(command_struct->list_out, \
 		command_struct->flag_file, arg);
-		if (!arg->file_output)
-		{
-			command_struct->flag_file = -1;
-			printf("File or directory not found\n");
-		}
 		if (arg->flag_file_out)
 			save_stdout = dup(1);
 		if (command_struct->flag_file == 2)
@@ -98,6 +93,7 @@ int
 	ret = -1;
 	if (args->heredoc_list)
 		ret = heredoc_routine(args->heredoc_list, args);
+	printf("%s aqui\n ", arg->file_output);
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
 	return (ret);
