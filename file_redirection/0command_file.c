@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 13:10:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:10:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,15 @@ void	search_input(t_list *list_in, t_arguments *args)
 /** PURPOSE : Setup files for input and output in each file. */
 void	command_file_setup(t_command *command_struct, t_arguments *args)
 {
-	if (command_struct->list_in || args->print_heredoc)
+	if (command_struct->list_in || command_struct->heredoc_file)
 	{
-		if (command_struct->heredoc_file)
-		{
+		
+		if (command_struct->list_in)
+			search_input(command_struct->list_in, args);
+		else if (command_struct->heredoc_file)
 			args->file_input = command_struct->heredoc_file;
-		}
-		else
-		{
-		search_input(command_struct->list_in, args);
-
-		}
 		if (args->file_input)
-		{
-			//printf("Entra : %s \n", args->file_input);
 			input_from_file(args->file_input);
-		}
 	}
 	if (command_struct->list_out)
 	{

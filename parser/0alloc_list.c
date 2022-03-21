@@ -6,11 +6,25 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:00:25 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 13:03:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:07:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+
+/** PURPOSE : Heredoc are found in table. */
+int	heredoc_found(char **table, int *type, int i)
+{
+	while (table[++i])
+	{
+		if (type[i] == 0)
+			break ;
+		if (!ft_strcmp(HEREDOC, table[i]))
+			return (1);
+	}
+	return (0);
+}
 
 /** PURPOSE : Obtain linked list with files (input) of pipe segment. */
 t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
@@ -28,7 +42,9 @@ t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
 			break ;
 		if (!ft_strcmp(IN, table[i]))
 		{
-			if (type[i + 1] == 2)
+			if (heredoc_found(table, type, i))
+				;
+			else if (type[i + 1] == 2)
 			{	
 				str = ft_strdup(table[i + 1]);
 				if (!str)
@@ -36,6 +52,7 @@ t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
 				ft_lstadd_back(&list_in, ft_lstnew(str));
 			}
 		}
+		
 	}
 	return (list_in);
 }

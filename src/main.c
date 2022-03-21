@@ -6,14 +6,29 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/21 12:22:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:53:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//wc << fin
-//<< fin > a IS WORKING PROPERLY
+//working:
+
+//inputs// wc << fin
+//redirections// << fin > a
+//redirections with content// cat << fin > a
+//multiple// cat << fin << fhs << ss << dd << tt > a
+//PRIORITIES// cat << fin < a    vs    cat << a < fin
+
+//<< fin | << bah leak
+
+//TODO
+// << fin
+//if u write 'finish' as delimeter, it detects it
+// << a
+//if u write 'ambar' as delimeter, it detects it
+//norm passed
+//LEAK ON CD STILL THERE
 
 //while true ; do leaks -q minishell; sleep 3; done
 //lsof -c minishell | grep PIPE
@@ -56,7 +71,7 @@ int
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	set_signal(1);
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));

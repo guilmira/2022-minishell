@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/21 13:14:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:19:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void create_file_heredoc(t_command *command_struct, t_arguments *args)
 		ft_shut(FILE_ERROR, 1);
 	write(fd_file, heredoc_str, ft_strlen(heredoc_str));
 	close(fd_file);
-	command_struct->heredoc_file = ft_strdup(path);
+	command_struct->heredoc_file = path;
 }
 
 int

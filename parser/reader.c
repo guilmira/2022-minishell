@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:35:59 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 10:51:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:01:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,33 @@ static int	case_space(char *str)
 	return (1);
 }
 
+static int error_table(char **table)
+{
+	int	i;
+
+	i = -1;
+	while (table[++i])
+	{
+		if (!ft_strcmp(HEREDOC, table[i]) || !ft_strcmp(HEREDOC, table[i]) || \
+		!ft_strcmp(HEREDOC, table[i]) || !ft_strcmp(HEREDOC, table[i]))
+			if (!table[i + 1])
+				return (1);
+	}
+	return (0);
+}
+
 /** PURPOSE : Handles file creation (in case of multipe redirections). */
 static int	heredoc_detection(char **lexer_table, int *lexer_type, \
 t_arguments *args)
 {
+	if (error_table(lexer_table))
+	{
+		ft_free_split(lexer_table);
+		free(lexer_type);
+		printf("Error at lexer. Command line not accepted.\n");
+		args->flag_execution = 1;
+		return (0);
+	}
 	heredoc_build_list(lexer_table, args);
 	if (case_space(lexer_table[0]) || args->flag_file_in == -1 \
 	|| args->flag_file_out == -1)
@@ -101,7 +124,6 @@ void
 		ft_shutdown(MEM, errno, args);
 	if (!heredoc_detection(lexer_table, lexer_type, args))
 		return ;
-	//printer(lexer_table, lexer_type);
 	arg_reader(lexer_table, lexer_type, args);
 	ft_free_split(lexer_table);
 	free(lexer_type);

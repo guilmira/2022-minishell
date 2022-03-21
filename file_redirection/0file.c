@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:43:46 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/18 15:16:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:44:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ void	heredoc_build_list(char **table, t_arguments *args)
 	i = -1;
 	while (table[++i])
 	{
-		if (!ft_strcmp(HEREDOC, table[i]))
+		if (!ft_strcmp(HEREDOC, table[i]) && !table[i + 1])
+			return ;
+		if (!ft_strcmp(HEREDOC, table[i]) && table[i + 1])
 		{
 			prepare_file(table[i + 1], &list_files, args);
 			assign_type(table[i], &list_type, args);
