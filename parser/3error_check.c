@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:15:35 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/18 10:53:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:58:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	is_executable(t_arguments *args)
 	while (folders[++i] && !path_exists)
 	{
 		command_path = ft_strjoin(folders[i], cmd->command[0]);
-		if (file_exists(command_path))
+		if (file_exists(command_path)) //|| !strcmp(BLANK, cmd->command[0])
 			path_exists++;
 		free(command_path);
 	}

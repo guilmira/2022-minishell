@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/17 12:12:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:22:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ int	first_son(t_arguments *args)
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
+	
+	//printf("1: %s\n", command_struct->list_delimeters->content);
+	//printf("2: %s\n", command_struct->list_delimeters->next->content);
 	ret = get_builtins_ret(args, command_struct);
 	fd_write = prepare_process(args->fds[0], args->fds[1]);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
-	if (ret >= 0)
+	if (ret >= 0 && !command_struct->heredoc_file)
 	{
 		write_pipe_to(args->wpipe, &ret);
 		free_heap_memory(args);

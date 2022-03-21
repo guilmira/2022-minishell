@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_mngmt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:41:30 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/16 18:41:34 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:02:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void
 	store_program(prog, arguments);
 	ft_free_split(arguments->envp);
 	ft_free_split(arguments->lenvp);
+	
 	free_heap_memory(arguments);
 }
 

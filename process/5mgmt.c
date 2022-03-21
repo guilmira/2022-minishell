@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 13:09:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:22:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	free_msh_struct(t_command *command_struct)
 		ft_fullclear(command_struct->list_in);
 	if (command_struct && command_struct->list_out)
 		ft_fullclear(command_struct->list_out);
+	if (command_struct && command_struct->list_delimeters)
+		ft_fullclear(command_struct->list_delimeters);
 	if (command_struct && command_struct->heredoc_file)
 		free(command_struct->heredoc_file);
 }

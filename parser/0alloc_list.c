@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:00:25 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 14:07:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:18:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,36 @@ t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
 				ft_lstadd_back(&list_in, ft_lstnew(str));
 			}
 		}
-		
 	}
 	return (list_in);
+}
+
+/** PURPOSE : Obtain linked list with files (input) of pipe segment. */
+t_list	*delimeters_in(char **table, int *type, int i, t_arguments *args)
+{
+	char	*str;
+	t_list	*list_delimeters;
+
+	str = NULL;
+	list_delimeters = NULL;
+	i = obtain_position(table, i);
+	i = i - 1;
+	while (table[++i])
+	{
+		if (type[i] == 0)
+			break ;
+		if (!ft_strcmp(HEREDOC, table[i]))
+		{
+			if (type[i + 1] == 2)
+			{	
+				str = ft_strdup(table[i + 1]);
+				if (!str)
+					ft_shutdown(str, i, args);
+				ft_lstadd_back(&list_delimeters, ft_lstnew(str));
+			}
+		}
+	}
+	return (list_delimeters);
 }
 
 /** PURPOSE : Obtain linked list with files (output) of pipe segment. */
@@ -95,6 +122,7 @@ void	struct_init(t_command *command_struct, int index)
 	command_struct->list_in = NULL;
 	command_struct->list_out = NULL;
 	command_struct->flag_file = 0;
+	command_struct->list_delimeters = NULL;
 	command_struct->heredoc_file = NULL;
 }
 
@@ -112,6 +140,7 @@ int i, t_arguments *args)
 	t_list		*list_in;
 	t_list		*list_out;
 	t_command	*command_struct;
+	t_list		*list_delimeters;
 
 	list_in = NULL;
 	list_out = NULL;
@@ -124,5 +153,10 @@ int i, t_arguments *args)
 	command_struct->list_in = list_in;
 	list_out = redirections_out(table, command_struct, i, args);
 	command_struct->list_out = list_out;
+
+	//<< fin << done | << first << second
+	list_delimeters = delimeters_in(table, type, i, args);
+	command_struct->list_delimeters = list_delimeters;
+
 	return (command_struct);
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 13:15:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:44:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void
 	identifier = fork();
 	if ((identifier) == 0)
 	{
-		
 		i = single_son(args);
 		write_pipe_to(args->wpipe, &i);
 		exit(0);

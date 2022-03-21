@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/15 13:11:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:00:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int
 		return (single_process(arguments));
 	}
 	arguments->fds = arg_descriptors(arguments);
+	
 	process_exe(arguments);
 	return (1);
 }

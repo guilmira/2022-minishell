@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 13:02:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:27:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_command
 	t_list	*list_in;
 	t_list	*list_out;
 	int		flag_file;
+	t_list	*list_delimeters;
 	char	*heredoc_file;
 }			t_command;
 

@@ -6,11 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/21 13:53:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:17:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+
+//<< fin << done << there | ls
 
 //working:
 
@@ -22,13 +25,18 @@
 
 //<< fin | << bah leak
 
+//the program, as we discussed, is not prepared to recieve multiple heredoc in different pipes
+// << a | << b    -->NO!!! (maybe develop a pre filter)
+
 //TODO
+//signal managment. in out heredoc, when we are inseting line and u press ctrl + c, it does not stop. 
 // << fin
 //if u write 'finish' as delimeter, it detects it
 // << a
 //if u write 'ambar' as delimeter, it detects it
 //norm passed
 //LEAK ON CD STILL THERE
+
 
 //while true ; do leaks -q minishell; sleep 3; done
 //lsof -c minishell | grep PIPE
