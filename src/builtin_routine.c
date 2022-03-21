@@ -61,14 +61,14 @@ void
 
 
 
-void create_file_heredoc(t_command *command_struct, t_arguments *args)
+void
+	create_file_heredoc(t_command *command_struct, t_arguments *args)
 {
+	int		fd_file;
+	char	*heredoc_str;
+	char	*path;
+	t_list	*end;
 
-	int	fd_file;
-	char *heredoc_str;
-	char *path;
-	t_list *end;
-	
 	if (args->here_output)
 	{
 		end = ft_lstlast(args->here_output);
@@ -80,6 +80,8 @@ void create_file_heredoc(t_command *command_struct, t_arguments *args)
 		ft_shut(FILE_ERROR, 1);
 	write(fd_file, heredoc_str, ft_strlen(heredoc_str));
 	close(fd_file);
+	if (command_struct->heredoc_file)
+		free_and_null(command_struct->heredoc_file);
 	command_struct->heredoc_file = path;
 }
 
@@ -96,13 +98,11 @@ int
 			ret = (((args->builtin_func[i])(command_struct->command, args)));
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
-	if (!command_struct->command[0] || !ft_strcmp(BLANK, command_struct->command[0]))
+	if (!command_struct->command[0]
+		|| !ft_strcmp(BLANK, command_struct->command[0]))
 		args->print_heredoc = false;
 	if (args->print_heredoc && args->heredoc_list)
-	{
 		create_file_heredoc(command_struct, args);
-		//print_heredoc(args);
-	}
 	if (save_stdout)
 	{
 		dup2(save_stdout, 1);
@@ -119,11 +119,8 @@ int
 
 	ret = -1;
 	if (args->heredoc_list)
-	{
 		ret = heredoc_routine(args->heredoc_list, args);
-	}
 	save_stdout = get_stdout_copy(args, command_struct);
-		
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
 	return (ret);
 }

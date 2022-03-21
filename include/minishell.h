@@ -120,7 +120,7 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 char		**copy_array(char **dest, char **src, unsigned int extra_cells);
 char		*ft_multistr_concat(int count, ...);
 size_t		get_envv_len(const char *s);
-void        mnge_heredoc(char *delim, t_arguments *args, int i, char *buf);
+void		mnge_heredoc(char *delim, t_arguments *args, int i, char *buf);
 void		set_signal(int sig_type);
 int			heredoc_routine(t_list *heredoc_list, t_arguments *args);
 bool		var_have_val(char **envp, char *needle);
@@ -141,10 +141,11 @@ char		*envp_routine(char *const *args, t_arguments *arg,
 void		search_input(t_list *list_in, t_arguments *args);
 void		generate_output(t_list *list_out, int flag_file, t_arguments *args);
 int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
-int
-builtin_routine(t_arguments *args, t_command *command_struct, int save_stdout, int ret);
+int			builtin_routine(t_arguments *args, t_command *command_struct,
+				int save_stdout, int ret);
 int			get_builtins_ret(t_arguments *args, t_command *command_struct);
 void		free_and_null(void *ptr);
+t_command	*get_command_struct(t_arguments *args, t_command *command_struct);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

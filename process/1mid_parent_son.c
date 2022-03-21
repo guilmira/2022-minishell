@@ -25,6 +25,17 @@ static void
 	close(args->fds[index + 1]);
 }
 
+t_command
+	*get_command_struct(t_arguments *args, t_command *command_struct)
+{
+	command_struct = NULL;
+	command_struct = ft_lst_position(args->commands_lst, args->command_number);
+	if (!command_struct || !command_struct->command)
+		ft_shutdown(LST, 0, args);
+	command_struct->heredoc_file = NULL;
+	return (command_struct);
+}
+
 /** PURPOSE : Executes forked process for all the mid commands
  * 1. Sets truct of command. Identify its path.
  * 2. Sets the proper inputs and outputs, redirecting the
@@ -38,9 +49,7 @@ static int
 
 	set_signal(1);
 	command_struct = NULL;
-	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct || !command_struct->command)
-		ft_shutdown(LST, 0, args);
+	command_struct = get_command_struct(args, command_struct);
 	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0)
 		return (ret);

@@ -76,7 +76,7 @@ void	free_heap_memory(t_arguments *args)
 			ft_structclear(args->commands_lst);
 		if (args->heredoc_list && args->heredoc_list->content != NULL)
 			ft_fullclear(args->heredoc_list);
-		if (args->here_output && args->here_output->content != NULL)
+		if (args->here_output)
 			ft_fullclear(args->here_output);
 		if (args->fds)
 			free(args->fds);

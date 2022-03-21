@@ -22,12 +22,7 @@ int	first_son(t_arguments *args)
 
 	set_signal(1);
 	command_struct = NULL;
-	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct || !command_struct->command)
-		ft_shutdown(LST, 0, args);
-	
-	//printf("1: %s\n", command_struct->list_delimeters->content);
-	//printf("2: %s\n", command_struct->list_delimeters->next->content);
+	command_struct = get_command_struct(args, command_struct);
 	ret = get_builtins_ret(args, command_struct);
 	fd_write = prepare_process(args->fds[0], args->fds[1]);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)

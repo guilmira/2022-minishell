@@ -65,9 +65,7 @@ int
 	int			ret;
 
 	command_struct = NULL;
-	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!command_struct || !command_struct->command)
-		ft_shutdown(LST, 0, args);
+	command_struct = get_command_struct(args, command_struct);
 	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0 && !command_struct->heredoc_file)
 		return (ret);
