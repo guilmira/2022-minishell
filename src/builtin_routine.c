@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/20 14:08:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:14:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int
 	int	save_stdout;
 
 	save_stdout = 0;
-	if (command_struct->list_out || arg->output_builtin)
+	if (command_struct->list_out)
 	{
 		generate_output(command_struct->list_out, \
 		command_struct->flag_file, arg);
@@ -59,6 +59,30 @@ void
 	}
 }
 
+
+
+void create_file_heredoc(t_command *command_struct, t_arguments *args)
+{
+
+	int	fd_file;
+	char *heredoc_str;
+	char *path;
+	t_list *end;
+	
+	if (args->here_output)
+	{
+		end = ft_lstlast(args->here_output);
+		heredoc_str = end->content;
+	}
+	path = ft_strjoin(PATH_TMP, HEREDOC_FILE);
+	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
+	if (fd_file < 0)
+		ft_shut(FILE_ERROR, 1);
+	write(fd_file, heredoc_str, ft_strlen(heredoc_str));
+	close(fd_file);
+	command_struct->heredoc_file = ft_strdup(path);
+}
+
 int
 	builtin_routine(t_arguments *args, t_command *command_struct,
 					int save_stdout, int ret)
@@ -70,12 +94,15 @@ int
 	while (++i < msh_num_builtins(args))
 		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
 			ret = (((args->builtin_func[i])(command_struct->command, args)));
-	/*if (!ret)
-		return (ret);*/
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
-	if (args->print_heredoc)
-		print_heredoc(args);
+	if (!command_struct->command[0] || !ft_strcmp(BLANK, command_struct->command[0]))
+		args->print_heredoc = false;
+	if (args->print_heredoc && args->heredoc_list)
+	{
+		create_file_heredoc(command_struct, args);
+		//print_heredoc(args);
+	}
 	if (save_stdout)
 	{
 		dup2(save_stdout, 1);
@@ -92,8 +119,11 @@ int
 
 	ret = -1;
 	if (args->heredoc_list)
+	{
 		ret = heredoc_routine(args->heredoc_list, args);
+	}
 	save_stdout = get_stdout_copy(args, command_struct);
+		
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
 	return (ret);
 }

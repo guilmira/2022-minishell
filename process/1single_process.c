@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/18 11:01:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:15:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void
 	identifier = fork();
 	if ((identifier) == 0)
 	{
+		
 		i = single_son(args);
 		write_pipe_to(args->wpipe, &i);
 		exit(0);
@@ -68,10 +69,8 @@ int
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	//args->output_builtin = false;
-	//args->print_heredoc = true;
 	ret = get_builtins_ret(args, command_struct);
-	if (ret >= 0)
+	if (ret >= 0 && !command_struct->heredoc_file)
 		return (ret);
 	if (pipe(args->wpipe) == -1)
 	{

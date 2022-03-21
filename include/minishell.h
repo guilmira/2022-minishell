@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/18 15:17:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:02:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_command
 	t_list	*list_in;
 	t_list	*list_out;
 	int		flag_file;
+	char	*heredoc_file;
 }			t_command;
 
 /* Struct that stores the data kept between loops. */
@@ -70,8 +71,6 @@ typedef struct s_arguments
 	t_list	*here_output;
 	bool	print_heredoc;
 	bool	output_builtin;
-	// ^ this flag might be necessary here in order to know
-	// if the output of builtins should be redirected to other command
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
 	char	**lenvp;
@@ -183,6 +182,8 @@ void		free_and_null(void *ptr);
 # define EMPTY_LINE ""
 
 # define HEREDOC_PROMPT "> "
+# define PATH_TMP "/private/tmp/"
+# define HEREDOC_FILE "tmp_file"
 
 /* TO delete. */
 

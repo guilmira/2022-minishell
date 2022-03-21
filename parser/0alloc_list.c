@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:00:25 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/14 09:56:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:03:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	struct_init(t_command *command_struct, int index)
 	command_struct->list_in = NULL;
 	command_struct->list_out = NULL;
 	command_struct->flag_file = 0;
+	command_struct->heredoc_file = NULL;
 }
 
 /** PURPOSE : Corresponding numbers are:
