@@ -44,7 +44,6 @@ void
 	store_program(prog, arguments);
 	ft_free_split(arguments->envp);
 	ft_free_split(arguments->lenvp);
-	
 	free_heap_memory(arguments);
 }
 

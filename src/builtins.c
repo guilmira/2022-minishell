@@ -61,8 +61,7 @@ int
 ** SYNOPSIS: builtin help command.
 */
 int
-	msh_help(char **args __attribute__((unused)),
-			 t_arguments *arg)
+	msh_help(char **args __attribute__((unused)), t_arguments *arg)
 {
 	int	i;
 

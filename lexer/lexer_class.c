@@ -62,7 +62,8 @@ static void	classification(char **lexer_table, int *type, int i)
 		type[i] = 3;
 	else if (is_heredoc(lexer_table[i]))
 		type[i] = 4;
-	else if (i != 0 && (type[i - 1] == 1 || type[i - 1] == 3 || type[i - 1] == 4))
+	else if (i != 0 && (type[i - 1] == 1
+			|| type[i - 1] == 3 || type[i - 1] == 4))
 		type[i] = 2;
 	else
 		type[i] = 5;

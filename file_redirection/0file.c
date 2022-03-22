@@ -49,12 +49,11 @@ static void	assign_type(char *content, t_list **list_type, t_arguments *args)
 static void	manage_heredoc(char *file, t_arguments *args)
 {
 	char	*str;
-	char   	*str_input;
+	char	*str_input;
 
 	str = ft_strdup(file);
 	if (!str)
 		ft_shutdown(MEM, 1, args);
-	//str_input = ft_strdup("TEST"); //provisional
 	str_input = NULL; //provisional
 	ft_lstadd_back(&args->heredoc_list, ft_lstnew(str));
 	ft_lstadd_back(&args->here_output, ft_lstnew(str_input));

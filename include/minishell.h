@@ -196,7 +196,6 @@ char		*build_new_line(t_list *list);
 int			ignore_symbol(char *str, int position);
 
 /* Protoypes minishell reader. */
-
 int			count_table(char **table);
 /* FILES */
 void		file_management(int argc, char *argv[], t_arguments *args);

@@ -56,7 +56,8 @@ static int	case_space(char *str)
 }
 
 /** PURPOSE : Check if there is a lexer symbol with nothing afterwards. */
-static int error_table(char **table)
+static int
+	error_table(char **table)
 {
 	int	i;
 
