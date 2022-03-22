@@ -71,7 +71,6 @@ typedef struct s_arguments
 	t_list	*heredoc_list;
 	t_list	*here_output;
 	bool	print_heredoc;
-	bool	output_builtin;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
 	char	**lenvp;
@@ -130,7 +129,7 @@ void		expand_l_var(char **args, t_arguments *arg, int i, char *temp);
 void		get_rid_of_quotes(char **args, size_t i, char *str);
 bool		is_valid_var(char *const *args, t_arguments *arg, int i);
 char		*get_env_var_body(char **envp, bool do_expand, int i, int len);
-char		*get_path(t_command *command_struct);
+char		*get_path(t_command *command_struct, bool *do_clean_path);
 void		write_pipe_to(int *pipe, int *to);
 void		read_pipe_from(int *pipe, int *from);
 int			do_execve(t_arguments *args, t_command *command_struct);
