@@ -18,10 +18,15 @@ bool
 	char	*var;
 
 	var = get_env_var(envp, needle, false);
+	//does it lost here?
 	if (!var)
 		return (false);
 	if (!ft_strchr(needle, '='))
+	{
+		free(var);
 		return (true);
+	}
+	free(var);
 	return (false);
 }
 
