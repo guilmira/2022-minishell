@@ -24,6 +24,20 @@ void
 	ft_putendl_fd(": numeric argument required", 1);
 }
 
+bool
+	contains_chars(char *str)
+{
+	if (!str)
+		return (false);
+	while (*str)
+	{
+		if (*str >= '0' && *str <= '9')
+			return (true);
+		str++;
+	}
+	return (false);
+}
+
 /*
 ** SYNOPSIS: builtin exit command.
 */
@@ -33,10 +47,10 @@ int
 	set_status(arg, 0);
 	if (!args[1])
 		return (0);
-	if (!is_within_range(args[1]))
+	if (!contains_chars(args[1]) && !is_within_range(args[1]))
 	{
 		manage_no_numeric_arg(args, arg);
-		return (1);
+		return (0);
 	}
 	if (get_arr_len(args) > 2)
 	{
