@@ -82,11 +82,9 @@ void	build_command_structure(t_command	*command_struct, \
 char **folders, char **envp)
 {
 	char	*tmp;
-	int		flag;
 	char 	*str;
 
 	str = NULL;
-	flag = 0;
 	if (!command_struct)
 		return ;
 	if (!command_struct->command || !command_struct->command[0])
