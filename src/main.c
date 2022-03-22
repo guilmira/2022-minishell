@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/22 15:12:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 15:42:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int
 		if (arguments->flag_execution)
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
-		
 		manage_loop_heap(arguments, prog);
 	}
 	manage_program_heap(arguments, prog);

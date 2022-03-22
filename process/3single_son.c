@@ -3,19 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   3single_son.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/03/22 15:22:05 by guilmira         ###   ########.fr       */
-=======
-<<<<<<< HEAD
-/*   Updated: 2022/03/22 15:13:01 by asydykna         ###   ########.fr       */
-=======
-/*   Updated: 2022/03/22 15:11:23 by guilmira         ###   ########.fr       */
->>>>>>> c17d4087c1058e95b4aafab44070e43844f58668
->>>>>>> 7d9a078118d4449209914f6844bd96e2806de78d
+/*   Updated: 2022/03/22 15:39:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
@@ -50,14 +44,12 @@ int
 		execve(path, command_struct->command, args->envp);
 	printf("fails with path %s\n", path);
 	printf("fails with command line %s\n", command_struct->command[0]);
-	free(path); //pending. should be only for certain cases
+	free(path);
 	path = NULL;
 	if (do_clean_path)
 		free(path);
-	printf("fails with path %s\n", path);
-	printf("fails with command line %s\n", command_struct->command[0]);
 	errno = ENOENT;
-	perror("minishell");
+	perror("minishell execve error"); //do not remove this mesage
 	return (127);
 }
 
