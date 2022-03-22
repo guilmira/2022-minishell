@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 14:44:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:19:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int
 {
 	t_command	*command_struct;
 	int			ret;
-
 	command_struct = NULL;
 	command_struct = get_command_struct(args, command_struct);
 	ret = get_builtins_ret(args, command_struct);
@@ -75,6 +74,7 @@ int
 		set_status(args, 1);
 		return (1);
 	}
+
 	fork_single_child(args);
 	return (1);
 }

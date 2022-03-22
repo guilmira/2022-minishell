@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 14:32:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:14:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int	single_son(t_arguments *args)
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
+	
 	return (do_execve(args, command_struct));
 }

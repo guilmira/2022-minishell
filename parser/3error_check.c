@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:15:35 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 14:58:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:18:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ bool	check_command(t_arguments *args)
 
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
+	if (!ft_strcmp(BLANK, command_struct->command[0]))
+		return (0);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
 	if (!is_executable(args))
