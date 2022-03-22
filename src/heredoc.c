@@ -48,7 +48,8 @@ char *
 				"delimited by end-of-file (wanted `%s')\n", delim);
 			break ;
 		}
-		if (!ft_strcmp(delim, readline_res))
+		if (!ft_strcmp(delim, readline_res)
+			&& (ft_strlen(delim) == ft_strlen(readline_res)))
 		{
 			free(readline_res);
 			break ;
