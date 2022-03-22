@@ -26,18 +26,26 @@ static void
 	free(readline_res);
 }
 
+int
+	event(void)
+{
+	return (1);
+}
+
 char *
 	do_inner_while(char *delim, char **buf)
 {
 	char	*readline_res;
 
+	rl_event_hook = event;
+	set_signal(3);
 	while (delim && g_rv)
 	{
 		readline_res = readline(HEREDOC_PROMPT);
 		if (!readline_res)
 		{
 			printf("minishell: warning: here-document "
-				   "delimited by end-of-file (wanted `%s')\n", delim);
+				"delimited by end-of-file (wanted `%s')\n", delim);
 			break ;
 		}
 		if (!ft_strcmp(delim, readline_res))

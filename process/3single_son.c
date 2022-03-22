@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-
 #include "../include/minishell.h"
 
 char *
@@ -60,7 +58,6 @@ int	single_son(t_arguments *args)
 
 	set_signal(1);
 	command_struct = NULL;
-	
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);

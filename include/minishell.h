@@ -145,6 +145,7 @@ int			builtin_routine(t_arguments *args, t_command *command_struct,
 int			get_builtins_ret(t_arguments *args, t_command *command_struct);
 void		free_and_null(void *ptr);
 t_command	*get_command_struct(t_arguments *args, t_command *command_struct);
+int			event(void);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"

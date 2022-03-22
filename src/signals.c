@@ -39,9 +39,8 @@ void
 	else if (signum == SIGINT)
 	{
 		g_rv = 0;
-		rl_replace_line("", 0);
-		rl_on_new_line();
 		rl_redisplay();
+		rl_done = 1;
 	}
 }
 
@@ -72,6 +71,5 @@ void
 	ft_free_split(args->envp);
 	ft_free_split(args->lenvp);
 	free_heap_memory(args);
-  //  free_and_null(args->here_redir);
 	exit(EXIT_SUCCESS);
 }

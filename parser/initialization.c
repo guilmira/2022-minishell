@@ -79,6 +79,5 @@ t_arguments	*initialize_arg(t_prog *prog)
 	args->builtin_str = prog->builtin_str;
 	args->wpipe = (int *)(malloc(2 * sizeof(int)));
 	args->print_heredoc = true;
-	args->output_builtin = true;
 	return (args);
 }
