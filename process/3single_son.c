@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 15:11:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 15:22:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,13 @@ int
 	set_status(args, 0);
 	path = get_path(command_struct);
 	command_file_setup(command_struct, args);
-	
 	if (is_blank(args->command_number, args))
 		return (0);
 	else
-	{
 		execve(path, command_struct->command, args->envp);
-	}
 	printf("fails with path %s\n", path);
 	printf("fails with command line %s\n", command_struct->command[0]);
-	free(path);
+	free(path); //pending. should be only for certain cases
 	path = NULL;
 	errno = ENOENT;
 	perror("minishell");
