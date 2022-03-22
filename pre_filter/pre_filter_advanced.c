@@ -41,7 +41,7 @@ int	is_one_of_lexer_symbols(char symbol)
 static int	evaluate_inside_quotes(char *line, int i, int *flag)
 {
 	int	j;
-	
+
 	j = i;
 	i = advance_to_next_quote(line, i);
 	i = i - 1;

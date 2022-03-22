@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-
 //<< fin << done << there << _hugeline__ | ls
 
 //while true ; do leaks -q minishell; sleep 3; done
@@ -65,11 +64,8 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //> a  NOT WORKING minishell: No such file or directory
 //ls | a  //problem with several processes
 
-
 //export vs env
 //export todas, env solo seteadas
-
-
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 

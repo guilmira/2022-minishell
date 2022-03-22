@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-
 /** PURPOSE : Heredoc are found in table. */
 int	heredoc_found(char **table, int *type, int i)
 {
@@ -157,6 +156,5 @@ int i, t_arguments *args)
 	//<< fin << done | << first << second
 	list_delimeters = delimeters_in(table, type, i, args);
 	command_struct->list_delimeters = list_delimeters;
-
 	return (command_struct);
 }

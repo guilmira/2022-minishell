@@ -82,14 +82,15 @@ void	build_command_structure(t_command	*command_struct, \
 char **folders, char **envp)
 {
 	char	*tmp;
-	char 	*str;
+	char	*str;
 
 	str = NULL;
 	if (!command_struct)
 		return ;
 	if (!command_struct->command || !command_struct->command[0])
 		return ;
-	if (command_struct->command[0][0] == '.' && command_struct->command[0][1] == '/') // espacios yluego ./
+	if (command_struct->command[0][0] == '.'
+		&& command_struct->command[0][1] == '/') // espacios yluego ./
 	{
 		str = command_struct->command[0];
 		str = str + 2;

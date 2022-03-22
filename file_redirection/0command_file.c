@@ -74,7 +74,6 @@ void	command_file_setup(t_command *command_struct, t_arguments *args)
 {
 	if (command_struct->list_in || command_struct->heredoc_file)
 	{
-		
 		if (command_struct->list_in)
 			search_input(command_struct->list_in, args);
 		else if (command_struct->heredoc_file)
