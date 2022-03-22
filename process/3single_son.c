@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 15:01:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 15:11:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,16 @@ int
 	path = get_path(command_struct);
 	command_file_setup(command_struct, args);
 	
-	command_struct->command[0] = strdup("script.sh"); //option1
-	//option 2, comment above line
-	printf("aqui %s\n", command_struct->command[0]);
-	printf("aqui %s\n", command_struct->command[1]);
 	if (is_blank(args->command_number, args))
 		return (0);
 	else
 	{
 		execve(path, command_struct->command, args->envp);
 	}
-	printf("aqui %s\n", path);
-	printf("fails with %s\n", command_struct->command[0]);
+	printf("fails with path %s\n", path);
+	printf("fails with command line %s\n", command_struct->command[0]);
 	free(path);
 	path = NULL;
-	
 	errno = ENOENT;
 	perror("minishell");
 	return (127);
