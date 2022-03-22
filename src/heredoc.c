@@ -66,6 +66,8 @@ void
 	t_list	*temp;
 
 	buf = do_inner_while(delim, &buf);
+	if (!g_rv)
+		set_status(args, 130);
 	temp = args->here_output;
 	j = 0;
 	while (j < i)
