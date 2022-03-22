@@ -39,8 +39,19 @@ int
 ** SYNOPSIS: our version of env command.
 */
 int
-	msh_env(char **args __attribute__((unused)), t_arguments *arg)
+	msh_env(char **args, t_arguments *arg)
 {
+	char	*str;
+
+	if (get_arr_len(args) > 1)
+	{
+		set_status(arg, ENOENT);
+		str = ft_multistr_concat(2, "env: ", args[1]);
+		perror(str);
+		free(str);
+		set_status(arg, 127);
+		return (2);
+	}
 	print_str_arr(arg->envp, 1);
 	set_status(arg, 0);
 	return (1);
