@@ -63,6 +63,8 @@ int
 {
 	t_command	*command_struct;
 	int			ret;
+
+	set_status(args, 0);
 	command_struct = NULL;
 	command_struct = get_command_struct(args, command_struct);
 	ret = get_builtins_ret(args, command_struct);
@@ -74,7 +76,6 @@ int
 		set_status(args, 1);
 		return (1);
 	}
-
 	fork_single_child(args);
 	return (1);
 }

@@ -91,7 +91,6 @@ int
 {
 	int	i;
 
-	set_status(args, 0);
 	i = -1;
 	while (++i < msh_num_builtins(args))
 		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
