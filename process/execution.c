@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 15:22:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 09:16:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int
 		set_status_and_shut(args, MSG);
 	if (!check_command(args))
 	{
-		printf("ki\n");
 		close(args->fds[0]);
 		close(args->fds[1]);
 		return (1);
