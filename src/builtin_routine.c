@@ -93,7 +93,7 @@ int
 
 	i = -1;
 	while (++i < msh_num_builtins(args))
-		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0]))
+		if (!ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]))
 			ret = (((args->builtin_func[i])(command_struct->command, args)));
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
