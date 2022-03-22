@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 09:16:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:26:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,5 @@ int
 		close(args->fds[1]);
 		return (1);
 	}
-	
 	return (fork_ret(args));
 }
