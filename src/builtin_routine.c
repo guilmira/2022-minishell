@@ -42,26 +42,6 @@ int
 }
 
 void
-	print_heredoc(const t_arguments *args)
-{
-	int		i;
-	int		j;
-	t_list	*temp;
-
-	i = 0;
-	j = ft_lstsize(args->here_output);
-	temp = args->here_output;
-	while (i < j && temp->content)
-	{
-		printf("%s", (char *)temp->content);
-		temp = temp->next;
-		i++;
-	}
-}
-
-
-
-void
 	create_file_heredoc(t_command *command_struct, t_arguments *args)
 {
 	int		fd_file;
@@ -93,7 +73,9 @@ int
 
 	i = -1;
 	while (++i < msh_num_builtins(args))
-		if (!ft_strcmp(command_struct->command[0], args->prog->builtin_str[i]))
+		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0])
+			&& (ft_strlen(args->prog->builtin_str[i])
+				== ft_strlen(command_struct->command[0])))
 			ret = (((args->builtin_func[i])(command_struct->command, args)));
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
