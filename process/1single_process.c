@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 10:19:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 14:37:47 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,21 @@ void
 
 	if (!check_command(args))
 		return ;
+	
 	identifier = fork();
+		
 	if ((identifier) == 0)
 	{
+	
+	//system("leaks minishell");
 		i = single_son(args);
 		write_pipe_to(args->wpipe, &i);
+	
 		exit(0);
 	}
 	else if (identifier > 0)
 	{
+		
 		read_pipe_from(args->wpipe, &args->status);
 		wait(&wstatus);
 	}

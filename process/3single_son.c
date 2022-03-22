@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 10:14:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 15:01:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,22 @@ int
 	set_status(args, 0);
 	path = get_path(command_struct);
 	command_file_setup(command_struct, args);
+	
+	command_struct->command[0] = strdup("script.sh"); //option1
+	//option 2, comment above line
+	printf("aqui %s\n", command_struct->command[0]);
+	printf("aqui %s\n", command_struct->command[1]);
 	if (is_blank(args->command_number, args))
 		return (0);
 	else
+	{
 		execve(path, command_struct->command, args->envp);
+	}
+	printf("aqui %s\n", path);
+	printf("fails with %s\n", command_struct->command[0]);
+	free(path);
+	path = NULL;
+	
 	errno = ENOENT;
 	perror("minishell");
 	return (127);
@@ -47,9 +59,9 @@ int	single_son(t_arguments *args)
 
 	set_signal(1);
 	command_struct = NULL;
+	
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
-	
 	return (do_execve(args, command_struct));
 }

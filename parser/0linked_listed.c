@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/15 11:46:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 14:47:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,23 @@ void	build_command_structure(t_command	*command_struct, \
 char **folders, char **envp)
 {
 	char	*tmp;
+	int		flag;
+	char 	*str;
 
+	str = NULL;
+	flag = 0;
 	if (!command_struct)
 		return ;
 	if (!command_struct->command || !command_struct->command[0])
 		return ;
-	if ((ft_strchr(command_struct->command[0], '/')))
+	if (command_struct->command[0][0] == '.' && command_struct->command[0][1] == '/') // espacios yluego ./
+	{
+		str = command_struct->command[0];
+		str = str + 2;
+		command_struct->path = set_path(str, \
+		folders, envp);
+	}
+	else if ((ft_strchr(command_struct->command[0], '/')))
 	{
 		tmp = command_struct->command[0];
 		command_struct->command[0] = ft_strdup(\

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:15:35 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 10:26:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/22 14:14:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,16 @@ static int	is_executable(t_arguments *args)
 	}
 	ft_free_split(folders);
 	if (!path_exists)
+	{
+		command_path = getcwd(NULL, 0);
+		if (file_exists(command_path))
+		{
+			free(command_path);
+			return (1);
+		}
+		free(command_path);
 		return (0);
+	}
 	return (1);
 }
 
