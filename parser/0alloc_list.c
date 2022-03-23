@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:00:25 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 15:18:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:01:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,6 @@ int i, t_arguments *args)
 	command_struct->list_in = list_in;
 	list_out = redirections_out(table, command_struct, i, args);
 	command_struct->list_out = list_out;
-
-	//<< fin << done | << first << second
 	list_delimeters = delimeters_in(table, type, i, args);
 	command_struct->list_delimeters = list_delimeters;
 	return (command_struct);

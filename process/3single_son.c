@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 11:30:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 12:19:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int
 	if (do_clean_path)
 		free(path);
 	errno = ENOENT;
-	perror("minishell execve error"); //do not remove this mesage
+	perror("minishell execve error");
 	return (127);
 }
 
