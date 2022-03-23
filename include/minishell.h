@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 11:59:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:32:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef struct s_command
 	t_list	*list_out;
 	int		flag_file;
 	t_list	*list_delimeters;
-	char	*heredoc_file;
+	char	*heredoc_result;
+	bool	print_heredoc;
 }			t_command;
 
 /* Struct that stores the data kept between loops. */
@@ -119,9 +120,11 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 char		**copy_array(char **dest, char **src, unsigned int extra_cells);
 char		*ft_multistr_concat(int count, ...);
 size_t		get_envv_len(const char *s);
-void		mnge_heredoc(char *delim, t_arguments *args, int i, char *buf);
+void
+	mnge_heredoc(char *delim, t_arguments *args, char *buf, t_command *command_struct);
 void		set_signal(int sig_type);
-int			heredoc_routine(t_list *heredoc_list, t_arguments *args);
+int
+	heredoc_routine(t_command *command_struct, t_arguments *args);
 bool		var_have_val(char **envp, char *needle);
 bool		export_new_l_variables(char **args, t_arguments *arg);
 void		set_new_var(char *var, t_arguments *arg);
@@ -184,8 +187,8 @@ int			event(void);
 # define EMPTY_LINE ""
 
 # define HEREDOC_PROMPT "> "
-# define PATH_TMP "/private/tmp/"
-# define HEREDOC_FILE "tmp_file"
+# define PATH_HD_FILE "/private/tmp/tmp_file"
+
 
 /* TO delete. */
 

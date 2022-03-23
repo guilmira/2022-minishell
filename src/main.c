@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/23 13:01:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:54:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 //system("leaks minishell");
 //<< fin << done << there << _hugeline__ | ls
+
 
 //while true ; do leaks -q minishell; sleep 3; done
 //lsof -c minishell | grep PIPE
@@ -57,7 +58,7 @@ int
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	set_signal(1);
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));

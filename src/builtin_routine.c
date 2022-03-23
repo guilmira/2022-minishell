@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/21 13:19:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:35:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,15 @@ void
 {
 	int		fd_file;
 	char	*heredoc_str;
-	char	*path;
-	t_list	*end;
 
-	if (args->here_output)
-	{
-		end = ft_lstlast(args->here_output);
-		heredoc_str = end->content;
-	}
-	path = ft_strjoin(PATH_TMP, HEREDOC_FILE);
-	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
+	if (command_struct->heredoc_result)
+		heredoc_str = command_struct->heredoc_result;
+
+	fd_file = open(PATH_HD_FILE, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
 	if (fd_file < 0)
-		ft_shut(FILE_ERROR, 1);
+		ft_shutdown("error with tmp folder", 1, args);
 	write(fd_file, heredoc_str, ft_strlen(heredoc_str));
 	close(fd_file);
-	if (command_struct->heredoc_file)
-		free_and_null(command_struct->heredoc_file);
-	command_struct->heredoc_file = path;
 }
 
 int
@@ -81,10 +73,10 @@ int
 		ret = 1;
 	if (!command_struct->command[0]
 		|| !ft_strcmp(BLANK, command_struct->command[0]))
-		args->print_heredoc = false;
-	if (args->print_heredoc && args->heredoc_list)
+		command_struct->print_heredoc = false;
+	if (command_struct->print_heredoc && command_struct->list_delimeters) //iportnate revisar command_struct->print_heredoc
 		create_file_heredoc(command_struct, args);
-	if (save_stdout)
+	if (save_stdout)//posible duplicancion
 	{
 		dup2(save_stdout, 1);
 		close(save_stdout);
@@ -99,8 +91,8 @@ int
 	int		save_stdout;
 
 	ret = -1;
-	if (args->heredoc_list)
-		ret = heredoc_routine(args->heredoc_list, args);
+	if (command_struct->list_delimeters)
+		ret = heredoc_routine(command_struct, args);
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
 	return (ret);

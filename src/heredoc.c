@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:25:59 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/17 13:04:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:47:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,41 +60,34 @@ char *
 }
 
 void
-	mnge_heredoc(char *delim, t_arguments *args, int i, char *buf)
+	mnge_heredoc(char *delim, t_arguments *args, char *buf, t_command *command_struct)
 {
-	int		j;
-	t_list	*temp;
-
+	if (command_struct->heredoc_result)
+		free(command_struct->heredoc_result);
 	buf = do_inner_while(delim, &buf);
 	if (!g_rv)
 		set_status(args, 130);
-	temp = args->here_output;
-	j = 0;
-	while (j < i)
-	{
-		args->here_output = args->here_output->next;
-		j++;
-	}
-	args->here_output->content = buf;
-	args->here_output = temp;
+	command_struct->heredoc_result = buf;
 }
 
 int
-	heredoc_routine(t_list *heredoc_list, t_arguments *args)
+	heredoc_routine(t_command *command_struct, t_arguments *args)
 {
 	int		i;
 	int		j;
 	t_list	*temp;
 	char	*buf;
 
+	
 	i = 0;
-	j = ft_lstsize(args->heredoc_list);
-	temp = heredoc_list;
+	buf = NULL;
+	j = ft_lstsize(command_struct->list_delimeters);
+	temp = command_struct->list_delimeters;
 	while (i < j && temp->content)
 	{
 		set_signal(3);
-		buf = ft_strdup("");
-		mnge_heredoc(temp->content, args, i, buf);
+		buf = ft_strdup(""); //important to check. might be the source of leak in son
+		mnge_heredoc(temp->content, args, buf, command_struct);
 		set_signal(1);
 		temp = temp->next;
 		i++;

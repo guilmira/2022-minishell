@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 14:33:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:34:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	free_msh_struct(t_command *command_struct)
 		ft_fullclear(command_struct->list_out);
 	if (command_struct && command_struct->list_delimeters)
 		ft_fullclear(command_struct->list_delimeters);
-	if (command_struct && command_struct->heredoc_file)
-		free(command_struct->heredoc_file);
+	if (command_struct && command_struct->heredoc_result)
+		free(command_struct->heredoc_result);
 }
 
 /** PURPOSE : clears linked list from first element to last, including content

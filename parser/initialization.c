@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 06:22:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/18 15:16:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:14:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ t_arguments	*initialize_arg(t_prog *prog)
 	args->status = prog->status;
 	args->builtin_str = prog->builtin_str;
 	args->wpipe = (int *)(malloc(2 * sizeof(int)));
-	args->print_heredoc = true;
+	args->print_heredoc = true; //desaparecera
 	return (args);
 }

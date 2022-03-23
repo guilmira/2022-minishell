@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 11:26:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:34:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int
 	set_status(args, 0);
 	command_struct = NULL;
 	command_struct = get_command_struct(args, command_struct);
-	ret = get_builtins_ret(args, command_struct);
-	if (ret >= 0 && !command_struct->heredoc_file)
+	ret =  get_builtins_ret(args, command_struct);
+	if (ret >= 0 && !command_struct->heredoc_result)
 		return (ret);
 	if (pipe(args->wpipe) == -1)
 	{
