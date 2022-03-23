@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:15:35 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 14:14:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 11:26:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ bool	check_command(t_arguments *args)
 		return (0);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
+	//if !is_not_command  PRUEBA DE MAIN
 	if (!is_executable(args))
 		set_status(args, 127);
 	if (error_input(args, command_struct))

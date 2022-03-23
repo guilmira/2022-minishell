@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:51:24 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/09 14:35:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 10:59:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	create_file(char *path, t_arguments *args)
 {
 	int	fd_file;
 
-	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
+	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU); //| FD_CLOEXEC
 	if (fd_file < 0)
 		ft_shutdown(FILE_ERROR, 1, args);
 	close(fd_file);

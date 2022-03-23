@@ -1,3 +1,4 @@
+
 # own
 .DS_Store
 philo
@@ -64,3 +65,4 @@ minishell
 1.sh
 12.txt
 linux_make
+script.sh
