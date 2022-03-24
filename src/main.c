@@ -20,6 +20,14 @@
 //lsof -c minishell | grep PIPE
 //lsof -c minishell -r2 | grep PIPE
 
+//buggy:
+//echo test > <<fin - should give error
+
+//different from bash:
+//pwd | echo test | echo hola
+//ls -l <<fin | export | exit
+//echo test | exit
+
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks commands into processes and execute them. */

@@ -35,8 +35,9 @@ void
 	else if (identifier > 0)
 	{
 		close(args->fds[last_index]);
-		read_pipe_from(args->wpipe, &args->status);
+		read_pipe_from(args->wpipe, &i);
 		wait(&wstatus);
+		mnge_status(args, i);
 	}
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
@@ -114,7 +115,6 @@ int
 		set_status_and_shut(args, MSG);
 	if (!check_command(args))
 	{
-		
 		close(args->fds[0]);
 		close(args->fds[1]);
 		return (1);

@@ -60,3 +60,12 @@ char
 	temp = "envp";
 	return (temp);
 }
+
+void
+	mnge_status(t_arguments *args, int i)
+{
+	if (i > 1)
+		set_status(args, i);
+	else
+		set_status(args, 0);
+}
