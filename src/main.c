@@ -15,13 +15,12 @@
 //system("leaks minishell");
 //<< fin << done << there << _hugeline__ | ls
 
-
 //while true ; do leaks -q minishell; sleep 3; done
 //lsof -c minishell | grep PIPE
 //lsof -c minishell -r2 | grep PIPE
 
 //buggy:
-//echo test > <<fin - should give error
+//echo test > <<fin - should give error - EXTRA FILE APPEARS
 
 //different from bash:
 //pwd | echo test | echo hola
@@ -65,7 +64,6 @@ int
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	set_signal(1);
-	//atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));

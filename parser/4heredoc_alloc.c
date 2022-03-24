@@ -78,8 +78,10 @@ static int	error_table(char **table)
 			if (!table[i + 1])
 				return (1);
 		if (!ft_strcmp(HEREDOC, table[i]))
-			if (!ft_strcmp(HEREDOC, table[i + 1]) || !ft_strcmp(PIPE, table[i + 1]) || \
-			!ft_strcmp(IN, table[i + 1]) || !ft_strcmp(OUT, table[i + 1]))
+			if (!ft_strcmp(HEREDOC, table[i + 1])
+				|| !ft_strcmp(PIPE, table[i + 1])
+				|| !ft_strcmp(IN, table[i + 1])
+				|| !ft_strcmp(OUT, table[i + 1]))
 				return (1);
 	}
 	return (0);

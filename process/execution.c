@@ -33,12 +33,7 @@ void
 		exit(0);
 	}
 	else if (identifier > 0)
-	{
-		close(args->fds[last_index]);
-		read_pipe_from(args->wpipe, &i);
-		wait(&wstatus);
-		mnge_status(args, i);
-	}
+		father_process_routine(args, last_index, &i, &wstatus);
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
 }

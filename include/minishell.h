@@ -69,7 +69,6 @@ typedef struct s_arguments
 	int		flag_file_out;
 	char	*file_input;
 	char	*file_output;
-	bool	print_heredoc;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
 	char	**lenvp;
@@ -143,17 +142,16 @@ int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
 int			builtin_routine(t_arguments *args, t_command *command_struct,
 				int save_stdout, int ret);
 int			get_builtins_ret(t_arguments *args, t_command *command_struct);
-void		free_and_null(void *ptr);
 t_command	*get_command_struct(t_arguments *args, t_command *command_struct);
 int			event(void);
 void		mnge_status(t_arguments *args, int i);
+void		father_process_routine(t_arguments *args,
+				int last_index, int *i, int *wstatus);
 
 /* FILE PATHS */
-# define PATH_BIN "/bin/"
 # define PATH_USR "/usr/bin/"
 # define FILE_NAME "outfile.txt"
 # define FULL_PERMISSIONS 0777
-# define RESTRICTED_PERM 777
 
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
@@ -191,8 +189,6 @@ void		printer(char **table, int *org);
 
 /* Protoypes minishell reader. */
 int			count_table(char **table);
-/* FILES */
-void		file_management(int argc, char *argv[], t_arguments *args);
 /* INITIALIZATION */
 t_prog		*initalize_prog(char **envp, char **builtin_str);
 t_arguments	*initialize_arg(t_prog *prog);
@@ -219,7 +215,6 @@ int			obtain_position(char **table, int number_of_command);
 t_command	*alloc_command_struct(char **table, int *type, \
 			int i, t_arguments *args);
 /* QUOTE MANAGEMENT */
-char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
 char		*ultra_quotes(char *str);
 /* QUOTE AUXILIAR */
@@ -282,7 +277,7 @@ void		free_heap_memory(t_arguments *args);
 void		ft_shutdown(char *str, int i, t_arguments *args);
 void		manage_program_heap(t_arguments *arguments, t_prog *prog);
 void		manage_loop_heap(t_arguments *arguments, t_prog *prog);
-void		ft_leaks(void);
 void		set_status_and_shut(t_arguments *args, char *msg);
+void		ft_leaks(void);
 
 #endif

@@ -51,16 +51,12 @@ void	output_to_file_append(char *path)
 	close(fd_file);
 }
 
-void	manage_input_redirection(t_arguments *args)
+void
+	father_process_routine(t_arguments *args,
+		int last_index, int *i, int *wstatus)
 {
-	if (args->flag_file_in)
-		input_from_file(args->file_input);
-}
-
-void	manage_output_redirection(t_arguments *args)
-{
-	if (args->flag_file_out == 2)
-		output_to_file_append(args->file_output);
-	else if (args->flag_file_out)
-		output_to_file(args->file_output);
+	close(args->fds[last_index]);
+	read_pipe_from(args->wpipe, i);
+	wait(wstatus);
+	mnge_status(args, (*i));
 }

@@ -40,14 +40,12 @@ int
 		return (0);
 	else
 		execve(path, command_struct->command, args->envp);
-	printf("fails with path %s\n", path);
-	printf("fails with command line %s\n", command_struct->command[0]);
 	free(path);
 	path = NULL;
 	if (do_clean_path)
 		free(path);
 	errno = ENOENT;
-	perror("minishell execve error");
+	perror("minishell");
 	return (127);
 }
 

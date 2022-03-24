@@ -34,7 +34,6 @@ int	first_son(t_arguments *args)
 		free_heap_memory(args);
 		exit(0);
 	}
-	printf("HERE\n");
 	ret = (do_execve(args, command_struct));
 	write_pipe_to(args->wpipe, &ret);
 	exit(0);
