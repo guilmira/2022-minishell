@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 14:18:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 09:29:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int
 		set_status_and_shut(args, MSG);
 	if (!check_command(args))
 	{
+		
 		close(args->fds[0]);
 		close(args->fds[1]);
 		return (1);

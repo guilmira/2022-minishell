@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/23 14:54:39 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 09:12:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
 		manage_loop_heap(arguments, prog);
-
 	}
 	manage_program_heap(arguments, prog);
 	ret = arguments->status;
@@ -58,13 +57,12 @@ int
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	set_signal(1);
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
 
-//> a  NOT WORKING minishell: No such file or directory
 //ls | a  //problem with several processes
 
 //export vs env
