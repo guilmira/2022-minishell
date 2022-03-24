@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:15:35 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 10:26:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:27:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,22 @@ static int	is_executable(t_arguments *args)
 	while (folders[++i] && !path_exists)
 	{
 		command_path = ft_strjoin(folders[i], cmd->command[0]);
-		if (file_exists(command_path)) //|| !strcmp(BLANK, cmd->command[0])
+		if (file_exists(command_path))
 			path_exists++;
 		free(command_path);
 	}
 	ft_free_split(folders);
 	if (!path_exists)
+	{
+		command_path = getcwd(NULL, 0);
+		if (file_exists(command_path))
+		{
+			free(command_path);
+			return (1);
+		}
+		free(command_path);
 		return (0);
+	}
 	return (1);
 }
 
@@ -62,6 +71,15 @@ static int	error_input(t_arguments *args, t_command *command_struct)
 	return (0);
 }
 
+static int	is_command(t_command *command_struct)
+{
+	if (!ft_strcmp(BLANK, command_struct->command[0]))
+		return (1);
+	if (file_exists(command_struct->path))
+		return (1);
+	return (0);
+}
+
 /** PURPOSE : Checks for error in commands.
  * 1. Whether is executable or not, by checking if PATH var. is unset.
  * 2. If file input is empty. */
@@ -71,10 +89,10 @@ bool	check_command(t_arguments *args)
 
 	command_struct = NULL;
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
-	if (!ft_strcmp(BLANK, command_struct->command[0]))
-		return (0);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
+	if (!is_command(command_struct))
+		set_status(args, 127);
 	if (!is_executable(args))
 		set_status(args, 127);
 	if (error_input(args, command_struct))
@@ -82,7 +100,6 @@ bool	check_command(t_arguments *args)
 	if (args->status == 127 || args->status == 1)
 	{
 		errno = ENOENT;
-		perror("minishell");
 		close(args->wpipe[0]);
 		close(args->wpipe[1]);
 		return (0);

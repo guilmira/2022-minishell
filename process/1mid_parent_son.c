@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/15 12:49:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:32:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_command
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	command_struct->heredoc_file = NULL;
 	return (command_struct);
 }
 
@@ -51,7 +50,7 @@ static int
 	command_struct = NULL;
 	command_struct = get_command_struct(args, command_struct);
 	ret = get_builtins_ret(args, command_struct);
-	if (ret >= 0)
+	if (ret >= 0 && !command_struct->heredoc_result)
 		return (ret);
 	mnge_dups(index, args, command_struct);
 	return (do_execve(args, command_struct));
@@ -77,8 +76,9 @@ void
 	else if (identifier > 0)
 	{
 		close(args->fds[index - 2]);
-		read_pipe_from(args->wpipe, &args->status);
+		read_pipe_from(args->wpipe, &i);
 		wait(&wstatus);
+		mnge_status(args, i);
 		close(args->fds[index + 1]);
 	}
 	else

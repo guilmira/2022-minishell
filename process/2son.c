@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 15:22:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 09:40:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	first_son(t_arguments *args)
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
-	if (ret >= 0 && !command_struct->heredoc_file)
+	if (ret >= 0 && !command_struct->heredoc_result)
 	{
 		write_pipe_to(args->wpipe, &ret);
 		free_heap_memory(args);
@@ -56,7 +56,7 @@ int	last_son(int index, t_arguments *args)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
 	command_file_setup(command_struct, args);
-	if (ret >= 0)
+	if (ret >= 0 && !command_struct->heredoc_result)
 		return (ret);
 	return (do_execve(args, command_struct));
 }

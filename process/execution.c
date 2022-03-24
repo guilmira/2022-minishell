@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 10:26:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 09:29:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,7 @@ void
 		exit(0);
 	}
 	else if (identifier > 0)
-	{
-		close(args->fds[last_index]);
-		read_pipe_from(args->wpipe, &args->status);
-		wait(&wstatus);
-	}
+		father_process_routine(args, last_index, &i, &wstatus);
 	else
 		ft_shutdown(FORK_ERROR, 0, args);
 }

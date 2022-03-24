@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/22 10:26:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 12:38:17 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int
 
 /** PURPOSE : Executes indetrmined number of processes.
  * 1. Executes single process if that is the case.
- * 2. Create argument descriptors to link pipes. 
+ * 2. Create argument descriptors to link pipes.
  * 3. Accesses main process function. */
 static int
 	process_execution(t_arguments *arguments)

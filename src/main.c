@@ -3,20 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/22 09:18:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:07:20 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+//system("leaks minishell");
 //<< fin << done << there << _hugeline__ | ls
 
 //while true ; do leaks -q minishell; sleep 3; done
 //lsof -c minishell | grep PIPE
 //lsof -c minishell -r2 | grep PIPE
+
+//buggy:
+//echo test > <<fin - should give error - EXTRA FILE APPEARS
+
+//different from bash:
+//pwd | echo test | echo hola
+//ls -l <<fin | export | exit
+//echo test | exit
 
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
@@ -55,14 +64,10 @@ int
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	set_signal(1);
-	atexit(ft_leaks);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
-
-//> a  NOT WORKING minishell: No such file or directory
-//ls | a  //problem with several processes
 
 //export vs env
 //export todas, env solo seteadas
@@ -72,13 +77,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //<< eof | cat, cat | cat | ls
 
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
-//echo $""HOME   ->elimina dollar. NOPE
 //meter un control de top | cat
 
 //NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
-
-//TODO funcion de checckeo por si te meten un Null en la talbla, 
-//por memoria o de la manera que sea, cierre minishell en shutdown.
 
 //ESTUDIAR
 //en el proceso principal, tras los forks, todos los fd del pipe cerrados
@@ -98,8 +99,3 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //ls < aijshf | wc -l | echo hola
 
 //ls < a | wc -l | echo hola NOT WORKING
-
-//wc << "fin" LEAKS
-
-//ls < klasjjkfh
-//dejo la salida bloqueada

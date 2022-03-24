@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/21 12:51:32 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/24 15:17:07 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,9 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				1mid_parent_son.c 1single_process.c 2son.c 3single_son.c 4auxiliar.c 5mgmt.c 6file_creator.c \
 				initialization.c reader.c 3error_check.c \
 				pre_filter.c pre_filter_simple.c pre_filter_advanced.c pre_filter_aux.c \
-				lexer.c lexer_class.c lexer_list.c  \
+				lexer.c lexer_class.c lexer_list.c  4heredoc_alloc.c \
 				quote_mgmt.c quote_split.c quote_auxiliars.c quote_erase.c \
-				0file.c 0command_file.c 1file_aux.c 2file_creator.c \
+				0command_file.c 1file_aux.c 2file_creator.c \
 				0dollar_expansion.c 1expansion_aux.c 2variable.c \
 				printstemp.c \
 				signals.c ft_multistr_concat.c utilities_2.c heredoc.c builtin_utils_2.c\

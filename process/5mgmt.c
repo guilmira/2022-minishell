@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 15:22:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:30:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	free_msh_struct(t_command *command_struct)
 		ft_fullclear(command_struct->list_out);
 	if (command_struct && command_struct->list_delimeters)
 		ft_fullclear(command_struct->list_delimeters);
-	if (command_struct && command_struct->heredoc_file)
-		free(command_struct->heredoc_file);
+	if (command_struct && command_struct->heredoc_result)
+		free(command_struct->heredoc_result);
 }
 
 /** PURPOSE : clears linked list from first element to last, including content
@@ -74,10 +74,6 @@ void	free_heap_memory(t_arguments *args)
 			ft_free_split(args->argv);
 		if (args->commands_lst && args->commands_lst->content != NULL)
 			ft_structclear(args->commands_lst);
-		if (args->heredoc_list && args->heredoc_list->content != NULL)
-			ft_fullclear(args->heredoc_list);
-		if (args->here_output)
-			ft_fullclear(args->here_output);
 		if (args->fds)
 			free(args->fds);
 		if (args->file_output)

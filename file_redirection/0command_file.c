@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 15:39:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:31:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	search_input(t_list *list_in, t_arguments *args)
 /** PURPOSE : Setup files for input and output in each file. */
 void	command_file_setup(t_command *command_struct, t_arguments *args)
 {
-	if (command_struct->list_in || command_struct->heredoc_file)
+	if (command_struct->list_in || command_struct->heredoc_result)
 	{
 		if (command_struct->list_in)
 			search_input(command_struct->list_in, args);
-		else if (command_struct->heredoc_file)
-			args->file_input = command_struct->heredoc_file;
+		else if (command_struct->heredoc_result)
+			args->file_input = PATH_HD_FILE;
 		if (args->file_input)
 			input_from_file(args->file_input);
 	}

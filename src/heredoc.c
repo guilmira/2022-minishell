@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:25:59 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/17 13:04:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:37:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,30 @@ static void
 	free(readline_res);
 }
 
+int
+	event(void)
+{
+	return (1);
+}
+
 char *
 	do_inner_while(char *delim, char **buf)
 {
 	char	*readline_res;
 
+	rl_event_hook = event;
+	set_signal(3);
 	while (delim && g_rv)
 	{
 		readline_res = readline(HEREDOC_PROMPT);
 		if (!readline_res)
 		{
 			printf("minishell: warning: here-document "
-				   "delimited by end-of-file (wanted `%s')\n", delim);
+				"delimited by end-of-file (wanted `%s')\n", delim);
 			break ;
 		}
-		if (!ft_strcmp(delim, readline_res))
+		if (!ft_strcmp(delim, readline_res)
+			&& (ft_strlen(delim) == ft_strlen(readline_res)))
 		{
 			free(readline_res);
 			break ;
@@ -51,25 +60,19 @@ char *
 }
 
 void
-	mnge_heredoc(char *delim, t_arguments *args, int i, char *buf)
+	mnge_heredoc(char *delim, t_arguments *args, \
+	char *buf, t_command *command_struct)
 {
-	int		j;
-	t_list	*temp;
-
+	if (command_struct->heredoc_result)
+		free(command_struct->heredoc_result);
 	buf = do_inner_while(delim, &buf);
-	temp = args->here_output;
-	j = 0;
-	while (j < i)
-	{
-		args->here_output = args->here_output->next;
-		j++;
-	}
-	args->here_output->content = buf;
-	args->here_output = temp;
+	if (!g_rv)
+		set_status(args, 130);
+	command_struct->heredoc_result = buf;
 }
 
 int
-	heredoc_routine(t_list *heredoc_list, t_arguments *args)
+	heredoc_routine(t_command *command_struct, t_arguments *args)
 {
 	int		i;
 	int		j;
@@ -77,13 +80,14 @@ int
 	char	*buf;
 
 	i = 0;
-	j = ft_lstsize(args->heredoc_list);
-	temp = heredoc_list;
+	buf = NULL;
+	j = ft_lstsize(command_struct->list_delimeters);
+	temp = command_struct->list_delimeters;
 	while (i < j && temp->content)
 	{
 		set_signal(3);
 		buf = ft_strdup("");
-		mnge_heredoc(temp->content, args, i, buf);
+		mnge_heredoc(temp->content, args, buf, command_struct);
 		set_signal(1);
 		temp = temp->next;
 		i++;

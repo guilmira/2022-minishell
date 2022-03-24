@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 10:13:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:34:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef struct s_command
 	t_list	*list_out;
 	int		flag_file;
 	t_list	*list_delimeters;
-	char	*heredoc_file;
+	char	*heredoc_result;
+	bool	print_heredoc;
 }			t_command;
 
 /* Struct that stores the data kept between loops. */
@@ -68,10 +69,6 @@ typedef struct s_arguments
 	int		flag_file_out;
 	char	*file_input;
 	char	*file_output;
-	t_list	*heredoc_list;
-	t_list	*here_output;
-	bool	print_heredoc;
-	bool	output_builtin;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
 	char	**lenvp;
@@ -120,9 +117,10 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 char		**copy_array(char **dest, char **src, unsigned int extra_cells);
 char		*ft_multistr_concat(int count, ...);
 size_t		get_envv_len(const char *s);
-void		mnge_heredoc(char *delim, t_arguments *args, int i, char *buf);
+void		mnge_heredoc(char *delim, t_arguments *args, char *buf,
+				t_command *command_struct);
 void		set_signal(int sig_type);
-int			heredoc_routine(t_list *heredoc_list, t_arguments *args);
+int			heredoc_routine(t_command *command_struct, t_arguments *args);
 bool		var_have_val(char **envp, char *needle);
 bool		export_new_l_variables(char **args, t_arguments *arg);
 void		set_new_var(char *var, t_arguments *arg);
@@ -130,7 +128,7 @@ void		expand_l_var(char **args, t_arguments *arg, int i, char *temp);
 void		get_rid_of_quotes(char **args, size_t i, char *str);
 bool		is_valid_var(char *const *args, t_arguments *arg, int i);
 char		*get_env_var_body(char **envp, bool do_expand, int i, int len);
-char		*get_path(t_command *command_struct);
+char		*get_path(t_command *command_struct, bool *do_clean_path);
 void		write_pipe_to(int *pipe, int *to);
 void		read_pipe_from(int *pipe, int *from);
 int			do_execve(t_arguments *args, t_command *command_struct);
@@ -144,15 +142,16 @@ int			get_stdout_copy(t_arguments *arg, t_command *command_struct);
 int			builtin_routine(t_arguments *args, t_command *command_struct,
 				int save_stdout, int ret);
 int			get_builtins_ret(t_arguments *args, t_command *command_struct);
-void		free_and_null(void *ptr);
 t_command	*get_command_struct(t_arguments *args, t_command *command_struct);
+int			event(void);
+void		mnge_status(t_arguments *args, int i);
+void		father_process_routine(t_arguments *args,
+				int last_index, int *i, int *wstatus);
 
 /* FILE PATHS */
-# define PATH_BIN "/bin/"
 # define PATH_USR "/usr/bin/"
 # define FILE_NAME "outfile.txt"
 # define FULL_PERMISSIONS 0777
-# define RESTRICTED_PERM 777
 
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
@@ -182,23 +181,14 @@ t_command	*get_command_struct(t_arguments *args, t_command *command_struct);
 # define EXPAN '$'
 # define RIDDLER '?'
 # define EMPTY_LINE ""
-
 # define HEREDOC_PROMPT "> "
-# define PATH_TMP "/private/tmp/"
-# define HEREDOC_FILE "tmp_file"
-
-/* TO delete. */
+# define PATH_HD_FILE "/private/tmp/tmp_file"
 
 /* Others. */
 void		printer(char **table, int *org);
 
-char		*build_new_line(t_list *list);
-int			ignore_symbol(char *str, int position);
-
 /* Protoypes minishell reader. */
 int			count_table(char **table);
-/* FILES */
-void		file_management(int argc, char *argv[], t_arguments *args);
 /* INITIALIZATION */
 t_prog		*initalize_prog(char **envp, char **builtin_str);
 t_arguments	*initialize_arg(t_prog *prog);
@@ -213,6 +203,9 @@ int			is_heredoc(char *string);
 char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 void		init_options(char **option, char **option_name);
+char		*build_new_line(t_list *list);
+t_list		*delimeters_in(char **table, int *type, int i, t_arguments *args);
+int			ignore_symbol(char *str, int position);
 /* LEXER */
 char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);
@@ -222,7 +215,6 @@ int			obtain_position(char **table, int number_of_command);
 t_command	*alloc_command_struct(char **table, int *type, \
 			int i, t_arguments *args);
 /* QUOTE MANAGEMENT */
-char		**quote_management(char **table);
 char		**quote_split(char const *s, char c);
 char		*ultra_quotes(char *str);
 /* QUOTE AUXILIAR */
@@ -239,18 +231,20 @@ void		load_command_struct(t_command *command_struct, \
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, \
 			t_arguments *args, int *type);
+int			error_detection(char **lexer_table, int *lexer_type, \
+			t_arguments *args);
 /* DOLLAR EXPANSION */
 char		**dollar_expansion(char **table, t_arguments *args);
 char		*ultra_expansion(char *str, t_arguments *args);
 int			variable_to_string(char *str, int i, \
 			t_list **list, t_arguments *args);
 /* FILE REDIRECTION */
-void		heredoc_build_list(char **table, t_arguments *args);
 void		create_output_files(t_list *list_files, \
 			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
 void		create_file(char *path, t_arguments *args);
 void		create_file_append(char *path, t_arguments *args);
+int			heredoc_found(char **table, int *type, int i);
 /* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void		fix_previous_line(char *line, int t, int i, t_list **list);
 /* Protoypes minishell execution. */
@@ -283,7 +277,7 @@ void		free_heap_memory(t_arguments *args);
 void		ft_shutdown(char *str, int i, t_arguments *args);
 void		manage_program_heap(t_arguments *arguments, t_prog *prog);
 void		manage_loop_heap(t_arguments *arguments, t_prog *prog);
-void		ft_leaks(void);
 void		set_status_and_shut(t_arguments *args, char *msg);
+void		ft_leaks(void);
 
 #endif
