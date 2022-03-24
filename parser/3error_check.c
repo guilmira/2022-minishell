@@ -12,18 +12,13 @@
 
 #include "../include/minishell.h"
 
-/** PURPOSE : Checks if binary program is executable. */
-static int	is_executable(t_arguments *args)
+static int
+	manage_command_path(char *const *folders,
+						char *command_path, const t_command *cmd)
 {
 	int			i;
 	int			path_exists;
-	char		**folders;
-	char		*command_path;
-	t_command	*cmd;
 
-	folders = get_env_path(args->envp);
-	cmd = args->commands_lst->content;
-	command_path = NULL;
 	i = -1;
 	path_exists = 0;
 	while (folders[++i] && !path_exists)
@@ -33,6 +28,21 @@ static int	is_executable(t_arguments *args)
 			path_exists++;
 		free(command_path);
 	}
+	return (path_exists);
+}
+
+/** PURPOSE : Checks if binary program is executable. */
+static int	is_executable(t_arguments *args)
+{
+	int			path_exists;
+	char		**folders;
+	char		*command_path;
+	t_command	*cmd;
+
+	folders = get_env_path(args->envp);
+	cmd = args->commands_lst->content;
+	command_path = NULL;
+	path_exists = manage_command_path(folders, command_path, cmd);
 	ft_free_split(folders);
 	if (!path_exists)
 	{
@@ -68,15 +78,6 @@ static int	error_input(t_arguments *args, t_command *command_struct)
 		if (args->file_input)
 			return (!try_open(args->file_input));
 	}
-	return (0);
-}
-
-static int	is_command(t_command *command_struct)
-{
-	if (!ft_strcmp(BLANK, command_struct->command[0]))
-		return (1);
-	if (file_exists(command_struct->path))
-		return (1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:36:14 by asydykna          #+#    #+#             */
-/*   Updated: 2022/02/12 16:41:02 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/25 00:21:09 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,6 @@ void
 		i++;
 	}
 	va_end(ap);
-}
-
-void
-	free_and_null(void *ptr)
-{
-	if (ptr)
-		free(ptr);
-	ptr = NULL;
 }
 
 char *

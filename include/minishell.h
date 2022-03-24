@@ -207,6 +207,7 @@ void		init_options(char **option, char **option_name);
 char		*build_new_line(t_list *list);
 t_list		*delimeters_in(char **table, int *type, int i, t_arguments *args);
 int			ignore_symbol(char *str, int position);
+int			is_command(t_command *command_struct);
 /* LEXER */
 char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);

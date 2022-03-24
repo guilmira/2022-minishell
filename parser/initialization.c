@@ -78,3 +78,13 @@ t_arguments	*initialize_arg(t_prog *prog)
 	args->wpipe = (int *)(malloc(2 * sizeof(int)));
 	return (args);
 }
+
+int
+	is_command(t_command *command_struct)
+{
+	if (!ft_strcmp(BLANK, command_struct->command[0]))
+		return (1);
+	if (file_exists(command_struct->path))
+		return (1);
+	return (0);
+}

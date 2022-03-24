@@ -6,7 +6,7 @@
 /*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/24 19:07:20 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/25 00:20:26 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
 	atexit(ft_leaks);
+	rl_event_hook = event;
 	set_signal(1);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);
