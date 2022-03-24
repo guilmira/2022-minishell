@@ -76,8 +76,9 @@ void
 	else if (identifier > 0)
 	{
 		close(args->fds[index - 2]);
-		read_pipe_from(args->wpipe, &args->status);
+		read_pipe_from(args->wpipe, &i);
 		wait(&wstatus);
+		mnge_status(args, i);
 		close(args->fds[index + 1]);
 	}
 	else

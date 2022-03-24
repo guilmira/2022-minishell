@@ -120,11 +120,10 @@ char		*get_env_val(t_arguments *arg, size_t len, const char *tmp);
 char		**copy_array(char **dest, char **src, unsigned int extra_cells);
 char		*ft_multistr_concat(int count, ...);
 size_t		get_envv_len(const char *s);
-void
-	mnge_heredoc(char *delim, t_arguments *args, char *buf, t_command *command_struct);
+void		mnge_heredoc(char *delim, t_arguments *args, char *buf,
+				t_command *command_struct);
 void		set_signal(int sig_type);
-int
-	heredoc_routine(t_command *command_struct, t_arguments *args);
+int			heredoc_routine(t_command *command_struct, t_arguments *args);
 bool		var_have_val(char **envp, char *needle);
 bool		export_new_l_variables(char **args, t_arguments *arg);
 void		set_new_var(char *var, t_arguments *arg);
@@ -149,6 +148,7 @@ int			get_builtins_ret(t_arguments *args, t_command *command_struct);
 void		free_and_null(void *ptr);
 t_command	*get_command_struct(t_arguments *args, t_command *command_struct);
 int			event(void);
+void		mnge_status(t_arguments *args, int i);
 
 /* FILE PATHS */
 # define PATH_BIN "/bin/"
