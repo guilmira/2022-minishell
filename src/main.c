@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/24 09:12:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 10:14:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	return (shell_loop(envp));
 }
 
-//ls | a  //problem with several processes
-
 //export vs env
 //export todas, env solo seteadas
 
@@ -73,13 +71,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //<< eof | cat, cat | cat | ls
 
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
-//echo $""HOME   ->elimina dollar. NOPE
 //meter un control de top | cat
 
 //NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
-
-//TODO funcion de checckeo por si te meten un Null en la talbla, 
-//por memoria o de la manera que sea, cierre minishell en shutdown.
 
 //ESTUDIAR
 //en el proceso principal, tras los forks, todos los fd del pipe cerrados
@@ -99,8 +93,3 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //ls < aijshf | wc -l | echo hola
 
 //ls < a | wc -l | echo hola NOT WORKING
-
-//wc << "fin" LEAKS
-
-//ls < klasjjkfh
-//dejo la salida bloqueada

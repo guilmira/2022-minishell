@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:15:35 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/24 09:50:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 10:19:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ static int	error_input(t_arguments *args, t_command *command_struct)
 	return (0);
 }
 
-static int	is_command(t_command *command_struct)
+/* static int	is_command(t_command *command_struct)
 {
 	if (!ft_strcmp(BLANK, command_struct->command[0]))
 		return (1);
 	if (file_exists(command_struct->path))
 		return (1);
 	return (0);
-}
+} */
 
 /** PURPOSE : Checks for error in commands.
  * 1. Whether is executable or not, by checking if PATH var. is unset.
@@ -91,8 +91,8 @@ bool	check_command(t_arguments *args)
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct)
 		ft_shutdown(LST, 0, args);
-	if (!is_command(command_struct))
-		set_status(args, 127);
+	/* if (!is_command(command_struct))
+		set_status(args, 127); */
 	if (!is_executable(args))
 		set_status(args, 127);
 	if (error_input(args, command_struct))
