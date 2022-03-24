@@ -51,13 +51,12 @@ int	last_son(int index, t_arguments *args)
 	command_struct = ft_lst_position(args->commands_lst, args->command_number);
 	if (!command_struct || !command_struct->command)
 		ft_shutdown(LST, 0, args);
-	ret = get_builtins_ret(args, command_struct); // THE PROBLEM IS HERE
+	ret = get_builtins_ret(args, command_struct);
 	if (dup2(args->fds[index], STDIN_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(args->fds[index]);
 	command_file_setup(command_struct, args);
-	ret = -1; //TEMPORAL LINE
-	if (ret >= 0)
+	if (ret >= 0 && !command_struct->heredoc_result)
 		return (ret);
 	return (do_execve(args, command_struct));
 }

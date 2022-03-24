@@ -67,7 +67,7 @@ int
 	set_status(args, 0);
 	command_struct = NULL;
 	command_struct = get_command_struct(args, command_struct);
-	ret =  get_builtins_ret(args, command_struct);
+	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0 && !command_struct->heredoc_result)
 		return (ret);
 	if (pipe(args->wpipe) == -1)
@@ -77,6 +77,5 @@ int
 		return (1);
 	}
 	fork_single_child(args);
-	
 	return (1);
 }
