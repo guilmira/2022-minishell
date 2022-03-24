@@ -12,6 +12,17 @@
 
 #include "../include/minishell.h"
 
+static void	handler_parent(int s)
+{
+	if (s == SIGQUIT || s == SIGINT)
+	{
+		rl_done = 1;
+		rl_redisplay();
+		ft_putendl_fd("", 2);
+		rl_on_new_line();
+	}
+}
+
 void
 	sig_handler(int signum __attribute__((unused)))
 {
@@ -22,9 +33,9 @@ void
 	}
 	else if (signum == SIGINT)
 	{
-		ft_putendl_fd("", 2);
-		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
+		ft_putendl_fd("", 2);
 	}
 }
 
@@ -45,21 +56,16 @@ void
 }
 
 void
-	handler_child(int signum __attribute__((unused)))
-{
-}
-
-void
 	set_signal(int sig_type)
 {
 	sig_t		handler;
 
-	if (sig_type == 1 || sig_type == 2)
-		handler = &sig_handler;
+	if (sig_type == 1)
+		handler = &handler_parent;
 	else if (sig_type == 3)
 		handler = &handler_heredoc;
 	else
-		handler = &handler_child;
+		handler = &sig_handler;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, handler);
 }
