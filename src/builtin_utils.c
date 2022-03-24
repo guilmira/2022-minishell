@@ -50,7 +50,7 @@ void
 void
 	free_and_null(void *ptr)
 {
-	if (ptr && *(char *)ptr)
+	if (ptr)
 		free(ptr);
 	ptr = NULL;
 }

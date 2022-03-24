@@ -82,7 +82,6 @@ void	build_command_structure(t_command	*cmd_struct, \
 char **folders, char **envp)
 {
 	char	*tmp;
-	char	*str;
 
 	if (!cmd_struct)
 		return ;

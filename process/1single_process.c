@@ -71,6 +71,7 @@ int
 	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0 && !command_struct->heredoc_result)
 		return (ret);
+	printf("HERE\n");
 	if (pipe(args->wpipe) == -1)
 	{
 		perror("PIPE ERROR\n");

@@ -66,9 +66,13 @@ void
 	if (command_struct->heredoc_result)
 		free(command_struct->heredoc_result);
 	buf = do_inner_while(delim, &buf);
-	if (!g_rv)
-		set_status(args, 130);
 	command_struct->heredoc_result = buf;
+	if (!g_rv)
+	{
+		set_status(args, 130);
+		free(command_struct->heredoc_result);
+		command_struct->heredoc_result = NULL;
+	}
 }
 
 int

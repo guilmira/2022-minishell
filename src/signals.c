@@ -22,9 +22,9 @@ void
 	}
 	else if (signum == SIGINT)
 	{
-		ft_putendl_fd("", 2);
-		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
+		ft_putendl_fd("", 2);
 	}
 }
 

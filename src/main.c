@@ -63,6 +63,7 @@ int
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
+	atexit(ft_leaks);
 	set_signal(1);
 	if (argc != ARG_NUMBER)
 		ft_shut(INVALID_ARGC, 0);

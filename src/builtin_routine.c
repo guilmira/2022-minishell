@@ -95,7 +95,9 @@ int
 		ret = heredoc_routine(command_struct, args);
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
+	printf("ret = %d, commadn[0] = %s\n", ret, command_struct->command[0]); //delete it
 	if (!ft_strcmp(BLANK, command_struct->command[0]))
-		ret = 0;
+		//ret = 0;  //CHECK IF THE CHANGE IS IMPORTANT
+		ret = 1;
 	return (ret);
 }

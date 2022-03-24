@@ -147,6 +147,7 @@ int			event(void);
 void		mnge_status(t_arguments *args, int i);
 void		father_process_routine(t_arguments *args,
 				int last_index, int *i, int *wstatus);
+void		free_and_null(void *ptr);
 
 /* FILE PATHS */
 # define PATH_USR "/usr/bin/"
