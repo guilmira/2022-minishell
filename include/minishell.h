@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 14:32:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:34:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ typedef struct s_arguments
 	int		flag_file_out;
 	char	*file_input;
 	char	*file_output;
-	t_list	*heredoc_list;
-	t_list	*here_output;
 	bool	print_heredoc;
 	int		(*builtin_func[8])(char **, struct s_arguments *);
 	char	**envp;
@@ -185,18 +183,11 @@ void		mnge_status(t_arguments *args, int i);
 # define EXPAN '$'
 # define RIDDLER '?'
 # define EMPTY_LINE ""
-
 # define HEREDOC_PROMPT "> "
 # define PATH_HD_FILE "/private/tmp/tmp_file"
 
-
-/* TO delete. */
-
 /* Others. */
 void		printer(char **table, int *org);
-
-char		*build_new_line(t_list *list);
-int			ignore_symbol(char *str, int position);
 
 /* Protoypes minishell reader. */
 int			count_table(char **table);
@@ -216,6 +207,9 @@ int			is_heredoc(char *string);
 char		*set_path(char *command, char **folders, char **envp);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 void		init_options(char **option, char **option_name);
+char		*build_new_line(t_list *list);
+t_list		*delimeters_in(char **table, int *type, int i, t_arguments *args);
+int			ignore_symbol(char *str, int position);
 /* LEXER */
 char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);
@@ -242,18 +236,20 @@ void		load_command_struct(t_command *command_struct, \
 /* READER SPLIT COMMANDS */
 char		**get_command_table(char **lexer_table, \
 			t_arguments *args, int *type);
+int			error_detection(char **lexer_table, int *lexer_type, \
+			t_arguments *args);
 /* DOLLAR EXPANSION */
 char		**dollar_expansion(char **table, t_arguments *args);
 char		*ultra_expansion(char *str, t_arguments *args);
 int			variable_to_string(char *str, int i, \
 			t_list **list, t_arguments *args);
 /* FILE REDIRECTION */
-void		heredoc_build_list(char **table, t_arguments *args);
 void		create_output_files(t_list *list_files, \
 			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
 void		create_file(char *path, t_arguments *args);
 void		create_file_append(char *path, t_arguments *args);
+int			heredoc_found(char **table, int *type, int i);
 /* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void		fix_previous_line(char *line, int t, int i, t_list **list);
 /* Protoypes minishell execution. */

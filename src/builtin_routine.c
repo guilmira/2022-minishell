@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/24 10:21:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:38:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void
 
 	if (command_struct->heredoc_result)
 		heredoc_str = command_struct->heredoc_result;
-
-	fd_file = open(PATH_HD_FILE, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
+	fd_file = open(PATH_HD_FILE, O_WRONLY | O_CREAT \
+	| O_TRUNC | O_APPEND, S_IRWXU);
 	if (fd_file < 0)
 		ft_shutdown("error with tmp folder", 1, args);
 	write(fd_file, heredoc_str, ft_strlen(heredoc_str));
@@ -74,9 +74,9 @@ int
 	if (!command_struct->command[0]
 		|| !ft_strcmp(BLANK, command_struct->command[0]))
 		command_struct->print_heredoc = false;
-	if (command_struct->print_heredoc && command_struct->list_delimeters) //iportnate revisar command_struct->print_heredoc
+	if (command_struct->print_heredoc && command_struct->list_delimeters)
 		create_file_heredoc(command_struct, args);
-	if (save_stdout)//posible duplicancion
+	if (save_stdout)
 	{
 		dup2(save_stdout, 1);
 		close(save_stdout);

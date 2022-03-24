@@ -6,24 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:00:25 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 14:32:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:15:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/** PURPOSE : Heredoc are found in table. */
-int	heredoc_found(char **table, int *type, int i)
-{
-	while (table[++i])
-	{
-		if (type[i] == 0)
-			break ;
-		if (!ft_strcmp(HEREDOC, table[i]))
-			return (1);
-	}
-	return (0);
-}
 
 /** PURPOSE : Obtain linked list with files (input) of pipe segment. */
 t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
@@ -53,34 +40,6 @@ t_list	*redirections_in(char **table, int *type, int i, t_arguments *args)
 		}
 	}
 	return (list_in);
-}
-
-/** PURPOSE : Obtain linked list with files (input) of pipe segment. */
-t_list	*delimeters_in(char **table, int *type, int i, t_arguments *args)
-{
-	char	*str;
-	t_list	*list_delimeters;
-
-	str = NULL;
-	list_delimeters = NULL;
-	i = obtain_position(table, i);
-	i = i - 1;
-	while (table[++i])
-	{
-		if (type[i] == 0)
-			break ;
-		if (!ft_strcmp(HEREDOC, table[i]))
-		{
-			if (type[i + 1] == 2)
-			{	
-				str = ft_strdup(table[i + 1]);
-				if (!str)
-					ft_shutdown(str, i, args);
-				ft_lstadd_back(&list_delimeters, ft_lstnew(str));
-			}
-		}
-	}
-	return (list_delimeters);
 }
 
 /** PURPOSE : Obtain linked list with files (output) of pipe segment. */

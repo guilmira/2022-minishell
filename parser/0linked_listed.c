@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 14:35:55 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/22 14:47:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:25:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,35 +78,27 @@ char	**get_env_path(char *envp[])
 /** PURPOSE : Builds command and path for the structure.
  * Manages input commands such as /bin/ls.
  * Transforms it into the clean command and adjusts path. */
-void	build_command_structure(t_command	*command_struct, \
+void	build_command_structure(t_command	*cmd_struct, \
 char **folders, char **envp)
 {
 	char	*tmp;
-	char	*str;
 
-	str = NULL;
-	if (!command_struct)
+	if (!cmd_struct)
 		return ;
-	if (!command_struct->command || !command_struct->command[0])
+	if (!cmd_struct->command || !cmd_struct->command[0])
 		return ;
-	if (command_struct->command[0][0] == '.'
-		&& command_struct->command[0][1] == '/') // espacios yluego ./
+	if (cmd_struct->command[0][0] == '.' && cmd_struct->command[0][1] == '/')
+		cmd_struct->path = set_path(cmd_struct->command[0] + 2, folders, envp);
+	else if ((ft_strchr(cmd_struct->command[0], '/')))
 	{
-		str = command_struct->command[0];
-		str = str + 2;
-		command_struct->path = set_path(str, \
-		folders, envp);
-	}
-	else if ((ft_strchr(command_struct->command[0], '/')))
-	{
-		tmp = command_struct->command[0];
-		command_struct->command[0] = ft_strdup(\
-		ft_strrchr(command_struct->command[0], '/') + 1);
-		command_struct->path = ft_strdup(tmp);
+		tmp = cmd_struct->command[0];
+		cmd_struct->command[0] = ft_strdup(\
+		ft_strrchr(cmd_struct->command[0], '/') + 1);
+		cmd_struct->path = ft_strdup(tmp);
 		free(tmp);
 	}
 	else
-		command_struct->path = set_path(command_struct->command[0], \
+		cmd_struct->path = set_path(cmd_struct->command[0], \
 		folders, envp);
 }
 

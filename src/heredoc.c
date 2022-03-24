@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:25:59 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/23 14:47:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:37:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ char *
 }
 
 void
-	mnge_heredoc(char *delim, t_arguments *args, char *buf, t_command *command_struct)
+	mnge_heredoc(char *delim, t_arguments *args, \
+	char *buf, t_command *command_struct)
 {
 	if (command_struct->heredoc_result)
 		free(command_struct->heredoc_result);
@@ -78,7 +79,6 @@ int
 	t_list	*temp;
 	char	*buf;
 
-	
 	i = 0;
 	buf = NULL;
 	j = ft_lstsize(command_struct->list_delimeters);
@@ -86,7 +86,7 @@ int
 	while (i < j && temp->content)
 	{
 		set_signal(3);
-		buf = ft_strdup(""); //important to check. might be the source of leak in son
+		buf = ft_strdup("");
 		mnge_heredoc(temp->content, args, buf, command_struct);
 		set_signal(1);
 		temp = temp->next;
