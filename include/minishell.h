@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/24 15:34:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 08:11:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ typedef struct s_command
 	t_list	*list_delimeters;
 	char	*heredoc_result;
 	bool	print_heredoc;
+	int		pipes[2];
+	pid_t	pid;
+	int		control;
 }			t_command;
 
 /* Struct that stores the data kept between loops. */
@@ -169,7 +172,6 @@ void		father_process_routine(t_arguments *args,
 # define DUP_ERROR "Dup2 function failure.\n"
 # define EXE_ERROR "Execve function failure.\n"
 # define ONLYTOP "Executing only command top.\n"
-
 # define PIPE "lex_PIPE"
 # define IN "lex_INPUT"
 # define OUT "lex_OUTPUT"
@@ -186,6 +188,9 @@ void		father_process_routine(t_arguments *args,
 
 /* Others. */
 void		printer(char **table, int *org);
+
+//paralell
+int	paralell_processing(t_arguments *args);
 
 /* Protoypes minishell reader. */
 int			count_table(char **table);

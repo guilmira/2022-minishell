@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:00:25 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/24 15:15:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 08:12:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ void	struct_init(t_command *command_struct, int index)
 	command_struct->list_delimeters = NULL;
 	command_struct->heredoc_result = NULL;
 	command_struct->print_heredoc = true;
+	command_struct->pipes[0] = 0;
+	command_struct->pipes[1] = 0;
+	command_struct->pid = 0;
+	command_struct->control = 0;
 }
 
 /** PURPOSE : Corresponding numbers are:

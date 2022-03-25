@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/25 06:34:55 by guilmira         ###   ########.fr        #
+#    Updated: 2022/03/25 06:43:53 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,12 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				0dollar_expansion.c 1expansion_aux.c 2variable.c \
 				printstemp.c \
 				signals.c ft_multistr_concat.c utilities_2.c heredoc.c builtin_utils_2.c\
-				lenvp.c wpipe.c builtin_routine.c memory_mngmt.c
+				lenvp.c wpipe.c builtin_routine.c memory_mngmt.c \
+				paralell_process.c
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 RM = rm -rf
-VPATH = include src parser pre_filter file_redirection lexer lexer_quotes lexer_expansion process
+VPATH = include src parser pre_filter file_redirection lexer lexer_quotes lexer_expansion process paralell_process
 
 all: $(LIB) $(NAME)
 
