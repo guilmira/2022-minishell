@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paralell_process.c                                 :+:      :+:    :+:   */
+/*   parallel_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 08:33:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:59:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ t_command	*get_cmd(t_arguments *args, int index)
 	return (cmd);
 }
 
-int	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, int last)
+void	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, t_arguments *args)
 {
-	if (index != last)
+	int last_index;
+	
+	last_index = args->total_commands - 1;
+	if (index != last_index)
 	{
+		printf("entra al iniciador el cmd 1: %s\n", cmd->command[0]);
 		close(cmd->pipes[READ_FD]);//
 		if (dup2(cmd->pipes[WRITE_FD], STDOUT_FILENO) == -1)//
 			ft_shutdown(DUP_ERROR, 0, args);
@@ -37,6 +41,7 @@ int	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, int last)
 	}
 	if (index != 0)
 	{
+		printf("entra al finalizador el cmd 2: %s, \n", cmd->command[0]);
 		if (dup2(prev_cmd->pipes[READ_FD], STDIN_FILENO) == -1)//
 			ft_shutdown(DUP_ERROR, 0, args);
 		close(prev_cmd->pipes[READ_FD]);//
@@ -46,28 +51,44 @@ int	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, int last)
 
 int	create_son(t_command *cmd, t_command *prev_cmd, int index, t_arguments *args)
 {
+	pid_t		identifier;
+	int last_index;
+	int	ret;
+
+	last_index = args->total_commands - 1;
 	identifier = fork();
+	ret = 0;
 	if (identifier == 0)
 	{
-			//ret = get_builtins_ret(args, cmd);
-		manage_pipes(cmd, prev_cmd, index, args->total_commands - 1);
-		
-			/* if (ret >= 0 && !cmd->heredoc_result)
-			{
-				write_pipe_to(args->wpipe, &ret);
-				free_heap_memory(args);
-				exit(0);
-			} */
+		manage_pipes(cmd, prev_cmd, index, args);
 		ret = (do_execve(args, cmd));
-		write_pipe_to(args->wpipe, &ret);
 		exit(0);
 	}
 	else if (identifier > 0)
 	{
-		index++;
-		cmd = get_cmd(args, index);
-		close(prev_cmd->pipes[WRITE_FD]);
-		process_continue();
+		cmd->pid = identifier;
+		if (index != last_index)
+			close(cmd->pipes[WRITE_FD]);
+		if (index != 0)
+			close(prev_cmd->pipes[READ_FD]);
+		return (ret);
+	}
+	else
+		set_status_and_shut(args, FORK_ERROR);
+	return (ret);
+}
+
+/** PURPOSE : Creates a pipe, except in the case where the last
+ * command of the command line is being executed. */
+void create_pipe(t_command *cmd, int counter, t_arguments *args)
+{
+	int last_command_index;
+
+	last_command_index = args->total_commands - 1;
+	if (counter != last_command_index)
+	{
+		if (pipe(cmd->pipes) == -1)
+			set_status_and_shut(args, MSG);
 	}
 }
 
@@ -78,7 +99,6 @@ int	create_son(t_command *cmd, t_command *prev_cmd, int index, t_arguments *args
 int	paralell_processing(t_arguments *args)
 {
 	int			i;
-	pid_t		identifier;
 	int 		ret;
 	t_command	*cmd;
 	t_command	*prev_cmd;
@@ -87,53 +107,18 @@ int	paralell_processing(t_arguments *args)
 	cmd = NULL;
 	prev_cmd = NULL;
 	i = -1;
-	while (++i < args->total_commands - 1)  
+	while (++i < args->total_commands)  
 	{
 		index = i;
 		cmd = get_cmd(args, index);
 		if (index != 0)
 			prev_cmd = get_cmd(args, index - 1);
-		if (pipe(cmd->pipes) == -1)
-			set_status_and_shut(args, MSG);
-		create_son(cmd, prev_cmd, index, args);
+		create_pipe(cmd, i, args);
+		ret = create_son(cmd, prev_cmd, index, args);
 	}
-
-		else if (identifier > 0)
-		{
-			cmd->pid = identifier;
-			index = 1;
-			prev_cmd = get_cmd(args, index - 1);
-			cmd = get_cmd(args, index);
-
-			close(prev_cmd->pipes[WRITE_FD]);//
-			identifier = fork();
-			if (identifier == 0)
-			{
-				//ret = get_builtins_ret(args, cmd);
-				if (dup2(prev_cmd->pipes[READ_FD], STDIN_FILENO) == -1)//
-					ft_shutdown(DUP_ERROR, 0, args);
-				close(prev_cmd->pipes[READ_FD]);//
-				/* if (ret >= 0 && !cmd->heredoc_result)
-				{
-					write_pipe_to(args->wpipe, &ret);
-					free_heap_memory(args);
-					exit(0);
-				} */
-				ret = (do_execve(args, cmd));
-				write_pipe_to(args->wpipe, &ret);
-					exit(0);
-			}
-			else if (identifier > 0)
-			{
-				cmd->pid = identifier;
-				close(prev_cmd->pipes[READ_FD]); //me podria estar dejando en el proceso principalsin cerrar el de read.
-				//read_pipe_from(args->wpipe, i);
-				//mnge_status(args, (*i)); no se aplicarlo
-			}
-		}
-		else
-			set_status_and_shut(args, FORK_ERROR);
-
+	close(prev_cmd->pipes[READ_FD]); //podria sobrar, probar.
+	
+	
 	//cuantos wait tiene que hacer,esa es la clave. tantos como hijos. 2 fork=2 wait.
 	i = -1;
 	while (++i < args->total_commands)  
@@ -141,5 +126,6 @@ int	paralell_processing(t_arguments *args)
 		cmd = get_cmd(args, i);
 		waitpid(cmd->pid, &(cmd->control), 0);
 	}
+
 	return(1);
 }
