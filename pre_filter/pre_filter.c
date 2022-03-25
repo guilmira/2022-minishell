@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 11:40:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:43:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	builtin_detection(t_arguments *args)
 	{
 		cmd = get_cmd(args, i);
 		if (is_builtin(cmd, args))
+			return (1);
+		if (cmd->list_delimeters)
 			return (1);
 	}
 	return (0);
