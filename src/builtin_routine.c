@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/24 15:38:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 10:42:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int
 		ret = heredoc_routine(command_struct, args);
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
+
 	if (!ft_strcmp(BLANK, command_struct->command[0]))
 		//ret = 0;  //CHECK IF THE CHANGE IS IMPORTANT
 		ret = 1;

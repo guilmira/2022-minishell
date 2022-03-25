@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 06:22:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/24 15:30:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 10:34:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,31 @@ t_arguments	*initialize_arg(t_prog *prog)
 	return (args);
 }
 
+
+static int	is_builtin(t_command *command_struct, t_arguments *args)
+{
+	int	i;
+	int	ret;
+
+	i = -1;
+	ret = -1;
+	while (++i < msh_num_builtins(args))
+		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0])
+			&& (ft_strlen(args->prog->builtin_str[i])
+				== ft_strlen(command_struct->command[0])))
+			ret = (((args->builtin_func[i])(command_struct->command, args)));
+	if (ret == -1)
+		return (0);
+	else
+		return (1);
+}
+
 int
-	is_command(t_command *command_struct)
+	is_command(t_command *command_struct, t_arguments *args)
 {
 	if (!ft_strcmp(BLANK, command_struct->command[0]))
+		return (1);
+	if (is_builtin(command_struct, args))
 		return (1);
 	if (file_exists(command_struct->path))
 		return (1);
