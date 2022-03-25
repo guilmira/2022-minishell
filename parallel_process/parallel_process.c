@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 09:59:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 10:52:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, t_arguments *a
 	last_index = args->total_commands - 1;
 	if (index != last_index)
 	{
-		printf("entra al iniciador el cmd 1: %s\n", cmd->command[0]);
 		close(cmd->pipes[READ_FD]);//
 		if (dup2(cmd->pipes[WRITE_FD], STDOUT_FILENO) == -1)//
 			ft_shutdown(DUP_ERROR, 0, args);
@@ -41,7 +40,6 @@ void	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, t_arguments *a
 	}
 	if (index != 0)
 	{
-		printf("entra al finalizador el cmd 2: %s, \n", cmd->command[0]);
 		if (dup2(prev_cmd->pipes[READ_FD], STDIN_FILENO) == -1)//
 			ft_shutdown(DUP_ERROR, 0, args);
 		close(prev_cmd->pipes[READ_FD]);//
