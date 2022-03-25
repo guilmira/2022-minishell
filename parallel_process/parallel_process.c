@@ -6,31 +6,18 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 11:05:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:31:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-#define READ_FD 0
-#define WRITE_FD 1
-
-/** PURPOSE : Creates required number of paralell son. */
-t_command	*get_cmd(t_arguments *args, int index)
+/** PURPOSE : Creates required number of parallel son. */
+static void	manage_pipes(t_command *cmd, t_command *prev_cmd, \
+int index, t_arguments *args)
 {
-	t_command	*cmd;
+	int	last_index;
 
-	cmd = ft_lst_position(args->commands_lst, index);
-	if (!cmd || !cmd->command)
-		ft_shutdown(LST, 0, args);
-	return (cmd);
-}
-
-/** PURPOSE : Creates required number of paralell son. */
-void	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, t_arguments *args)
-{
-	int last_index;
-	
 	last_index = args->total_commands - 1;
 	if (index != last_index)
 	{
@@ -45,15 +32,15 @@ void	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, t_arguments *a
 			ft_shutdown(DUP_ERROR, 0, args);
 		close(prev_cmd->pipes[READ_FD]);
 	}
-	
 }
 
 /** PURPOSE : Creates required number of paralell son. */
-int	create_son(t_command *cmd, t_command *prev_cmd, int index, t_arguments *args)
+static int	create_son(t_command *cmd, t_command *prev_cmd, \
+int index, t_arguments *args)
 {
-	pid_t		identifier;
-	int last_index;
-	int	ret;
+	int		ret;
+	int		last_index;
+	pid_t	identifier;
 
 	last_index = args->total_commands - 1;
 	identifier = fork();
@@ -80,48 +67,44 @@ int	create_son(t_command *cmd, t_command *prev_cmd, int index, t_arguments *args
 
 /** PURPOSE : Creates a pipe, except in the case where the last
  * command of the command line is being executed. */
-void create_pipe(t_command *cmd, int counter, t_arguments *args)
+static void	create_pipe(t_command *cmd, int index, t_arguments *args)
 {
-	int last_command_index;
+	int	last_command_index;
 
 	last_command_index = args->total_commands - 1;
-	if (counter != last_command_index)
-	{
+	if (index != last_command_index)
 		if (pipe(cmd->pipes) == -1)
 			set_status_and_shut(args, MSG);
-	}
 }
 
 /** PURPOSE : Executes fork function to run commands.
  * 1. Create first pipe. 
  * 2. Fork process in a loop, and inside each son process, run command.
  * 3. Continue running program until last fork. */
-int	paralell_processing(t_arguments *args)
+int	processing(t_arguments *args)
 {
-	int			i;
-	int 		ret;
+	int			ret;
 	int			index;
 	t_command	*cmd;
 	t_command	*prev_cmd;
-	
+
 	cmd = NULL;
 	prev_cmd = NULL;
-	i = -1;
-	while (++i < args->total_commands)  
+	index = -1;
+	while (++index < args->total_commands)
 	{
-		index = i;
 		cmd = get_cmd(args, index);
 		if (index != 0)
 			prev_cmd = get_cmd(args, index - 1);
-		create_pipe(cmd, i, args);
+		create_pipe(cmd, index, args);
 		ret = create_son(cmd, prev_cmd, index, args);
 	}
 	close(prev_cmd->pipes[READ_FD]); //podria sobrar, probar.
-	i = -1;
-	while (++i < args->total_commands)  
+	index = -1;
+	while (++index < args->total_commands)
 	{
-		cmd = get_cmd(args, i);
+		cmd = get_cmd(args, index);
 		waitpid(cmd->pid, &(cmd->control), 0);
 	}
-	return(1);
+	return (1);
 }
