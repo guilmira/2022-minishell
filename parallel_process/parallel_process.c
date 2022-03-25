@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 10:52:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:05:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define READ_FD 0
 #define WRITE_FD 1
 
-
+/** PURPOSE : Creates required number of paralell son. */
 t_command	*get_cmd(t_arguments *args, int index)
 {
 	t_command	*cmd;
@@ -26,6 +26,7 @@ t_command	*get_cmd(t_arguments *args, int index)
 	return (cmd);
 }
 
+/** PURPOSE : Creates required number of paralell son. */
 void	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, t_arguments *args)
 {
 	int last_index;
@@ -33,20 +34,21 @@ void	manage_pipes(t_command *cmd, t_command *prev_cmd, int index, t_arguments *a
 	last_index = args->total_commands - 1;
 	if (index != last_index)
 	{
-		close(cmd->pipes[READ_FD]);//
-		if (dup2(cmd->pipes[WRITE_FD], STDOUT_FILENO) == -1)//
+		close(cmd->pipes[READ_FD]);
+		if (dup2(cmd->pipes[WRITE_FD], STDOUT_FILENO) == -1)
 			ft_shutdown(DUP_ERROR, 0, args);
-		close(cmd->pipes[WRITE_FD]);//
+		close(cmd->pipes[WRITE_FD]);
 	}
 	if (index != 0)
 	{
-		if (dup2(prev_cmd->pipes[READ_FD], STDIN_FILENO) == -1)//
+		if (dup2(prev_cmd->pipes[READ_FD], STDIN_FILENO) == -1)
 			ft_shutdown(DUP_ERROR, 0, args);
-		close(prev_cmd->pipes[READ_FD]);//
+		close(prev_cmd->pipes[READ_FD]);
 	}
 	
 }
 
+/** PURPOSE : Creates required number of paralell son. */
 int	create_son(t_command *cmd, t_command *prev_cmd, int index, t_arguments *args)
 {
 	pid_t		identifier;
@@ -98,9 +100,9 @@ int	paralell_processing(t_arguments *args)
 {
 	int			i;
 	int 		ret;
+	int			index;
 	t_command	*cmd;
 	t_command	*prev_cmd;
-	int			index;
 	
 	cmd = NULL;
 	prev_cmd = NULL;
@@ -115,15 +117,11 @@ int	paralell_processing(t_arguments *args)
 		ret = create_son(cmd, prev_cmd, index, args);
 	}
 	close(prev_cmd->pipes[READ_FD]); //podria sobrar, probar.
-	
-	
-	//cuantos wait tiene que hacer,esa es la clave. tantos como hijos. 2 fork=2 wait.
 	i = -1;
 	while (++i < args->total_commands)  
 	{
 		cmd = get_cmd(args, i);
 		waitpid(cmd->pid, &(cmd->control), 0);
 	}
-
 	return(1);
 }
