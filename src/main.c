@@ -6,21 +6,16 @@
 /*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/25 00:20:26 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:07:44 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 //system("leaks minishell");
-//<< fin << done << there << _hugeline__ | ls
-
 //while true ; do leaks -q minishell; sleep 3; done
 //lsof -c minishell | grep PIPE
 //lsof -c minishell -r2 | grep PIPE
-
-//buggy:
-//echo test > <<fin - should give error - EXTRA FILE APPEARS
 
 //different from bash:
 //pwd | echo test | echo hola
@@ -63,7 +58,7 @@ int
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	rl_event_hook = event;
 	set_signal(1);
 	if (argc != ARG_NUMBER)
@@ -79,14 +74,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //<< eof | cat, cat | cat | ls
 
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
-//meter un control de top | cat
-
 //NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
-
-//ESTUDIAR
-//en el proceso principal, tras los forks, todos los fd del pipe cerrados
-//ejecutarlos en paralelo, no en serie. 
-//todos los procesos del fork se lanazarian a la vez
 
 // << eof | cat, cat | cat | ls
 
@@ -99,5 +87,3 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //ls < aijshf | wc -l < nonexisten
 //ls < aijshf | wc -l | echo hola
-
-//ls < a | wc -l | echo hola NOT WORKING

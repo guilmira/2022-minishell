@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:10:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/24 15:41:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 06:37:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static int	error_table(char **table)
 		!ft_strcmp(IN, table[i]) || !ft_strcmp(OUT, table[i]))
 			if (!table[i + 1])
 				return (1);
-		if (!ft_strcmp(HEREDOC, table[i]))
+		if (!ft_strcmp(HEREDOC, table[i]) || !ft_strcmp(IN, table[i]) \
+		|| !ft_strcmp(OUT, table[i]))
 			if (!ft_strcmp(HEREDOC, table[i + 1])
 				|| !ft_strcmp(PIPE, table[i + 1])
 				|| !ft_strcmp(IN, table[i + 1])

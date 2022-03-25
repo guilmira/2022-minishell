@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/23 12:38:17 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:03:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ static int
 	}
 	if (arguments->total_commands == 1)
 		return (single_process(arguments));
-	if (!ft_strcmp("top", command_table->command[0]))
-	{
-		printf(ONLYTOP);
-		return (single_process(arguments));
-	}
 	arguments->fds = arg_descriptors(arguments);
-	process_exe(arguments);
+	if (1)
+		process_exe(arguments);
+	else
+		paralell_processing(arguments);
 	return (1);
 }
 
