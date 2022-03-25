@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 11:43:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 13:07:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_builtin(t_command *command_struct, t_arguments *args)
 		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0])
 			&& (ft_strlen(args->prog->builtin_str[i])
 				== ft_strlen(command_struct->command[0])))
-			ret = (((args->builtin_func[i])(command_struct->command, args)));
+			ret = 1;
 	if (ret == -1)
 		return (0);
 	else

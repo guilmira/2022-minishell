@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/25 09:55:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 12:55:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int
 {
 	t_prog		*prog;
 	t_arguments	*arguments;
-	char		*builtin_str[9];
 	int			ret;
+	char		*builtin_str[9];
 
 	prog = NULL;
 	arguments = NULL;
@@ -66,8 +66,9 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	return (shell_loop(envp));
 }
 
-//export vs env
-//export todas, env solo seteadas
+
+
+//echo $TEST > $TEST
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 
@@ -80,7 +81,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //ls |  wc -l |  cat |  grep 72 |  grep 72 <<  fin
 
-//echo $TEST > $TEST
 //ls > omega | ls -la > final
 //wc < omega >dd | wc -l< final > cc 
 //cat dd && cat cc

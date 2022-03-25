@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 11:31:28 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 14:08:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,23 @@ int index, t_arguments *args)
 	}
 }
 
+//exec_builtin()
+
+	//int i;
+
+//SET STATUS
+	//set_status(args, 0);
+
+//SET FILES
+	/* while (++i < msh_num_builtins(args))
+	{
+				if (!ft_strcmp(args->prog->builtin_str[i], cmd->command[0])
+				&& (ft_strlen(args->prog->builtin_str[i])
+				== ft_strlen(cmd->command[0])))
+				ret = (((args->builtin_func[i])(cmd->command, args)));
+	} */
+
+
 /** PURPOSE : Creates required number of paralell son. */
 static int	create_son(t_command *cmd, t_command *prev_cmd, \
 int index, t_arguments *args)
@@ -41,15 +58,22 @@ int index, t_arguments *args)
 	int		ret;
 	int		last_index;
 	pid_t	identifier;
+			int	i;
 
+	i = -1;
 	last_index = args->total_commands - 1;
 	identifier = fork();
 	ret = 0;
 	if (identifier == 0)
 	{
 		manage_pipes(cmd, prev_cmd, index, args);
-		ret = (do_execve(args, cmd));
-		exit(0);
+		/* if (is_builtin(cmd, args))
+		{
+			exec_builtin();
+		} */
+		//else
+			ret = (do_execve(args, cmd));
+		exit(ret);
 	}
 	else if (identifier > 0)
 	{
