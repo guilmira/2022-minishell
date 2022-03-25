@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 06:22:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 10:34:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:36:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,6 @@ t_arguments	*initialize_arg(t_prog *prog)
 	args->builtin_str = prog->builtin_str;
 	args->wpipe = (int *)(malloc(2 * sizeof(int)));
 	return (args);
-}
-
-
-static int	is_builtin(t_command *command_struct, t_arguments *args)
-{
-	int	i;
-	int	ret;
-
-	i = -1;
-	ret = -1;
-	while (++i < msh_num_builtins(args))
-		if (!ft_strcmp(args->prog->builtin_str[i], command_struct->command[0])
-			&& (ft_strlen(args->prog->builtin_str[i])
-				== ft_strlen(command_struct->command[0])))
-			ret = (((args->builtin_func[i])(command_struct->command, args)));
-	if (ret == -1)
-		return (0);
-	else
-		return (1);
 }
 
 int

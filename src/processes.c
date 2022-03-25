@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:47:01 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/25 11:03:01 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:39:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ int
 	return ((int)get_arr_len(arg->prog->builtin_str));
 }
 
+/** PURPOSE : Gets command indexed. */
+t_command	*get_cmd(t_arguments *args, int index)
+{
+	t_command	*cmd;
+
+	cmd = ft_lst_position(args->commands_lst, index);
+	if (!cmd || !cmd->command)
+		ft_shutdown(LST, 0, args);
+	return (cmd);
+}
+
 /** PURPOSE : Executes indetrmined number of processes.
  * 1. Executes single process if that is the case.
  * 2. Create argument descriptors to link pipes.
@@ -28,9 +39,6 @@ int
 static int
 	process_execution(t_arguments *arguments)
 {
-	t_command	*command_table;
-
-	command_table = arguments->commands_lst->content;
 	if (arguments->total_commands > MAX_COMMANDS)
 	{
 		printf("Input commands must be less than %i.\n", MAX_COMMANDS);
@@ -39,10 +47,7 @@ static int
 	if (arguments->total_commands == 1)
 		return (single_process(arguments));
 	arguments->fds = arg_descriptors(arguments);
-	if (1)
-		process_exe(arguments);
-	else
-		paralell_processing(arguments);
+	process_exe(arguments);
 	return (1);
 }
 

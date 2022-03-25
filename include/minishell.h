@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 10:56:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:36:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,11 +152,6 @@ void		father_process_routine(t_arguments *args,
 				int last_index, int *i, int *wstatus);
 void		free_and_null(void *ptr);
 
-/* FILE PATHS */
-# define PATH_USR "/usr/bin/"
-# define FILE_NAME "outfile.txt"
-# define FULL_PERMISSIONS 0777
-
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
 # define TOTAL_SYMBOLS 5
@@ -172,7 +167,6 @@ void		free_and_null(void *ptr);
 # define FORK_ERROR "Error at fork creation\n"
 # define DUP_ERROR "Dup2 function failure.\n"
 # define EXE_ERROR "Execve function failure.\n"
-# define ONLYTOP "Executing only command top.\n"
 # define PIPE "lex_PIPE"
 # define IN "lex_INPUT"
 # define OUT "lex_OUTPUT"
@@ -186,13 +180,11 @@ void		free_and_null(void *ptr);
 # define EMPTY_LINE ""
 # define HEREDOC_PROMPT "> "
 # define PATH_HD_FILE "/private/tmp/tmp_file"
+# define READ_FD 0
+# define WRITE_FD 1
 
 /* Others. */
 void		printer(char **table, int *org);
-
-//paralell
-int	paralell_processing(t_arguments *args);
-
 /* Protoypes minishell reader. */
 int			count_table(char **table);
 /* INITIALIZATION */
@@ -207,12 +199,17 @@ int			is_one_of_lexer_symbols(char symbol);
 int			is_heredoc(char *string);
 /* PARSER */
 char		*set_path(char *command, char **folders, char **envp);
-int			prepare_process(int fd_to_close, int fd_to_prepare);
 void		init_options(char **option, char **option_name);
 char		*build_new_line(t_list *list);
 t_list		*delimeters_in(char **table, int *type, int i, t_arguments *args);
 int			ignore_symbol(char *str, int position);
 int			is_command(t_command *command_struct, t_arguments *args);
+/* PROCESS */
+int			processing(t_arguments *args);
+int			prepare_process(int fd_to_close, int fd_to_prepare);
+t_command	*get_cmd(t_arguments *args, int index);
+int			builtin_detection(t_arguments *args);
+int			is_builtin(t_command *command_struct, t_arguments *args);
 /* LEXER */
 char		**main_lexer(char *line, t_arguments *args);
 int			*class_lex_table(char **lexer_table);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 10:36:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:34:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,11 @@ int
 int
 	process_exe(t_arguments *args)
 {
+	if (!builtin_detection(args))
+	{
+		processing(args);
+		return (1);
+	}
 	if (pipe(args->fds) == -1 || pipe(args->wpipe) == -1)
 		set_status_and_shut(args, MSG);
 	if (!check_command(args))
