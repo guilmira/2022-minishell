@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/28 16:43:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/28 16:53:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	processing(t_arguments *args)
 		create_pipe(cmd, index, args);
 		ret = create_son(cmd, prev_cmd, index, args);
 	}
-	close(prev_cmd->pipes[READ_FD]); //podria sobrar, probar.
+	//close(prev_cmd->pipes[READ_FD]); //DESCOMENTAR SI QUEDA UN SOLO PIPE ABIERTO
 	index = -1;
 	while (++index < args->total_commands)
 	{
