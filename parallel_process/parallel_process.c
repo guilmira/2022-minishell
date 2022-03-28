@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/28 15:09:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/28 16:43:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,15 @@ int index, t_arguments *args)
 	return (ret);
 }
 
+/** PURPOSE : Takes process son exit result variable and sets global status. */
+void set_status_variable(int status, t_arguments *args)
+{
+	if (WIFEXITED(status))
+		args->status = WEXITSTATUS(status);
+	/* 	else if (WIFSIGNALED(status))
+		contrl+c function(status); */
+}
+
 /** PURPOSE : Creates a pipe, except in the case where the last
  * command of the command line is being executed. */
 static void	create_pipe(t_command *cmd, int index, t_arguments *args)
@@ -129,10 +138,7 @@ int	processing(t_arguments *args)
 	{
 		cmd = get_cmd(args, index);
 		waitpid(cmd->pid, &(cmd->control), 0);
-		if (cmd->control)
-			args->status = 127;
-		else
-			args->status = 0;
 	}
+	set_status_variable(cmd->control, args);
 	return (1);
 }
