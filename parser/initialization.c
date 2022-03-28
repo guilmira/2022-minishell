@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 06:22:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 11:36:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:05:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	variables_to_zero(t_arguments *args)
 	args->flag_file_out = 0;
 	args->file_input = NULL;
 	args->file_output = NULL;
+	args->heredoc_det = 0;
 }
 
 /** PURPOSE : Init arguments variable. */

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 13:31:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:05:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,7 @@ int
 int
 	process_exe(t_arguments *args)
 {
-	//if (1)//
-	if (!builtin_detection(args))
+	if (!args->heredoc_det)
 	{
 		processing(args);
 		return (1);
