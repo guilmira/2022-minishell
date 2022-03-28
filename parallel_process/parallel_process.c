@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/28 13:02:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:07:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,11 @@ int	processing(t_arguments *args)
 	{
 		cmd = get_cmd(args, index);
 		waitpid(cmd->pid, &(cmd->control), 0);
+		if (cmd->control)
+			args->status = 127;
+		else
+			args->status = 0;
+
 	}
 	return (1);
 }
