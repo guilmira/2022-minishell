@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:10:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/21 12:29:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/29 13:10:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	output_to_file(char *path)
 {
 	int	fd_file;
 
+	if (!path)
+		return ;
 	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
 	if (fd_file < 0)
 		ft_shut(FILE_ERROR, 1);
@@ -43,6 +45,8 @@ void	output_to_file_append(char *path)
 {
 	int	fd_file;
 
+	if (!path)
+		return ;
 	fd_file = open(path, O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
 	if (fd_file < 0)
 		ft_shut(FILE_ERROR, 1);

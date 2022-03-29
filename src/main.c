@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/29 12:39:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/29 13:23:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 //lsof -c minishell | grep PIPE
 //lsof -c minishell -r2 | grep PIPE
 
-//different from bash:
-//pwd | echo test | echo hola
-//ls -l <<fin | export | exit
-//echo test | exit
 
+//differen form bash
+//ls -l <<fin | export | exit
+//double hola
+//echo "hola" << fin
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks commands into processes and execute them. */
@@ -72,12 +72,8 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
 
-//<< eof | cat, cat | cat | ls
-
 //echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
 //NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
-
-// << eof | cat, cat | cat | ls
 
 //ls |  wc -l |  cat |  grep 72 |  grep 72 <<  fin
 
@@ -85,5 +81,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 //wc < omega >dd | wc -l< final > cc 
 //cat dd && cat cc
 
+//working perfectly
 //ls < aijshf | wc -l < nonexisten
 //ls < aijshf | wc -l | echo hola
