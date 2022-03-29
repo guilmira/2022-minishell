@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/29 12:40:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:55:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int
 	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0 && !command_struct->heredoc_result)
 		return (ret);
-	printf("akjfh\n");
 	if (pipe(args->wpipe) == -1)
 	{
 		perror("PIPE ERROR\n");
