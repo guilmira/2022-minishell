@@ -88,9 +88,17 @@ void
 	(*old_path) = ft_strjoin("OLDPWD=", cwd);
 	free_pointers(1, cwd);
 	if (!args[1] || !ft_memcmp(args[1], "~", 2) || !ft_memcmp(args[1], "--", 3))
+	{
 		(*path) = get_env_var(arg->envp, "HOME", false);
+		if (!*path)
+			printf("%s\n", HOMENOTSET);
+	}
 	else if (!ft_memcmp(args[1], "-", 2))
+	{
 		(*path) = get_env_var(arg->envp, "OLDPWD", false);
+		if (!*path)
+			printf("%s\n", OLDPWDNOTSET);
+	}
 	else
 		(*path) = ft_strdup(args[1]);
 }
@@ -113,7 +121,8 @@ int
 	get_paths(args, arg, &path, &old_path);
 	if (chdir(path) != 0)
 	{
-		perror("msh");
+		if (path)
+			printf("msh: cd: %s: %s\n", path, strerror(errno));
 		free_pointers(2, path, old_path);
 		set_status(arg, 1);
 	}

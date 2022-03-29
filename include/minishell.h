@@ -196,6 +196,8 @@ void		change_current_directory(t_arguments *args);
 # define READ_FD 0
 # define WRITE_FD 1
 # define EXIT_SUCCESSFULL 1000
+# define HOMENOTSET "msh: cd: HOME not set"
+# define OLDPWDNOTSET "msh: cd: OLDPWD not set"
 
 /* Others. */
 void		printer(char **table, int *org);
