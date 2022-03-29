@@ -23,9 +23,11 @@ void
 	{
 		close(args->fds[last_index]);
 		close(args->fds[last_index + 1]);
+		perror("minishell");
 		return ;
 	}
 	identifier = fork();
+	//sleep(1000000);
 	if (identifier == 0)
 	{
 		i = last_son(last_index, args);
@@ -77,6 +79,7 @@ int
 	int	x;
 
 	identifier = fork();
+	//sleep(1000000);
 	if (identifier == 0)
 		first_son(args);
 	else if (identifier > 0)

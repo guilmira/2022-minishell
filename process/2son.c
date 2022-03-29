@@ -23,11 +23,11 @@ int	first_son(t_arguments *args)
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = get_command_struct(args, command_struct);
+	ret = get_builtins_ret(args, command_struct);
 	fd_write = prepare_process(args->fds[0], args->fds[1]);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);
-	ret = get_builtins_ret(args, command_struct);
 	if (ret >= 0 && !command_struct->heredoc_result)
 	{
 		write_pipe_to(args->wpipe, &ret);
