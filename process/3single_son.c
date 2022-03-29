@@ -45,7 +45,7 @@ int
 	if (do_clean_path)
 		free(path);
 	errno = ENOENT;
-	perror("minishell");
+	printf("minishell: %s\n", strerror(errno));
 	return (127);
 }
 

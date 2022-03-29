@@ -12,11 +12,16 @@
 
 #include "../include/minishell.h"
 
+//TODO: builtin_detection is unused function in .h and in pre_filter.c
+//DO NORMINETTE
+//check for extra printfs
+//delete comments
+//!!!perror (not allowed?) was substituted to printf with strerror. May be hidden if stdout is redirected!!!
+
 //system("leaks minishell");
 //while true ; do leaks -q minishell; sleep 3; done
 //lsof -c minishell | grep PIPE
 //lsof -c minishell -r2 | grep PIPE
-
 
 //differen form bash
 //ls -l <<fin | export | exit
@@ -65,8 +70,6 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
-
-
 
 //echo $TEST > $TEST
 

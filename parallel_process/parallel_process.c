@@ -15,7 +15,7 @@
 /** PURPOSE : Creates required number of parallel son. */
 static int
 	create_son(t_command *cmd, t_command *prev_cmd,
-		   int index, t_arguments *args)
+		int index, t_arguments *args)
 {
 	int			last_index;
 	pid_t		pid;
