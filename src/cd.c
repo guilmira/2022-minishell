@@ -63,15 +63,27 @@ void
 {
 	char	*cur_path;
 	char	*cwd;
+	char	*p;
 
-	delete_env_var(arg->envp, 7, "OLDPWD");
-	set_new_var(old_path, arg);
-	cwd = getcwd(NULL, 0);
-	cur_path = ft_strjoin("PWD=", cwd);
-	free_pointers(1, cwd);
-	delete_env_var(arg->envp, 4, "PWD");
-	set_new_var(cur_path, arg);
-	free_pointers(1, cur_path);
+	p = NULL;
+	p = get_env_var(arg->envp, "OLDPWD", false);
+	if (p)
+	{
+		free_pointers(1, p);
+		delete_env_var(arg->envp, 7, "OLDPWD");
+		set_new_var(old_path, arg);
+	}
+	p = get_env_var(arg->envp, "PWD", false);
+	if (p)
+	{
+		free_pointers(1, p);
+		cwd = getcwd(NULL, 0);
+		cur_path = ft_strjoin("PWD=", cwd);
+		free_pointers(1, cwd);
+		delete_env_var(arg->envp, 4, "PWD");
+		set_new_var(cur_path, arg);
+		free_pointers(1, cur_path);
+	}
 }
 
 /*
