@@ -42,13 +42,11 @@ contains_chars(char *str)
 ** SYNOPSIS: builtin exit command.
 */
 int
-msh_exit(char **args, t_arguments *arg)
+	msh_exit(char **args, t_arguments *arg)
 {
-	int	exit_code;
-
 	set_status(arg, 0);
 	if (!args[1])
-		return (EXIT_SUCCESSFULL);
+		return (0);
 	if (!contains_chars(args[1]) && !is_within_range(args[1]))
 	{
 		manage_no_numeric_arg(args, arg);
@@ -60,7 +58,6 @@ msh_exit(char **args, t_arguments *arg)
 		ft_putendl_fd("msh: exit: too many arguments", 1);
 		return (1);
 	}
-	exit_code = atoi_exit_code(args[1]);
-	set_status(arg, exit_code);
-	return (EXIT_SUCCESSFULL);
+	set_status(arg, atoi_exit_code(args[1]));
+	return (0);
 }
