@@ -40,7 +40,10 @@ void
 	int	wstatus;
 
 	if (!check_command(args))
+	{
+		perror("minishell");
 		return ;
+	}
 	identifier = fork();
 	if ((identifier) == 0)
 	{
