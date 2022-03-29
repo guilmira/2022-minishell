@@ -6,124 +6,88 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 06:42:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/28 16:53:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/27 12:58:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /** PURPOSE : Creates required number of parallel son. */
-static void	manage_pipes(t_command *cmd, t_command *prev_cmd, \
-int index, t_arguments *args)
+static int
+	create_son(t_command *cmd, t_command *prev_cmd,
+		   int index, t_arguments *args)
 {
-	int	last_index;
+	int			last_index;
+	pid_t		pid;
+	int			ret;
 
-	last_index = args->total_commands - 1;
-	if (index != last_index)
+	init_local_variables(args, &last_index, &ret);
+	pid = fork();
+	if (pid == 0)
 	{
-		close(cmd->pipes[READ_FD]);
-		if (dup2(cmd->pipes[WRITE_FD], STDOUT_FILENO) == -1)
-			ft_shutdown(DUP_ERROR, 0, args);
-		close(cmd->pipes[WRITE_FD]);
-	}
-	if (index != 0)
-	{
-		if (dup2(prev_cmd->pipes[READ_FD], STDIN_FILENO) == -1)
-			ft_shutdown(DUP_ERROR, 0, args);
-		close(prev_cmd->pipes[READ_FD]);
-	}
-}
-
-//exec_builtin()
-
-	//int i;
-
-//SET STATUS
-	//set_status(args, 0);
-
-//SET FILES
-	/* while (++i < msh_num_builtins(args))
-	{
-				if (!ft_strcmp(args->prog->builtin_str[i], cmd->command[0])
-				&& (ft_strlen(args->prog->builtin_str[i])
-				== ft_strlen(cmd->command[0])))
-				ret = (((args->builtin_func[i])(cmd->command, args)));
-	} */
-
-
-/** PURPOSE : Creates required number of paralell son. */
-static int	create_son(t_command *cmd, t_command *prev_cmd, \
-int index, t_arguments *args)
-{
-	int		ret;
-	int		last_index;
-	pid_t	identifier;
-			int	i;
-
-	i = -1;
-	last_index = args->total_commands - 1;
-	identifier = fork();
-	ret = 0;
-	if (identifier == 0)
-	{
-		manage_pipes(cmd, prev_cmd, index, args);
-		/* if (is_builtin(cmd, args))
-		{
-			exec_builtin();
-		} */
-		//else
-			ret = (do_execve(args, cmd));
+		ret = child_process_routine(cmd, prev_cmd, index, args);
 		exit(ret);
 	}
-	else if (identifier > 0)
+	else if (pid > 0)
 	{
-		cmd->pid = identifier;
-		if (index != last_index)
-			close(cmd->pipes[WRITE_FD]);
-		if (index != 0)
-			close(prev_cmd->pipes[READ_FD]);
+		cmd->pid = pid;
+		close_p_pipes(cmd, prev_cmd, index, last_index);
 		return (ret);
 	}
 	else
 		set_status_and_shut(args, FORK_ERROR);
+	return (pid);
+}
+
+void
+	initialize_variables(int *ret, int *index, t_command **prev_cmd)
+{
+	(*prev_cmd) = NULL;
+	(*index) = -1;
+	(*ret) = 0;
+}
+
+int
+	get_ret(t_arguments *args, const t_command *cmd, pid_t waited_pid)
+{
+	int	ret;
+	int	st;
+
+	ret = 1;
+	if (waited_pid != -1)
+	{
+		if (WIFEXITED(cmd->control))
+		{
+			st = WEXITSTATUS(cmd->control);
+			if (st >= 0 && st <= 1)
+				set_status(args, 0);
+			if (st == 232)
+				ret = 0;
+		}
+		else if (WIFSIGNALED(cmd->control))
+			set_status(args, 130);
+		else if (WIFSTOPPED(cmd->control))
+			set_status(args, 127);
+		else
+			set_status(args, 1);
+	}
 	return (ret);
 }
 
-/** PURPOSE : Takes process son exit result variable and sets global status. */
-void set_status_variable(int status, t_arguments *args)
-{
-	if (WIFEXITED(status))
-		args->status = WEXITSTATUS(status);
-	/* 	else if (WIFSIGNALED(status))
-		contrl+c function(status); */
-}
-
-/** PURPOSE : Creates a pipe, except in the case where the last
- * command of the command line is being executed. */
-static void	create_pipe(t_command *cmd, int index, t_arguments *args)
-{
-	int	last_command_index;
-
-	last_command_index = args->total_commands - 1;
-	if (index != last_command_index)
-		if (pipe(cmd->pipes) == -1)
-			set_status_and_shut(args, MSG);
-}
-
 /** PURPOSE : Executes fork function to run commands.
- * 1. Create first pipe. 
+ * 1. Create first pipe.
  * 2. Fork process in a loop, and inside each son process, run command.
  * 3. Continue running program until last fork. */
-int	processing(t_arguments *args)
+int
+	processing(t_arguments *args)
 {
 	int			ret;
 	int			index;
 	t_command	*cmd;
 	t_command	*prev_cmd;
+	pid_t		waited_pid;
 
-	cmd = NULL;
-	prev_cmd = NULL;
-	index = -1;
+	initialize_variables(&ret, &index, &prev_cmd);
 	while (++index < args->total_commands)
 	{
 		cmd = get_cmd(args, index);
@@ -132,13 +96,12 @@ int	processing(t_arguments *args)
 		create_pipe(cmd, index, args);
 		ret = create_son(cmd, prev_cmd, index, args);
 	}
-	//close(prev_cmd->pipes[READ_FD]); //DESCOMENTAR SI QUEDA UN SOLO PIPE ABIERTO
 	index = -1;
 	while (++index < args->total_commands)
 	{
 		cmd = get_cmd(args, index);
-		waitpid(cmd->pid, &(cmd->control), 0);
+		waited_pid = waitpid(cmd->pid, &(cmd->control), 0);
+		ret = get_ret(args, cmd, waited_pid);
 	}
-	set_status_variable(cmd->control, args);
-	return (1);
+	return (ret);
 }

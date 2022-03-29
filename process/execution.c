@@ -106,11 +106,16 @@ int
 int
 	process_exe(t_arguments *args)
 {
-	if (!args->heredoc_det)
+	if (1)
 	{
 		processing(args);
 		return (1);
 	}
+	/*if (!args->heredoc_det)
+	{
+		processing(args);
+		return (1);
+	}*/
 	if (pipe(args->fds) == -1 || pipe(args->wpipe) == -1)
 		set_status_and_shut(args, MSG);
 	if (!check_command(args))

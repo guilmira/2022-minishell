@@ -151,6 +151,19 @@ int			event(void);
 void		mnge_status(t_arguments *args, int i);
 void		father_process_routine(t_arguments *args,
 				int last_index, int *i, int *wstatus);
+void		create_pipe(t_command *cmd, int index, t_arguments *args);
+void		make_pipe(t_arguments *args, int *wpipe);
+int			child_process_routine(t_command *cmd, t_command *prev_cmd,
+				int index, t_arguments *args);
+void		close_p_pipes(const t_command *cmd, const t_command *prev_cmd,
+				int index, int last_index);
+void		init_local_variables(t_arguments *args, int *last_index, int *ret);
+void		create_file_heredoc(t_command *command_struct, t_arguments *args);
+void		pipe_send_envp(t_arguments *args);
+void		pipe_receive_envp(t_arguments *args, char	**temp_envp);
+void		build_pipes(t_arguments *args, int index, t_command *cmd);
+int			close_all_pipes(t_arguments *args, int *ret);
+void		change_current_directory(t_arguments *args);
 
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
@@ -182,6 +195,7 @@ void		father_process_routine(t_arguments *args,
 # define PATH_HD_FILE "/private/tmp/tmp_file"
 # define READ_FD 0
 # define WRITE_FD 1
+# define EXIT_SUCCESSFULL 1000
 
 /* Others. */
 void		printer(char **table, int *org);

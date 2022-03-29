@@ -36,7 +36,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				0dollar_expansion.c 1expansion_aux.c 2variable.c \
 				printstemp.c \
 				signals.c ft_multistr_concat.c utilities_2.c heredoc.c builtin_utils_2.c\
-				lenvp.c wpipe.c builtin_routine.c memory_mngmt.c
+				lenvp.c wpipe.c builtin_routine.c memory_mngmt.c forked_processes.c p_process_utilities.c
 				
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
