@@ -32,8 +32,9 @@ bool
 	while (*str)
 	{
 		if (*str >= '0' && *str <= '9')
+			str++ ;
+		else
 			return (true);
-		str++;
 	}
 	return (false);
 }
@@ -44,10 +45,11 @@ bool
 int
 	msh_exit(char **args, t_arguments *arg)
 {
+	printf("exit\n");
 	set_status(arg, 0);
 	if (!args[1])
 		return (0);
-	if (!contains_chars(args[1]) && !is_within_range(args[1]))
+	if (contains_chars(args[1]) || !is_within_range(args[1]))
 	{
 		manage_no_numeric_arg(args, arg);
 		return (0);
