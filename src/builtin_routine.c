@@ -71,11 +71,11 @@ int
 			ret = (((args->builtin_func[i])(command_struct->command, args)));
 	if (export_new_l_variables(command_struct->command, args))
 		ret = 1;
-	if (!command_struct->command[0]
+	/*if (!command_struct->command[0]
 		|| !ft_strcmp(BLANK, command_struct->command[0]))
 		command_struct->print_heredoc = false;
 	if (command_struct->print_heredoc && command_struct->list_delimeters)
-		create_file_heredoc(command_struct, args);
+		create_file_heredoc(command_struct, args);*/
 	if (save_stdout)
 	{
 		dup2(save_stdout, 1);
@@ -91,12 +91,12 @@ int
 	int		save_stdout;
 
 	ret = -1;
-	if (command_struct->list_delimeters)
-		ret = heredoc_routine(command_struct, args);
+	/*if (command_struct->list_delimeters)
+		ret = heredoc_routine(command_struct, args);*/
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
-	if (!ft_strcmp(BLANK, command_struct->command[0]))
+	/*if (!ft_strcmp(BLANK, command_struct->command[0]))
 		//ret = 0;  //CHECK IF THE CHANGE IS IMPORTANT
-		ret = 1;
+		ret = 1;*/
 	return (ret);
 }

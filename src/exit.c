@@ -16,7 +16,7 @@
 ** SYNOPSIS: called if argument passed to exit command is not numeric.
 */
 void
-manage_no_numeric_arg(char **args, t_arguments *arg)
+	manage_no_numeric_arg(char **args, t_arguments *arg)
 {
 	set_status(arg, ENOENT);
 	ft_putstr_fd("msh: exit: ", 1);
@@ -25,7 +25,7 @@ manage_no_numeric_arg(char **args, t_arguments *arg)
 }
 
 bool
-contains_chars(char *str)
+	contains_chars(char *str)
 {
 	if (!str)
 		return (false);
