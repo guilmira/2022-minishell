@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/29 13:23:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:28:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 //system("leaks minishell");
 //while true ; do leaks -q minishell; sleep 3; done
-//lsof -c minishell | grep PIPE
+//q
 //lsof -c minishell -r2 | grep PIPE
 
 //differen form bash
@@ -46,7 +46,7 @@ int
 		g_rv = 1;
 		arguments = initialize_arg(prog);
 		set_shlvl_num(arguments);
-		shell_reader(arguments);
+		shell_reader(arguments);q
 		if (arguments->flag_execution)
 			if (!msh_execute(arguments->argv, arguments))
 				break ;
@@ -63,7 +63,7 @@ int
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	rl_event_hook = event;
 	set_signal(1);
 	if (argc != ARG_NUMBER)

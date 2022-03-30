@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/28 17:04:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:20:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,8 +255,8 @@ int			variable_to_string(char *str, int i, \
 void		create_output_files(t_list *list_files, \
 			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
-void		create_file(char *path, t_arguments *args);
-void		create_file_append(char *path, t_arguments *args);
+void		create_file(char *path);
+void		create_file_append(char *path);
 int			heredoc_found(char **table, int *type, int i);
 /* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void		fix_previous_line(char *line, int t, int i, t_list **list);

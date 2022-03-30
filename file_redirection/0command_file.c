@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 14:31:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:20:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void	manage_output(int flag_file, char *file, t_arguments *args)
 	if (!args->file_output)
 		ft_shutdown(MEM, 1, args);
 	if (flag_file == 2)
-		create_file_append(file, args);
+		create_file_append(file);
 	else if (flag_file)
-		create_file(file, args);
+		create_file(file);
 }
 
 /** PURPOSE : Iterate list and create every single file as is needed. 
