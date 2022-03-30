@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/28 12:26:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:42:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /** PURPOSE : shutdown program freeing heap allocated memory. */
 void	ft_shutdown(char *str, int i, t_arguments *args)
 {
-	printf("ERROR: %s\n", strerror(errno));
+	perror("ERROR");
 	free_heap_memory(args);
 	ft_shut(str, i);
 }

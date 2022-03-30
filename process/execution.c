@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:09:13 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/29 12:38:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:42:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void
 	{
 		close(args->fds[last_index]);
 		close(args->fds[last_index + 1]);
-		printf("minishell: %s\n", strerror(errno));
+		perror("minishell");
 		return ;
 	}
 	identifier = fork();
@@ -51,7 +51,7 @@ int
 	set_status(args, 0);
 	if (pipe(args->wpipe) == -1)
 	{
-		printf("PIPE ERROR: %s\n", strerror(errno));
+		perror("PIPE ERROR\n");
 		set_status(args, 1);
 		return (1);
 	}

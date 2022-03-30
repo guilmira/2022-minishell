@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/30 10:28:25 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:33:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 //DO NORMINETTE
 //check for extra printfs
 //delete comments
-//!!!perror (not allowed?) was substituted to printf with strerror. May be hidden if stdout is redirected!!!
 
 //system("leaks minishell");
 //while true ; do leaks -q minishell; sleep 3; done
@@ -46,7 +45,7 @@ int
 		g_rv = 1;
 		arguments = initialize_arg(prog);
 		set_shlvl_num(arguments);
-		shell_reader(arguments);q
+		shell_reader(arguments);
 		if (arguments->flag_execution)
 			if (!msh_execute(arguments->argv, arguments))
 				break ;

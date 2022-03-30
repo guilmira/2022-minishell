@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 14:07:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:38:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int
 	if (do_clean_path)
 		free(path);
 	errno = ENOENT;
-	printf("minishell: %s\n", strerror(errno));
+	perror(command_struct->command[0]);
 	return (127);
 }
 

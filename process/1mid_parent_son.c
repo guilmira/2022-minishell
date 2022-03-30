@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:44 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 14:32:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:39:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int
 	set_status(args, 0);
 	if (pipe(args->wpipe) == -1)
 	{
-		printf("PIPE ERROR: %s\n", strerror(errno));
+		perror("PIPE ERROR\n");
 		set_status(args, 1);
 		return (1);
 	}

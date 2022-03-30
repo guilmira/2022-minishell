@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:40:28 by asydykna          #+#    #+#             */
-/*   Updated: 2021/12/10 11:15:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:43:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int
 
 	path = getcwd(NULL, 0);
 	if (!path)
-		printf("pwd() error: %s\n", strerror(errno));
+		perror("pwd() error");
 	ft_putendl_fd(path, 1);
 	set_status(arg, 0);
 	free(path);
@@ -47,7 +47,7 @@ int
 	{
 		set_status(arg, ENOENT);
 		str = ft_multistr_concat(2, "env: ", args[1]);
-		printf("%s: %s\n", str, strerror(errno));
+		perror(str);
 		free(str);
 		set_status(arg, 127);
 		return (2);
