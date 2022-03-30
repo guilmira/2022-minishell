@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/30 10:33:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:49:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	rl_event_hook = event;
 	set_signal(1);
 	if (argc != ARG_NUMBER)

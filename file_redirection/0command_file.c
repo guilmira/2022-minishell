@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 12:57:04 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/30 10:20:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:03:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	command_file_setup(t_command *command_struct, t_arguments *args)
 			search_input(command_struct->list_in, args);
 		else if (command_struct->heredoc_result)
 			args->file_input = PATH_HD_FILE;
-		if (args->file_input)
+		if (args->file_input && !is_blank(args->command_number, args))
 			input_from_file(args->file_input);
 	}
 	if (command_struct->list_out)
