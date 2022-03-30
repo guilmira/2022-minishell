@@ -23,11 +23,10 @@ void
 	{
 		close(args->fds[last_index]);
 		close(args->fds[last_index + 1]);
-		perror("minishell");
+		printf("minishell: %s\n", strerror(errno));
 		return ;
 	}
 	identifier = fork();
-	//sleep(1000000);
 	if (identifier == 0)
 	{
 		i = last_son(last_index, args);
@@ -52,7 +51,7 @@ int
 	set_status(args, 0);
 	if (pipe(args->wpipe) == -1)
 	{
-		perror("PIPE ERROR\n");
+		printf("PIPE ERROR: %s\n", strerror(errno));
 		set_status(args, 1);
 		return (1);
 	}
@@ -79,7 +78,6 @@ int
 	int	x;
 
 	identifier = fork();
-	//sleep(1000000);
 	if (identifier == 0)
 		first_son(args);
 	else if (identifier > 0)

@@ -26,13 +26,6 @@ void
 }
 
 void
-	make_pipe(t_arguments *args, int *wpipe)
-{
-	if (pipe(wpipe) == -1)
-		set_status_and_shut(args, MSG); //ft_shudown is absent. check it before deleting the comment
-}
-
-void
 	close_p_pipes(const t_command *cmd, const t_command *prev_cmd,
 		int index, int last_index)
 {
@@ -48,14 +41,4 @@ void
 	set_status(args, 0);
 	(*last_index) = args->total_commands - 1;
 	(*ret) = 1;
-}
-
-void
-	change_current_directory(t_arguments *args)
-{
-	char		*new_pwd;
-
-	new_pwd = get_env_var(args->envp, "PWD", false);
-	chdir(new_pwd);
-	free(new_pwd);
 }

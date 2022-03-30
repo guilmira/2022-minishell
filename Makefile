@@ -13,7 +13,7 @@
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
 CC			= gcc -g
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include# -Wno-error=unused-result# -O -fsanitize=leak
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include
 CFLAGS		= -Wall -Wextra -Werror -g -Ilibreadline/include
 READLINE    = -L${LIB_READLINE}/lib -lreadline_macos_v10_14 -lcurses
 #--------------------------------------------------------------------------------------------------------------LIBS
@@ -67,7 +67,7 @@ re: fclean all
 
 norm:
 	norminette ./file_redirection ./include ./lexer ./lexer_expansion ./lexer_quotes \
-	 $(LIB_DIR) ./parser ./pre_filter ./process ./src
+	 $(LIB_DIR) ./parallel_process ./parser ./pre_filter ./process ./src
 
 .PHONY: all clean fclean re norm
 #--------------------------------------------------------------------------------------------------------------FORMAT
