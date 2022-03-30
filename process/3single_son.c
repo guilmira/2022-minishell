@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/30 11:00:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:28:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int
 	set_status(args, 0);
 	path = get_path(command_struct, &do_clean_path);
 	command_file_setup(command_struct, args);
-	if (is_blank(args->command_number, args))
+	if (is_blank(args->command_number, args) || \
+	is_builtin(command_struct, args))
 		return (0);
 	else
 		execve(path, command_struct->command, args->envp);

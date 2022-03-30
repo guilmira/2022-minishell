@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/30 10:20:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:31:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void		close_p_pipes(const t_command *cmd, const t_command *prev_cmd,
 				int index, int last_index);
 void		init_local_variables(t_arguments *args, int *last_index, int *ret);
 void		create_file_heredoc(t_command *command_struct, t_arguments *args);
+void		set_cd_error(char *path);
 
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
@@ -217,7 +218,6 @@ int			is_command(t_command *command_struct, t_arguments *args);
 int			processing(t_arguments *args);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 t_command	*get_cmd(t_arguments *args, int index);
-int			builtin_detection(t_arguments *args);
 int			is_builtin(t_command *command_struct, t_arguments *args);
 /* LEXER */
 char		**main_lexer(char *line, t_arguments *args);

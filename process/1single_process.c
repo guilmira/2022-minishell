@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/30 10:59:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:14:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ void
 	int	wstatus;
 
 	if (!check_command(args))
-	{
-		perror("minishell");
 		return ;
-	}
 	identifier = fork();
 	if ((identifier) == 0)
 	{

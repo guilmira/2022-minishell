@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 04:26:02 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 13:07:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:27:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,6 @@ int	is_builtin(t_command *command_struct, t_arguments *args)
 		return (0);
 	else
 		return (1);
-}
-
-int	builtin_detection(t_arguments *args)
-{
-	int			i;
-	t_command	*cmd;
-
-	i = -1;
-	cmd = NULL;
-	while (++i < args->total_commands)
-	{
-		cmd = get_cmd(args, i);
-		if (is_builtin(cmd, args))
-			return (1);
-		if (cmd->list_delimeters)
-			return (1);
-	}
-	return (0);
 }
 
 /** PURPOSE : Simple parser of command line. */
