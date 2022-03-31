@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/30 11:26:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/31 12:04:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 		ft_shut(INVALID_ARGC, 0);
 	return (shell_loop(envp));
 }
+//system("leaks minishell");
+//while true ; do leaks -q minishell; sleep 3; done
+//lsof -c minishell | grep PIPE
+//https://datacarpentry.org/shell-genomics/04-redirection/index.html
