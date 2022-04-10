@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/31 12:04:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/10 12:33:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 	rl_event_hook = event;
 	set_signal(1);
 	if (argc != ARG_NUMBER)
-		ft_shut(INVALID_ARGC, 0);
+		ft_shut(INVALID_ARGC);
 	return (shell_loop(envp));
 }
 //system("leaks minishell");
