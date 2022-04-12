@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 14:43:09 by guilmira          #+#    #+#             */
-/*   Updated: 2021/12/16 09:52:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/10 11:53:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ int		*ft_bubble_sort(int *array, int size);
 int		*ft_lstto_array(t_list *list, int *array_size);
 void	ft_swap(int *a, int *b);
 /*ERROR MANAGEMENT*/
-void	ft_ex(void);
-void	ft_checkmalloc(void *ptr);
+int		ft_checkmalloc(void *ptr, char *str);
+void		ft_senderror(char *str);
+void	ft_shut(char *str);
 /*GET NEXT LINE*/
 int		get_next_line(int fd, char **line);
 
