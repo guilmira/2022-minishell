@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3single_son.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:07:52 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 12:19:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:53:57 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int
 	set_status(args, 0);
 	path = get_path(command_struct, &do_clean_path);
 	command_file_setup(command_struct, args);
-	if (is_blank(args->command_number, args))
+	if (is_blank(args->command_number, args) || \
+	is_builtin(command_struct, args))
 		return (0);
 	else
 		execve(path, command_struct->command, args->envp);
@@ -45,7 +46,7 @@ int
 	if (do_clean_path)
 		free(path);
 	errno = ENOENT;
-	perror("minishell");
+	perror(command_struct->command[0]);
 	return (127);
 }
 

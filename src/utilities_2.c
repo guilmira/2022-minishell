@@ -36,7 +36,7 @@ bool
 		set_status(arg, 1);
 		temp = ft_multistr_concat(3, "minishell: export: '", args[i],
 				"': not a valid identifier");
-		perror(temp);
+		printf("%s\n", temp);
 		free_pointers(1, temp);
 		return (false);
 	}

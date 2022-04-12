@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
+#    By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/25 09:04:15 by guilmira         ###   ########.fr        #
+#    Updated: 2022/04/12 16:54:43 by asydykna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
 CC			= gcc -g
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include# -Wno-error=unused-result# -O -fsanitize=leak
-#CFLAGS		= -Wall -Wextra -Werror -g -Ilibreadline/include
+#CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include
+CFLAGS		= -Wall -Wextra -Werror -g -Ilibreadline/include
 READLINE    = -L${LIB_READLINE}/lib -lreadline_macos_v10_14 -lcurses
 #--------------------------------------------------------------------------------------------------------------LIBS
 LIB_DIR		= libft_submodule
@@ -36,7 +36,7 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				0dollar_expansion.c 1expansion_aux.c 2variable.c \
 				printstemp.c \
 				signals.c ft_multistr_concat.c utilities_2.c heredoc.c builtin_utils_2.c\
-				lenvp.c wpipe.c builtin_routine.c memory_mngmt.c
+				lenvp.c wpipe.c builtin_routine.c memory_mngmt.c forked_processes.c p_process_utilities.c
 				
 OBJS		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
@@ -67,7 +67,7 @@ re: fclean all
 
 norm:
 	norminette ./file_redirection ./include ./lexer ./lexer_expansion ./lexer_quotes \
-	 $(LIB_DIR) ./parser ./pre_filter ./process ./src
+	 $(LIB_DIR) ./parallel_process ./parser ./pre_filter ./process ./src
 
 .PHONY: all clean fclean re norm
 #--------------------------------------------------------------------------------------------------------------FORMAT

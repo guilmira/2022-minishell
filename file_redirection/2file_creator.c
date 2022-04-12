@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:33:15 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/24 15:31:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:20:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static void	manage_output(int *ptr, char *file, t_arguments *args)
 	if (!args->file_output)
 		ft_shutdown(MEM, 1, args);
 	if ((*ptr) == 1)
-		create_file(file, args);
+		create_file(file);
 	if ((*ptr) == 3)
 	{
-		create_file_append(file, args);
+		create_file_append(file);
 		args->flag_file_out = 2;
 	}
 }

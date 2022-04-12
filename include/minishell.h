@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:14 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 11:36:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/12 17:11:27 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_arguments
 	t_list	*commands_lst;
 	t_prog	*prog;
 	int		*wpipe;
+	int		heredoc_det;
 }			t_arguments;
 
 /* Protoypes minishell builtins. */
@@ -150,7 +151,14 @@ int			event(void);
 void		mnge_status(t_arguments *args, int i);
 void		father_process_routine(t_arguments *args,
 				int last_index, int *i, int *wstatus);
-void		free_and_null(void *ptr);
+void		create_pipe(t_command *cmd, int index, t_arguments *args);
+int			child_process_routine(t_command *cmd, t_command *prev_cmd,
+				int index, t_arguments *args);
+void		close_p_pipes(const t_command *cmd, const t_command *prev_cmd,
+				int index, int last_index);
+void		init_local_variables(t_arguments *args, int *last_index, int *ret);
+void		create_file_heredoc(t_command *command_struct, t_arguments *args);
+void		set_cd_error(char *path);
 
 /* ERROR MESSAGES */
 # define ARG_NUMBER 1
@@ -182,6 +190,8 @@ void		free_and_null(void *ptr);
 # define PATH_HD_FILE "/private/tmp/tmp_file"
 # define READ_FD 0
 # define WRITE_FD 1
+# define HOMENOTSET "msh: cd: HOME not set"
+# define OLDPWDNOTSET "msh: cd: OLDPWD not set"
 
 /* Others. */
 void		printer(char **table, int *org);
@@ -208,7 +218,6 @@ int			is_command(t_command *command_struct, t_arguments *args);
 int			processing(t_arguments *args);
 int			prepare_process(int fd_to_close, int fd_to_prepare);
 t_command	*get_cmd(t_arguments *args, int index);
-int			builtin_detection(t_arguments *args);
 int			is_builtin(t_command *command_struct, t_arguments *args);
 /* LEXER */
 char		**main_lexer(char *line, t_arguments *args);
@@ -246,8 +255,8 @@ int			variable_to_string(char *str, int i, \
 void		create_output_files(t_list *list_files, \
 			t_list *list_type, t_arguments *args);
 int			file_exists(char *str);
-void		create_file(char *path, t_arguments *args);
-void		create_file_append(char *path, t_arguments *args);
+void		create_file(char *path);
+void		create_file_append(char *path);
 int			heredoc_found(char **table, int *type, int i);
 /* USED IN LEXER QUOTES AND IN DOLLAR EXPANSION. */
 void		fix_previous_line(char *line, int t, int i, t_list **list);
@@ -276,7 +285,7 @@ void		output_to_file_append(char *path);
 int			*arg_descriptors(t_arguments *args);
 void		*ft_lst_position(t_list *lst, int n);
 /* MEMORY MGMT */
-void		ft_shut(char *str, int i);
+void		ft_shut_specific(char *str, int i);
 void		free_heap_memory(t_arguments *args);
 void		ft_shutdown(char *str, int i, t_arguments *args);
 void		manage_program_heap(t_arguments *arguments, t_prog *prog);

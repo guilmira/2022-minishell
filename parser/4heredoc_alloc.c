@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:10:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 06:37:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:05:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,15 @@ static int	case_space(char *str)
 }
 
 /** PURPOSE : Check if there is a lexer symbol with nothing afterwards. */
-static int	error_table(char **table)
+static int	error_table(char **table, t_arguments *args)
 {
 	int	i;
 
 	i = -1;
 	while (table[++i])
 	{
+		if (!ft_strcmp(HEREDOC, table[i]))
+			args->heredoc_det++;
 		if (!ft_strcmp(HEREDOC, table[i]) || !ft_strcmp(PIPE, table[i]) || \
 		!ft_strcmp(IN, table[i]) || !ft_strcmp(OUT, table[i]))
 			if (!table[i + 1])
@@ -92,7 +94,7 @@ static int	error_table(char **table)
 int	error_detection(char **lexer_table, int *lexer_type, \
 t_arguments *args)
 {
-	if (error_table(lexer_table))
+	if (error_table(lexer_table, args))
 	{
 		ft_free_split(lexer_table);
 		free(lexer_type);

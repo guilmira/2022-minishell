@@ -6,7 +6,7 @@
 /*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:56:36 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/25 11:07:56 by asydykna         ###   ########.fr       */
+/*   Updated: 2022/04/12 17:11:04 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int
 	save_stdout = get_stdout_copy(args, command_struct);
 	ret = builtin_routine(args, command_struct, save_stdout, ret);
 	if (!ft_strcmp(BLANK, command_struct->command[0]))
-		//ret = 0;  //CHECK IF THE CHANGE IS IMPORTANT
 		ret = 1;
 	return (ret);
 }

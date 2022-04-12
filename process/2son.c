@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:47 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/25 10:50:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/25 13:35:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	first_son(t_arguments *args)
 	set_signal(1);
 	command_struct = NULL;
 	command_struct = get_command_struct(args, command_struct);
-	fd_write = prepare_process(args->fds[0], args->fds[1]);
 	ret = get_builtins_ret(args, command_struct);
+	fd_write = prepare_process(args->fds[0], args->fds[1]);
 	if (dup2(fd_write, STDOUT_FILENO) == -1)
 		ft_shutdown(DUP_ERROR, 0, args);
 	close(fd_write);

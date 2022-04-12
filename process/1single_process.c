@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1single_process.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/23 14:34:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:54:05 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int
 	printf("HERE\n");
 	if (pipe(args->wpipe) == -1)
 	{
-		perror("PIPE ERROR\n");
+		printf("PIPE ERROR: %s\n", strerror(errno));
 		set_status(args, 1);
 		return (1);
 	}
