@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 11:00:55 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/18 11:02:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:31:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int
 	if (chdir(path) != 0)
 	{
 		if (path)
-			printf("msh: cd: %s: %s\n", path, strerror(errno));
+			set_cd_error(path);
 		free_pointers(2, path, old_path);
 		set_status(arg, 1);
 	}

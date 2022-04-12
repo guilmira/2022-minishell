@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1single_process.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 08:20:45 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/29 12:55:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:54:05 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ void
 	int	wstatus;
 
 	if (!check_command(args))
-	{
-		printf("minishell: %s\n", strerror(errno));
 		return ;
-	}
 	identifier = fork();
 	if ((identifier) == 0)
 	{

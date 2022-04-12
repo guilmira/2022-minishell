@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:31:20 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/28 12:26:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/10 12:35:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ void	ft_shutdown(char *str, int i, t_arguments *args)
 {
 	printf("ERROR: %s\n", strerror(errno));
 	free_heap_memory(args);
-	ft_shut(str, i);
+	ft_shut_specific(str, i);
 }
 
 /** PURPOSE : Output error with given value 2, close the program.
- *  Exit signal must be 0 by default */
-void	ft_shut(char *str, int i)
+ *  Exit signal must be 0 by default. 
+ * This function is not libft submodule function,, fut specific
+ * for this project. */
+void	ft_shut_specific(char *str, int i)
 {
 	write(2, str, ft_strlen(str));
 	exit(i);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 08:51:24 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/24 15:09:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/03/30 11:31:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,37 @@ int	file_exists(char *str)
 
 /** PURPOSE : Sends output to file if needed. 
  * //S_IRWXU File permission bits. Read, Write, eXecute. */
-void	create_file(char *path, t_arguments *args)
+void	create_file(char *path)
 {
 	int	fd_file;
 
 	fd_file = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRWXU);
 	if (fd_file < 0)
-		ft_shutdown(FILE_ERROR, 1, args);
+	{
+		perror("msh");
+		return ;
+	}
 	close(fd_file);
 }
 
 /** PURPOSE : Sends output to file if needed. 
  * //S_IRWXU File permission bits. Read, Write, eXecute. */
-void	create_file_append(char *path, t_arguments *args)
+void	create_file_append(char *path)
 {
 	int	fd_file;
 
 	fd_file = open(path, O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
 	if (fd_file < 0)
-		ft_shutdown(FILE_ERROR, 1, args);
+	{
+		perror("msh");
+		return ;
+	}
 	close(fd_file);
+}
+
+void
+	set_cd_error(char *path)
+{
+	ft_putstr_fd("msh: cd: ", 2);
+	perror(path);
 }

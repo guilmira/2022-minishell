@@ -3,30 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:21:32 by asydykna          #+#    #+#             */
-/*   Updated: 2022/03/29 13:23:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:53:31 by asydykna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//TODO: builtin_detection is unused function in .h and in pre_filter.c
-//DO NORMINETTE
-//check for extra printfs
-//delete comments
-//!!!perror (not allowed?) was substituted to printf with strerror. May be hidden if stdout is redirected!!!
-
-//system("leaks minishell");
-//while true ; do leaks -q minishell; sleep 3; done
-//lsof -c minishell | grep PIPE
-//lsof -c minishell -r2 | grep PIPE
-
-//differen form bash
-//ls -l <<fin | export | exit
-//double hola
-//echo "hola" << fin
 /** PURPOSE : Main loop of the shell.
  * 1. Reads the command from standard input and load it.
  * 2. Execute main routine. Forks commands into processes and execute them. */
@@ -63,27 +48,13 @@ int
  * 		msh> [INSERT COMMANDS]											*/
 int	main(int argc, char *argv[] __attribute__((unused)), char *envp[])
 {
-	//atexit(ft_leaks);
 	rl_event_hook = event;
 	set_signal(1);
 	if (argc != ARG_NUMBER)
-		ft_shut(INVALID_ARGC, 0);
+		ft_shut(INVALID_ARGC);
 	return (shell_loop(envp));
 }
-
-//echo $TEST > $TEST
-
+//system("leaks minishell");
+//while true ; do leaks -q minishell; sleep 3; done
+//lsof -c minishell | grep PIPE
 //https://datacarpentry.org/shell-genomics/04-redirection/index.html
-
-//echo "''$PWD'''qwere"qwqwer$P$P$PWD"'$PWD'"
-//NO BORRAR "ls" "|" "wc" COMMIT LLAMADO "LS EJEMPLO" LO TIENE
-
-//ls |  wc -l |  cat |  grep 72 |  grep 72 <<  fin
-
-//ls > omega | ls -la > final
-//wc < omega >dd | wc -l< final > cc 
-//cat dd && cat cc
-
-//working perfectly
-//ls < aijshf | wc -l < nonexisten
-//ls < aijshf | wc -l | echo hola

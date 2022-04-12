@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 06:22:53 by guilmira          #+#    #+#             */
-/*   Updated: 2022/03/28 17:05:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2022/04/10 12:37:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_prog	*initalize_prog(char **envp, char **builtin_str)
 
 	prog = ft_calloc(1, sizeof(t_prog));
 	if (!prog)
-		ft_shut(MEM, 0);
+		ft_shut_specific(MEM, 0);
 	prog->envp = copy_array(prog->envp, envp, 1);
 	prog->lenvp = malloc(1 * sizeof(char *));
 	prog->lenvp[0] = NULL;
@@ -64,7 +64,7 @@ t_arguments	*initialize_arg(t_prog *prog)
 
 	args = ft_calloc(1, sizeof(t_arguments));
 	if (!args)
-		ft_shut(MEM, 0);
+		ft_shut_specific(MEM, 0);
 	args->prog = prog;
 	variables_to_zero(args);
 	if (args->envp)

@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
+#    By: asydykna <asydykna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/29 12:30:08 by guilmira         ###   ########.fr        #
+#    Updated: 2022/04/12 16:54:43 by asydykna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= minishell
 CC			= gcc -g
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include
+#CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g -Ilibreadline/include
 CFLAGS		= -Wall -Wextra -Werror -g -Ilibreadline/include
 READLINE    = -L${LIB_READLINE}/lib -lreadline_macos_v10_14 -lcurses
 #--------------------------------------------------------------------------------------------------------------LIBS
