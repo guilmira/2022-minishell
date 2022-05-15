@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/03/30 11:32:55 by guilmira         ###   ########.fr        #
+#    Updated: 2022/05/15 21:22:07 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,21 @@ SRCS		=	main.c processes.c builtins.c builtins_2.c ft_str_arr_sort.c \
 				signals.c ft_multistr_concat.c utilities_2.c heredoc.c builtin_utils_2.c\
 				lenvp.c wpipe.c builtin_routine.c memory_mngmt.c forked_processes.c p_process_utilities.c
 				
-OBJS		=	$(SRCS:.c=.o)
+OBJ		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
+#Nueva funcionalidad.
+OBJ_DIR = objs/
+SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ))
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 RM = rm -rf
 VPATH = include src parser pre_filter file_redirection process parallel_process lexer lexer_quotes lexer_expansion
+
+
+
 
 all: $(LIB) $(NAME)
 
