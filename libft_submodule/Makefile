@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/17 12:59:05 by guilmira          #+#    #+#              #
-#    Updated: 2022/04/10 11:53:30 by guilmira         ###   ########.fr        #
+#    Updated: 2022/05/15 21:48:25 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCLUDES = -I ./0includes
 SRCS	=		$(1BOOLEANS) $(2STRINGS) $(3STRINGS_MID) $(4STRINGS_ADV) \
 				$(5NUMBERS) $(6FDS) $(7TOOLS) $(8LINKED_LISTS) \
 				$(9MEMORY) $(10ARRAYS) $(11ERROR_MGMT) $(12GNL)
-OBJS	=		${SRCS:.c=.o}
+OBJS	=			${SRCS:.c=.o}
 
 1BOOLEANS =		./1booleans/ft_isalnum.c ./1booleans/ft_isalpha.c ./1booleans/ft_isascii.c \
 				./1booleans/ft_isdigit.c ./1booleans/ft_isprint.c ./1booleans/ft_isspaces.c
@@ -58,10 +58,19 @@ OBJS	=		${SRCS:.c=.o}
 
 12GNL =			./12gnl/get_next_line.c
 #--------------------------------------------------------------------------------------------------------------RULES
-all: ${NAME}
+
+
+
 
 %.o: %.c
 	-@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+
+
+
+all: ${NAME}
+
+
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)

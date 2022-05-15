@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/05/15 21:24:52 by guilmira         ###   ########.fr        #
+#    Updated: 2022/05/15 21:42:26 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJ		=	$(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 #Nueva funcionalidad.
 OBJ_DIR = objs/
-SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ))
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
