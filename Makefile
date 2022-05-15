@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 07:28:58 by guilmira          #+#    #+#              #
-#    Updated: 2022/05/15 21:22:07 by guilmira         ###   ########.fr        #
+#    Updated: 2022/05/15 21:24:52 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,6 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 RM = rm -rf
 VPATH = include src parser pre_filter file_redirection process parallel_process lexer lexer_quotes lexer_expansion
-
-
-
 
 all: $(LIB) $(NAME)
 

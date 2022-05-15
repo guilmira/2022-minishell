@@ -28,7 +28,7 @@ int
 
 	path = getcwd(NULL, 0);
 	if (!path)
-		perror("pwd() error");
+		printf("pwd() error: %s\n", strerror(errno));
 	ft_putendl_fd(path, 1);
 	set_status(arg, 0);
 	free(path);
@@ -47,7 +47,7 @@ int
 	{
 		set_status(arg, ENOENT);
 		str = ft_multistr_concat(2, "env: ", args[1]);
-		perror(str);
+		printf("%s: %s\n", str, strerror(errno));
 		free(str);
 		set_status(arg, 127);
 		return (2);
